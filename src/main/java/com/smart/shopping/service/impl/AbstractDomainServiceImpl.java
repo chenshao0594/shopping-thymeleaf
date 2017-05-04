@@ -35,8 +35,8 @@ public abstract class AbstractDomainServiceImpl<E extends BusinessDomain, K exte
 
 	@Override
 	public E save(E entity) throws ServiceException {
-		repository.saveAndFlush(entity);
-		searchRepository.save(entity);
+		repository.save(entity);
+		// searchRepository.save(entity);
 		return entity;
 	}
 

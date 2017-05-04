@@ -7,7 +7,26 @@
 
 	<title th:text="#{app.title}">App Title</title>
 
-	<link href="css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+	<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.min.css}" rel="stylesheet"/>
+	<link
+	href="http://cdn.jsdelivr.net/webjars/tether/1.4.0/css/tether.min.css"
+	th:href="@{/webjars/tether/1.4.0/css/tether.min.css}" rel="stylesheet"/>
+	
+	<link  href="http://cdn.jsdelivr.net/webjars/font-awesome/4.7.0/css/font-awesome.min.css" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+<link
+	href="css/main.css"
+	th:href="@{/css/main.css}"
+	rel="stylesheet" />
+<script
+	src="http://cdn.jsdelivr.net/webjars/jquery/3.2.0/jquery.min.js"
+	th:src="@{/webjars/jquery/3.2.0/jquery.min.js}"></script>
+	<script
+	src="https://npmcdn.com/tether@4.0.0-alpha.6-1/dist/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.0.0-alpha.6-1/js/bootstrap.min.js}"></script>
+<script src="https://npmcdn.com/tether@1.4.0/js/tether.min.js" th:src="@{/webjars/tether/1.4.0/js/tether.min.js}"></script>
+	
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>

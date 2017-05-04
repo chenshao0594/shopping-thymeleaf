@@ -10,13 +10,6 @@
 	margin-bottom: 19px;
 }
 
-body {
-	padding-top: 20px;
-	margin-left: 100px;
-#	width: 100%;
-#	min-height: 2000px;
-}
-
 .starter-template {
 	padding: 40px 15px;
 	text-align: center;
@@ -24,5 +17,11 @@ body {
 
 .dropdown-menu-right {
 	right: inherit !important;
+}
+
+.form-actions {
+  padding: 17px 20px 18px;
+  background-color: $bg-addition;
+  @include clearfix(); // Adding clearfix to allow for .float-right button containers
 }
 

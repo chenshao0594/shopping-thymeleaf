@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:ddl="http://www.thymeleaf.org/dandelion"
-	xmlns:dt="http://github.com/dandelion/datatables" ddl:bundle-includes="bootstrap3" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="fragments/header :: header">
 <!-- REPLACE BEFORE COMMITTING -->
 </head>
@@ -9,30 +8,28 @@
 	<div class="container">
 		<div class="page-header">
 			<h2>
-				Categories
-				<a  href="#" class="btn btn-success pull-right">Add category</a>
+				Categories <a th:href="@{/categories/new}" class="btn btn-success pull-right">Add category</a>
 			</h2>
 		</div>
 		<div class="row">
 			<div role="alert" th:if="${statusMessage}"
 				th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-			<table id="categoriesTable" dt:table="true" dt:theme="bootstrap3" class="table table-striped"
-				dt:pagination="true">
-				<thead>
+			<table class="table">
+				<thead class="thead-default">
 					<tr>
-						<th>code</th>
-						<th>Specialties</th>
+						<th>#</th>
+						<th>Code</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="item : ${items}">
+						<th scope="row" th:text="${item.id}">1</th>
 						<td th:text="${item.code}">code</td>
-						<td><span>test</span></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		<div th:replace="fragments/footer :: footer" class="footer">REPLACE BEFORE COMMITTING</div>
 	</div>
-	<div th:replace="fragments/footer :: footer" class="footer">REPLACE BEFORE COMMITTING</div>
 </body>
 </html>
