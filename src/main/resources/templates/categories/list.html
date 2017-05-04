@@ -5,10 +5,11 @@
 </head>
 <body role="document">
 	<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE COMMITTING</div>
-	<div class="container">
-		<div class="page-header">
+	<div class="container content">
+		<div class="page-title">
 			<h2>
-				Categories <a th:href="@{/categories/new}" class="btn btn-success pull-right">Add category</a>
+				Categories <a th:href="@{/categories/new}" class="btn btn-success pull-right"><span
+					class="fa fa-plus"></span>Add category</a>
 			</h2>
 		</div>
 		<div class="row">
@@ -19,12 +20,26 @@
 					<tr>
 						<th>#</th>
 						<th>Code</th>
+						<th>Parent</th>
+						<th>Operation</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="item : ${items}">
 						<th scope="row" th:text="${item.id}">1</th>
 						<td th:text="${item.code}">code</td>
+						<td th:text="${item.parent?.code}">parent code</td>
+						<td>
+							<div class="flex-btn-group-container">
+								<a class="btn btn-info btn-sm" th:href="@{'/categories/'+${item.id}}"> <span
+									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
+								</a> 
+								&nbsp;
+								<a class="btn btn-primary btn-sm" th:href="@{'/categories/'+${item.id}+'/edit'}"> <span
+									class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
+								</a>
+							</div>
+						</td>
 					</tr>
 				</tbody>
 			</table>

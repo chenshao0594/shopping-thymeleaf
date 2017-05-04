@@ -35,6 +35,12 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 
 	protected abstract String getEntityName();
 
+	protected void preNew(Model model) {
+	};
+
+	protected void postNew(E entity, Model model) {
+	};
+
 	protected void preCreate(E entity) {
 	};
 
@@ -66,8 +72,9 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	@Timed
 	@GetMapping(value = "/new")
 	public String initCreationForm(Model model) {
+		this.preNew(model);
 		Category entity = new Category();
-		model.addAttribute(entity);
+		model.addAttribute("item", entity);
 		return this.getSectionKey() + "/dialog";
 	}
 
@@ -90,8 +97,21 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	@GetMapping(value = "{id}/edit")
 	public String editEntity(@PathVariable("id") K id, Model model) {
 		E entity = this.service.findOne(id);
-		model.addAttribute(entity);
+		model.addAttribute("item", entity);
+		this.preNew(model);
 		return this.getSectionKey() + "/dialog";
+	}
+
+	@Timed
+	@PostMapping(value = "{id}/edit")
+	public String updateEntity(@PathVariable("id") K id, @Valid E entity, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return this.getSectionKey() + "/dialog";
+		} else {
+			this.service.save(entity);
+			model.addAttribute("item", entity);
+			return "redirect:/" + this.getSectionKey() + "/" + id + "/edit";
+		}
 	}
 
 }

@@ -5,17 +5,29 @@
 </head>
 <body role="document">
 	<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE COMMITTING</div>
-	<div class="container" role="main">
-		<div class="page-header">
-			<h3>Category <small th:text="${item.id}"></small></h3>
+	<div class="container content">
+		<div class="page-title">
+			<h2>
+				Category <small class="text-muted" th:text="${item.id}"></small> <a th:href="@{/categories}"
+					class="btn btn-secondary pull-right"><span class="fa fa-arrow-left"></span>Back </a>
+			</h2>
 		</div>
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-			
-			
-			
+		<fieldset>
+			<legend class="section">Basic Info</legend>
+			<dl class="row justify-content-md-center">
+				<dt class="col-md-2 text-right">Code</dt>
+				<dd class="col-md-4 text-left" th:text="${item.code}">Code</dd>
+				<dt class="col-md-2 text-right">Sort Order</dt>
+				<dd class="col-md-4 text-left" th:text="${item.sortOrder}">Code</dd>
+				<dt class="col-md-2 text-right">Parent</dt>
+				<dd class="col-md-4 text-left" th:text="${item.parent?.code}">Parent</dd>
+				<dt class="col-md-2 text-right"></dt>
+				<dd class="col-md-4 text-left" ></dd>
+			</dl>
+		</fieldset>
 	</div>
-	<div th:replace="fragments/footer :: footer" class="footer">REPLACE BEFORE COMMITTING
-	</div>
+	<div th:replace="fragments/footer :: footer" class="footer">REPLACE BEFORE COMMITTING</div>
 </body>
 </html>

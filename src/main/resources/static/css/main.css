@@ -19,9 +19,48 @@
 	right: inherit !important;
 }
 
+.content {
+  padding: 25px 2.5641%;
+  opacity: 1;
+}
+.page-title {
+  font-weight: 300;
+  line-height: 1;
+  margin: 11px 0 18px;
+}
 .form-actions {
   padding: 17px 20px 18px;
   background-color: $bg-addition;
   @include clearfix(); // Adding clearfix to allow for .float-right button containers
 }
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
 
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 18px;
+  font-size: 19.5px;
+  line-height: inherit;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.mt-sm {
+  margin-top: 9px;
+}
+ 
