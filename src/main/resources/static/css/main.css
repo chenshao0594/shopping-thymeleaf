@@ -63,4 +63,43 @@ label {
 .mt-sm {
   margin-top: 9px;
 }
- 
+.thumbnail {
+  display: block;
+  padding: 4px;
+  margin-bottom: 18px;
+  line-height: 1.428571429;
+  background-color: #ffffff;
+  border: 1px solid 1px solid #ddd;
+  border-radius: 3px;
+  -webkit-transition: border 0.2s ease-in-out;
+  -o-transition: border 0.2s ease-in-out;
+  transition: border 0.2s ease-in-out;
+}
+.thumbnail .caption {
+  padding: 9px;
+  //color: #f8f8f8;
+}
+
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active {
+  border-color: #4D9DD7;
+}
+
+.thumbnail > img,
+.thumbnail a > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+ul ul,
+ol ul {
+  list-style: none;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+}

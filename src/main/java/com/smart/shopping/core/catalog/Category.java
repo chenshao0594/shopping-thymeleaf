@@ -38,10 +38,10 @@ public class Category extends BusinessDomain<Long, Category> implements Serializ
 	private Long id;
 
 	@Column(name = "depth")
-	private Integer depth=0;
+	private Integer depth = 0;
 
 	@Column(name = "sort_order")
-	private Integer sortOrder=0;
+	private Integer sortOrder = 0;
 
 	@Column(name = "status")
 	private Boolean categoryStatus;
@@ -53,7 +53,7 @@ public class Category extends BusinessDomain<Long, Category> implements Serializ
 	private Boolean visible;
 
 	@NotNull
-	@Column(name = "code", nullable = false)
+	@Column(name = "code", nullable = false, unique = true)
 	private String code;
 
 	@Column(name = "image")

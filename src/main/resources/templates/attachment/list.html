@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en">
+<head th:replace="fragments/header :: header">
+<!-- REPLACE BEFORE COMMITTING -->
+</head>
+<body role="document">
+	<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE COMMITTING</div>
+	<div class="container content">
+		<div class="page-title">
+			<h2>Attachments</h2>
+		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<ul class="row thumbnails">
+					<li class="col-sm-4">
+						<div class="thumbnail">
+							<img src="images/10.jpg" alt="" />
+							<div class="caption">
+								<p>
+									<a href="#" class="btn btn-danger">Favorite</a> 
+									<a href="#" class="btn btn-success">Read
+										more...</a>
+								</p>
+							</div>
+						</div>
+					</li>
+					<li class="col-sm-4">
+						<div class="thumbnail">
+							<img src="images/12.jpg" alt="" />
+							<div class="caption">
+								<p>
+									<a href="#" class="btn btn-danger">Favorite</a> 
+									<a href="#" class="btn btn-success">Read
+										more...</a>
+								</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div th:replace="fragments/footer :: footer" class="footer">REPLACE BEFORE COMMITTING</div>
+	</div>
+</body>
+</html>
