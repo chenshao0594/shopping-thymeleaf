@@ -51,6 +51,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	public String listEntities(Model model, Pageable pageable) {
 		Page<E> page = this.service.findAll(pageable);
 		model.addAttribute("items", page.getContent());
+		model.addAttribute("page", page);
 		return this.getSectionKey() + "/list";
 	}
 
@@ -81,7 +82,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			// status.setComplete();
 			PageRequest defaultPageable = new PageRequest(0, 10);
 			model.addAttribute("items", this.service.findAll(defaultPageable));
-			return this.getSectionKey() + "/list";
+			return "redirect:/" + this.getSectionKey();
 		}
 	}
 
