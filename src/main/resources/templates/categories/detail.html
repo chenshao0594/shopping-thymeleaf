@@ -27,6 +27,20 @@
 				<dd class="col-md-4 text-left" ></dd>
 			</dl>
 		</fieldset>
+		
+		<fieldset>
+			<legend class="section">Audit Info</legend>
+			<dl class="row justify-content-md-center">
+				<dt class="col-md-2 text-right">Created By</dt>
+				<dd class="col-md-4 text-left" th:text="${item.createdBy}">Code</dd>
+				<dt class="col-md-2 text-right">createdDate</dt>
+				<dd class="col-md-4 text-left" th:text="${item.createdDate}">createdDate</dd>
+				<dt class="col-md-2 text-right">Last Modified By</dt>
+				<dd class="col-md-4 text-left" th:text="${item.lastModifiedBy}">Code</dd>
+				<dt class="col-md-2 text-right">lastModifiedDate</dt>
+				<dd class="col-md-4 text-left" th:text="${item.lastModifiedDate}">LastModifiedDate</dd>
+			</dl>
+		</fieldset>
 	</div>
 	<div th:replace="fragments/footer :: footer" class="footer">REPLACE BEFORE COMMITTING</div>
 </body>

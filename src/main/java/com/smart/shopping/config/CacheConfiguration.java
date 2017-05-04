@@ -22,31 +22,34 @@ import io.github.jhipster.config.JHipsterProperties;
 @AutoConfigureBefore(value = { WebConfigurer.class, DatabaseConfiguration.class })
 public class CacheConfiguration {
 
-    private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
+	private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
 
-    public CacheConfiguration(JHipsterProperties jHipsterProperties) {
-        JHipsterProperties.Cache.Ehcache ehcache =
-            jHipsterProperties.getCache().getEhcache();
+	public CacheConfiguration(JHipsterProperties jHipsterProperties) {
+		JHipsterProperties.Cache.Ehcache ehcache = jHipsterProperties.getCache().getEhcache();
 
-        jcacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(
-            CacheConfigurationBuilder.newCacheConfigurationBuilder(Object.class, Object.class,
-                ResourcePoolsBuilder.heap(ehcache.getMaxEntries()))
-                .withExpiry(Expirations.timeToLiveExpiration(Duration.of(ehcache.getTimeToLiveSeconds(), TimeUnit.SECONDS)))
-                .build());
-    }
+		jcacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(CacheConfigurationBuilder
+				.newCacheConfigurationBuilder(Object.class, Object.class,
+						ResourcePoolsBuilder.heap(ehcache.getMaxEntries()))
+				.withExpiry(
+						Expirations.timeToLiveExpiration(Duration.of(ehcache.getTimeToLiveSeconds(), TimeUnit.SECONDS)))
+				.build());
+	}
 
-    @Bean
-    public JCacheManagerCustomizer cacheManagerCustomizer() {
-        return cm -> {
-            cm.createCache(com.smart.shopping.domain.User.class.getName(), jcacheConfiguration);
-            cm.createCache(com.smart.shopping.domain.Authority.class.getName(), jcacheConfiguration);
-            cm.createCache(com.smart.shopping.domain.User.class.getName() + ".authorities", jcacheConfiguration);
-            cm.createCache(com.smart.shopping.domain.PersistentToken.class.getName(), jcacheConfiguration);
-            cm.createCache(com.smart.shopping.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
-            cm.createCache(com.smart.shopping.core.catalog.Category.class.getName(), jcacheConfiguration);
-			cm.createCache(com.smart.shopping.core.catalog.Category.class.getName() + ".categories", jcacheConfiguration);
-			
-            // jhipster-needle-ehcache-add-entry
-        };
-    }
+	@Bean
+	public JCacheManagerCustomizer cacheManagerCustomizer() {
+		return cm -> {
+			cm.createCache(com.smart.shopping.domain.User.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.domain.Authority.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+			cm.createCache(com.smart.shopping.domain.PersistentToken.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.Category.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.Category.class.getName() + ".categories",
+					jcacheConfiguration);
+			cm.createCache(com.smart.shopping.domain.Attachment.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.domain.EmailSetting.class.getName(), jcacheConfiguration);
+
+			// jhipster-needle-ehcache-add-entry
+		};
+	}
 }

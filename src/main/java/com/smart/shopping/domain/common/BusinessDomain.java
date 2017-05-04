@@ -37,13 +37,7 @@ public abstract class BusinessDomain<K extends Serializable & Comparable<K>, E e
 		if (Hibernate.getClass(object) != Hibernate.getClass(this)) {
 			return false;
 		}
-		BusinessDomain<K, E> entity = (BusinessDomain<K, E>) object; // NOSONAR
-																		// :
-																		// traité
-																		// au-dessus
-																		// mais
-																		// wrapper
-																		// Hibernate
+		BusinessDomain<K, E> entity = (BusinessDomain<K, E>) object;
 		K id = getId();
 
 		if (id == null) {
