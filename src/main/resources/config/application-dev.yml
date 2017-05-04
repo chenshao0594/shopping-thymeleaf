@@ -142,5 +142,8 @@ jhipster:
 # More documentation is available at:
 # https://jhipster.github.io/common-application-properties/
 # ===================================================================
-
+# ===============================
+# = data.sql file will be executed?
+# ===============================
+  ###spring.datasource.initialize=true
 application:
