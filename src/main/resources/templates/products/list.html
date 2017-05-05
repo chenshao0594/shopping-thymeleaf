@@ -19,6 +19,7 @@
 						<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
 						<th>Image</th>
 						<th><a class="sorted" sd:pagination-sort="title">title</a></th>
+						<th><a class="sorted" sd:pagination-sort="sku">SKU</a></th>
 						<th>Sale Price</th>
 						<th>Retail Price</th>
 						<th>Operation</th>
@@ -28,7 +29,8 @@
 					<tr th:each="row : ${page}">
 						<th scope="row" th:text="${row.id}">1</th>
 						<th><img src="..." alt="..." class="img-thumbnail"></th>
-						<td th:text="${row.title}">code</td>
+						<td th:text="${row.title}">title</td>
+						<td th:text="${row.sku}">sku</td>
 						<td th:text="${row.salePrice}">Sale Price</td>
 						<td th:text="${row.retailPrice}">Retail Price</td>
 						<td>
