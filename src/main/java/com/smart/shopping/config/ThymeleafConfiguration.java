@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.thymeleaf.dialect.springdata.SpringDataDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
@@ -15,15 +16,27 @@ public class ThymeleafConfiguration {
 	private final Logger log = LoggerFactory.getLogger(ThymeleafConfiguration.class);
 
 	@Bean
-	@Description("Thymeleaf template resolver serving HTML 5 emails")
-	public ClassLoaderTemplateResolver emailTemplateResolver() {
+	@Description("Thymeleaf template")
+	public ClassLoaderTemplateResolver TemplateResolver() {
 		ClassLoaderTemplateResolver emailTemplateResolver = new ClassLoaderTemplateResolver();
-		emailTemplateResolver.setPrefix("mails/");
+		emailTemplateResolver.setPrefix("templates/");
 		emailTemplateResolver.setSuffix(".html");
-		emailTemplateResolver.setTemplateMode("HTML5");
+		emailTemplateResolver.setTemplateMode("HTML");
 		emailTemplateResolver.setCharacterEncoding(CharEncoding.UTF_8);
 		emailTemplateResolver.setOrder(1);
 		return emailTemplateResolver;
 	}
+
+	@Bean
+	public SpringDataDialect springDataDialect() {
+		return new SpringDataDialect();
+	}
+
+	/*
+	 * @Bean public SpringTemplateEngine templateDialogEngine() {
+	 * SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+	 * templateEngine.getDialects(); templateEngine.addDialect(new
+	 * LayoutDialect()); return templateEngine; }
+	 */
 
 }

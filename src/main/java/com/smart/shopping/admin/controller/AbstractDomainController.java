@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smart.shopping.core.catalog.Category;
@@ -35,7 +35,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 
 	protected abstract String getEntityName();
 
-	protected void preNew(Model model) {
+	protected void preNew(ModelAndView model) {
 	};
 
 	protected void postNew(E entity, Model model) {
@@ -56,7 +56,6 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	@GetMapping()
 	public String listEntities(Model model, Pageable pageable) {
 		Page<E> page = this.service.findAll(pageable);
-		model.addAttribute("items", page.getContent());
 		model.addAttribute("page", page);
 		return this.getSectionKey() + "/list";
 	}
@@ -71,35 +70,40 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 
 	@Timed
 	@GetMapping(value = "/new")
-	public String initCreationForm(Model model) {
+	public ModelAndView initCreationForm(ModelAndView model) {
 		this.preNew(model);
 		Category entity = new Category();
-		model.addAttribute("item", entity);
-		return this.getSectionKey() + "/dialog";
+		model.addObject("item", entity);
+		model.setViewName(this.getSectionKey() + "/dialog");
+		return model;
 	}
 
 	@Timed
 	@PostMapping()
-	public String createEntity(@Valid E entity, BindingResult result, SessionStatus status, Model model) {
+	public ModelAndView createEntity(@Valid E entity, BindingResult result, RedirectAttributes redirect) {
 		log.debug("REST request to save entity : {}", entity);
+		ModelAndView mv = new ModelAndView();
 		if (result.hasErrors()) {
-			return this.getSectionKey() + "/dialog";
+			mv.addObject("formErrors", result.getAllErrors());
+			mv.setViewName(this.getSectionKey() + "/dialog");
+			mv.addObject("item", entity);
+			this.preNew(mv);
+			return mv;
 		} else {
 			this.service.save(entity);
-			// status.setComplete();
-			PageRequest defaultPageable = new PageRequest(0, 10);
-			model.addAttribute("items", this.service.findAll(defaultPageable));
-			return "redirect:/" + this.getSectionKey();
+			redirect.addFlashAttribute("statusMessage", "Successfully created!");
+			return new ModelAndView("redirect:/" + this.getSectionKey() + "/{entity.id}", "entity.id", entity.getId());
 		}
 	}
 
 	@Timed
 	@GetMapping(value = "{id}/edit")
-	public String editEntity(@PathVariable("id") K id, Model model) {
+	public ModelAndView editEntity(@PathVariable("id") K id, ModelAndView model) {
 		E entity = this.service.findOne(id);
-		model.addAttribute("item", entity);
+		model.addObject("item", entity);
 		this.preNew(model);
-		return this.getSectionKey() + "/dialog";
+		model.setViewName(this.getSectionKey() + "/dialog");
+		return model;
 	}
 
 	@Timed

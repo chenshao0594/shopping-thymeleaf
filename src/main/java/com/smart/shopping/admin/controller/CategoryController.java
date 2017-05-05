@@ -5,8 +5,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.smart.shopping.core.catalog.Category;
 import com.smart.shopping.core.catalog.service.CategoryService;
@@ -27,9 +27,9 @@ public class CategoryController extends AbstractDomainController<Category, Long>
 	}
 
 	@Override
-	protected void preNew(Model model) {
+	protected void preNew(ModelAndView model) {
 		List<Category> categories = this.categoryService.list();
-		model.addAttribute("categories", categories);
+		model.addObject("categories", categories);
 	}
 
 	@Override

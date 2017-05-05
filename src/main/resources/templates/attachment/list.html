@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en">
-<head th:replace="fragments/header :: header">
+<head>
+<head th:include="fragments/header :: header">
+</head>
 <!-- REPLACE BEFORE COMMITTING -->
+	<script src="js/vendor/jquery.ui.widget.js" th:src="@{/js/vendor/jquery.ui.widget.js}"></script>
+	<script th:src="@{/webjars/jquery-file-upload/9.10.1/js/jquery.fileupload.js}"></script>
+	<script src="js/attachment.js" th:src="@{/js/attachment.js}"></script>
+
 </head>
 <body role="document">
 	<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE COMMITTING</div>
@@ -9,6 +15,15 @@
 		<div class="page-title">
 			<h2>Attachments</h2>
 		</div>
+		<input id="inp" type='file'/>
+		<p id="b64"></p>
+		<img id="img" height="150"/>
+		<form name="attachmentForm" id="attachmentForm" th:action="@{'/attachments'}" action="attachments.html" method="POST">
+			<input type="hidden" id="attachmentContent" name="content" value=""/>
+			<input type="hidden"  name="boId" value="1"/>
+			<input type="hidden" name="boName" value="Category"/>
+		</form>
+		
 		<div class="row">
 			<div class="col-md-10">
 				<ul class="row thumbnails">
@@ -17,8 +32,7 @@
 							<img src="images/10.jpg" alt="" />
 							<div class="caption">
 								<p>
-									<a href="#" class="btn btn-danger">Favorite</a> 
-									<a href="#" class="btn btn-success">Read
+									<a href="#" class="btn btn-danger">Favorite</a> <a href="#" class="btn btn-success">Read
 										more...</a>
 								</p>
 							</div>
@@ -29,8 +43,7 @@
 							<img src="images/12.jpg" alt="" />
 							<div class="caption">
 								<p>
-									<a href="#" class="btn btn-danger">Favorite</a> 
-									<a href="#" class="btn btn-success">Read
+									<a href="#" class="btn btn-danger">Favorite</a> <a href="#" class="btn btn-success">Read
 										more...</a>
 								</p>
 							</div>
@@ -42,4 +55,7 @@
 		<div th:replace="fragments/footer :: footer" class="footer">REPLACE BEFORE COMMITTING</div>
 	</div>
 </body>
+<script type="text/javascript">
+	document.getElementById("inp").addEventListener("change", readFile);
+</script>
 </html>

@@ -13,10 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -52,7 +52,7 @@ public class Category extends BusinessDomain<Long, Category> implements Serializ
 	@Column(name = "visible")
 	private Boolean visible;
 
-	@NotNull
+	@NotEmpty
 	@Column(name = "code", nullable = false, unique = true)
 	private String code;
 

@@ -55,7 +55,7 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 	@Column(name = "bo_name", nullable = false, updatable = false)
 	private String boName;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "bo_id", nullable = false, updatable = false)
 	private Long boId;
 

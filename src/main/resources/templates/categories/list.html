@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en">
-<head th:replace="fragments/header :: header">
-<!-- REPLACE BEFORE COMMITTING -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+	layout:decorate="~{layouts/layout}">
 </head>
-<body role="document">
-	<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE COMMITTING</div>
-	<div class="container content">
+<body>
+	<section layout:fragment="content">
 		<div class="page-title">
 			<h2>
 				Categories <a th:href="@{/categories/new}" class="btn btn-success pull-right"><span
@@ -18,25 +16,23 @@
 			<table class="table">
 				<thead class="thead-default">
 					<tr>
-						<th>#</th>
-						<th>Code</th>
+						<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
+						<th><a class="sorted" sd:pagination-sort="code">Code</a></th>
 						<th>Parent</th>
 						<th>Operation</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="item : ${items}">
-						<th scope="row" th:text="${item.id}">1</th>
-						<td th:text="${item.code}">code</td>
-						<td th:text="${item.parent?.code}">parent code</td>
+					<tr th:each="row : ${page}">
+						<th scope="row" th:text="${row.id}">1</th>
+						<td th:text="${row.code}">code</td>
+						<td th:text="${row.parent?.code}">Parent</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{'/categories/'+${item.id}}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{'/categories/'+${row.id}}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> 
-								&nbsp;
-								<a class="btn btn-primary btn-sm" th:href="@{'/categories/'+${item.id}+'/edit'}"> <span
-									class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/categories/'+${row.id}+'/edit'}">
+									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>
 						</td>
@@ -44,7 +40,20 @@
 				</tbody>
 			</table>
 		</div>
-		<div th:replace="fragments/footer :: footer" class="footer">REPLACE BEFORE COMMITTING</div>
-	</div>
+		<div class="row">
+			<div class="col-6">
+				<div sd:pagination-summary="">info</div>
+			</div>
+			<div class="col-6">
+				<nav class="pull-right">
+					<ul class="pagination" sd:pagination="full">
+						<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+						<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</section>
 </body>
 </html>
