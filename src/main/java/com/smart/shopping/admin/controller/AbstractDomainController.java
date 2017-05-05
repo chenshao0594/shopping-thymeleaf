@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smart.shopping.core.catalog.Category;
 import com.smart.shopping.domain.common.BusinessDomain;
 import com.smart.shopping.service.AbstractDomainService;
 
@@ -33,7 +32,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 
 	protected abstract String getSectionKey();
 
-	protected abstract String getEntityName();
+	protected abstract Class getEntityClass();
 
 	protected void preNew(ModelAndView model) {
 	};
@@ -72,8 +71,15 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	@GetMapping(value = "/new")
 	public ModelAndView initCreationForm(ModelAndView model) {
 		this.preNew(model);
-		Category entity = new Category();
-		model.addObject("item", entity);
+		try {
+			model.addObject("item", this.getEntityClass().newInstance());
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		model.setViewName(this.getSectionKey() + "/dialog");
 		return model;
 	}
@@ -108,12 +114,15 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 
 	@Timed
 	@PostMapping(value = "{id}/edit")
-	public String updateEntity(@PathVariable("id") K id, @Valid E entity, BindingResult result, Model model) {
+	public String updateEntity(@PathVariable("id") K id, @Valid E entity, BindingResult result, Model model,
+			RedirectAttributes redirect) {
 		if (result.hasErrors()) {
+			model.addAttribute("formErrors", result.getAllErrors());
 			return this.getSectionKey() + "/dialog";
 		} else {
 			this.service.save(entity);
 			model.addAttribute("item", entity);
+			redirect.addFlashAttribute("statusMessage", "Update Successfully !");
 			return "redirect:/" + this.getSectionKey() + "/" + id + "/edit";
 		}
 	}

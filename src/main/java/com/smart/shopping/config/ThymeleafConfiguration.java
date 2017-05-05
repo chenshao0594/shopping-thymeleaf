@@ -23,6 +23,7 @@ public class ThymeleafConfiguration {
 		emailTemplateResolver.setSuffix(".html");
 		emailTemplateResolver.setTemplateMode("HTML");
 		emailTemplateResolver.setCharacterEncoding(CharEncoding.UTF_8);
+		emailTemplateResolver.setCacheable(false);
 		emailTemplateResolver.setOrder(1);
 		return emailTemplateResolver;
 	}

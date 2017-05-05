@@ -48,6 +48,16 @@ public class CacheConfiguration {
 					jcacheConfiguration);
 			cm.createCache(com.smart.shopping.domain.Attachment.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smart.shopping.domain.EmailSetting.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.domain.MerchantStore.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.Product.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.Product.class.getName() + ".productOptions",
+					jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.ProductOption.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.ProductOption.class.getName() + ".productOptionValues",
+					jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.ProductOptionValue.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.ProductOptionValue.class.getName() + ".productOption",
+					jcacheConfiguration);
 
 			// jhipster-needle-ehcache-add-entry
 		};

@@ -17,7 +17,7 @@ public class CategoryController extends AbstractDomainController<Category, Long>
 
 	private final Logger log = LoggerFactory.getLogger(CategoryController.class);
 	public static final String SECTION_KEY = "categories";
-	private static final String ENTITY_NAME = "category";
+	private static final Class ENTITY_CLASS = Category.class;
 
 	private final CategoryService categoryService;
 
@@ -38,8 +38,8 @@ public class CategoryController extends AbstractDomainController<Category, Long>
 	}
 
 	@Override
-	protected String getEntityName() {
-		return this.ENTITY_NAME;
+	protected Class getEntityClass() {
+		return this.ENTITY_CLASS;
 	}
 
 }

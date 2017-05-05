@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" layout:decorate="~{layouts/layout}">
+<head>
+<body>
+	<section layout:fragment="content">
+		<div class="page-title">
+			<h2>Product</h2>
+		</div>
+		<div role="alert" th:if="${statusMessage}"
+			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
+		<form name="form" th:action="@{(${item.id} ? '/products/'+${item.id}+'/edit': '/products')}"
+			action="category/edit.html" method="POST">
+			<fieldset>
+				<legend class="section">Basic Info</legend>
+				<div class="row form-group">
+					<label for="name_input" class="col-2 col-form-label text-right">Name</label> <input type="text"
+						th:value="${item.name}" class="form-control col-4" id="name_input" name="name" /> <label
+						for="title_input" class="col-2 col-form-label text-right">Title</label> <input type="text"
+						th:value="${item.title}" class="form-control col-4" id="title_input" name="title" /> <label
+						for="salePrice_input" class="col-2 col-form-label text-right">Sale Price</label>
+					<div class="input-group  col-4">
+						<span class="input-group-addon">$</span> <input type="number" th:value="${item.salePrice}"
+							class="form-control" id="salePrice_input" name="salePrice" />
+					</div>
+					<label for="retailPrice_input" class="col-2 col-form-label text-right">Retail Price</label>
+					<div class="input-group  col-4">
+						<span class="input-group-addon">$</span> <input type="number" th:value="${item.retailPrice}"
+							class="form-control" id="retailPrice_input" name="retailPrice" />
+					</div>
+					<label for="sku" class="col-2 col-form-label text-right">SKU Name</label> <input type="text"
+						th:value="${item.sku}" class="form-control col-4" name="sku" />
+				</div>
+			</fieldset>
+			<div class="form-actions">
+				<div class="row">
+					<div class="offset-9">
+						<button type="button" class="btn btn-default" th:onclick="${'goBack();'}">
+							<span class="fa fa-ban"></span>&nbsp;Cancel
+						</button>
+						<button type="submit" class="btn btn-primary">
+							<span class="fa fa-save"></span>&nbsp;Save
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

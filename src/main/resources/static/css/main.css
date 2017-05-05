@@ -14,7 +14,10 @@
 	padding: 40px 15px;
 	text-align: center;
 }
-
+.input-group{
+	 padding-left: 0px;
+    padding-right: 0px;
+}
 .dropdown-menu-right {
 	right: inherit !important;
 }
@@ -102,4 +105,8 @@ ol ul {
 ul, ol {
   list-style: none;
   padding: 0;
+}
+
+.table th {
+    padding: .5rem;
 }
