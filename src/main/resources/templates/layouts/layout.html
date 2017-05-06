@@ -16,7 +16,6 @@
 <!-- script    -->
 <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.0/jquery.min.js"
 	th:src="@{/webjars/jquery/3.2.0/jquery.min.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
 <script src="https://npmcdn.com/tether@1.4.0/js/tether.min.js"
 	th:src="@{/webjars/tether/1.4.0/js/tether.min.js}"></script>
 <script src="https://npmcdn.com/tether@4.0.0-alpha.6-1/dist/js/bootstrap.min.js"
@@ -36,7 +35,7 @@
 		</section>
 	</div>
 	<footer>
-		<div th:replace="fragments/footer :: footer" class="footer">REPLACE BEFORE COMMITTING</div>
+		<div th:replace="fragments/footer :: footer">REPLACE BEFORE COMMITTING</div>
 	</footer>
 </body>
 <section layout:fragment="footer-script"></section>

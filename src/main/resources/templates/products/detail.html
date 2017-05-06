@@ -15,19 +15,28 @@
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
 		<fieldset>
 			<legend class="section">Basic Info</legend>
-			<dl class="row justify-content-md-center">
-				<dt class="col-md-2 text-right">Title</dt>
-				<dd class="col-md-4 text-left" th:text="${item.title}">Title</dd>
-				<dt class="col-md-2 text-right">SKU</dt>
-				<dd class="col-md-4 text-left" th:text="${item.sku}">SKU</dd>
-				<dt class="col-md-2 text-right">Sale Price</dt>
-				<dd class="col-md-4 text-left" th:text="${item.salePrice}">Sale Price</dd>
-				<dt class="col-md-2 text-right">Retail Price</dt>
-				<dd class="col-md-4 text-left" th:text="${item.retailPrice}">Retail Price</dd>
-				<dt class="col-md-2 text-right"></dt>
-				<dd class="col-md-4 text-left"></dd>
-			</dl>
+			<div class="row justify-content-md-center">
+				<div class="col-3">
+					<img src="/images/jpeg/2.jpg" class="rounded float-left" alt="...">
+				</div>
+				<dl class="col-md-9 row">
+					<dt class="col-md-2 text-right">Title</dt>
+					<dd class="col-md-4 text-left" th:text="${item.title}">Title</dd>
+					<dt class="col-md-2 text-right">SKU</dt>
+					<dd class="col-md-4 text-left" th:text="${item.sku}">SKU</dd>
+					<dt class="col-md-2 text-right">Sale Price</dt>
+					<dd class="col-md-4 text-left" th:text="${item.salePrice}">Sale Price</dd>
+					<dt class="col-md-2 text-right">Retail Price</dt>
+					<dd class="col-md-4 text-left" th:text="${item.retailPrice}">Retail Price</dd>
+					<dt class="col-md-2 text-right"></dt>
+					<dd class="col-md-4 text-left"></dd>
+				</dl>
+			</div>
 		</fieldset>
+		<fieldset>
+			<legend class="section">SKU Info</legend>
+			</fieldset>
+			
 		<fieldset>
 			<legend class="section">Audit Info</legend>
 			<dl class="row justify-content-md-center">

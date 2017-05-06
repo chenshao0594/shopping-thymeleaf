@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -108,10 +109,8 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@Column(name = "sku", nullable = false)
 	private String sku;
 
-	// @OneToMany(mappedBy = "product")
-	// @JsonIgnore
-	// @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-	// private Set<ProductAttribute> attributes = new HashSet<>();
+	@ManyToOne
+	private Category category;
 
 	@Column(name = "standard_price", precision = 10, scale = 2)
 	private BigDecimal standardPrice;
@@ -345,6 +344,14 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	public Boolean getProductShipeable() {
 		return productShipeable;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }

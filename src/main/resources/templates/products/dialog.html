@@ -1,67 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en" layout:decorate="~{layouts/layout}">
 <head>
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css"
+	th:href="@{/vendor/summernote/summernote.css}" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"
+	th:src="@{/vendor/summernote/summernote.js}"></script>
+</head>
 <body>
 	<section layout:fragment="content">
 		<div class="page-title">
 			<div class="row justify-content-between">
 				<h2 class="">Product</h2>
-				<div class="btn-group" role="group">
+				<div th:if="${item.id}" class="btn-group" role="group">
 					<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-pencil"></span>&nbsp;Edit Others&nbsp;</button>
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="fa fa-pencil"></span>&nbsp;Edit Others&nbsp;
+					</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 						<a class="dropdown-item" href="#">Dropdown link</a> <a class="dropdown-item" href="#">Dropdown
 							link</a>
 					</div>
 				</div>
 			</div>
-			</div>
-			<div role="alert" th:if="${statusMessage}"
-				th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-			<form name="form" th:action="@{(${item.id} ? '/products/'+${item.id}+'/edit': '/products')}"
-				action="category/edit.html" method="POST">
-				<fieldset>
-					<legend class="section">Basic Info</legend>
-					<div class="row">
-						<div class="col-3">
-							<img src="/images/jpeg/2.jpg" class="rounded float-left" alt="...">
+		</div>
+		<div role="alert" th:if="${statusMessage}"
+			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
+		<form name="form" th:action="@{(${item.id} ? '/products/'+${item.id}+'/edit': '/products')}"
+			action="products/edit.html" method="POST">
+			<fieldset>
+				<legend class="section">Basic Info</legend>
+				<div class="row">
+					<div class="col-3">
+						<img src="/images/jpeg/2.jpg" class="rounded float-left" alt="...">
+					</div>
+					<div class="col-md-9 row">
+						<label for="name_input" class="col-2 col-form-label text-right">Name</label> <input
+							type="text" th:value="${item.name}" class="form-control col-4" id="name_input" name="name" />
+						<label for="title_input" class="col-2 col-form-label text-right">Title</label> <input
+							type="text" th:value="${item.title}" class="form-control col-4" id="title_input" name="title" />
+						<label for="category" class="col-2 col-form-label text-right"> Category</label> <select
+							class="form-control col-4" name="category.id">
+							<option th:each="item : ${categories}" th:value="${item.id}" th:text="${item.code}"></option>
+						</select> <label for="sku" class="col-2 col-form-label text-right">SKU</label> <input type="text"
+							th:value="${item.sku}" class="form-control col-4" name="sku" /> <label for="salePrice_input"
+							class="col-2 col-form-label text-right">Sale Price</label>
+						<div class="input-group  col-4">
+							<span class="input-group-addon">$</span> <input type="number" th:value="${item.salePrice}"
+								class="form-control" id="salePrice_input" name="salePrice" />
 						</div>
-						<div class="col-md-9 row">
-							<label for="name_input" class="col-2 col-form-label text-right">Name</label> <input
-								type="text" th:value="${item.name}" class="form-control col-4" id="name_input" name="name" />
-							<label for="title_input" class="col-2 col-form-label text-right">Title</label> <input
-								type="text" th:value="${item.title}" class="form-control col-4" id="title_input"
-								name="title" /> <label for="sku" class="col-2 col-form-label text-right">SKU</label> <input
-								type="text" th:value="${item.sku}" class="form-control col-4" name="sku" /> <label
-								for="salePrice_input" class="col-2 col-form-label text-right">Sale Price</label>
-							<div class="input-group  col-4">
-								<span class="input-group-addon">$</span> <input type="number" th:value="${item.salePrice}"
-									class="form-control" id="salePrice_input" name="salePrice" />
-							</div>
-							<label for="retailPrice_input" class="col-2 col-form-label text-right">Retail Price</label>
-							<div class="input-group  col-4">
-								<span class="input-group-addon">$</span> <input type="number" th:value="${item.retailPrice}"
-									class="form-control" id="retailPrice_input" name="retailPrice" />
-							</div>
+						<label for="retailPrice_input" class="col-2 col-form-label text-right">Retail Price</label>
+						<div class="input-group  col-4">
+							<span class="input-group-addon">$</span> <input type="number" th:value="${item.retailPrice}"
+								class="form-control" id="retailPrice_input" name="retailPrice" />
 						</div>
 					</div>
-				</fieldset>
-				<fieldset>
-					<legend class="section">SKU Info</legend>
-					<div class="row">待定 ...</div>
-				</fieldset>
-				<div class="form-actions">
-					<div class="row justify-content-end">
-							<button type="button" class="btn btn-default" th:onclick="${'goBack();'}">
-								<span class="fa fa-ban"></span>&nbsp;Cancel
-							</button>
-							&nbsp;
-							<button type="submit" class="btn btn-primary">
-								<span class="fa fa-save"></span>&nbsp;Save
-							</button>
-						</div>
 				</div>
-			</form>
+				<!-- <br />
+				<div class="row offset-2 col-10">
+					<div id="summernote">
+						<p>Hello Summernote</p>
+					</div>
+				</div> -->
+			</fieldset>
+			<fieldset>
+				<legend class="section">SKU Info</legend>
+				<div class="row">待定 ...</div>
+			</fieldset>
+			<div class="form-actions">
+				<div class="row justify-content-end">
+					<button type="button" class="btn btn-default" th:onclick="${'goBack();'}">
+						<span class="fa fa-ban"></span>&nbsp;Cancel
+					</button>
+					&nbsp;
+					<button type="submit" class="btn btn-primary">
+						<span class="fa fa-save"></span>&nbsp;Save
+					</button>
+				</div>
+			</div>
+		</form>
 	</section>
 </body>
+<section layout:fragment="footer-script">
+	<script>
+		$(document).ready(function() {
+			$('#summernote').summernote({
+				height : 300, // set editor height
+				minHeight : null, // set minimum height of editor
+				maxHeight : null, // set maximum height of editor
+			//focus: true                  // set focus to editable area after initializing summernote
+			}); // set focus to editable area after initializing summernote);
+		});
+	</script>
+</section>
 </html>
