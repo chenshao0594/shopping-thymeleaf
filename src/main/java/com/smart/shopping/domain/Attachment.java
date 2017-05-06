@@ -2,10 +2,8 @@ package com.smart.shopping.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,13 +38,12 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 	private String name;
 
 	@NotNull
-	@Basic(fetch = FetchType.LAZY)
 	@Lob
 	@Column(name = "content", nullable = false, updatable = false)
 	private byte[] content;
 
-	@Column(name = "content_content_type", nullable = false, updatable = false)
-	private String contentContentType;
+	@Column(name = "content_type", nullable = false, updatable = false)
+	private String contentType;
 
 	@Column(name = "jhi_size", updatable = false)
 	private Long size;
@@ -95,17 +92,17 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 		this.content = content;
 	}
 
-	public String getContentContentType() {
-		return contentContentType;
+	public String getContentType() {
+		return contentType;
 	}
 
-	public Attachment contentContentType(String contentContentType) {
-		this.contentContentType = contentContentType;
+	public Attachment contentType(String contentContentType) {
+		this.contentType = contentContentType;
 		return this;
 	}
 
-	public void setContentContentType(String contentContentType) {
-		this.contentContentType = contentContentType;
+	public void setContentType(String contentContentType) {
+		this.contentType = contentContentType;
 	}
 
 	public Long getSize() {

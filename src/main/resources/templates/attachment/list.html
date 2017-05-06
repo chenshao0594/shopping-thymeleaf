@@ -1,61 +1,55 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data"
+	layout:decorate="~{layouts/layout}" lang="en">
 <head>
-<head th:include="fragments/header :: header">
+<link href="css/fileinput.min.css" th:href="@{css/fileinput.min.css}" media="all" rel="stylesheet"
+	type="text/css" />
+<script src="js/vendor/jquery.ui.widget.js" th:src="@{/js/vendor/jquery.ui.widget.js}"></script>
+<script th:src="@{/webjars/jquery-file-upload/9.10.1/js/jquery.fileupload.js}"></script>
+<script src="js/vendor/fileinput.min.js" th:src="@{js/vendor/fileinput.min.js}"></script>
 </head>
-<!-- REPLACE BEFORE COMMITTING -->
-	<script src="js/vendor/jquery.ui.widget.js" th:src="@{/js/vendor/jquery.ui.widget.js}"></script>
-	<script th:src="@{/webjars/jquery-file-upload/9.10.1/js/jquery.fileupload.js}"></script>
-	<script src="js/attachment.js" th:src="@{/js/attachment.js}"></script>
-
-</head>
-<body role="document">
-	<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE COMMITTING</div>
-	<div class="container content">
+<body>
+	<section layout:fragment="content">
 		<div class="page-title">
-			<h2>Attachments</h2>
+			<h2>Product Images</h2>
 		</div>
-		<input id="inp" type='file'/>
-		<p id="b64"></p>
-		<img id="img" height="150"/>
-		<form name="attachmentForm" id="attachmentForm" th:action="@{'/attachments'}" action="attachments.html" method="POST">
-			<input type="hidden" id="attachmentContent" name="content" value=""/>
-			<input type="hidden"  name="boId" value="1"/>
-			<input type="hidden" name="boName" value="Category"/>
-		</form>
-		
-		<div class="row">
-			<div class="col-md-10">
-				<ul class="row thumbnails">
-					<li class="col-sm-4">
-						<div class="thumbnail">
-							<img src="images/10.jpg" alt="" />
-							<div class="caption">
-								<p>
-									<a href="#" class="btn btn-danger">Favorite</a> <a href="#" class="btn btn-success">Read
-										more...</a>
-								</p>
-							</div>
-						</div>
-					</li>
-					<li class="col-sm-4">
-						<div class="thumbnail">
-							<img src="images/12.jpg" alt="" />
-							<div class="caption">
-								<p>
-									<a href="#" class="btn btn-danger">Favorite</a> <a href="#" class="btn btn-success">Read
-										more...</a>
-								</p>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
+		<div class="container">
+			<form name="form" th:action="@{'/test'}" method="POST" enctype="multipart/form-data">
+				<input type="file" name="file" /><br/> <input type="submit" value="Submit" />
+			</form>
+			<input id="file-input" name="file" type="file" multiple=true class="file-loading">
 		</div>
-		<div th:replace="fragments/footer :: footer" class="footer">REPLACE BEFORE COMMITTING</div>
-	</div>
+	</section>
 </body>
-<script type="text/javascript">
-	document.getElementById("inp").addEventListener("change", readFile);
-</script>
+<section layout:fragment="footer-script">
+	<script>
+		$(document).ready(function() {
+			$("#file-input").fileinput({
+				uploadUrl : "test", // server upload action
+				uploadAsync : true,
+				minFileCount : 1,
+				maxFileCount : 5,
+				overwriteInitial : false,
+				initialPreview : [
+					"http://lorempixel.com/800/460/people/1"
+				],
+				initialPreviewAsData : true, // identify if you are sending preview data only and not the raw markup
+				initialPreviewFileType : 'image', // image is the default and can be overridden in config below
+				initialPreviewConfig : [
+					{
+						caption : "People-1.jpg",
+						size : 576237,
+						width : "120px",
+						url : "/site/file-delete",
+						key : 1
+					}
+				]
+			/*  uploadExtraData: {
+			     img_key: "1000",
+			     img_keywords: "happy, places",
+			 } */
+			});
+		});
+	</script>
+</section>
 </html>

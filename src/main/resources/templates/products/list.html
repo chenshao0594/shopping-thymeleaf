@@ -13,7 +13,7 @@
 		<div class="row">
 			<div role="alert" th:if="${statusMessage}"
 				th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-			<table class="table">
+			<table class="table table-striped">
 				<thead class="thead-default">
 					<tr>
 						<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
@@ -28,7 +28,7 @@
 				<tbody>
 					<tr th:each="row : ${page}">
 						<th scope="row" th:text="${row.id}">1</th>
-						<th><img src="..." alt="..." class="img-thumbnail"></th>
+						<th><img src="images/jpeg/2.jpg" alt="..." class="img-rounded" height="50"></th>
 						<td th:text="${row.title}">title</td>
 						<td th:text="${row.sku}">sku</td>
 						<td th:text="${row.salePrice}">Sale Price</td>

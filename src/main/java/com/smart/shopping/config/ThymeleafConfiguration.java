@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
-import org.thymeleaf.dialect.springdata.SpringDataDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
@@ -28,10 +27,10 @@ public class ThymeleafConfiguration {
 		return emailTemplateResolver;
 	}
 
-	@Bean
-	public SpringDataDialect springDataDialect() {
-		return new SpringDataDialect();
-	}
+	// @Bean
+	// public SpringDataDialect springDataDialect() {
+	// return new SpringDataDialect();
+	// }
 
 	/*
 	 * @Bean public SpringTemplateEngine templateDialogEngine() {

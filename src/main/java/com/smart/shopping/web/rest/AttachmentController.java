@@ -8,6 +8,8 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.codahale.metrics.annotation.Timed;
 import com.smart.shopping.domain.Attachment;
 import com.smart.shopping.service.AttachmentService;
 
@@ -34,27 +37,21 @@ public class AttachmentController {
 		this.attachmentService = attachmentService;
 	}
 
-	@PostMapping(value = "")
+	@Timed
+	@PostMapping()
 	public void createImage(@Valid Attachment attachment, BindingResult result, SessionStatus status, Model model,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		this.attachmentService.save(attachment);
-
 		System.out.println(attachment.getContent());
 		response.sendRedirect(request.getRequestURI());
 	}
 
+	@Timed
 	@GetMapping()
-	public String images(HttpServletResponse response) throws IOException {
-		// MultipartFile image = reqModel.getImage();
-		// if (null == image) {
-		// response.sendRedirect(request.getRequestURI() + "s");
-		// }
-		// if (null == item.getMainImageId()) {
-		// item.setMainImageId(newImage.getId());
-		// this.repository.saveAndFlush(item);
-		// }
-		// response.sendRedirect(request.getRequestURI());
+	public String images(Model model, Pageable pageable) throws IOException {
+		Page<Attachment> page = this.attachmentService.findAll(null);
+		model.addAttribute("page", page);
 		return "attachment/list";
 	}
 

@@ -15,9 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smart.shopping.core.catalog.Product;
+import com.smart.shopping.core.catalog.service.CategoryService;
 import com.smart.shopping.core.catalog.service.ProductOptionService;
 import com.smart.shopping.domain.Attachment;
 import com.smart.shopping.service.AttachmentService;
@@ -44,12 +46,20 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 	private AttachmentService attachmentService;
 
 	@Autowired
+	private CategoryService categoryService;
+
+	@Autowired
 	private ProductOptionService productOptionService;
 
 	public ProductController(ProductService productService) {
 		super(productService);
 		this.productService = productService;
 	}
+
+	@Override
+	protected void preNew(ModelAndView model) {
+		model.addObject("categories", this.categoryService.list());
+	};
 
 	@Timed
 	@GetMapping("/{id}/attachments")
