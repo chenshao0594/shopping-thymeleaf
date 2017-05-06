@@ -12,13 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smart.shopping.domain.MerchantStore;
@@ -55,8 +54,8 @@ public class ProductOption extends BusinessDomain<Long, ProductOption> {
 	private String description;
 
 	@OneToMany(mappedBy = "productOption", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-	@Fetch(value = FetchMode.SELECT)
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@OrderBy("sortOrder")
 	private Set<ProductOptionValue> productOptionValues = new HashSet<>();
 
 	@ManyToOne()
@@ -150,6 +149,13 @@ public class ProductOption extends BusinessDomain<Long, ProductOption> {
 
 	public void setSortOrder(Integer sortOrder) {
 		this.sortOrder = sortOrder;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductOption [id=" + id + ", readOnly=" + readOnly + ", productOptionType=" + productOptionType
+				+ ", code=" + code + ", sortOrder=" + sortOrder + ", description=" + description
+				+ ", productOptionValues=" + productOptionValues + ", merchantStore=" + merchantStore + "]";
 	}
 
 }

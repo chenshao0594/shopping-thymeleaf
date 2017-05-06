@@ -62,6 +62,15 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 	};
 
 	@Timed
+	@GetMapping("/{productId}/skus")
+	public String querySKUs(@PathVariable("productId") Long productId, ModelAndView model) {
+		Product product = this.productService.findOne(productId);
+		model.addObject("productId", productId);
+		model.addObject("options", product.getProductOptions());
+		return this.getSectionKey() + "/skus";
+	}
+
+	@Timed
 	@GetMapping("/{id}/attachments")
 	public ResponseEntity<List<Attachment>> getAllAttachments(@PathVariable("id") Long boid,
 			@ApiParam Pageable pageable) {

@@ -1,6 +1,5 @@
 package com.smart.shopping.admin.controller;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Set;
 
@@ -9,12 +8,10 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,7 +20,6 @@ import com.smart.shopping.core.catalog.ProductOption;
 import com.smart.shopping.core.catalog.ProductOptionValue;
 import com.smart.shopping.core.catalog.service.ProductOptionService;
 import com.smart.shopping.core.catalog.service.ProductOptionValueService;
-import com.smart.shopping.web.rest.util.HeaderUtil;
 
 /**
  * REST controller for managing ProductOption.
@@ -55,26 +51,21 @@ public class ProductOptionController extends AbstractDomainController<ProductOpt
 	};
 
 	@Timed
-	@PostMapping("/{id}/values")
-	public @ResponseBody ResponseEntity<ProductOptionValue> createProductOptionValue(@PathVariable Long id,
-			@Valid @RequestBody ProductOptionValue entity) throws URISyntaxException {
-		log.debug("REST request to save entity : {}", entity);
-		if (entity.getId() != null) {
-			return null;
-		}
-		ProductOption productOption = this.productOptionService.findOne(id);
+	@PostMapping("/{optionId}/values")
+	public String createProductOptionValue(@PathVariable("optionId") Long optionId, @Valid ProductOptionValue entity)
+			throws URISyntaxException {
+		log.debug(" request to save product Option value entity : {}", entity.getId());
+		ProductOption productOption = this.productOptionService.findOne(optionId);
 		entity.setProductOption(productOption);
 		productOption.getProductOptionValues().add(entity);
-		ProductOption result = this.productOptionService.save(productOption);
-		return ResponseEntity.created(new URI("/api/product-options/" + id + "/" + result.getId()))
-				.headers(HeaderUtil.createEntityCreationAlert("", result.getId().toString())).body(entity);
-
+		this.productOptionService.save(productOption);
+		return "redirect:/" + this.getSectionKey() + "/" + optionId;
 	}
 
 	@Timed
-	@GetMapping("/{id}/values")
-	public @ResponseBody Set<ProductOptionValue> getAllProductOptionValues(@PathVariable Long id) {
-		ProductOption option = this.productOptionService.findOne(id);
+	@GetMapping("/{optionId}/values")
+	public @ResponseBody Set<ProductOptionValue> getAllProductOptionValues(@PathVariable("optionId") Long optionId) {
+		ProductOption option = this.productOptionService.findOne(optionId);
 		if (option == null) {
 			return null;
 		}

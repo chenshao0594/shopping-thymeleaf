@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+	layout:decorate="~{layouts/layout}">
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="page-title">
+			<h2>SKUs</h2>
+		</div>
+		<div class="row">
+			<div role="alert" th:if="${statusMessage}"
+				th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
+		</div>
+	</section>
+</body>
+</html>

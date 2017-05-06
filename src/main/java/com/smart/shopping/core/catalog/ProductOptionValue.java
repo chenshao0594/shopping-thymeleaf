@@ -8,10 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smart.shopping.domain.MerchantStore;
@@ -36,15 +36,15 @@ public class ProductOptionValue extends BusinessDomain<Long, ProductOption> impl
 	@Column(name = "product_option_value_image")
 	private String productOptionValueImage;
 
-	@NotNull
+	@NotEmpty
 	@Column(name = "code", nullable = false)
 	private String code;
 
-	@Column(name = "product_option_value_sort_order")
-	private Integer productOptionValueSortOrder;
+	@Column(name = "sort_order")
+	private Integer sortOrder;
 
-	@Column(name = "product_option_display_only")
-	private Boolean productOptionDisplayOnly;
+	@Column(name = "display_only")
+	private Boolean displayOnly;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private MerchantStore merchantStore;
@@ -60,6 +60,22 @@ public class ProductOptionValue extends BusinessDomain<Long, ProductOption> impl
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Integer getSortOrder() {
+		return sortOrder;
+	}
+
+	public void setSortOrder(Integer sortOrder) {
+		this.sortOrder = sortOrder;
+	}
+
+	public Boolean getDisplayOnly() {
+		return displayOnly;
+	}
+
+	public void setDisplayOnly(Boolean displayOnly) {
+		this.displayOnly = displayOnly;
 	}
 
 	public String getProductOptionValueImage() {
@@ -86,32 +102,6 @@ public class ProductOptionValue extends BusinessDomain<Long, ProductOption> impl
 
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-	public Integer getProductOptionValueSortOrder() {
-		return productOptionValueSortOrder;
-	}
-
-	public ProductOptionValue productOptionValueSortOrder(Integer productOptionValueSortOrder) {
-		this.productOptionValueSortOrder = productOptionValueSortOrder;
-		return this;
-	}
-
-	public void setProductOptionValueSortOrder(Integer productOptionValueSortOrder) {
-		this.productOptionValueSortOrder = productOptionValueSortOrder;
-	}
-
-	public Boolean isProductOptionDisplayOnly() {
-		return productOptionDisplayOnly;
-	}
-
-	public ProductOptionValue productOptionDisplayOnly(Boolean productOptionDisplayOnly) {
-		this.productOptionDisplayOnly = productOptionDisplayOnly;
-		return this;
-	}
-
-	public void setProductOptionDisplayOnly(Boolean productOptionDisplayOnly) {
-		this.productOptionDisplayOnly = productOptionDisplayOnly;
 	}
 
 	public MerchantStore getMerchantStore() {

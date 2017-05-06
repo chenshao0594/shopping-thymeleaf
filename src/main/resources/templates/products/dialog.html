@@ -18,7 +18,7 @@
 						<span class="fa fa-pencil"></span>&nbsp;Edit Others&nbsp;
 					</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" href="#">Dropdown link</a> <a class="dropdown-item" href="#">Dropdown
+						<a class="dropdown-item" th:href="@{'/products/'+${item.id}+'/skus'}">Edit SKUs</a> <a class="dropdown-item" href="#">Dropdown
 							link</a>
 					</div>
 				</div>
