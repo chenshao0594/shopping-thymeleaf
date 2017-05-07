@@ -22,7 +22,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.itextpdf.text.pdf.fonts.otf.Language;
 import com.smart.shopping.core.common.Billing;
 import com.smart.shopping.core.common.Delivery;
 import com.smart.shopping.core.enumeration.Gender;
@@ -64,9 +63,6 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 	@Column(name = "company")
 	private String company;
 
-	@Column(name = "customer_password")
-	private String pwd;
-
 	@Column(name = "nick")
 	private String nick;
 
@@ -79,9 +75,6 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	@ManyToOne
 	private MerchantStore merchantStore;
-
-	@ManyToOne
-	private Language defaultLanguage;
 
 	@Valid
 	@Embedded
@@ -224,14 +217,6 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 		this.merchantStore = merchantStore;
 	}
 
-	public Language getDefaultLanguage() {
-		return defaultLanguage;
-	}
-
-	public void setDefaultLanguage(Language defaultLanguage) {
-		this.defaultLanguage = defaultLanguage;
-	}
-
 	public Billing getBilling() {
 		return billing;
 	}
@@ -276,11 +261,4 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 		return anonymous;
 	}
 
-	public String getPwd() {
-		return pwd;
-	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
 }

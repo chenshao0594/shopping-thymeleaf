@@ -63,11 +63,12 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 
 	@Timed
 	@GetMapping("/{productId}/skus")
-	public String querySKUs(@PathVariable("productId") Long productId, ModelAndView model) {
-		Product product = this.productService.findOne(productId);
+	public ModelAndView querySKUs(@PathVariable("productId") Long productId, ModelAndView model) {
 		model.addObject("productId", productId);
-		model.addObject("options", product.getProductOptions());
-		return this.getSectionKey() + "/skus";
+		model.addObject("options", this.productOptionService.list());
+		model.setViewName(this.getSectionKey() + "/skus");
+		System.out.println("options:  " + this.productOptionService.list());
+		return model;
 	}
 
 	@Timed
