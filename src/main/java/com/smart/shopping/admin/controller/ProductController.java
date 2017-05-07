@@ -2,6 +2,7 @@ package com.smart.shopping.admin.controller;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smart.shopping.core.catalog.Product;
+import com.smart.shopping.core.catalog.ProductOption;
 import com.smart.shopping.core.catalog.service.CategoryService;
 import com.smart.shopping.core.catalog.service.ProductOptionService;
 import com.smart.shopping.domain.Attachment;
@@ -33,7 +37,7 @@ import io.swagger.annotations.ApiParam;
  */
 @Transactional
 @Controller
-@RequestMapping("/" + ProductController.SECTION_KEY)
+@RequestMapping("/admin/" + ProductController.SECTION_KEY)
 public class ProductController extends AbstractDomainController<Product, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
@@ -67,7 +71,24 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		model.addObject("productId", productId);
 		model.addObject("options", this.productOptionService.list());
 		model.setViewName(this.getSectionKey() + "/skus");
-		System.out.println("options:  " + this.productOptionService.list());
+		return model;
+	}
+
+	@Timed
+	@PostMapping("/{productId}/options")
+	public ModelAndView options(@PathVariable("productId") Long productId, List<Long> productOptionIds,
+			BindingResult result, ModelAndView model) {
+		if (CollectionUtils.isEmpty(productOptionIds)) {
+
+		}
+		Product product = this.productService.findOne(productId);
+		for (Long optionId : productOptionIds) {
+			ProductOption option = this.productOptionService.findOne(optionId);
+			product.getProductOptions().add(option);
+		}
+		this.productService.save(product);
+		model.setViewName(this.getSectionKey() + "/skus");
+		model.setViewName("redirect:/" + SECTION_KEY + "/" + productId + "/skus");
 		return model;
 	}
 

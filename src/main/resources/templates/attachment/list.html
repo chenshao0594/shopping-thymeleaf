@@ -4,7 +4,7 @@
 <head>
 <link href="css/fileinput.min.css" th:href="@{css/fileinput.min.css}" media="all" rel="stylesheet"
 	type="text/css" />
-<script src="js/vendor/jquery.ui.widget.js" th:src="@{/js/vendor/jquery.ui.widget.js}"></script>
+<script src="vendor/jquery.ui.widget.js" th:src="@{/vendor/jquery.ui.widget.js}"></script>
 <script th:src="@{/webjars/jquery-file-upload/9.10.1/js/jquery.fileupload.js}"></script>
 <script src="vendor/fileinput/fileinput.min.js" th:src="@{vendor/fileinput/fileinput.min.js}"></script>
 <script src="vendor/fileinput/themes/fa/theme.js" th:src="@{vendor/fileinput/themes/fa/theme.js}"></script>
@@ -15,16 +15,80 @@
 			<h2>Product Images</h2>
 		</div>
 		<div class="container">
-			<form name="form" th:action="@{'/test'}" method="POST" enctype="multipart/form-data">
-				<input type="file" name="file" /><br/> <input type="submit" value="Submit" />
+			<img src="" id="id_image" style="max-height: 100px;" alt="attachment image" />
+			<form name="form" th:action="@{'/attachments'}" method="POST">
+				<input id="file_input" type="file" name="file" /><br /> <input type="hidden" name="boName"
+					value="product" /> <input type="hidden" name="boId" value="1" /> <input type="hidden"
+					name="name" id="file_name" /> <input type="hidden" name="content" id="file_content" /> <input
+					type="hidden" name="contentType" id="file_contentType" /> <input type="hidden" name="size"
+					id="file_size" /> <input type="submit" value="Submit" />
 			</form>
-			<input id="file-input" name="file" type="file" multiple=true class="file-loading">
+			<table class="table table-striped">
+				<thead class="thead-default">
+					<tr>
+						<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
+						<th><a class="sorted">Content</a></th>
+						<th>Type</th>
+						<th>Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="row : ${page}">
+						<th scope="row" th:text="${row.id}">1</th>
+						<td><img th:src="@{'/attachments/'+${row.id}}" style="max-height: 100px;"
+							alt="attachment image" /></td>
+						<td th:text="${row.contentType}">Content Type</td>
+						<td>
+							<div class="flex-btn-group-container">
+								<a class="btn btn-success btn-sm" th:href="@{'/categories/'+${row.id}}"> <span
+									class="fa fa-eye"></span> &nbsp; <span class="hidden-md-down">View</span>
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/categories/'+${row.id}+'/edit'}">
+									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<div sd:pagination-summary="">info</div>
+			</div>
+			<div class="col-6">
+				<nav class="pull-right">
+					<ul class="pagination" sd:pagination="full">
+						<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+						<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<input id="file-input" name="file" type="file" class="file-loading">
 		</div>
 	</section>
 </body>
 <section layout:fragment="footer-script">
 	<script>
 		$(document).ready(function() {
+			
+			$('#file_input').on('change', function(evt){
+		        var file = evt.target.files[0]; 
+		        $('#file_contentType').val(file.type);
+		        $('#file_size').val(file.size);
+		        $('#file_name').val(file.name);
+		        var r = new FileReader();
+		        var fileReader = new FileReader();
+				fileReader.readAsDataURL(file);
+				fileReader.onload = function (e) {
+					$("#id_image").attr("src",e.target.result);
+					var base64Data = e.target.result.substr(e.target.result.indexOf('base64,') + 'base64,'.length);
+					$("#file_content").val(base64Data);
+		        };
+			});
+			
+			
 			$("#file-input").fileinput({
 				theme: "fa",
 				uploadUrl : "test", // server upload action
@@ -52,6 +116,9 @@
 			     img_keywords: "happy, places",
 			 } */
 			});
+			
+			
+			
 		});
 	</script>
 </section>

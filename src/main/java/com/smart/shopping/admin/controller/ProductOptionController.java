@@ -25,7 +25,7 @@ import com.smart.shopping.core.catalog.service.ProductOptionValueService;
  * REST controller for managing ProductOption.
  */
 @Controller
-@RequestMapping("/" + ProductOptionController.SECTION_KEY)
+@RequestMapping("/admin/" + ProductOptionController.SECTION_KEY)
 public class ProductOptionController extends AbstractDomainController<ProductOption, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);

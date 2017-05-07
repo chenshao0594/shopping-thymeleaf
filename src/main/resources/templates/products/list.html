@@ -6,7 +6,7 @@
 	<section layout:fragment="content">
 		<div class="page-title">
 			<h2>
-				Products <a th:href="@{/products/new}" class="btn btn-success pull-right"><span
+				Products <a th:href="@{/admin/products/new}" class="btn btn-success pull-right"><span
 					class="fa fa-plus"></span>Add Product</a>
 			</h2>
 		</div>
@@ -20,6 +20,7 @@
 						<th>Image</th>
 						<th><a class="sorted" sd:pagination-sort="title">title</a></th>
 						<th><a class="sorted" sd:pagination-sort="sku">SKU</a></th>
+						<th><a class="sorted" sd:pagination-sort="category.code">Category</a></th>
 						<th>Sale Price</th>
 						<th>Retail Price</th>
 						<th>Operation</th>
@@ -31,13 +32,14 @@
 						<th><img src="images/jpeg/2.jpg" alt="..." class="img-rounded" height="50"></th>
 						<td th:text="${row.title}">title</td>
 						<td th:text="${row.sku}">sku</td>
+						<td th:text="${row.category?.code}">Category</td>
 						<td th:text="${row.salePrice}">Sale Price</td>
 						<td th:text="${row.retailPrice}">Retail Price</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{'/products/'+${row.id}}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{'/admin/products/'+${row.id}}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/products/'+${row.id}+'/edit'}">
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/admin/products/'+${row.id}+'/edit'}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

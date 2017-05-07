@@ -23,7 +23,7 @@ import com.smart.shopping.domain.common.BusinessDomain;
 import com.smart.shopping.service.AbstractDomainService;
 
 @Controller("BasicEntityController")
-@RequestMapping("/{sectionKey:.+}")
+@RequestMapping("/admin/{sectionKey:.+}")
 public abstract class AbstractDomainController<E extends BusinessDomain, K extends Serializable & Comparable<K>> {
 
 	private final Logger log = LoggerFactory.getLogger(AbstractDomainController.class);
@@ -98,7 +98,8 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 		} else {
 			this.service.save(entity);
 			redirect.addFlashAttribute("statusMessage", "Successfully created!");
-			return new ModelAndView("redirect:/" + this.getSectionKey() + "/{entity.id}", "entity.id", entity.getId());
+			return new ModelAndView("redirect:/admin/" + this.getSectionKey() + "/{entity.id}", "entity.id",
+					entity.getId());
 		}
 	}
 
@@ -123,7 +124,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			this.service.save(entity);
 			model.addAttribute("item", entity);
 			redirect.addFlashAttribute("statusMessage", "Update Successfully !");
-			return "redirect:/" + this.getSectionKey() + "/" + id + "/edit";
+			return "redirect:/admin/" + this.getSectionKey() + "/" + id + "/edit";
 		}
 	}
 

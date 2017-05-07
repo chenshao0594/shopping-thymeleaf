@@ -10,6 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,9 +45,7 @@ public class AttachmentController {
 	@PostMapping()
 	public void createImage(@Valid Attachment attachment, BindingResult result, SessionStatus status, Model model,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
-
 		this.attachmentService.save(attachment);
-		System.out.println(attachment.getContent());
 		response.sendRedirect(request.getRequestURI());
 	}
 
@@ -56,8 +58,15 @@ public class AttachmentController {
 	}
 
 	@GetMapping(value = "/{id}")
-	public void findOne(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
-		response.sendRedirect("");
+	public ResponseEntity<byte[]> findOne(@PathVariable("id") Long id) throws IOException {
+		Attachment attachment = this.attachmentService.findOne(id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+		// headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		// headers.setContentDispositionFormData("attachment",
+		// attachment.getName());
+		return new ResponseEntity<byte[]>(attachment.getContent(), headers, HttpStatus.OK);
+
 	}
 
 	@GetMapping(value = "/{id}/attachments")

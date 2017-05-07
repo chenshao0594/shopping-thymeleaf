@@ -39,10 +39,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.smart.shopping.domain.Image;
 import com.smart.shopping.service.AttachmentService;
 
 /**
@@ -83,9 +82,9 @@ public class ImageController {
 	}
 
 	@PostMapping()
-	public Map upload(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
+	public Map upload(Image image) {
 
-		System.out.println(">>>>>>>>>>>   upload  work !!" + file.getContentType() + ":" + file.getName());
+		System.out.println(">>>>>>>>>>>   upload  work !!" + image);
 		log.debug("uploadPost called");
 		// Iterator<String> itr = request.getFileNames();
 		// MultipartFile mpf;

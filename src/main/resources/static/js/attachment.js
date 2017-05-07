@@ -13,3 +13,14 @@ function readFile() {
 }
 
 
+//if ($file) {
+//    DataUtils.toBase64($file, function(base64Data) {
+//        $scope.$apply(function() {
+//            attachment.image = base64Data;
+//            attachment.imageContentType = $file.type;
+//        });
+//    });
+//}
+//
+//
+//

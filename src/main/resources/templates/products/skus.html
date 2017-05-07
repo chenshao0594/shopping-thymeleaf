@@ -7,11 +7,13 @@
 		<div class="page-title">
 			<h2>SKUs</h2>
 		</div>
-		<div class="row">
-			<div role="alert" th:if="${statusMessage}"
+		<div th:if="${statusMessage}" class="row">
+			<div role="alert" 
 				th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
 		</div>
-		<table class="table table-striped">
+		<fieldset>
+			<legend class="section">Options</legend>
+			<table class="table table-striped">
 				<thead class="thead-default">
 					<tr>
 						<th><a class="sorted">Id</a></th>
@@ -35,6 +37,7 @@
 					</tr>
 				</tbody>
 			</table>
+		</fieldset>
 	</section>
 </body>
 </html>
