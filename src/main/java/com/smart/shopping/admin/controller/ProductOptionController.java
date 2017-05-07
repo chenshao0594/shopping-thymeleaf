@@ -59,7 +59,7 @@ public class ProductOptionController extends AbstractDomainController<ProductOpt
 		entity.setProductOption(productOption);
 		productOption.getProductOptionValues().add(entity);
 		this.productOptionService.save(productOption);
-		return "redirect:/" + this.getSectionKey() + "/" + optionId;
+		return "redirect:/admin/" + this.getSectionKey() + "/" + optionId;
 	}
 
 	@Timed
