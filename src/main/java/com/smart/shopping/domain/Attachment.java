@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smart.shopping.attachment.common.AttachmentEnum;
 import com.smart.shopping.domain.common.BusinessDomain;
 
 /**
@@ -55,6 +58,10 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 	@NotNull
 	@Column(name = "bo_id", nullable = false, updatable = false)
 	private Long boId;
+
+	@NotNull
+	@Enumerated(value = EnumType.STRING)
+	private AttachmentEnum attachmentType = AttachmentEnum.ATTACHMENT;
 
 	public Attachment() {
 
@@ -151,6 +158,14 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 
 	public void setBoId(Long boId) {
 		this.boId = boId;
+	}
+
+	public AttachmentEnum getAttachmentType() {
+		return attachmentType;
+	}
+
+	public void setAttachmentType(AttachmentEnum attachmentType) {
+		this.attachmentType = attachmentType;
 	}
 
 }

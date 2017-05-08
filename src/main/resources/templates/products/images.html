@@ -29,6 +29,7 @@
 				maxFileCount : 5,
 				browseOnZoneClick: true,
 				overwriteInitial : false,
+				showBrowse: false,
 				initialPreview : [
 					[# th:each="image : ${attachments}"]    
 				     "/attachments/"+[[${image.id}]],
@@ -36,23 +37,14 @@
 				],
 				initialPreviewAsData : true, // identify if you are sending preview data only and not the raw markup
 				initialPreviewFileType : 'image', // image is the default and can be overridden in config below
-				/* initialPreviewConfig : [
-					{
-						caption : "People-1.jpg",
-						size : 576237,
-						width : "120px",
-						url : "/site/file-delete",
-						key : 1
-					}
-				] */
 			 uploadExtraData: {
 			     boName: "product",
 			     boId: [[${{productId}}]],
-			 } 
+			 },
+			deleteExtraData: {
+			 		[[${_csrf.parameterName}]]: [[${_csrf.token}]]
+			 	}
 			});
-			
-			
-			
 		});
 	</script>
 </section>

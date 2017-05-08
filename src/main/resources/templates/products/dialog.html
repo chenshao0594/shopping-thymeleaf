@@ -4,6 +4,13 @@
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css"
 	th:href="@{/vendor/summernote/summernote.css}" rel="stylesheet">
+<link href="/css/fileinput.min.css" th:href="@{/css/fileinput.min.css}" media="all" rel="stylesheet"
+	type="text/css" />
+<script src="/vendor/jquery.ui.widget.js" th:src="@{/vendor/jquery.ui.widget.js}"></script>
+<!-- <script th:src="@{/webjars/jquery-file-upload/9.10.1/js/jquery.fileupload.js}"></script>
+ -->
+<script src="/vendor/fileinput/fileinput.min.js" th:src="@{/vendor/fileinput/fileinput.min.js}"></script>
+<script src="/vendor/fileinput/themes/fa/theme.js" th:src="@{/vendor/fileinput/themes/fa/theme.js}"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"
 	th:src="@{/vendor/summernote/summernote.js}"></script>
 </head>
@@ -33,14 +40,10 @@
 				<legend class="section">Basic Info</legend>
 				<div class="row">
 					<div class="col-3">
-						<i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
 						<div id="kv-avatar-errors-2" class="center-block" style="width: 800px; display: none"></div>
-						<form class="text-center" action="/avatar_upload.php" method="post" enctype="multipart/form-data">
-							<div class="kv-avatar center-block" style="width: 200px">
-								<input id="avatar-2" name="avatar-2" type="file" class="file-loading">
-							</div>
-							<!-- include other inputs if needed and include a form submit (save) button -->
-						</form>
+						<div class="kv-avatar center-block" style="width: 200px">
+							<input id="avatar-2" name="file" type="file" class="file-loading">
+						</div>
 						<!-- 	<img src="/img/image_add.png" class="rounded float-left"> -->
 					</div>
 					<div class="col-md-9 row">
@@ -123,31 +126,37 @@
 	</section>
 </body>
 <section layout:fragment="footer-script">
-	<script>
+	<script th:inline="javascript">
 		$(document).ready(function() {
-			
-			var btnCust = '<button type="button" class="btn btn-default" title="Add picture tags" ' + 
-		    'onclick="alert(\'Call your custom code here.\')">' +
-		    '<i class="glyphicon glyphicon-tag"></i>' +
-		    '</button>'; 
-		$("#avatar-2").fileinput({
+		$input=$("#avatar-2");
+		$input.fileinput({
+			theme: "fa",
+			uploadUrl: "/attachments?"+[[${_csrf.parameterName}]] + '=' + [[${_csrf.token}]], // serv
 		    overwriteInitial: true,
 		    maxFileSize: 1500,
 		    showClose: false,
-		    showCaption: false,
 		    showBrowse: false,
+		    showRemove: false,
+		    showCaption: false,
+		    showZoom: false,
 		    browseOnZoneClick: true,
-		    removeLabel: '',
-		    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-		    removeTitle: 'Cancel or reset changes',
 		    elErrorContainer: '#kv-avatar-errors-2',
 		    msgErrorClass: 'alert alert-block alert-danger',
-		    defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar" style="width:160px"><h6 class="text-muted">Click to select</h6>',
-		    layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
-		    allowedFileExtensions: ["jpg", "png", "gif"]
-		});
-			
-			
+		    defaultPreviewContent: '<i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>',
+		    layoutTemplates: {main2: '{preview} {remove}  {browse}',footer:''},
+		    allowedFileExtensions: ["jpg", "png"],
+		    initialPreview : [
+			],
+			initialPreviewConfig:[],
+		    uploadExtraData: {
+		    	 boName: "product",
+		     	 boId: [[${item.id}]],
+		     	 attachmentType: "AVATOR"
+		 	},
+		 	
+		}).on("filebatchselected", function(event, files) {
+		    $input.fileinput("upload");
+		});;
 			
 			$('#summernote').summernote({
 				height : 300, // set editor height

@@ -42,6 +42,7 @@ public class AttachmentController {
 
 	private static final String ENTITY_NAME = "attachment";
 
+	private static final String InitialPreview = "<img src='/attachments/attachment_id' class='file-preview-image kv-preview-data rotate-1'>";
 	private final AttachmentService attachmentService;
 
 	public AttachmentController(AttachmentService attachmentService) {
@@ -64,9 +65,16 @@ public class AttachmentController {
 		previewConfig.setKey(Long.toString(attachment.getId()));
 		previewConfig.addSize(attachment.getSize());
 		previewConfig.addUrl("/attachments/" + attachment.getId());
+		previewConfig.addWidth("180px");
 		AttachmentResponse body = new AttachmentResponse();
 		body.getPreviewConfig().add(previewConfig);
-		body.getInitialPreview().add("/attachments/" + attachment.getId());
+		switch (attachment.getAttachmentType()) {
+		case AVATOR:
+			body.getInitialPreview().add(InitialPreview.replace("attachment_id", Long.toString(attachment.getId())));
+			break;
+		default:
+			body.getInitialPreview().add("/attachments/" + attachment.getId());
+		}
 
 		return ResponseEntity.created(new URI("/attachments/" + attachment.getId())).body(body);
 		/*

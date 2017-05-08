@@ -34,9 +34,10 @@
 		$(document).ready(function() {
 			var btnCust = '<button type="button" class="btn btn-default" title="Add picture tags" ' + 
 		    'onclick="alert(\'Call your custom code here.\')">' +
-		    '<i class="glyphicon glyphicon-tag"></i>' +
+		    '<i class="fa fa-tag"></i>' +
 		    '</button>'; 
 		$("#avatar-2").fileinput({
+			theme: "fa",
 		    overwriteInitial: true,
 		    maxFileSize: 1500,
 		    showClose: false,
