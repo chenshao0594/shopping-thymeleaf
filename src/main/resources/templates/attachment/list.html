@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data"
 	layout:decorate="~{layouts/layout}" lang="en">
 <head>
+<meta name="_csrf" th:content="${_csrf.token}" />
+<!-- default header name is X-CSRF-TOKEN -->
 <link href="css/fileinput.min.css" th:href="@{css/fileinput.min.css}" media="all" rel="stylesheet"
 	type="text/css" />
 <script src="vendor/jquery.ui.widget.js" th:src="@{/vendor/jquery.ui.widget.js}"></script>
@@ -15,109 +17,72 @@
 			<h2>Product Images</h2>
 		</div>
 		<div class="container">
-			<img src="" id="id_image" style="max-height: 100px;" alt="attachment image" />
-			<form name="form" th:action="@{'/attachments'}" method="POST">
-				<input id="file_input" type="file" name="file" /><br /> <input type="hidden" name="boName"
-					value="product" /> <input type="hidden" name="boId" value="1" /> <input type="hidden"
-					name="name" id="file_name" /> <input type="hidden" name="content" id="file_content" /> <input
-					type="hidden" name="contentType" id="file_contentType" /> <input type="hidden" name="size"
-					id="file_size" /> <input type="submit" value="Submit" />
+			<!-- the avatar markup -->
+			<div id="kv-avatar-errors-2" class="center-block" style="width: 800px; display: none"></div>
+			<form class="text-center" action="/avatar_upload.php" method="post" enctype="multipart/form-data">
+				<div class="kv-avatar center-block" style="width: 200px">
+					<input id="avatar-2" name="avatar-2" type="file" class="file-loading">
+				</div>
+				<!-- include other inputs if needed and include a form submit (save) button -->
 			</form>
-			<table class="table table-striped">
-				<thead class="thead-default">
-					<tr>
-						<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
-						<th><a class="sorted">Content</a></th>
-						<th>Type</th>
-						<th>Operation</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="row : ${page}">
-						<th scope="row" th:text="${row.id}">1</th>
-						<td><img th:src="@{'/attachments/'+${row.id}}" style="max-height: 100px;"
-							alt="attachment image" /></td>
-						<td th:text="${row.contentType}">Content Type</td>
-						<td>
-							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{'/categories/'+${row.id}}"> <span
-									class="fa fa-eye"></span> &nbsp; <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/categories/'+${row.id}+'/edit'}">
-									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
-								</a>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<div sd:pagination-summary="">info</div>
-			</div>
-			<div class="col-6">
-				<nav class="pull-right">
-					<ul class="pagination" sd:pagination="full">
-						<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
-						<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-		<input id="file-input" name="file" type="file" class="file-loading">
+			<input id="file-input" name="file" type="file" class="file-loading">
 		</div>
 	</section>
 </body>
 <section layout:fragment="footer-script">
-	<script>
+	<script th:inline="javascript">
 		$(document).ready(function() {
-			
-			$('#file_input').on('change', function(evt){
-		        var file = evt.target.files[0]; 
-		        $('#file_contentType').val(file.type);
-		        $('#file_size').val(file.size);
-		        $('#file_name').val(file.name);
-		        var r = new FileReader();
-		        var fileReader = new FileReader();
-				fileReader.readAsDataURL(file);
-				fileReader.onload = function (e) {
-					$("#id_image").attr("src",e.target.result);
-					var base64Data = e.target.result.substr(e.target.result.indexOf('base64,') + 'base64,'.length);
-					$("#file_content").val(base64Data);
-		        };
-			});
+			var btnCust = '<button type="button" class="btn btn-default" title="Add picture tags" ' + 
+		    'onclick="alert(\'Call your custom code here.\')">' +
+		    '<i class="glyphicon glyphicon-tag"></i>' +
+		    '</button>'; 
+		$("#avatar-2").fileinput({
+		    overwriteInitial: true,
+		    maxFileSize: 1500,
+		    showClose: false,
+		    showCaption: false,
+		    showBrowse: false,
+		    browseOnZoneClick: true,
+		    removeLabel: '',
+		    removeIcon: '<i class="fa fa-remove"></i>',
+		    removeTitle: 'Cancel or reset changes',
+		    elErrorContainer: '#kv-avatar-errors-2',
+		    msgErrorClass: 'alert alert-block alert-danger',
+		    defaultPreviewContent: '<img src="/img/image_add.png" alt="Your Avatar" style="width:160px"><h6 class="text-muted">Click to select</h6>',
+		    layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
+		    allowedFileExtensions: ["jpg", "png", "gif"]
+		});
 			
 			
 			$("#file-input").fileinput({
 				theme: "fa",
-				uploadUrl : "test", // server upload action
+				uploadUrl : "attachments?"+[[${_csrf.parameterName}]] + '=' + [[${_csrf.token}]], // server upload action
 				uploadAsync : true,
-				browseClass: "btn btn-primary",
+				ajaxDeleteSettings: { method: "DELETE" },
+				//browseClass: "btn btn-primary btn-block",
+				showBrowse: false,
+				showCaption: true,
+				browseOnZoneClick: true,
 				minFileCount : 1,
 				maxFileCount : 5,
 				overwriteInitial : false,
 				initialPreview : [
-					"http://lorempixel.com/800/460/people/1"
+					[# th:each="image : ${attachments}"]    
+				     '/attachments/'+[[${image.id}]],
+				    [/]
 				],
+				initialPreviewConfig: [[${priviewConfig}]],
 				initialPreviewAsData : true, // identify if you are sending preview data only and not the raw markup
 				initialPreviewFileType : 'image', // image is the default and can be overridden in config below
-				/* initialPreviewConfig : [
-					{
-						caption : "People-1.jpg",
-						size : 576237,
-						width : "120px",
-						url : "/site/file-delete",
-						key : 1
-					}
-				] */
-			/*  uploadExtraData: {
-			     img_key: "1000",
-			     img_keywords: "happy, places",
-			 } */
+				showCaption:false,
+			 	uploadExtraData: {
+			    	 boName: "product",
+			     	 boId: 1,
+			 	},
+			 	deleteExtraData: {
+			 		[[${_csrf.parameterName}]]: [[${_csrf.token}]]
+			 	}
 			});
-			
-			
 			
 		});
 	</script>

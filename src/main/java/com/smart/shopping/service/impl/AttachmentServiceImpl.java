@@ -2,6 +2,8 @@ package com.smart.shopping.service.impl;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -117,6 +119,15 @@ public class AttachmentServiceImpl implements AttachmentService {
 		BooleanExpression boid = qAttachment.boId.eq(boId);
 		Page<Attachment> pages = this.attachmentRepository.findAll(boid.and(boname), pageable);
 		return pages;
+	}
+
+	@Override
+	public List<Attachment> findAllByBOInfo(String boName, Long boId) {
+		QAttachment qAttachment = QAttachment.attachment;
+		BooleanExpression boname = qAttachment.boName.eq(boName);
+		BooleanExpression boid = qAttachment.boId.eq(boId);
+		List<Attachment> results = (List<Attachment>) this.attachmentRepository.findAll(boid.and(boname));
+		return results;
 	}
 
 }

@@ -29,7 +29,7 @@
 				<tbody>
 					<tr th:each="row : ${page}">
 						<th scope="row" th:text="${row.id}">1</th>
-						<th><img src="images/jpeg/2.jpg" alt="..." class="img-rounded" height="50"></th>
+						<th><i class="fa fa-3x fa-file-image-o"></i><!-- <img src="/img/image_add.png" alt="..." class="img-rounded" height="50"> --></th>
 						<td th:text="${row.title}">title</td>
 						<td th:text="${row.sku}">sku</td>
 						<td th:text="${row.category?.code}">Category</td>

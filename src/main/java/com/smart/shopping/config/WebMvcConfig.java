@@ -15,10 +15,8 @@
  */
 package com.smart.shopping.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -37,11 +35,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 	}
 
-	@Bean
-	public CommonsMultipartResolver multipartResolver() {
-		final CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
-		commonsMultipartResolver.setMaxUploadSize(-1);
-		return commonsMultipartResolver;
-	}
-
+	/*
+	 * @Bean public CommonsMultipartResolver multipartResolver() { final
+	 * CommonsMultipartResolver commonsMultipartResolver = new
+	 * CommonsMultipartResolver();
+	 * commonsMultipartResolver.setMaxUploadSize(-1); return
+	 * commonsMultipartResolver; }
+	 */
 }

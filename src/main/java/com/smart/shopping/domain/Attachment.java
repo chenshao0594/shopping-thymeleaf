@@ -56,6 +56,15 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 	@Column(name = "bo_id", nullable = false, updatable = false)
 	private Long boId;
 
+	public Attachment() {
+
+	}
+
+	public Attachment(String boName, Long boId) {
+		this.boName = boName;
+		this.boId = boId;
+	}
+
 	@Override
 	public Long getId() {
 		return id;

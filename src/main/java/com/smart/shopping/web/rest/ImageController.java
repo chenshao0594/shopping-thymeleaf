@@ -39,9 +39,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.smart.shopping.domain.Image;
 import com.smart.shopping.service.AttachmentService;
 
 /**
@@ -81,10 +83,15 @@ public class ImageController {
 		return files;
 	}
 
-	@PostMapping()
-	public Map upload(Image image) {
+	@PostMapping("/upload")
+	public String upload(@RequestParam("file") MultipartFile file, String boName, Long BoId,
+			RedirectAttributes redirectAttributes) {
 
-		System.out.println(">>>>>>>>>>>   upload  work !!" + image);
+		System.out.println("boName : " + boName);
+		System.out.println(file.getName());
+		System.out.println(file.getSize());
+
+		System.out.println(">>>>>>>>>>>   upload  work !!" + file);
 		log.debug("uploadPost called");
 		// Iterator<String> itr = request.getFileNames();
 		// MultipartFile mpf;
@@ -136,7 +143,7 @@ public class ImageController {
 		// Map<String, Object> files = new HashMap<>();
 		// files.put("files", list);
 		// return files;
-		return null;
+		return "/";
 	}
 
 	@GetMapping(value = "/{id}")

@@ -150,6 +150,9 @@ fieldset {
 .col-2 {
 	margin-bottom: 5px;
 }
+.icon-upload-img{
+	content: "\e998";
+}
 
 body {
 	font-size: 0.9rem;

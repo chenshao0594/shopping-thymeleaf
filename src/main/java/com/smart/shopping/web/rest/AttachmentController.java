@@ -1,10 +1,12 @@
 package com.smart.shopping.web.rest;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.LinkedList;
+import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,14 +18,19 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codahale.metrics.annotation.Timed;
+import com.smart.shopping.attachment.common.AttachmentResponse;
+import com.smart.shopping.attachment.common.PreviewConfig;
 import com.smart.shopping.domain.Attachment;
 import com.smart.shopping.service.AttachmentService;
 
@@ -43,17 +50,53 @@ public class AttachmentController {
 
 	@Timed
 	@PostMapping()
-	public void createImage(@Valid Attachment attachment, BindingResult result, SessionStatus status, Model model,
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public @ResponseBody ResponseEntity<AttachmentResponse> createImage(@RequestParam("file") MultipartFile file,
+			String boName, Long boId, RedirectAttributes redirectAttributes, HttpServletResponse response)
+			throws IOException, URISyntaxException {
+		Attachment attachment = new Attachment(boName, boId);
+		attachment.setContent(file.getBytes());
+		attachment.setContentType(file.getContentType());
+		attachment.setSize(file.getSize());
+		attachment.setName(file.getOriginalFilename());
 		this.attachmentService.save(attachment);
-		response.sendRedirect(request.getRequestURI());
+
+		PreviewConfig previewConfig = new PreviewConfig(attachment.getName());
+		previewConfig.setKey(Long.toString(attachment.getId()));
+		previewConfig.addSize(attachment.getSize());
+		previewConfig.addUrl("/attachments/" + attachment.getId());
+		AttachmentResponse body = new AttachmentResponse();
+		body.getPreviewConfig().add(previewConfig);
+		body.getInitialPreview().add("/attachments/" + attachment.getId());
+
+		return ResponseEntity.created(new URI("/attachments/" + attachment.getId())).body(body);
+		/*
+		 * this.attachmentService.save(attachment);
+		 *
+		 */
+	}
+
+	@Timed
+	@DeleteMapping("/{id}")
+	public @ResponseBody ResponseEntity<Void> deleteImage(@PathVariable("id") Long id) throws IOException {
+		System.out.println("delete attachment by " + id);
+		this.attachmentService.delete(id);
+		return ResponseEntity.ok().build();
 	}
 
 	@Timed
 	@GetMapping()
 	public String images(Model model, Pageable pageable) throws IOException {
 		Page<Attachment> page = this.attachmentService.findAll(null);
-		model.addAttribute("page", page);
+		model.addAttribute("attachments", page.getContent());
+		List<PreviewConfig> inititalPreviewConfigs = new LinkedList<PreviewConfig>();
+		for (Attachment attachment : page.getContent()) {
+			PreviewConfig config = new PreviewConfig(attachment.getName());
+			config.addKey(Long.toString(attachment.getId()));
+			config.addSize(attachment.getSize());
+			config.addUrl("/attachments/" + attachment.getId());
+			inititalPreviewConfigs.add(config);
+		}
+		model.addAttribute("priviewConfig", inititalPreviewConfigs);
 		return "attachment/list";
 	}
 
@@ -62,24 +105,7 @@ public class AttachmentController {
 		Attachment attachment = this.attachmentService.findOne(id);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
-		// headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-		// headers.setContentDispositionFormData("attachment",
-		// attachment.getName());
 		return new ResponseEntity<byte[]>(attachment.getContent(), headers, HttpStatus.OK);
-
-	}
-
-	@GetMapping(value = "/{id}/attachments")
-	public void queryImages(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
-		// MultipartFile image = reqModel.getImage();
-		// if (null == image) {
-		// response.sendRedirect(request.getRequestURI() + "s");
-		// }
-		// if (null == item.getMainImageId()) {
-		// item.setMainImageId(newImage.getId());
-		// this.repository.saveAndFlush(item);
-		// }
-		// response.sendRedirect(request.getRequestURI());
 	}
 
 }

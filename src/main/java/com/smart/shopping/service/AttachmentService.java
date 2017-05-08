@@ -1,5 +1,7 @@
 package com.smart.shopping.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -58,4 +60,6 @@ public interface AttachmentService {
 	Page<Attachment> search(String query, Pageable pageable);
 
 	Page<Attachment> findAllByBOInfo(String boName, Long boId, Pageable pageable);
+
+	List<Attachment> findAllByBOInfo(String boName, Long boId);
 }

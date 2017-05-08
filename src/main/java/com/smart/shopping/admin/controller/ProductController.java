@@ -6,13 +6,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,9 +24,6 @@ import com.smart.shopping.core.catalog.service.ProductOptionService;
 import com.smart.shopping.domain.Attachment;
 import com.smart.shopping.service.AttachmentService;
 import com.smart.shopping.service.ProductService;
-import com.smart.shopping.web.rest.util.PaginationUtil;
-
-import io.swagger.annotations.ApiParam;
 
 /**
  * REST controller for managing Product.
@@ -93,14 +86,13 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 	}
 
 	@Timed
-	@GetMapping("/{id}/attachments")
-	public ResponseEntity<List<Attachment>> getAllAttachments(@PathVariable("id") Long boid,
-			@ApiParam Pageable pageable) {
+	@GetMapping("/{id}/images")
+	public String getAllImages(@PathVariable("id") Long productId, Model model) {
 		log.debug("REST request to get a page of Attachments");
-		Page<Attachment> page = attachmentService.findAllByBOInfo("product", boid, pageable);
-		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page,
-				"/api/products/" + boid + "/attachments");
-		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+		List<Attachment> results = attachmentService.findAllByBOInfo("product", productId);
+		model.addAttribute("attachments", results);
+		model.addAttribute("productId", productId);
+		return this.getSectionKey() + "/images";
 	}
 
 	@Override
