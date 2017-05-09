@@ -1,11 +1,13 @@
 package com.smart.shopping.admin.controller;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -94,6 +96,14 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		model.addAttribute("attachments", results);
 		model.addAttribute("productId", productId);
 		return this.getSectionKey() + "/images";
+	}
+
+	@Timed
+	@PostMapping("{id}/generateSkusByBatch")
+	public ResponseEntity<Void> generateSkusByBatch(@PathVariable Long id) throws URISyntaxException {
+		log.debug("create generateSkusByBatch----------------{}", id);
+		this.productService.generateAdditionalSKUsByBatch(id);
+		return ResponseEntity.ok().build();
 	}
 
 	@Override

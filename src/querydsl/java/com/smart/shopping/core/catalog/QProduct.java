@@ -22,6 +22,8 @@ public class QProduct extends EntityPathBase<Product> {
 
     public static final QProduct product = new QProduct("product");
 
+    public final SetPath<SKU, QSKU> additionalSKUs = this.<SKU, QSKU>createSet("additionalSKUs", SKU.class, QSKU.class, PathInits.DIRECT2);
+
     public final BooleanPath available = createBoolean("available");
 
     public final QCategory category;
@@ -29,6 +31,8 @@ public class QProduct extends EntityPathBase<Product> {
     public final DatePath<java.time.LocalDate> dateAvailable = createDate("dateAvailable", java.time.LocalDate.class);
 
     public final StringPath description = createString("description");
+
+    public final BooleanPath hasSKU = createBoolean("hasSKU");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

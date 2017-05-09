@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -63,6 +65,9 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@NotNull
 	@Column(name = "name", nullable = false)
 	private String name;
+
+	@Column(name = "has_sku")
+	private boolean hasSKU = false;
 
 	@Column(name = "product_external_dl")
 	private String productExternalDl;
@@ -119,6 +124,10 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	@JoinTable(name = "product_option_xref", joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "product_option_id", referencedColumnName = "ID"))
 	private Set<ProductOption> productOptions = new HashSet<>();
+
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = SKU.class, mappedBy = "product", cascade = CascadeType.ALL)
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	protected Set<SKU> additionalSKUs = new HashSet<>();
 
 	@Override
 	public Long getId() {
@@ -352,6 +361,22 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public Set<SKU> getAdditionalSKUs() {
+		return additionalSKUs;
+	}
+
+	public void setAdditionalSKUs(Set<SKU> additionalSKUs) {
+		this.additionalSKUs = additionalSKUs;
+	}
+
+	public boolean isHasSKU() {
+		return hasSKU;
+	}
+
+	public void setHasSKU(boolean hasSKU) {
+		this.hasSKU = hasSKU;
 	}
 
 }

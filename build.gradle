@@ -142,10 +142,6 @@ repositories {
 }
 
 dependencies {
-	// to download source/doc
- 	compile "commons-codec:commons-codec:1.10:sources"
-    compile "commons-codec:commons-codec:1.10:javadoc"
-    
     compile "io.github.jhipster:jhipster:${jhipster_server_version}"
     compile "io.dropwizard.metrics:metrics-core:${dropwizard_metrics_version}"
     compile "io.dropwizard.metrics:metrics-jcache:${dropwizard_metrics_version}"
@@ -229,8 +225,7 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '21.0'
     compile group: 'org.springframework.webflow', name: 'spring-webflow', version: '2.4.4.RELEASE'
     compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.2'
-    
-
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
     optional "org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}"
 }
 

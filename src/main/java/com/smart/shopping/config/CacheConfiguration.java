@@ -52,6 +52,11 @@ public class CacheConfiguration {
 			cm.createCache(com.smart.shopping.core.catalog.Product.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smart.shopping.core.catalog.Product.class.getName() + ".productOptions",
 					jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.Product.class.getName() + ".additionalSKUs",
+					jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.SKU.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.catalog.SKU.class.getName() + ".productOptionValues",
+					jcacheConfiguration);
 			cm.createCache(com.smart.shopping.core.catalog.ProductOption.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smart.shopping.core.catalog.ProductOption.class.getName() + ".productOptionValues",
 					jcacheConfiguration);
