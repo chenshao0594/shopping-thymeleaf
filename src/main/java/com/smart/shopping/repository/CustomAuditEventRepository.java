@@ -1,6 +1,6 @@
 package com.smart.shopping.repository;
 
-import com.smart.shopping.config.Constants;
+import com.smart.shopping.config.AppConstants;
 import com.smart.shopping.config.audit.AuditEventConverter;
 import com.smart.shopping.domain.PersistentAuditEvent;
 
@@ -67,7 +67,7 @@ public class CustomAuditEventRepository implements AuditEventRepository {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void add(AuditEvent event) {
         if (!AUTHORIZATION_FAILURE.equals(event.getType()) &&
-            !Constants.ANONYMOUS_USER.equals(event.getPrincipal())) {
+            !AppConstants.ANONYMOUS_USER.equals(event.getPrincipal())) {
 
             PersistentAuditEvent persistentAuditEvent = new PersistentAuditEvent();
             persistentAuditEvent.setPrincipal(event.getPrincipal());

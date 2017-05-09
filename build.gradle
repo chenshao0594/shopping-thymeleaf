@@ -142,6 +142,10 @@ repositories {
 }
 
 dependencies {
+	// to download source/doc
+ 	compile "commons-codec:commons-codec:1.10:sources"
+    compile "commons-codec:commons-codec:1.10:javadoc"
+    
     compile "io.github.jhipster:jhipster:${jhipster_server_version}"
     compile "io.dropwizard.metrics:metrics-core:${dropwizard_metrics_version}"
     compile "io.dropwizard.metrics:metrics-jcache:${dropwizard_metrics_version}"

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
+import com.smart.shopping.config.AppConstants;
 import com.smart.shopping.core.catalog.Product;
 import com.smart.shopping.core.catalog.ProductOption;
 import com.smart.shopping.core.catalog.service.CategoryService;
@@ -30,7 +31,7 @@ import com.smart.shopping.service.ProductService;
  */
 @Transactional
 @Controller
-@RequestMapping("/admin/" + ProductController.SECTION_KEY)
+@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + ProductController.SECTION_KEY)
 public class ProductController extends AbstractDomainController<Product, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);

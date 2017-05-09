@@ -4,12 +4,12 @@
 <body>
 	<section layout:fragment="content">
 		<div class="page-title">
-			<h2>Product Option #<small th:text="${item?.id}"></small></h2>
+			<h2>Customer #<small th:text="${item?.id}"></small></h2>
 		</div>
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-		<form name="form" th:action="@{(${item.id} ? '/'+${admin_url}+'productOptions/'+${item.id}+'/edit': '/'+${admin_url}+'/productOptions')}"
-			action="productOption/edit.html" method="POST">
+		<form name="form" th:action="@{(${item.id} ? '/customers/'+${item.id}+'/edit': '/customers')}"
+			action="category/edit.html" method="POST">
 			<div class="row form-group">
 				<label for="codeInput" class="col-2 col-form-label text-right">Code</label>
 				 <input type="text"	th:value="${item.code}" class="form-control col-4" id="codeInput" name="code" placeholder="Code" /> 

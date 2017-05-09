@@ -4,7 +4,7 @@ import com.smart.shopping.domain.Authority;
 import com.smart.shopping.domain.User;
 import com.smart.shopping.repository.AuthorityRepository;
 import com.smart.shopping.repository.PersistentTokenRepository;
-import com.smart.shopping.config.Constants;
+import com.smart.shopping.config.AppConstants;
 import com.smart.shopping.repository.UserRepository;
 import com.smart.shopping.repository.search.UserSearchRepository;
 import com.smart.shopping.security.AuthoritiesConstants;
@@ -215,7 +215,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
-        return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
+        return userRepository.findAllByLoginNot(pageable, AppConstants.ANONYMOUS_USER).map(UserDTO::new);
     }
 
     @Transactional(readOnly = true)

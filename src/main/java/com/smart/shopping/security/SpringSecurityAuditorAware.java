@@ -1,6 +1,6 @@
 package com.smart.shopping.security;
 
-import com.smart.shopping.config.Constants;
+import com.smart.shopping.config.AppConstants;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
@@ -14,6 +14,6 @@ public class SpringSecurityAuditorAware implements AuditorAware<String> {
     @Override
     public String getCurrentAuditor() {
         String userName = SecurityUtils.getCurrentUserLogin();
-        return userName != null ? userName : Constants.SYSTEM_ACCOUNT;
+        return userName != null ? userName : AppConstants.SYSTEM_ACCOUNT;
     }
 }

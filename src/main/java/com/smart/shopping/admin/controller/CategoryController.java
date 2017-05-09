@@ -8,11 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.smart.shopping.config.AppConstants;
 import com.smart.shopping.core.catalog.Category;
 import com.smart.shopping.core.catalog.service.CategoryService;
 
 @Controller
-@RequestMapping("/admin/" + CategoryController.SECTION_KEY)
+@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + CategoryController.SECTION_KEY)
 public class CategoryController extends AbstractDomainController<Category, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(CategoryController.class);

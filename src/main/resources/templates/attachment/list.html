@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data"
 	layout:decorate="~{layouts/layout}" lang="en">
 <head>
-<meta name="_csrf" th:content="${_csrf.token}" />
 <!-- default header name is X-CSRF-TOKEN -->
-<link href="css/fileinput.min.css" th:href="@{css/fileinput.min.css}" media="all" rel="stylesheet"
+<link href="/css/fileinput.min.css" th:href="@{/css/fileinput.min.css}" media="all" rel="stylesheet"
 	type="text/css" />
-<script src="vendor/jquery.ui.widget.js" th:src="@{/vendor/jquery.ui.widget.js}"></script>
+<script src="/vendor/jquery.ui.widget.js" th:src="@{/vendor/jquery.ui.widget.js}"></script>
 <script th:src="@{/webjars/jquery-file-upload/9.10.1/js/jquery.fileupload.js}"></script>
-<script src="vendor/fileinput/fileinput.min.js" th:src="@{vendor/fileinput/fileinput.min.js}"></script>
-<script src="vendor/fileinput/themes/fa/theme.js" th:src="@{vendor/fileinput/themes/fa/theme.js}"></script>
+<script src="/vendor/fileinput/fileinput.min.js" th:src="@{/vendor/fileinput/fileinput.min.js}"></script>
+<script src="/vendor/fileinput/themes/fa/theme.js" th:src="@{/vendor/fileinput/themes/fa/theme.js}"></script>
 </head>
 <body>
 	<section layout:fragment="content">

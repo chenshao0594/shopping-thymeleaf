@@ -1,6 +1,6 @@
 package com.smart.shopping.service.dto;
 
-import com.smart.shopping.config.Constants;
+import com.smart.shopping.config.AppConstants;
 
 import com.smart.shopping.domain.Authority;
 import com.smart.shopping.domain.User;
@@ -19,7 +19,7 @@ public class UserDTO {
 
     private Long id;
 
-    @Pattern(regexp = Constants.LOGIN_REGEX)
+    @Pattern(regexp = AppConstants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     private String login;
 

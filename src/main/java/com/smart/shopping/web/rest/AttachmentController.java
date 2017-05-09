@@ -31,11 +31,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.codahale.metrics.annotation.Timed;
 import com.smart.shopping.attachment.common.AttachmentResponse;
 import com.smart.shopping.attachment.common.PreviewConfig;
+import com.smart.shopping.config.AppConstants;
 import com.smart.shopping.domain.Attachment;
 import com.smart.shopping.service.AttachmentService;
 
 @Controller
-@RequestMapping("/attachments")
+@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/attachments")
 public class AttachmentController {
 
 	private final Logger log = LoggerFactory.getLogger(AttachmentController.class);

@@ -6,7 +6,7 @@
 	<section layout:fragment="content">
 		<div class="page-title">
 			<h2>
-				ProductOptions <a th:href="@{/admin/productOptions/new}" class="btn btn-success pull-right"><span
+				ProductOptions <a th:href="@{/{admin}/productOptions/new(admin=${admin_url})}" class="btn btn-success pull-right"><span
 					class="fa fa-plus"></span>Add Product Option</a>
 			</h2>
 		</div>
@@ -29,9 +29,9 @@
 						<td th:text="${row.sortOrder}">sortOrder</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{'/admin/productOptions/'+${row.id}}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{/{admin}/productOptions/{optionId}(admin=${admin_url}, optionId=${row.id})}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/admin/productOptions/'+${row.id}+'/edit'}">
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/productOptions/{optionId}/edit(admin=${admin_url}, optionId=${row.id})}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

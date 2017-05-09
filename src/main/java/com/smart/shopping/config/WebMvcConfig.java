@@ -17,8 +17,11 @@ package com.smart.shopping.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import com.smart.shopping.interceptor.CommonInterceptor;
 
 /**
  * Configures View-related items.
@@ -33,6 +36,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/access").setViewName("access");
 		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new CommonInterceptor());
 	}
 
 	/*

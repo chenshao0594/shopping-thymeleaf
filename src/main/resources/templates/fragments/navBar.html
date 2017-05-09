@@ -10,19 +10,19 @@
         <a class="nav-link" href="/"> <i class="fa fa-home fa-fw"></i>&nbsp; Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../admin/categories/list.html" th:href="@{/admin/categories}">Category</a>
+        <a class="nav-link" href="../admin/categories/list.html" th:href="@{/{admin}/categories(admin=${admin_url})}">Category</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="../admin/products/list.html" th:href="@{/admin/products}">Product</a>
+        <a class="nav-link" href="../admin/products/list.html" th:href="@{/{admin}/products(admin=${admin_url})}">Product</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../admin/productOptions/list.html" th:href="@{/admin/productOptions}">ProductOption</a>
+        <a class="nav-link" href="../admin/productOptions/list.html" th:href="@{/{admin}/productOptions(admin=${admin_url})}">ProductOption</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="../admin/merchantStores/list.html" th:href="@{/admin/merchantStores}">Merchant Store</a>
+        <a class="nav-link" href="../admin/merchantStores/list.html" th:href="@{/{admin}/merchantStores(admin=${admin_url})}">Merchant Store</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../attachment/list.html" th:href="@{/attachments}">Images</a>
+        <a class="nav-link" href="../attachment/list.html" th:href="@{/{admin}/attachments(admin=${admin_url})}">Images</a>
       </li>
       <li class="nav-item push-right">
         <a class="nav-link" href="#" th:href="@{/register}">Register</a>

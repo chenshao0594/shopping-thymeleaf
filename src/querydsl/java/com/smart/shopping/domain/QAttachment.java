@@ -19,13 +19,15 @@ public class QAttachment extends EntityPathBase<Attachment> {
 
     public static final QAttachment attachment = new QAttachment("attachment");
 
+    public final EnumPath<com.smart.shopping.attachment.common.AttachmentEnum> attachmentType = createEnum("attachmentType", com.smart.shopping.attachment.common.AttachmentEnum.class);
+
     public final NumberPath<Long> boId = createNumber("boId", Long.class);
 
     public final StringPath boName = createString("boName");
 
     public final ArrayPath<byte[], Byte> content = createArray("content", byte[].class);
 
-    public final StringPath contentContentType = createString("contentContentType");
+    public final StringPath contentType = createString("contentType");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

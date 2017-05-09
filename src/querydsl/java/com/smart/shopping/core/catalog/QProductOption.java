@@ -30,13 +30,13 @@ public class QProductOption extends EntityPathBase<ProductOption> {
 
     public final com.smart.shopping.domain.QMerchantStore merchantStore;
 
-    public final NumberPath<Integer> productOptionSortOrder = createNumber("productOptionSortOrder", Integer.class);
-
     public final StringPath productOptionType = createString("productOptionType");
 
     public final SetPath<ProductOptionValue, QProductOptionValue> productOptionValues = this.<ProductOptionValue, QProductOptionValue>createSet("productOptionValues", ProductOptionValue.class, QProductOptionValue.class, PathInits.DIRECT2);
 
     public final BooleanPath readOnly = createBoolean("readOnly");
+
+    public final NumberPath<Integer> sortOrder = createNumber("sortOrder", Integer.class);
 
     public QProductOption(String variable) {
         this(ProductOption.class, forVariable(variable), INITS);

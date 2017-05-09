@@ -25,8 +25,11 @@
 						<span class="fa fa-pencil"></span>&nbsp;Edit Others&nbsp;
 					</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" th:href="@{'/admin/products/'+${item.id}+'/skus'}">Edit SKUs</a> <a
-							class="dropdown-item" th:href="@{'/admin/products/'+${item.id}+'/images'}">Edit Images</a>
+						<a class="dropdown-item"
+							th:href="@{/{admin}/products/{productId}/skus(admin=${admin_url}, productId=${item.id})}">Edit
+							SKUs</a> <a class="dropdown-item"
+							th:href="@{/{admin}/products/{productId}/images(admin=${admin_url}, productId=${item.id})}">Edit
+							Images</a>
 					</div>
 				</div>
 			</div>
@@ -34,39 +37,37 @@
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
 		<form name="form"
-			th:action="@{(${item.id} ? '/admin/products/'+${item.id}+'/edit': '/admin/products')}"
+			th:action="@{(${item.id} ? '/'+${admin_url}+'/products/'+${item.id}+'/edit' : '/'+${admin_url}+'/products')}"
 			action="products/edit.html" method="POST">
 			<fieldset>
 				<legend class="section">Basic Info</legend>
 				<div class="row">
-					<div class="col-3">
+					<!-- <div class="col-3">
 						<div id="kv-avatar-errors-2" class="center-block" style="width: 800px; display: none"></div>
 						<div class="kv-avatar center-block" style="width: 200px">
 							<input id="avatar-2" name="file" type="file" class="file-loading">
 						</div>
-						<!-- 	<img src="/img/image_add.png" class="rounded float-left"> -->
+							<img src="/img/image_add.png" class="rounded float-left">
+					</div> -->
+					<label for="name_input" class="col-2 col-form-label text-right">Name</label> <input type="text"
+						th:value="${item.name}" class="form-control col-4" id="name_input" name="name" /> <label
+						for="title_input" class="col-2 col-form-label text-right">Title</label> <input type="text"
+						th:value="${item.title}" class="form-control col-4" id="title_input" name="title" /> <label
+						for="category" class="col-2 col-form-label text-right"> Category</label> <select
+						class="form-control col-4" name="category.id">
+						<option th:each="category : ${categories}" th:value="${category.id}"
+							th:selected="${category.id==item.category?.id}" th:text="${category.code}"></option>
+					</select> <label for="sku" class="col-2 col-form-label text-right">SKU</label> <input type="text"
+						th:value="${item.sku}" class="form-control col-4" name="sku" /> <label for="salePrice_input"
+						class="col-2 col-form-label text-right">Sale Price</label>
+					<div class="input-group  col-4">
+						<span class="input-group-addon">$</span> <input type="number" th:value="${item.salePrice}"
+							class="form-control" id="salePrice_input" name="salePrice" />
 					</div>
-					<div class="col-md-9 row">
-						<label for="name_input" class="col-2 col-form-label text-right">Name</label> <input
-							type="text" th:value="${item.name}" class="form-control col-4" id="name_input" name="name" />
-						<label for="title_input" class="col-2 col-form-label text-right">Title</label> <input
-							type="text" th:value="${item.title}" class="form-control col-4" id="title_input" name="title" />
-						<label for="category" class="col-2 col-form-label text-right"> Category</label> <select
-							class="form-control col-4" name="category.id">
-							<option th:each="category : ${categories}" th:value="${category.id}"
-								th:selected="${category.id==item.category?.id}" th:text="${category.code}"></option>
-						</select> <label for="sku" class="col-2 col-form-label text-right">SKU</label> <input type="text"
-							th:value="${item.sku}" class="form-control col-4" name="sku" /> <label for="salePrice_input"
-							class="col-2 col-form-label text-right">Sale Price</label>
-						<div class="input-group  col-4">
-							<span class="input-group-addon">$</span> <input type="number" th:value="${item.salePrice}"
-								class="form-control" id="salePrice_input" name="salePrice" />
-						</div>
-						<label for="retailPrice_input" class="col-2 col-form-label text-right">Retail Price</label>
-						<div class="input-group  col-4">
-							<span class="input-group-addon">$</span> <input type="number" th:value="${item.retailPrice}"
-								class="form-control" id="retailPrice_input" name="retailPrice" />
-						</div>
+					<label for="retailPrice_input" class="col-2 col-form-label text-right">Retail Price</label>
+					<div class="input-group  col-4">
+						<span class="input-group-addon">$</span> <input type="number" th:value="${item.retailPrice}"
+							class="form-control" id="retailPrice_input" name="retailPrice" />
 					</div>
 				</div>
 				<!-- <br />
@@ -128,7 +129,7 @@
 <section layout:fragment="footer-script">
 	<script th:inline="javascript">
 		$(document).ready(function() {
-		$input=$("#avatar-2");
+		/* $input=$("#avatar-2");
 		$input.fileinput({
 			theme: "fa",
 			uploadUrl: "/attachments?"+[[${_csrf.parameterName}]] + '=' + [[${_csrf.token}]], // serv
@@ -156,7 +157,7 @@
 		 	
 		}).on("filebatchselected", function(event, files) {
 		    $input.fileinput("upload");
-		});;
+		});; */
 			
 			$('#summernote').summernote({
 				height : 300, // set editor height

@@ -24,17 +24,17 @@ public class QProductOptionValue extends EntityPathBase<ProductOptionValue> {
 
     public final StringPath code = createString("code");
 
+    public final BooleanPath displayOnly = createBoolean("displayOnly");
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final com.smart.shopping.domain.QMerchantStore merchantStore;
 
     public final QProductOption productOption;
 
-    public final BooleanPath productOptionDisplayOnly = createBoolean("productOptionDisplayOnly");
-
     public final StringPath productOptionValueImage = createString("productOptionValueImage");
 
-    public final NumberPath<Integer> productOptionValueSortOrder = createNumber("productOptionValueSortOrder", Integer.class);
+    public final NumberPath<Integer> sortOrder = createNumber("sortOrder", Integer.class);
 
     public QProductOptionValue(String variable) {
         this(ProductOptionValue.class, forVariable(variable), INITS);
