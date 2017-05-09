@@ -7,8 +7,6 @@
 <link href="/css/fileinput.min.css" th:href="@{/css/fileinput.min.css}" media="all" rel="stylesheet"
 	type="text/css" />
 <script src="/vendor/jquery.ui.widget.js" th:src="@{/vendor/jquery.ui.widget.js}"></script>
-<!-- <script th:src="@{/webjars/jquery-file-upload/9.10.1/js/jquery.fileupload.js}"></script>
- -->
 <script src="/vendor/fileinput/fileinput.min.js" th:src="@{/vendor/fileinput/fileinput.min.js}"></script>
 <script src="/vendor/fileinput/themes/fa/theme.js" th:src="@{/vendor/fileinput/themes/fa/theme.js}"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"
@@ -69,6 +67,10 @@
 						<span class="input-group-addon">$</span> <input type="number" th:value="${item.retailPrice}"
 							class="form-control" id="retailPrice_input" name="retailPrice" />
 					</div>
+					<label for="name_input" class="col-2 col-form-label text-right">Remark</label> 
+					<textarea rows="4" cols="50" th:value="${item.remark}" class="col-10" id="remark_input" name="remark">
+					
+					</textarea>
 				</div>
 				<!-- <br />
 				<div class="row offset-2 col-10">
@@ -107,10 +109,6 @@
 						type="text" th:value="${item.metatagKeywords}" class="form-control col-4" id="name_input"
 						name="metatagKeywords" />
 				</div>
-			</fieldset>
-			<fieldset>
-				<legend class="section">SKU Info</legend>
-				<div class="row">待定 ...</div>
 			</fieldset>
 			<div class="form-actions">
 				<div class="row justify-content-end">

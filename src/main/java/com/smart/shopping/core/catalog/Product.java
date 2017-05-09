@@ -104,6 +104,9 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@Column(name = "ref_sku")
 	private String refSku;
 
+	@Column(name = "remark")
+	private String remark;
+
 	@Column(name = "width", precision = 10, scale = 2)
 	private BigDecimal width;
 
@@ -377,6 +380,14 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	public void setHasSKU(boolean hasSKU) {
 		this.hasSKU = hasSKU;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

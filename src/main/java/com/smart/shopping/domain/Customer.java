@@ -78,10 +78,10 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	@Valid
 	@Embedded
-	private Billing billing = null;
+	private Billing billing = new Billing();
 
 	@Embedded
-	private Delivery delivery = null;
+	private Delivery delivery = new Delivery();
 
 	@Transient
 	private String showCustomerStateList;
