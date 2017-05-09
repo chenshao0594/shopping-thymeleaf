@@ -12,7 +12,11 @@
 <body>
 	<section layout:fragment="content">
 		<div class="page-title">
-			<h2>Product Images</h2>
+			<h2>Product Images
+			<button type="button" class="btn btn-secondary pull-right" th:onclick="${'goBack();'}">
+					<span class="fa fa-arrow-left"></span>Back
+				</button>
+			</h2>
 		</div>
 		<input id="file-input" name="file" type="file" class="file-loading">
 	</section>
@@ -24,12 +28,15 @@
 				theme: "fa",
 				uploadUrl : "/attachments?"+[[${_csrf.parameterName}]] + '=' + [[${_csrf.token}]], // server upload action
 				uploadAsync : true,
-				browseClass: "btn btn-primary",
+				ajaxDeleteSettings: { method: "DELETE" },
 				minFileCount : 1,
 				maxFileCount : 5,
 				browseOnZoneClick: true,
 				overwriteInitial : false,
 				showBrowse: false,
+				showCaption:false,
+				showCancel: false,
+				showClose: false,
 				initialPreview : [
 					[# th:each="image : ${attachments}"]    
 				     "/attachments/"+[[${image.id}]],

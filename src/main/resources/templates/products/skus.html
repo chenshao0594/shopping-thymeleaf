@@ -5,11 +5,16 @@
 <body>
 	<section layout:fragment="content">
 		<div class="page-title">
-			<h2>SKUs</h2>
+			<h2>
+				SKUs
+				<button type="button" class="btn btn-secondary pull-right" th:onclick="${'goBack();'}">
+					<span class="fa fa-arrow-left"></span>Back
+				</button>
+			</h2>
 		</div>
 		<div th:if="${statusMessage}" class="row">
-			<div role="alert" 
-				th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
+			<div role="alert" th:class="'alert ' + ${statusMessageClass}?: 'alert-info'"
+				th:text="${statusMessage}"></div>
 		</div>
 		<fieldset>
 			<legend class="section">Options</legend>

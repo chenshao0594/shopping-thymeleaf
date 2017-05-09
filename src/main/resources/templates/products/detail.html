@@ -30,23 +30,24 @@
 					<dd class="col-md-4 text-left" th:text="${item.retailPrice}">Retail Price</dd>
 					<dt class="col-md-2 text-right">Category</dt>
 					<dd class="col-md-4 text-left" th:text="${item.category?.code}">Category Code</dd>
+					<dt class="col-md-2 text-right">Brand</dt>
+					<dd class="col-md-4 text-left" th:text="${item.category?.code}">Brand</dd>
 				</dl>
 			</div>
 		</fieldset>
 		<fieldset>
 			<legend class="section">Shipping Info</legend>
 			<dl class="row">
-					<dt class="col-md-2 text-right">Width</dt>
-					<dd class="col-md-4 text-left" th:text="${item.width}">Width</dd>
-					<dt class="col-md-2 text-right">Length</dt>
-					<dd class="col-md-4 text-left" th:text="${item.length}">Length</dd>
-					<dt class="col-md-2 text-right">Weight</dt>
-					<dd class="col-md-4 text-left" th:text="${item.productWeight}">Weight</dd>
-					<dt class="col-md-2 text-right">Height</dt>
-					<dd class="col-md-4 text-left" th:text="${item.productHeight}">Height</dd>
-				</dl>
-			</fieldset>
-			
+				<dt class="col-md-2 text-right">Width</dt>
+				<dd class="col-md-4 text-left" th:text="${item.width}">Width</dd>
+				<dt class="col-md-2 text-right">Length</dt>
+				<dd class="col-md-4 text-left" th:text="${item.length}">Length</dd>
+				<dt class="col-md-2 text-right">Weight</dt>
+				<dd class="col-md-4 text-left" th:text="${item.productWeight}">Weight</dd>
+				<dt class="col-md-2 text-right">Height</dt>
+				<dd class="col-md-4 text-left" th:text="${item.productHeight}">Height</dd>
+			</dl>
+		</fieldset>
 		<fieldset>
 			<legend class="section">Audit Info</legend>
 			<dl class="row justify-content-md-center">
