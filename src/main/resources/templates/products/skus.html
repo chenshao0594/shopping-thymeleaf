@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
 	layout:decorate="~{layouts/layout}">
+<head>
 </head>
 <body>
 	<section layout:fragment="content">
@@ -17,7 +18,13 @@
 				th:text="${statusMessage}"></div>
 		</div>
 		<fieldset>
-			<legend class="section">Options</legend>
+			<legend class="section">
+				Options
+				<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal"
+					data-target="#optionModal">
+					<span class="fa fa-plus"> Create SKUs </span>
+				</button>
+			</legend>
 			<table class="table table-striped">
 				<thead class="thead-default">
 					<tr>
@@ -43,6 +50,51 @@
 				</tbody>
 			</table>
 		</fieldset>
+		<div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="optionModal"
+			aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Create a Option Value</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<dl>
+							<th:block th:each="option : ${options}">
+								<dt>
+									<span th:text="${option.code}"></span>
+								</dt>
+								<dd th:each="value: ${option.productOptionValues}">
+									<div class="checkbox">
+										<input type="checkbox" th:value="${option.id}+'@'+${value.id}"
+											th:onchange="'toggle('+${option.id}+');'" /><span th:text="${value.code}"></span>
+									</div>
+								</dd>
+							</th:block>
+						</dl>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 </body>
+<section layout:fragment="footer-script">
+	<script>
+		var selectedOptions = [];
+		function toggle (item) {
+			var idx = selectedOptions.indexOf(item);
+			if (idx > -1) {
+				selectedOptions.splice(idx, 1);
+			}else {
+				selectedOptions.push(item);
+			}
+		};
+	</script>
+</section>
 </html>

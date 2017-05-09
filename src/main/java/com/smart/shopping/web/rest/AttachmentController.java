@@ -43,7 +43,8 @@ public class AttachmentController {
 
 	private static final String ENTITY_NAME = "attachment";
 
-	private static final String InitialPreview = "<img src='/attachments/attachment_id' class='file-preview-image kv-preview-data rotate-1'>";
+	private static final String InitialPreview = "<img src='/" + AppConstants.ADMIN_PREFIX
+			+ "attachments/attachment_id' class='file-preview-image kv-preview-data rotate-1'>";
 	private final AttachmentService attachmentService;
 
 	public AttachmentController(AttachmentService attachmentService) {
@@ -65,7 +66,7 @@ public class AttachmentController {
 		PreviewConfig previewConfig = new PreviewConfig(attachment.getName());
 		previewConfig.setKey(Long.toString(attachment.getId()));
 		previewConfig.addSize(attachment.getSize());
-		previewConfig.addUrl("/attachments/" + attachment.getId());
+		previewConfig.addUrl("/" + AppConstants.ADMIN_PREFIX + "attachments/" + attachment.getId());
 		previewConfig.addWidth("180px");
 		AttachmentResponse body = new AttachmentResponse();
 		body.getPreviewConfig().add(previewConfig);
@@ -74,10 +75,11 @@ public class AttachmentController {
 			body.getInitialPreview().add(InitialPreview.replace("attachment_id", Long.toString(attachment.getId())));
 			break;
 		default:
-			body.getInitialPreview().add("/attachments/" + attachment.getId());
+			body.getInitialPreview().add("/" + AppConstants.ADMIN_PREFIX + "attachments/" + attachment.getId());
 		}
 
-		return ResponseEntity.created(new URI("/attachments/" + attachment.getId())).body(body);
+		return ResponseEntity.created(new URI("/" + AppConstants.ADMIN_PREFIX + "attachments/" + attachment.getId()))
+				.body(body);
 		/*
 		 * this.attachmentService.save(attachment);
 		 *
@@ -102,7 +104,7 @@ public class AttachmentController {
 			PreviewConfig config = new PreviewConfig(attachment.getName());
 			config.addKey(Long.toString(attachment.getId()));
 			config.addSize(attachment.getSize());
-			config.addUrl("/attachments/" + attachment.getId());
+			config.addUrl("/" + AppConstants.ADMIN_PREFIX + "attachments/" + attachment.getId());
 			inititalPreviewConfigs.add(config);
 		}
 		model.addAttribute("priviewConfig", inititalPreviewConfigs);

@@ -26,7 +26,7 @@
 		$(document).ready(function() {
 			$("#file-input").fileinput({
 				theme: "fa",
-				uploadUrl : "/attachments?"+[[${_csrf.parameterName}]] + '=' + [[${_csrf.token}]], // server upload action
+				uploadUrl : "/admin/attachments?"+[[${_csrf.parameterName}]] + '=' + [[${_csrf.token}]], // server upload action
 				uploadAsync : true,
 				ajaxDeleteSettings: { method: "DELETE" },
 				minFileCount : 1,
@@ -39,7 +39,7 @@
 				showClose: false,
 				initialPreview : [
 					[# th:each="image : ${attachments}"]    
-				     "/attachments/"+[[${image.id}]],
+				     "/admin/attachments/"+[[${image.id}]],
 				    [/]
 				],
 				initialPreviewAsData : true, // identify if you are sending preview data only and not the raw markup
