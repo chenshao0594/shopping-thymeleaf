@@ -4,27 +4,67 @@
 <body>
 	<section layout:fragment="content">
 		<div class="page-title">
-			<h2>Customer #<small th:text="${item?.id}"></small></h2>
+			<h2>
+				Customer <small th:text="${item?.id}"></small>
+			</h2>
 		</div>
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-		<form name="form" th:action="@{(${item.id} ? '/customers/'+${item.id}+'/edit': '/customers')}"
+		<form name="form"
+			th:action="@{(${item.id} ? '/'+${admin_url}+'customers/'+${item.id}+'/edit': '/'+${admin_url}+'/customers')}"
 			action="category/edit.html" method="POST">
-			<div class="row form-group">
-				<label for="codeInput" class="col-2 col-form-label text-right">Code</label>
-				 <input type="text"	th:value="${item.code}" class="form-control col-4" id="codeInput" name="code" placeholder="Code" /> 
-				 <label for="sortOrder" class="col-2 col-form-label text-right">SortOrder</label> 
-				 <input type="number" value="${item.sortOrder}" name="sortOrder"
-					class="form-control col-4" placeholder="Sort Order" /> 
-			</div>
+			<fieldset>
+				<legend class="section">Basic Info</legend>
+				<div class="row form-group">
+					<label for="lastName_Input" class="col-2 col-form-label text-right">Last Name</label> <input
+						type="text" th:value="${item.lastName}" class="form-control col-4" id="codeInput"
+						name="lastName" placeholder="Last Name" required></input> <label for="firstName_Input"
+						class="col-2 col-form-label text-right">First Name</label> <input type="text"
+						th:value="${item.firstName}" class="form-control col-4" id="firstName_Input" name="firstName"
+						placeholder="Last Name" required /> <label for="email_Input"
+						class="col-2 col-form-label text-right">Email</label> <input type="email"
+						th:value="${item.emailAddress}" class="form-control col-4" id="emailAddress_Input"
+						name="emailAddress" placeholder="Email" required /> <label for="gender_Input"
+						class="col-2 col-form-label text-right">Gender</label> <select class="form-control col-4"
+						name="gender">
+						<option value="M" th:selected="${M==item?.gender}">M</option>
+						<option value="F" th:selected="${F==item?.gender}">F</option>
+					</select>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend class="section">Billing Info</legend>
+				<div class="row">
+						<label class="col-2 col-form-label text-right"
+							for="field_firstName">First Name</label> <input type="text" class="form-control col-4"
+							name="billing.firstName" id="field_firstName" required />
+						<label class="col-2 col-form-label text-right" for="field_billing_lastName">Last Name</label> <input
+							type="text" class="form-control col-4" name="billing.lastName" id="field_billing_lastName" required />
+						<label class="col-2 col-form-label text-right" for="field_billing_company">Company</label> <input
+							type="text" class="form-control col-4" name="billing.company" id="field_billing_company" />
+						<label class="col-2 col-form-label text-right" for="field_billing_address">Address</label> <input
+							type="text" class="form-control col-4" name="billing.address" id="field_billing_address" />
+						<label class="col-2 col-form-label text-right" for="field_billing_city">City</label> <input type="text"
+							class="form-control col-4" name="billing.city" id="field_billing_city" required />
+						<label class="col-2 col-form-label text-right" for="field_billing_state">State</label> <input type="text"
+							class="form-control col-4" name="billing.state" id="field_billing_state" />
+						<label class="col-2 col-form-label text-right" for="field_billing_postalCode">Postal Code</label> <input
+							type="text" class="form-control col-4" name="billing.postalCode" id="field_billing_postalCode" />
+						<label class="col-2 col-form-label text-right" for="field_billing_telephone">Telephone</label> <input
+							type="text" class="form-control col-4" name="billing.telephone" id="field_billing_telephone" />
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend class="section">Delivery Info</legend>
+			</fieldset>
 			<div class="form-actions">
 				<div class="row justify-content-end">
-						<button type="button" class="btn btn-default" th:onclick="${'goBack();'}">
-							<span class="fa fa-ban"></span>&nbsp;Cancel
-						</button>
-						<button type="submit" class="btn btn-primary">
-							<span class="fa fa-save"></span>&nbsp;Save
-						</button>
+					<button type="button" class="btn btn-default" th:onclick="${'goBack();'}">
+						<span class="fa fa-ban"></span>&nbsp;Cancel
+					</button>
+					<button type="submit" class="btn btn-primary">
+						<span class="fa fa-save"></span>&nbsp;Save
+					</button>
 				</div>
 			</div>
 		</form>

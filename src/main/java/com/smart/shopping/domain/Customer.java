@@ -66,6 +66,9 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 	@Column(name = "nick")
 	private String nick;
 
+	@Column(name = "remark")
+	private String remark;
+
 	@Email
 	@Column(name = "email_address", nullable = false)
 	private String emailAddress;
@@ -259,6 +262,14 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	public Boolean getAnonymous() {
 		return anonymous;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

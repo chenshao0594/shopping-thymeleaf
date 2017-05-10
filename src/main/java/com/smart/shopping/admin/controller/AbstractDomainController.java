@@ -91,6 +91,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 		log.debug("REST request to save entity : {}", entity);
 		ModelAndView mv = new ModelAndView();
 		if (result.hasErrors()) {
+			log.error("save entity has error {}", result.getAllErrors());
 			mv.addObject("formErrors", result.getAllErrors());
 			mv.setViewName(this.getSectionKey() + "/dialog");
 			mv.addObject("item", entity);
@@ -120,7 +121,9 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	public String updateEntity(@PathVariable("id") K id, @Valid E entity, BindingResult result, Model model,
 			RedirectAttributes redirect) {
 		if (result.hasErrors()) {
+			log.error("error info {}", result.getAllErrors());
 			model.addAttribute("formErrors", result.getAllErrors());
+			model.addAttribute("item", entity);
 			return this.getSectionKey() + "/dialog";
 		} else {
 			this.service.save(entity);

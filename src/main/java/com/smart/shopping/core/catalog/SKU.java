@@ -48,7 +48,7 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 	private String name;
 
 	@NotEmpty
-	@Column(name = "sku_attributes")
+	@Column(name = "sku_attributes", updatable = false)
 	private String attributes;
 
 	@Column(name = "description")
@@ -61,9 +61,6 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 	@NotNull
 	@Column(name = "SALE_PRICE", precision = 19, scale = 2, nullable = false)
 	private BigDecimal salePrice = BigDecimal.ZERO;
-
-	@Column(name = "default_sku")
-	private Boolean defaultSKU;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
@@ -126,14 +123,6 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 
 	public void setSalePrice(BigDecimal salePrice) {
 		this.salePrice = salePrice;
-	}
-
-	public Boolean getDefaultSKU() {
-		return defaultSKU;
-	}
-
-	public void setDefaultSKU(Boolean defaultSKU) {
-		this.defaultSKU = defaultSKU;
 	}
 
 	public StatusEnum getStatus() {

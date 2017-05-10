@@ -6,8 +6,8 @@
 	<section layout:fragment="content">
 		<div class="page-title">
 			<h2>
-				ProductOptions <a th:href="@{/{admin}/customers/new(admin=${admin_url})}" class="btn btn-success pull-right"><span
-					class="fa fa-plus"></span>Add Product Option</a>
+				Customer <a th:href="@{/{admin}/customers/new(admin=${admin_url})}"
+					class="btn btn-success pull-right"><span class="fa fa-plus"></span>Add Customer</a>
 			</h2>
 		</div>
 		<div class="row">
@@ -17,21 +17,27 @@
 				<thead class="thead-default">
 					<tr>
 						<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
-						<th><a class="sorted" sd:pagination-sort="code">Code</a></th>
-						<th>Sort Order</th>
+						<th>Display Name</th>
+						<th>Gender</th>
+						<th>Email</th>
+						<th>Company</th>
 						<th>Operation</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="row : ${page}">
 						<th scope="row" th:text="${row.id}">1</th>
-						<td th:text="${row.code}">code</td>
-						<td th:text="${row.sortOrder}">sortOrder</td>
+						<td th:text="${row.lastName} ${row.firstName}">DisplayName</td>
+						<td th:text="${row.gender}">Gender</td>
+						<td th:text="${row.emailAddress}">Email</td>
+						<td th:text="${row.company}">Company</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{/{admin}/customers/{customerId}(admin=${admin_url}, customerId=${row.id})}"> <span
-									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/customers/{customerId}/edit(admin=${admin_url}, customerId=${row.id})}">
+								<a class="btn btn-success btn-sm"
+									th:href="@{/{admin}/customers/{customerId}(admin=${admin_url}, customerId=${row.id})}">
+									<span class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
+								</a> &nbsp; <a class="btn btn-primary btn-sm"
+									th:href="@{/{admin}/customers/{customerId}/edit(admin=${admin_url}, customerId=${row.id})}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

@@ -8,18 +8,22 @@
 		</div>
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-		<form name="form" th:action="@{(${item.id} ? '/skus/'+${item.id}+'/edit')}"
+		<form name="form" th:action="@{/{admin}/skus/{skuId}/edit(admin=${admin_url}, skuId=${item.id})}"
 			action="category/edit.html" method="POST">
 			<div class="row form-group">
-				<label for="codeInput" class="col-2 col-form-label text-right">Code</label> <input type="text"
-					th:value="${item.code}" class="form-control col-4" id="codeInput" name="code"
-					placeholder="Code" /> <label for="sortOrder" class="col-2 col-form-label text-right">Sort
-					Order</label> <input type="number" value="${item.sortOrder}" name="sortOrder"
-					class="form-control col-4" placeholder="Sort Order" /> <label for="parent"
-					class="col-2 col-form-label text-right">Parent Category</label> <select
-					class="form-control col-4" name="parent.id">
-					<option th:each="item : ${categories}" th:value="${item.id}" th:text="${item.code}"></option>
-				</select>
+				<label for="codeInput" class="col-2 col-form-label text-right">Name</label> <input type="text"
+					th:value="${item.name}" class="form-control col-4" id="codeInput" name="name"
+					placeholder="Code" /> <label for="attributesinput" class="col-2 col-form-label text-right">Attribute</label>
+				<input type="hidden" th:value="${item.attributes}" name="attributes" /> <input type="text"
+					th:value="${item.attributes}" class="form-control col-4" id="attributes_input" disabled /> <label
+					for="salePrice" class="col-2 col-form-label text-right">Sale Price</label> <input type="number"
+					th:value="${item.salePrice}" name="salePrice" class="form-control col-4" /> <label
+					for="retailPrice" class="col-2 col-form-label text-right">Retail Price</label> <input
+					type="number" th:value="${item.retailPrice}" name="retailPrice" class="form-control col-4" />
+					<label for="name_input" class="col-2 col-form-label text-right">Description</label> 
+					<textarea rows="4" cols="50" th:value="${item.description}" class="col-10" id="description_input" name="description">
+					
+					</textarea>
 			</div>
 			<div class="form-actions">
 				<div class="row justify-content-end">

@@ -33,7 +33,7 @@ import com.smart.shopping.service.ProductService;
  * REST controller for managing Product.
  */
 @Transactional
-@Controller
+@Controller("AdminProductController")
 @RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + ProductController.SECTION_KEY)
 public class ProductController extends AbstractDomainController<Product, Long> {
 

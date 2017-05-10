@@ -9,8 +9,6 @@
 <script src="/vendor/jquery.ui.widget.js" th:src="@{/vendor/jquery.ui.widget.js}"></script>
 <script src="/vendor/fileinput/fileinput.min.js" th:src="@{/vendor/fileinput/fileinput.min.js}"></script>
 <script src="/vendor/fileinput/themes/fa/theme.js" th:src="@{/vendor/fileinput/themes/fa/theme.js}"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"
-	th:src="@{/vendor/summernote/summernote.js}"></script>
 </head>
 <body>
 	<section layout:fragment="content">
@@ -51,7 +49,9 @@
 						th:value="${item.name}" class="form-control col-4" id="name_input" name="name" /> <label
 						for="title_input" class="col-2 col-form-label text-right">Title</label> <input type="text"
 						th:value="${item.title}" class="form-control col-4" id="title_input" name="title" /> <label
-						for="category" class="col-2 col-form-label text-right"> Category</label> <select
+						for="category" class="col-2 col-form-label text-right"> Category</label> 
+						
+						<select
 						class="form-control col-4" name="category.id">
 						<option th:each="category : ${categories}" th:value="${category.id}"
 							th:selected="${category.id==item.category?.id}" th:text="${category.code}"></option>
@@ -127,36 +127,6 @@
 <section layout:fragment="footer-script">
 	<script th:inline="javascript">
 		$(document).ready(function() {
-		/* $input=$("#avatar-2");
-		$input.fileinput({
-			theme: "fa",
-			uploadUrl: "/attachments?"+[[${_csrf.parameterName}]] + '=' + [[${_csrf.token}]], // serv
-		    overwriteInitial: true,
-		    maxFileSize: 1500,
-		    showClose: false,
-		    browseIcon: '<i class="fa fa-folder-open">修改图片</i>',
-		    showRemove: false,
-		    showCaption: false,
-		    showZoom: false,
-		    browseOnZoneClick: true,
-		    elErrorContainer: '#kv-avatar-errors-2',
-		    msgErrorClass: 'alert alert-block alert-danger',
-		    defaultPreviewContent: '<i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>',
-		    layoutTemplates: {main2: '{preview} {remove}  {browse}',footer:''},
-		    allowedFileExtensions: ["jpg", "png"],
-		    initialPreview : [
-			],
-			initialPreviewConfig:[],
-		    uploadExtraData: {
-		    	 boName: "product",
-		     	 boId: [[${item.id}]],
-		     	 attachmentType: "AVATOR"
-		 	},
-		 	
-		}).on("filebatchselected", function(event, files) {
-		    $input.fileinput("upload");
-		});; */
-			
 			$('#summernote').summernote({
 				height : 300, // set editor height
 				minHeight : null, // set minimum height of editor
