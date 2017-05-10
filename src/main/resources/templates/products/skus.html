@@ -19,6 +19,47 @@
 		</div>
 		<fieldset>
 			<legend class="section">
+				SKUs
+				<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal"
+					data-target="#optionModal">
+					<span class="fa fa-plus"> Create SKUs </span>
+				</button>
+			</legend>
+			<div id="skus-block">
+				<table class="table table-striped">
+					<thead class="thead-default">
+						<tr>
+							<th><a class="sorted">Id</a></th>
+							<th>name</th>
+							<th>Attributes</th>
+							<th>Sale Price</th>
+							<th>Retail Price</th>
+							<th>Operation</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="sku : ${skus}">
+							<th scope="row" th:text="${sku?.id}">1</th>
+							<td th:text="${sku?.name}">Name</td>
+							<td th:text="${sku?.attributes}">Attributes</td>
+							<td th:text="${sku?.salePrice}">Sale Price</td>
+							<td th:text="${sku?.retailPrice}">Retail Price</td>
+							<td>
+								<div class="flex-btn-group-container">
+									<a class="btn btn-success btn-sm" th:href="@{'/skus/'+${sku.id}}"> <span
+										class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
+									</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/skus/'+${sku.id}+'/edit'}"> <span
+										class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
+									</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</fieldset>
+		<!-- <fieldset>
+			<legend class="section">
 				Options
 				<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal"
 					data-target="#optionModal">
@@ -49,7 +90,7 @@
 					</tr>
 				</tbody>
 			</table>
-		</fieldset>
+		</fieldset> -->
 		<div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="optionModal"
 			aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
@@ -64,14 +105,9 @@
 						<dl>
 							<th:block th:each="option : ${options}">
 								<dt>
-									<span th:text="${option.code}"></span>
+									<input type="checkbox" name="option" th:value="${option.id}" /><span
+										th:text="${option.code}"></span>
 								</dt>
-								<dd th:each="value: ${option.productOptionValues}">
-									<div class="checkbox">
-										<input type="checkbox" name="optionValue" th:value="${option.id}+'@'+${value.id}" /><span
-											th:text="${value.code}"></span>
-									</div>
-								</dd>
 							</th:block>
 						</dl>
 					</div>
@@ -87,15 +123,25 @@
 <section layout:fragment="footer-script">
 	<script>
 		function getOptionInfo () {
-
-		var options=document.querySelectorAll('[name="optionValue"]:checked');
+		var options=document.querySelectorAll('[name="option"]:checked');
 		var selected = [];
 		for (var i=0; i<options.length; i++) {
 		    if (options[i].checked) {
 		        selected.push(options[i].value);
 		    }
+		}	
+		if(selected.length==0){
+			$("#optionModal").modal('toggle');
+			return;
 		}
-		alert(selected);
+		$.post("/[[${admin_url}]]/products/[[${productId}]]/generateSkusByBatch", 
+				{optionContent : selected.join('@'),
+				 [[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
+				}, 
+				function(data, textStatus, req) {
+					$("#optionModal").modal('toggle');
+					$("#skus-block").replaceWith(data);
+		});
 		};
 	</script>
 </section>

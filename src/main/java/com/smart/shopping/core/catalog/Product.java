@@ -128,7 +128,7 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@JoinTable(name = "product_option_xref", joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "product_option_id", referencedColumnName = "ID"))
 	private Set<ProductOption> productOptions = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = SKU.class, mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = SKU.class, mappedBy = "product", cascade = CascadeType.ALL)
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	protected Set<SKU> additionalSKUs = new HashSet<>();
 

@@ -1,13 +1,13 @@
 package com.smart.shopping.admin.controller;
 
 import java.net.URISyntaxException;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -25,6 +25,7 @@ import com.smart.shopping.core.catalog.ProductOption;
 import com.smart.shopping.core.catalog.service.CategoryService;
 import com.smart.shopping.core.catalog.service.ProductOptionService;
 import com.smart.shopping.domain.Attachment;
+import com.smart.shopping.exception.BusinessException;
 import com.smart.shopping.service.AttachmentService;
 import com.smart.shopping.service.ProductService;
 
@@ -38,6 +39,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
 	public static final String SECTION_KEY = "products";
+	private static final String SKUS_FRAGMENT = "skus/list :: skusList";
 	private static final Class ENTITY_CLASS = Product.class;
 
 	private final ProductService productService;
@@ -63,9 +65,15 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 
 	@Timed
 	@GetMapping("/{productId}/skus")
-	public ModelAndView querySKUs(@PathVariable("productId") Long productId, ModelAndView model) {
+	public ModelAndView querySKUs(@PathVariable("productId") Long productId, ModelAndView model)
+			throws BusinessException {
 		model.addObject("productId", productId);
-		model.addObject("options", this.productOptionService.list());
+		Product product = this.productService.findOne(productId);
+		if (product == null) {
+			throw new BusinessException("can't find product by id " + productId);
+		}
+		model.addObject("options", this.productOptionService.findAll(null));
+		model.addObject("skus", product.getAdditionalSKUs());
 		model.setViewName(this.getSectionKey() + "/skus");
 		return model;
 	}
@@ -100,10 +108,19 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 
 	@Timed
 	@PostMapping("{id}/generateSkusByBatch")
-	public ResponseEntity<Void> generateSkusByBatch(@PathVariable Long id) throws URISyntaxException {
+	public String generateSkusByBatch(@PathVariable Long id, String optionContent, Model model)
+			throws URISyntaxException {
+		List<Long> optionIds = new LinkedList<Long>();
+		for (String each : optionContent.split("@")) {
+			optionIds.add(Long.parseLong(each));
+		}
+		System.out.println("option ids :" + optionIds);
 		log.debug("create generateSkusByBatch----------------{}", id);
-		this.productService.generateAdditionalSKUsByBatch(id);
-		return ResponseEntity.ok().build();
+		this.productService.generateAdditionalSKUsByBatch(id, optionIds);
+
+		Product product = this.productService.findOne(id);
+		model.addAttribute("skus", product.getAdditionalSKUs());
+		return SKUS_FRAGMENT;
 	}
 
 	@Override

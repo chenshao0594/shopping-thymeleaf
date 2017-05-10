@@ -23,6 +23,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smart.shopping.core.enumeration.StatusEnum;
@@ -46,15 +47,19 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 	@Column(name = "name")
 	private String name;
 
+	@NotEmpty
+	@Column(name = "sku_attributes")
+	private String attributes;
+
 	@Column(name = "description")
 	private String description;
 
 	@NotNull
-	@Column(name = "RETAIL_PRICE", precision = 19, scale = 5, nullable = false)
+	@Column(name = "RETAIL_PRICE", precision = 19, scale = 2, nullable = false)
 	protected BigDecimal retailPrice = BigDecimal.ZERO;
 
 	@NotNull
-	@Column(name = "SALE_PRICE", precision = 19, scale = 5, nullable = false)
+	@Column(name = "SALE_PRICE", precision = 19, scale = 2, nullable = false)
 	private BigDecimal salePrice = BigDecimal.ZERO;
 
 	@Column(name = "default_sku")
@@ -153,6 +158,14 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 
 	public void setProductOptionValues(Set<ProductOptionValue> productOptionValues) {
 		this.productOptionValues = productOptionValues;
+	}
+
+	public String getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(String attributes) {
+		this.attributes = attributes;
 	}
 
 }

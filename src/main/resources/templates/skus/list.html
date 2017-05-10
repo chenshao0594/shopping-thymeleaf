@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+</head>
+<body>
+	<div th:fragment="skusList" id="skus-block">
+		<table class="table table-striped">
+			<thead class="thead-default">
+				<tr>
+					<th><a class="sorted">Id</a></th>
+					<th>name</th>
+					<th>Attributes</th>
+					<th>Sale Price</th>
+					<th>Retail Price</th>
+					<th>Operation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="sku : ${skus}">
+					<th scope="row" th:text="${sku?.id}">1</th>
+					<td th:text="${sku?.name}">Name</td>
+					<td th:text="${sku?.attributes}">Attributes</td>
+					<td th:text="${sku?.salePrice}">Sale Price</td>
+					<td th:text="${sku?.retailPrice}">Retail Price</td>
+					<td>
+						<div class="flex-btn-group-container">
+							<a class="btn btn-success btn-sm" th:href="@{'/skus/'+${sku.id}}"> <span
+								class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
+							</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/skus/'+${sku.id}+'/edit'}"> <span
+								class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
+							</a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

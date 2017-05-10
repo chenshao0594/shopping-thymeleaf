@@ -3,6 +3,7 @@ package com.smart.shopping.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -55,18 +56,21 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 	}
 
 	@Override
-	public void generateAdditionalSKUsByBatch(Long productId) {
+	public void generateAdditionalSKUsByBatch(Long productId, List<Long> optionIds) {
 		Product product = this.productRepository.getOne(productId);
 		if (product == null) {
-			throw new RuntimeException("null option");
+			throw new RuntimeException("null product !!!");
 		}
-		Set<ProductOption> productOptions = product.getProductOptions();
+		Set<ProductOption> productOptions = new HashSet<ProductOption>();
+		for (Long optionId : optionIds) {
+			productOptions.add(this.productOptionService.findOne(optionId));
+		}
 		if (CollectionUtils.isEmpty(productOptions)) {
 			LOGGER.info("product options is empty,product{} ", product.getId());
 			return;
 		}
 		List<List<ProductOptionValue>> allPermutations = generatePermutations(0, new ArrayList<ProductOptionValue>(),
-				new ArrayList(product.getProductOptions()));
+				new ArrayList(productOptions));
 		if (allPermutations == null) {
 			return;
 		}
@@ -104,12 +108,17 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 			permutatedSKU.setDescription(product.getDescription());
 			permutatedSKU.setProduct(product);
 			LOGGER.info("permutation list : ", permutation);
-			permutatedSKU = this.skuService.save(permutatedSKU);
-
+			List<String> skuAttributes = new LinkedList<String>();
+			for (ProductOptionValue value : permutation) {
+				skuAttributes.add(value.getCode());
+			}
+			permutatedSKU.setAttributes(String.join("/", skuAttributes));
+			// permutatedSKU = this.skuService.save(permutatedSKU);
 			permutatedSKU.setProductOptionValues(new HashSet<ProductOptionValue>(permutation));
 			this.skuService.save(permutatedSKU);
 			product.getAdditionalSKUs().add(permutatedSKU);
 		}
+		product.getProductOptions().addAll(productOptions);
 		product.setHasSKU(true);
 		this.save(product);
 		return;
