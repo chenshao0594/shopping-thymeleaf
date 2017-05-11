@@ -35,33 +35,54 @@
 			<fieldset>
 				<legend class="section">Billing Info</legend>
 				<div class="row">
-						<label class="col-2 col-form-label text-right"
-							for="field_firstName">First Name</label> <input type="text" class="form-control col-4"
-							name="billing.firstName" id="field_firstName" required />
-						<label class="col-2 col-form-label text-right" for="field_billing_lastName">Last Name</label> <input
-							type="text" class="form-control col-4" name="billing.lastName" id="field_billing_lastName" required />
-						<label class="col-2 col-form-label text-right" for="field_billing_company">Company</label> <input
-							type="text" class="form-control col-4" name="billing.company" id="field_billing_company" />
-						<label class="col-2 col-form-label text-right" for="field_billing_address">Address</label> <input
-							type="text" class="form-control col-4" name="billing.address" id="field_billing_address" />
-						<label class="col-2 col-form-label text-right" for="field_billing_city">City</label> <input type="text"
-							class="form-control col-4" name="billing.city" id="field_billing_city" required />
-						<label class="col-2 col-form-label text-right" for="field_billing_state">State</label> <input type="text"
-							class="form-control col-4" name="billing.state" id="field_billing_state" />
-						<label class="col-2 col-form-label text-right" for="field_billing_postalCode">Postal Code</label> <input
-							type="text" class="form-control col-4" name="billing.postalCode" id="field_billing_postalCode" />
-						<label class="col-2 col-form-label text-right" for="field_billing_telephone">Telephone</label> <input
-							type="text" class="form-control col-4" name="billing.telephone" id="field_billing_telephone" />
+					<label class="col-2 col-form-label text-right" for="field_firstName">First Name</label> <input
+						type="text" class="form-control col-4" name="billing.firstName" id="field_firstName" required />
+					<label class="col-2 col-form-label text-right" for="field_billing_lastName">Last Name</label> <input
+						type="text" class="form-control col-4" name="billing.lastName" id="field_billing_lastName"
+						required /> <label class="col-2 col-form-label text-right" for="field_billing_company">Company</label>
+					<input type="text" class="form-control col-4" name="billing.company" id="field_billing_company" />
+					<label class="col-2 col-form-label text-right" for="field_billing_address">Address</label> <input
+						type="text" class="form-control col-4" name="billing.address" id="field_billing_address" /> <label
+						class="col-2 col-form-label text-right" for="field_billing_city">City</label> <input
+						type="text" class="form-control col-4" name="billing.city" id="field_billing_city" required />
+					<label class="col-2 col-form-label text-right" for="field_billing_state">State</label> <input
+						type="text" class="form-control col-4" name="billing.state" id="field_billing_state" /> <label
+						class="col-2 col-form-label text-right" for="field_billing_postalCode">Postal Code</label> <input
+						type="text" class="form-control col-4" name="billing.postalCode" id="field_billing_postalCode" />
+					<label class="col-2 col-form-label text-right" for="field_billing_telephone">Telephone</label>
+					<input type="text" class="form-control col-4" name="billing.telephone"
+						id="field_billing_telephone" />
 				</div>
 			</fieldset>
 			<fieldset>
 				<legend class="section">Delivery Info</legend>
+				<div class="row">
+				<label class="col-2 col-form-label text-right" for="field_delivery_firstName">First Name</label>
+				<input type="text" class="form-control col-4" name="delivery.firstName" id="field_firstName"
+					required /> <label class="col-2 col-form-label text-right" for="field_delivery_lastName">Last
+					Name</label> <input type="text" class="form-control col-4" name="delivery.lastName"
+					id="field_delivery_lastName" required /> <label class="col-2 col-form-label text-right"
+					for="field_delivery_company">Company</label> <input type="text" class="form-control col-4"
+					name="delivery.company" id="field_delivery_company" /> <label
+					class="col-2 col-form-label text-right" for="field_delivery_address">Address</label> <input
+					type="text" class="form-control col-4" name="delivery.address" id="field_delivery_address" />
+				<label class="col-2 col-form-label text-right" for="field_delivery_city">City</label> <input
+					type="text" class="form-control col-4" name="delivery.city" id="field_delivery_city" required />
+				<label class="col-2 col-form-label text-right" for="field_delivery_state">State</label> <input
+					type="text" class="form-control col-4" name="delivery.state" id="field_delivery_state" /> <label
+					class="col-2 col-form-label text-right" for="field_delivery_postalCode">Postal Code</label> <input
+					type="text" class="form-control col-4" name="delivery.postalCode"
+					id="field_delivery_postalCode" /> <label class="col-2 col-form-label text-right"
+					for="field_delivery_telephone">Telephone</label> <input type="text" class="form-control col-4"
+					name="delivery.telephone" id="field_delivery_telephone" />
+					</div>
 			</fieldset>
 			<div class="form-actions">
 				<div class="row justify-content-end">
 					<button type="button" class="btn btn-default" th:onclick="${'goBack();'}">
 						<span class="fa fa-ban"></span>&nbsp;Cancel
 					</button>
+					&nbsp;&nbsp;
 					<button type="submit" class="btn btn-primary">
 						<span class="fa fa-save"></span>&nbsp;Save
 					</button>
