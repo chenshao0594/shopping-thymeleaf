@@ -22,9 +22,9 @@ public class QSKU extends EntityPathBase<SKU> {
 
     public static final QSKU sKU = new QSKU("sKU");
 
-    public final StringPath code = createString("code");
+    public final StringPath attributes = createString("attributes");
 
-    public final BooleanPath defaultSKU = createBoolean("defaultSKU");
+    public final StringPath code = createString("code");
 
     public final StringPath description = createString("description");
 

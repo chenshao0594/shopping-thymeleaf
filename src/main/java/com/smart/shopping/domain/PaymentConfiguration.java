@@ -44,7 +44,7 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 	@Column(name = "configuration")
 	private String configuration;
 
-	@Column(name = "schema")
+	@Column(name = "payment_schema")
 	private String scheme;
 
 	@Column(name = "host", nullable = false)
@@ -59,15 +59,14 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 	@Column(name = "env", nullable = false)
 	private String env;
 
-	@Column(name = "config1", nullable = false)
+	@Column(name = "config1")
 	private String config1;
 
-	@Column(name = "config2", nullable = false)
+	@Column(name = "config2")
 	private String config2;
 
 	@Override
 	public Long getId() {
-		// TODO Auto-generated method stub
 		return this.id;
 	}
 
@@ -170,6 +169,14 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 
 	public void setConfig2(String config2) {
 		this.config2 = config2;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

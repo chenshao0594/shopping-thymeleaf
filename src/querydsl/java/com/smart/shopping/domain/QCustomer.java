@@ -48,6 +48,8 @@ public class QCustomer extends EntityPathBase<Customer> {
 
     public final StringPath password = createString("password");
 
+    public final StringPath remark = createString("remark");
+
     public QCustomer(String variable) {
         this(Customer.class, forVariable(variable), INITS);
     }

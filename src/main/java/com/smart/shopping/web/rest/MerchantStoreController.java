@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smart.shopping.admin.controller.AbstractDomainController;
+import com.smart.shopping.config.AppConstants;
 import com.smart.shopping.domain.MerchantStore;
 import com.smart.shopping.service.MerchantStoreService;
 
@@ -13,7 +14,7 @@ import com.smart.shopping.service.MerchantStoreService;
  * REST controller for managing MerchantStore.
  */
 @RestController
-@RequestMapping("/api/" + MerchantStoreController.SECTION_KEY)
+@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + MerchantStoreController.SECTION_KEY)
 public class MerchantStoreController extends AbstractDomainController<MerchantStore, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(MerchantStoreController.class);

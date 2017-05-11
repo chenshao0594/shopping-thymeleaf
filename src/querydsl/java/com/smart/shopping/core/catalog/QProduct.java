@@ -32,7 +32,11 @@ public class QProduct extends EntityPathBase<Product> {
 
     public final StringPath description = createString("description");
 
+    public final StringPath externalDl = createString("externalDl");
+
     public final BooleanPath hasSKU = createBoolean("hasSKU");
+
+    public final StringPath highlight = createString("highlight");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -46,11 +50,7 @@ public class QProduct extends EntityPathBase<Product> {
 
     public final StringPath name = createString("name");
 
-    public final StringPath productExternalDl = createString("productExternalDl");
-
     public final NumberPath<java.math.BigDecimal> productHeight = createNumber("productHeight", java.math.BigDecimal.class);
-
-    public final StringPath productHighlight = createString("productHighlight");
 
     public final SetPath<ProductOption, QProductOption> productOptions = this.<ProductOption, QProductOption>createSet("productOptions", ProductOption.class, QProductOption.class, PathInits.DIRECT2);
 
@@ -61,6 +61,8 @@ public class QProduct extends EntityPathBase<Product> {
     public final NumberPath<java.math.BigDecimal> productWeight = createNumber("productWeight", java.math.BigDecimal.class);
 
     public final StringPath refSku = createString("refSku");
+
+    public final StringPath remark = createString("remark");
 
     public final NumberPath<java.math.BigDecimal> retailPrice = createNumber("retailPrice", java.math.BigDecimal.class);
 
