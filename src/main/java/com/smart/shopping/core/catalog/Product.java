@@ -50,8 +50,8 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@Column(name = "metatag_keywords")
 	private String metatagKeywords;
 
-	@Column(name = "product_highlight")
-	private String productHighlight;
+	@Column(name = "highlight")
+	private String highlight;
 
 	@Column(name = "title")
 	private String title;
@@ -69,8 +69,8 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@Column(name = "has_sku")
 	private boolean hasSKU = false;
 
-	@Column(name = "product_external_dl")
-	private String productExternalDl;
+	@Column(name = "external_dl")
+	private String externalDl;
 
 	@Column(name = "product_height", precision = 10, scale = 2)
 	private BigDecimal productHeight;
@@ -218,14 +218,6 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 		this.metatagKeywords = metatagKeywords;
 	}
 
-	public String getProductHighlight() {
-		return productHighlight;
-	}
-
-	public void setProductHighlight(String productHighlight) {
-		this.productHighlight = productHighlight;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -258,12 +250,20 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 		this.name = name;
 	}
 
-	public String getProductExternalDl() {
-		return productExternalDl;
+	public String getHighlight() {
+		return highlight;
 	}
 
-	public void setProductExternalDl(String productExternalDl) {
-		this.productExternalDl = productExternalDl;
+	public void setHighlight(String highlight) {
+		this.highlight = highlight;
+	}
+
+	public String getExternalDl() {
+		return externalDl;
+	}
+
+	public void setExternalDl(String externalDl) {
+		this.externalDl = externalDl;
 	}
 
 	public BigDecimal getSalePrice() {
