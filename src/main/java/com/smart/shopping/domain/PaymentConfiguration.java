@@ -9,13 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.elasticsearch.annotations.Document;
-
 import com.smart.shopping.domain.common.BusinessDomain;
 
 @Entity
 @Table(name = "payment_configuration")
-@Document(indexName = "paymentConfiguration")
 public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfiguration> implements Serializable {
 
 	/**
@@ -50,7 +47,7 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 	@Column(name = "host", nullable = false)
 	private String host;
 
-	@Column(name = "port", nullable = false)
+	@Column(name = "port")
 	private String port;
 
 	@Column(name = "uri", nullable = false)
@@ -61,9 +58,6 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 
 	@Column(name = "config1")
 	private String config1;
-
-	@Column(name = "config2")
-	private String config2;
 
 	@Override
 	public Long getId() {
@@ -161,14 +155,6 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 
 	public void setConfig1(String config1) {
 		this.config1 = config1;
-	}
-
-	public String getConfig2() {
-		return config2;
-	}
-
-	public void setConfig2(String config2) {
-		this.config2 = config2;
 	}
 
 	public String getName() {

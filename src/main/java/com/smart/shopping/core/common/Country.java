@@ -33,9 +33,6 @@ public class Country extends BusinessDomain<Long, Country> implements Serializab
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "supported")
-	private Boolean supported;
-
 	private String descriptions;
 
 	@OneToMany(mappedBy = "country")
@@ -79,19 +76,6 @@ public class Country extends BusinessDomain<Long, Country> implements Serializab
 		this.isoCode = isoCode;
 	}
 
-	public Boolean isSupported() {
-		return supported;
-	}
-
-	public Country supported(Boolean supported) {
-		this.supported = supported;
-		return this;
-	}
-
-	public void setSupported(Boolean supported) {
-		this.supported = supported;
-	}
-
 	public Set<Zone> getZones() {
 		return zones;
 	}
@@ -125,7 +109,4 @@ public class Country extends BusinessDomain<Long, Country> implements Serializab
 		this.descriptions = descriptions;
 	}
 
-	public Boolean getSupported() {
-		return supported;
-	}
 }
