@@ -31,9 +31,9 @@
 						<td th:text="${row.type}">type</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{/{admin}/payments/{itemId}(admin=${admin_url}, itemId=${row.id})}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{/{admin}/paymentConfigurations/{itemId}(admin=${admin_url}, itemId=${row.id})}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/payments/{itemId}/edit(admin=${admin_url}, itemId=${row.id})}">
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/paymentConfigurations/{itemId}/edit(admin=${admin_url}, itemId=${row.id})}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

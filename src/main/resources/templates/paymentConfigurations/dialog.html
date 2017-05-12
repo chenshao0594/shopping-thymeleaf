@@ -11,14 +11,16 @@
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
 		<form name="form"
-			th:action="@{(${item.id} ? '/'+${admin_url}+'paymentConfigurations/'+${item.id}+'/edit': '/'+${admin_url}+'/paymentConfigurations')}"
+			th:action="@{(${item.id} ? '/'+${admin_url}+'/paymentConfigurations/'+${item.id}+'/edit': '/'+${admin_url}+'/paymentConfigurations')}"
 			action="paymentConfiguration/edit.html" method="POST">
 			<fieldset>
 				<legend class="section">Basic Info</legend>
 				<div class="row form-group">
 					<label for="nameInput" class="col-2 col-form-label text-right">Name</label> <input type="text"
 						th:value="${item.name}" class="form-control col-4" id="nameInput" name="name"
-						placeholder="Name" /> <label for="configurationInput" class="col-2 col-form-label text-right">Configuration</label>
+						placeholder="Name" /> <label for="typeInput" class="col-2 col-form-label text-right">Type</label>
+					<input type="text" th:value="${item.type}" class="form-control col-4" id="typeInput"
+						name="type" /> <label for="configurationInput" class="col-2 col-form-label text-right">Configuration</label>
 					<input type="text" th:value="${item.configuration}" class="form-control col-4"
 						id="configurationInput" name="configuration" placeholder="Configuration" /> <label
 						for="schemeInput" class="col-2 col-form-label text-right">Scheme</label> <input type="text"
@@ -32,13 +34,9 @@
 					<input type="text" th:value="${item.uri}" class="form-control col-4" id="uriInput" name="uri"
 						placeholder="Port" /> <label for="envInput" class="col-2 col-form-label text-right">ENV</label>
 					<input type="text" th:value="${item.env}" class="form-control col-4" id="envInput" name="env"
-						placeholder="env" />
-					<label for="config1Input" class="col-2 col-form-label text-right">Config1</label>
+						placeholder="env" /> <label for="config1Input" class="col-2 col-form-label text-right">Config1</label>
 					<input type="text" th:value="${item.config1}" class="form-control col-4" id="config1Input"
-						name="config1" placeholder="config1" /> <label for="config2Input"
-						class="col-2 col-form-label text-right">Config2</label> <input type="text"
-						th:value="${item.config2}" class="form-control col-4" id="config2Input" name="config2"
-						placeholder="config2" />
+						name="config1" placeholder="config1" />
 				</div>
 			</fieldset>
 			<div class="form-actions">

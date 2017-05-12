@@ -32,6 +32,9 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 	@Column(name = "name")
 	private String name;
 
+	@Column(name = "version")
+	private String version;
+
 	@Column(name = "regions")
 	private String regions;
 
@@ -163,6 +166,14 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 }

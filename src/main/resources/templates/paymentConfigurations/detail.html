@@ -37,32 +37,6 @@
 			</dl>
 		</fieldset>
 		<fieldset>
-			<legend class="section">
-				Option Values
-				<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal"
-					data-target="#optionModal">
-					<span class="fa fa-plus"> Add Value </span>
-				</button>
-			</legend>
-			<table class="table w-75">
-				<thead class="thead-default">
-					<tr>
-						<th>Id</th>
-						<th>Code</th>
-						<th>Sort Order</th>
-						<th>Operation</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="optionValue : ${item.productOptionValues}">
-						<th scope="row" th:text="${optionValue.id}">1</th>
-						<td th:text="${optionValue.code}">code</td>
-						<td th:text="${optionValue.sortOrder}">sortOrder</td>
-					</tr>
-				</tbody>
-			</table>
-		</fieldset>
-		<fieldset>
 			<legend class="section">Audit Info</legend>
 			<dl class="row justify-content-md-center">
 				<dt class="col-md-2 text-right">Created By</dt>
@@ -77,35 +51,6 @@
 		</fieldset>
 		<!-- Button trigger modal -->
 		<!-- Modal -->
-		<div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="optionModal"
-			aria-hidden="true">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Create a Option Value</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form name="form" th:action="@{/{admin}/productOptions/{optionId}/values(admin=${admin_url}, optionId=${item.id})}"
-						action="productOptions/values.html" method="POST">
-						<div class="modal-body">
-							<div class="row form-group">
-								<label for="codeInput" class="col-1 col-form-label text-right">Code</label> 
-								<input type="text"  class="form-control col-4" id="codeInput" name="code"
-									placeholder="Code" /> <label for="sortOrder" class="col-2 col-form-label text-right">SortOrder</label>
-								<input type="number"  name="sortOrder" class="form-control col-4"
-									placeholder="Sort Order" />
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Save</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
 	</section>
 </body>
 </html>
