@@ -6,8 +6,8 @@
 	<section layout:fragment="content">
 		<div class="page-title">
 			<h2>
-				Customer <a th:href="@{/{admin}/customers/new(admin=${admin_url})}"
-					class="btn btn-success pull-right"><span class="fa fa-plus"></span>Add Customer</a>
+				PaymentConfiguration <a th:href="@{/{admin}/paymentConfigurations/new(admin=${admin_url})}" class="btn btn-success pull-right"><span
+					class="fa fa-plus"></span>Add Payment Configuration</a>
 			</h2>
 		</div>
 		<div class="row">
@@ -17,27 +17,23 @@
 				<thead class="thead-default">
 					<tr>
 						<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
-						<th>Display Name</th>
-						<th>Gender</th>
-						<th><a class="sorted" sd:pagination-sort="emailAddress">Email</a></th>
-						<th>Company</th>
+						<th>Image</th>
+						<th>Name</th>
+						<th>Type</th>
 						<th>Operation</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="row : ${page}">
 						<th scope="row" th:text="${row.id}">1</th>
-						<td th:text="${row.lastName} ${row.firstName}">DisplayName</td>
-						<td th:text="${row.gender}">Gender</td>
-						<td th:text="${row.emailAddress}">Email</td>
-						<td th:text="${row.company}">Company</td>
+						<td th:text="${row.image}">Image</td>
+						<td th:text="${row.name}">name</td>
+						<td th:text="${row.type}">type</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm"
-									th:href="@{/{admin}/customers/{customerId}(admin=${admin_url}, customerId=${row.id})}">
-									<span class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm"
-									th:href="@{/{admin}/customers/{customerId}/edit(admin=${admin_url}, customerId=${row.id})}">
+								<a class="btn btn-success btn-sm" th:href="@{/{admin}/payments/{itemId}(admin=${admin_url}, itemId=${row.id})}"> <span
+									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/payments/{itemId}/edit(admin=${admin_url}, itemId=${row.id})}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

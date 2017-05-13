@@ -9,15 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.smart.shopping.domain.common.BusinessDomain;
 
 @Entity
 @Table(name = "payment_configuration")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfiguration> implements Serializable {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = -7790700323284087735L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

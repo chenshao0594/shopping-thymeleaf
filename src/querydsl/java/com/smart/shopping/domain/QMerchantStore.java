@@ -22,9 +22,13 @@ public class QMerchantStore extends EntityPathBase<MerchantStore> {
 
     public static final QMerchantStore merchantStore = new QMerchantStore("merchantStore");
 
+    public final StringPath address = createString("address");
+
+    public final StringPath city = createString("city");
+
     public final StringPath code = createString("code");
 
-    public final StringPath continueShoppingUrl = createString("continueShoppingUrl");
+    public final StringPath continueShoppingURL = createString("continueShoppingURL");
 
     public final com.smart.shopping.core.common.QCountry country;
 
@@ -34,27 +38,21 @@ public class QMerchantStore extends EntityPathBase<MerchantStore> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final DatePath<java.util.Date> inBusinessSince = createDate("inBusinessSince", java.util.Date.class);
-
     public final StringPath invoiceTemplate = createString("invoiceTemplate");
 
-    public final StringPath seizeunitcode = createString("seizeunitcode");
+    public final StringPath Logo = createString("Logo");
 
-    public final StringPath storeaddress = createString("storeaddress");
+    public final StringPath name = createString("name");
 
-    public final StringPath storecity = createString("storecity");
+    public final StringPath phone = createString("phone");
 
-    public final StringPath storeLogo = createString("storeLogo");
+    public final StringPath postalcode = createString("postalcode");
 
-    public final StringPath storename = createString("storename");
+    public final StringPath seizeUnit = createString("seizeUnit");
 
-    public final StringPath storephone = createString("storephone");
+    public final StringPath stateProvince = createString("stateProvince");
 
-    public final StringPath storepostalcode = createString("storepostalcode");
-
-    public final StringPath storestateprovince = createString("storestateprovince");
-
-    public final StringPath weightunitcode = createString("weightunitcode");
+    public final StringPath weightUnit = createString("weightUnit");
 
     public final com.smart.shopping.core.common.QZone zone;
 

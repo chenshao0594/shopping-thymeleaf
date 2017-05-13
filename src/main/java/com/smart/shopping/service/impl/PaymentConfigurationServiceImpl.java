@@ -19,11 +19,11 @@ public class PaymentConfigurationServiceImpl extends AbstractDomainServiceImpl<P
 		implements PaymentConfigurationService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(PaymentConfigurationServiceImpl.class);
-	private final PaymentConfigurationRepository PaymentConfigurationRepository;
+	private final PaymentConfigurationRepository paymentConfigurationRepository;
 
 	public PaymentConfigurationServiceImpl(PaymentConfigurationRepository paymentConfigurationRepository) {
 		super(paymentConfigurationRepository, null);
-		this.PaymentConfigurationRepository = paymentConfigurationRepository;
+		this.paymentConfigurationRepository = paymentConfigurationRepository;
 	}
 
 }

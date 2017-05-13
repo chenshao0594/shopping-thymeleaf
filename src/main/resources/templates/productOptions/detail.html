@@ -75,15 +75,15 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form name="form" th:action="@{/{admin}/productOptions/{optionId}/values(admin=${admin_url}, optionId=${item.id})}"
+					<form name="form"
+						th:action="@{/{admin}/productOptions/{optionId}/values(admin=${admin_url}, optionId=${item.id})}"
 						action="productOptions/values.html" method="POST">
 						<div class="modal-body">
 							<div class="row form-group">
-								<label for="codeInput" class="col-1 col-form-label text-right">Code</label> 
-								<input type="text"  class="form-control col-4" id="codeInput" name="code"
-									placeholder="Code" /> <label for="sortOrder" class="col-2 col-form-label text-right">SortOrder</label>
-								<input type="number"  name="sortOrder" class="form-control col-4"
-									placeholder="Sort Order" />
+								<label for="codeInput" class="col-1 col-form-label text-right">Code</label> <input
+									type="text" class="form-control col-4" id="codeInput" name="code" placeholder="Code" /> <label
+									for="sortOrder" class="col-2 col-form-label text-right">SortOrder</label> <input
+									type="number" name="sortOrder" class="form-control col-4" placeholder="Sort Order" />
 							</div>
 						</div>
 						<div class="modal-footer">
