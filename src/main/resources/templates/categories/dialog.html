@@ -8,7 +8,7 @@
 		</div>
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-		<form name="form" th:action="@{(${item.id} ? '/categories/'+${item.id}+'/edit': '/categories')}"
+		<form name="form" th:action="@{(${item.id} ? '/'+${admin_url}+'/categories/'+${item.id}+'/edit': '/'+${admin_url}+'/categories')}"
 			action="category/edit.html" method="POST">
 			<div class="row form-group">
 				<label for="codeInput" class="col-2 col-form-label text-right">Code</label> <input type="text"
@@ -26,6 +26,7 @@
 					<button type="button" class="btn btn-default" th:onclick="${'goBack();'}">
 						<span class="fa fa-ban"></span>&nbsp;Cancel
 					</button>
+					&nbsp;&nbsp;
 					<button type="submit" class="btn btn-primary">
 						<span class="fa fa-save"></span>&nbsp;Save
 					</button>

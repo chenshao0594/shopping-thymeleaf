@@ -92,7 +92,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		}
 		this.productService.save(product);
 		model.setViewName(this.getSectionKey() + "/skus");
-		model.setViewName("redirect:/" + SECTION_KEY + "/" + productId + "/skus");
+		model.setViewName("redirect:/" + AppConstants.ADMIN_PREFIX + "/" + SECTION_KEY + "/" + productId + "/skus");
 		return model;
 	}
 

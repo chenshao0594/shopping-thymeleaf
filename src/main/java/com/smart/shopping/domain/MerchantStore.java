@@ -1,7 +1,6 @@
 package com.smart.shopping.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,15 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smart.shopping.core.common.Country;
 import com.smart.shopping.core.common.Zone;
@@ -33,10 +29,13 @@ import com.smart.shopping.domain.common.BusinessDomain;
 @Entity
 @Table(name = "merchant_store")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "merchantstore")
 public class MerchantStore extends BusinessDomain<Long, MerchantStore> implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 8819502867751478315L;
+
 	public final static String DEFAULT_STORE = "DEFAULT";
 
 	@Id
@@ -44,28 +43,28 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 	private Long id;
 
 	@NotEmpty
-	@Column(name = "STORE_NAME", nullable = false, length = 100)
-	private String storename;
+	@Column(name = "NAME", nullable = false, length = 100)
+	private String name;
 
 	@NotEmpty
 	@Pattern(regexp = "^[a-zA-Z0-9_]*$")
-	@Column(name = "STORE_CODE", nullable = false, unique = true, length = 100)
+	@Column(name = "CODE", nullable = false, unique = true, length = 100)
 	private String code;
 
 	@NotEmpty
-	@Column(name = "STORE_PHONE", length = 50)
-	private String storephone;
+	@Column(name = "PHONE", length = 50)
+	private String phone;
 
-	@Column(name = "STORE_ADDRESS")
-	private String storeaddress;
-
-	@NotEmpty
-	@Column(name = "STORE_CITY", length = 100)
-	private String storecity;
+	@Column(name = "ADDRESS")
+	private String address;
 
 	@NotEmpty
-	@Column(name = "STORE_POSTAL_CODE", length = 15)
-	private String storepostalcode;
+	@Column(name = "CITY", length = 100)
+	private String city;
+
+	@NotEmpty
+	@Column(name = "POSTAL_CODE", length = 15)
+	private String postalcode;
 
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Country.class)
 	@JoinColumn(name = "COUNTRY_ID", nullable = false, updatable = true)
@@ -75,18 +74,18 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 	@JoinColumn(name = "ZONE_ID", nullable = true, updatable = true)
 	private Zone zone;
 
-	@Column(name = "STORE_STATE_PROVINCE", length = 100)
-	private String storestateprovince;
+	@Column(name = "STATE_PROVINCE", length = 100)
+	private String stateProvince;
 
-	@Column(name = "WEIGHTUNITCODE", length = 5)
-	private String weightunitcode = MeasureUnit.LB.name();
+	@Column(name = "WEIGHT_UNIT", length = 5)
+	private String weightUnit = MeasureUnit.LB.name();
 
-	@Column(name = "SEIZEUNITCODE", length = 5)
-	private String seizeunitcode = MeasureUnit.IN.name();
+	@Column(name = "SIZE_UNIT", length = 5)
+	private String seizeUnit = MeasureUnit.IN.name();
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "IN_BUSINESS_SINCE")
-	private Date inBusinessSince = new Date();
+	// @Temporal(TemporalType.DATE)
+	// @Column(name = "IN_BUSINESS_SINCE")
+	// private Date inBusinessSince = new Date();
 
 	@Column(name = "INVOICE_TEMPLATE", length = 25)
 	private String invoiceTemplate;
@@ -94,16 +93,16 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 	@Column(name = "DOMAIN_NAME", length = 80)
 	private String domainName;
 
-	@Column(name = "CONTINUESHOPPINGURL", length = 150)
-	private String continueShoppingUrl;
+	@Column(name = "CONTINUE_SHOPPING_URL", length = 150)
+	private String continueShoppingURL;
 
 	@Email
 	@NotEmpty
-	@Column(name = "EMAIL", length = 60, nullable = false)
+	@Column(name = "EMAIL_ADDRESS", length = 60, nullable = false)
 	private String emailAddress;
 
-	@Column(name = "STORE_LOGO", length = 100)
-	private String storeLogo;
+	@Column(name = "LOGO", length = 100)
+	private String Logo;
 
 	// @ManyToOne(targetEntity = Currency.class)
 	// @JoinColumn(name = "CURRENCY_ID", nullable=false)
@@ -119,186 +118,132 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 		this.id = id;
 	}
 
-	public String getStoreaddress() {
-		return storeaddress;
+	public String getName() {
+		return name;
 	}
 
-	public MerchantStore storeaddress(String storeaddress) {
-		this.storeaddress = storeaddress;
-		return this;
-	}
-
-	public void setStoreaddress(String storeaddress) {
-		this.storeaddress = storeaddress;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public MerchantStore code(String code) {
-		this.code = code;
-		return this;
-	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
 
-	public String getStorename() {
-		return storename;
+	public String getPhone() {
+		return phone;
 	}
 
-	public MerchantStore storename(String storename) {
-		this.storename = storename;
-		return this;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-	public void setStorename(String storename) {
-		this.storename = storename;
+	public String getAddress() {
+		return address;
 	}
 
-	public String getStorephone() {
-		return storephone;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public MerchantStore storephone(String storephone) {
-		this.storephone = storephone;
-		return this;
+	public String getCity() {
+		return city;
 	}
 
-	public void setStorephone(String storephone) {
-		this.storephone = storephone;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String getWeightunitcode() {
-		return weightunitcode;
+	public String getPostalcode() {
+		return postalcode;
 	}
 
-	public MerchantStore weightunitcode(String weightunitcode) {
-		this.weightunitcode = weightunitcode;
-		return this;
-	}
-
-	public void setWeightunitcode(String weightunitcode) {
-		this.weightunitcode = weightunitcode;
-	}
-
-	public String getDomainName() {
-		return domainName;
-	}
-
-	public MerchantStore domainName(String domainName) {
-		this.domainName = domainName;
-		return this;
-	}
-
-	public void setDomainName(String domainName) {
-		this.domainName = domainName;
-	}
-
-	public String getInvoiceTemplate() {
-		return invoiceTemplate;
-	}
-
-	public MerchantStore invoiceTemplate(String invoiceTemplate) {
-		this.invoiceTemplate = invoiceTemplate;
-		return this;
-	}
-
-	public void setInvoiceTemplate(String invoiceTemplate) {
-		this.invoiceTemplate = invoiceTemplate;
-	}
-
-	public String getStoreLogo() {
-		return storeLogo;
-	}
-
-	public MerchantStore storeLogo(String storeLogo) {
-		this.storeLogo = storeLogo;
-		return this;
-	}
-
-	public void setStoreLogo(String storeLogo) {
-		this.storeLogo = storeLogo;
-	}
-
-	public String getStorepostalcode() {
-		return storepostalcode;
-	}
-
-	public MerchantStore storepostalcode(String storepostalcode) {
-		this.storepostalcode = storepostalcode;
-		return this;
-	}
-
-	public void setStorepostalcode(String storepostalcode) {
-		this.storepostalcode = storepostalcode;
-	}
-
-	public String getSeizeunitcode() {
-		return seizeunitcode;
-	}
-
-	public MerchantStore seizeunitcode(String seizeunitcode) {
-		this.seizeunitcode = seizeunitcode;
-		return this;
-	}
-
-	public void setSeizeunitcode(String seizeunitcode) {
-		this.seizeunitcode = seizeunitcode;
-	}
-
-	public String getStorestateprovince() {
-		return storestateprovince;
-	}
-
-	public MerchantStore storestateprovince(String storestateprovince) {
-		this.storestateprovince = storestateprovince;
-		return this;
-	}
-
-	public void setStorestateprovince(String storestateprovince) {
-		this.storestateprovince = storestateprovince;
-	}
-
-	public String getStorecity() {
-		return storecity;
-	}
-
-	public MerchantStore storecity(String storecity) {
-		this.storecity = storecity;
-		return this;
-	}
-
-	public void setStorecity(String storecity) {
-		this.storecity = storecity;
-	}
-
-	public Zone getZone() {
-		return zone;
-	}
-
-	public MerchantStore zone(Zone zone) {
-		this.zone = zone;
-		return this;
-	}
-
-	public void setZone(Zone zone) {
-		this.zone = zone;
+	public void setPostalcode(String postalcode) {
+		this.postalcode = postalcode;
 	}
 
 	public Country getCountry() {
 		return country;
 	}
 
-	public MerchantStore country(Country country) {
-		this.country = country;
-		return this;
-	}
-
 	public void setCountry(Country country) {
 		this.country = country;
+	}
+
+	public Zone getZone() {
+		return zone;
+	}
+
+	public void setZone(Zone zone) {
+		this.zone = zone;
+	}
+
+	public String getStateProvince() {
+		return stateProvince;
+	}
+
+	public void setStateProvince(String stateProvince) {
+		this.stateProvince = stateProvince;
+	}
+
+	public String getWeightUnit() {
+		return weightUnit;
+	}
+
+	public void setWeightUnit(String weightUnit) {
+		this.weightUnit = weightUnit;
+	}
+
+	public String getSeizeUnit() {
+		return seizeUnit;
+	}
+
+	public void setSeizeUnit(String seizeUnit) {
+		this.seizeUnit = seizeUnit;
+	}
+
+	public String getInvoiceTemplate() {
+		return invoiceTemplate;
+	}
+
+	public void setInvoiceTemplate(String invoiceTemplate) {
+		this.invoiceTemplate = invoiceTemplate;
+	}
+
+	public String getDomainName() {
+		return domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+
+	public String getContinueShoppingURL() {
+		return continueShoppingURL;
+	}
+
+	public void setContinueShoppingURL(String continueShoppingURL) {
+		this.continueShoppingURL = continueShoppingURL;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public String getLogo() {
+		return Logo;
+	}
+
+	public void setLogo(String logo) {
+		Logo = logo;
 	}
 
 }

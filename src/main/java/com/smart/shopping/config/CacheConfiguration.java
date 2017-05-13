@@ -64,6 +64,8 @@ public class CacheConfiguration {
 			cm.createCache(com.smart.shopping.core.catalog.ProductOptionValue.class.getName() + ".productOption",
 					jcacheConfiguration);
 			cm.createCache(com.smart.shopping.domain.Customer.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.order.SalesOrder.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smart.shopping.core.order.OrderStatusHistory.class.getName(), jcacheConfiguration);
 
 			// jhipster-needle-ehcache-add-entry
 		};

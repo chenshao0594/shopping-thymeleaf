@@ -11,13 +11,12 @@
 			<h2>
 				Customer <small th:text="${item?.id}"></small>
 			</h2>
-			
 		</div>
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
 		<form name="form"
 			th:action="@{(${item.id} ? '/'+${admin_url}+'customers/'+${item.id}+'/edit': '/'+${admin_url}+'/customers')}"
-			action="category/edit.html" method="POST">
+			action="customer/edit.html" method="POST">
 			<fieldset>
 				<legend class="section">Basic Info</legend>
 				<div class="row form-group">

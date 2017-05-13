@@ -6,8 +6,8 @@
 	<section layout:fragment="content">
 		<div class="page-title">
 			<h2>
-				Categories <a th:href="@{/categories/new}" class="btn btn-success pull-right"><span
-					class="fa fa-plus"></span>Add category</a>
+				Merchant Store <a th:href="@{/{admin}/merchantStores/new(admin=${admin_url})}"
+					class="btn btn-success pull-right"><span class="fa fa-plus"></span>Add Merchant Store</a>
 			</h2>
 		</div>
 		<div class="row">
@@ -17,21 +17,23 @@
 				<thead class="thead-default">
 					<tr>
 						<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
-						<th><a class="sorted" sd:pagination-sort="code">Code</a></th>
-						<th>Parent</th>
+						<th>Logo</th>
+						<th>name</th>
+						<th>domainName</th>
 						<th>Operation</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="row : ${page}">
 						<th scope="row" th:text="${row.id}">1</th>
-						<td th:text="${row.code}">code</td>
-						<td th:text="${row.parent?.code}">Parent</td>
+						<td th:text="${row.logo}">logo</td>
+						<td th:text="${row.name}">Name</td>
+						<td th:text="${row.domainName}">Domain Name</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{'/categories/'+${row.id}}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{'/merchantStores/'+${row.id}}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/categories/'+${row.id}+'/edit'}">
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/merchantStores/'+${row.id}+'/edit'}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>
