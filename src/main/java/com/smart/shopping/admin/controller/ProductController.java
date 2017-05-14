@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
+import com.smart.shopping.attachment.common.PreviewConfig;
 import com.smart.shopping.config.AppConstants;
 import com.smart.shopping.core.catalog.Product;
 import com.smart.shopping.core.catalog.ProductOption;
@@ -101,6 +102,15 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 	public String getAllImages(@PathVariable("id") Long productId, Model model) {
 		log.debug("REST request to get a page of Attachments");
 		List<Attachment> results = attachmentService.findAllByBOInfo("product", productId);
+		List<PreviewConfig> inititalPreviewConfigs = new LinkedList<PreviewConfig>();
+		for (Attachment attachment : results) {
+			PreviewConfig config = new PreviewConfig(attachment.getName());
+			config.addKey(Long.toString(attachment.getId()));
+			config.addSize(attachment.getSize());
+			config.addUrl("/" + AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
+			inititalPreviewConfigs.add(config);
+		}
+		model.addAttribute("priviewConfig", inititalPreviewConfigs);
 		model.addAttribute("attachments", results);
 		model.addAttribute("productId", productId);
 		return this.getSectionKey() + "/images";

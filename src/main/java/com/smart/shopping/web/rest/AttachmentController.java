@@ -3,8 +3,10 @@ package com.smart.shopping.web.rest;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,7 +46,7 @@ public class AttachmentController {
 	private static final String ENTITY_NAME = "attachment";
 
 	private static final String InitialPreview = "<img src='/" + AppConstants.ADMIN_PREFIX
-			+ "attachments/attachment_id' class='file-preview-image kv-preview-data rotate-1'>";
+			+ "/attachments/attachment_id' class='file-preview-image kv-preview-data rotate-1'>";
 	private final AttachmentService attachmentService;
 
 	public AttachmentController(AttachmentService attachmentService) {
@@ -66,19 +68,19 @@ public class AttachmentController {
 		PreviewConfig previewConfig = new PreviewConfig(attachment.getName());
 		previewConfig.setKey(Long.toString(attachment.getId()));
 		previewConfig.addSize(attachment.getSize());
-		previewConfig.addUrl("/" + AppConstants.ADMIN_PREFIX + "attachments/" + attachment.getId());
+		previewConfig.addUrl("/" + AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
 		previewConfig.addWidth("180px");
 		AttachmentResponse body = new AttachmentResponse();
-		body.getPreviewConfig().add(previewConfig);
+		body.getInitialPreviewConfig().add(previewConfig);
 		switch (attachment.getAttachmentType()) {
-		case AVATOR:
+		case AVATAR:
 			body.getInitialPreview().add(InitialPreview.replace("attachment_id", Long.toString(attachment.getId())));
 			break;
 		default:
-			body.getInitialPreview().add("/" + AppConstants.ADMIN_PREFIX + "attachments/" + attachment.getId());
+			body.getInitialPreview().add("/" + AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
 		}
 
-		return ResponseEntity.created(new URI("/" + AppConstants.ADMIN_PREFIX + "attachments/" + attachment.getId()))
+		return ResponseEntity.created(new URI("/" + AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId()))
 				.body(body);
 		/*
 		 * this.attachmentService.save(attachment);
@@ -88,10 +90,12 @@ public class AttachmentController {
 
 	@Timed
 	@DeleteMapping("/{id}")
-	public @ResponseBody ResponseEntity<Void> deleteImage(@PathVariable("id") Long id) throws IOException {
+	public @ResponseBody ResponseEntity<Map> deleteImage(@PathVariable("id") Long id) throws IOException {
 		System.out.println("delete attachment by " + id);
 		this.attachmentService.delete(id);
-		return ResponseEntity.ok().build();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("deleteThumb", "file delete");
+		return ResponseEntity.ok().body(map);
 	}
 
 	@Timed
@@ -104,7 +108,7 @@ public class AttachmentController {
 			PreviewConfig config = new PreviewConfig(attachment.getName());
 			config.addKey(Long.toString(attachment.getId()));
 			config.addSize(attachment.getSize());
-			config.addUrl("/" + AppConstants.ADMIN_PREFIX + "attachments/" + attachment.getId());
+			config.addUrl("/" + AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
 			inititalPreviewConfigs.add(config);
 		}
 		model.addAttribute("priviewConfig", inititalPreviewConfigs);

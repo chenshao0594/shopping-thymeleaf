@@ -8,7 +8,7 @@ import java.util.Set;
 public class AttachmentResponse {
 	private boolean append = true;
 	private List<String> initialPreview = new LinkedList<String>();
-	private Set<PreviewConfig> previewConfig = new HashSet<PreviewConfig>();
+	private Set<PreviewConfig> initialPreviewConfig = new HashSet<PreviewConfig>();
 
 	public boolean isAppend() {
 		return append;
@@ -26,12 +26,12 @@ public class AttachmentResponse {
 		this.initialPreview = initialPreview;
 	}
 
-	public Set<PreviewConfig> getPreviewConfig() {
-		return previewConfig;
+	public Set<PreviewConfig> getInitialPreviewConfig() {
+		return initialPreviewConfig;
 	}
 
-	public void setPreviewConfig(Set<PreviewConfig> previewConfig) {
-		this.previewConfig = previewConfig;
+	public void setInitialPreviewConfig(Set<PreviewConfig> initialPreviewConfig) {
+		this.initialPreviewConfig = initialPreviewConfig;
 	}
 
 }
