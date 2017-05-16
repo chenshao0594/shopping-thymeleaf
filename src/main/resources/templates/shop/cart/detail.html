@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+	layout:decorate="~{shop/layouts/layout}">
+<body>
+	<section layout:fragment="content">
+		<div id="cart-content">
+			<div class="row">
+				<table class="product-list full-width">
+					<tr>
+						<th>Item</th>
+						<th class="narrow">Quantity</th>
+						<th class="narrow">Price</th>
+						<th class="narrow">Total</th>
+						<th class="narrow"></th>
+					</tr>
+					<tr>
+						<td><a class="hide-for-small" href="/product/{{ item.product.url_name }}"><img
+								src="/shop/demo/Boatshoe.png" /></a>
+							<div class="short-description">
+								<h3>
+									<a href="/product/{{ item.product.url_name }}">{{ item.product.name }}</a>
+								</h3>
+							</div>
+						</td>
+						<td class="narrow">
+						<input type="text" name="item_quantity[{{ item.key }}]"
+							class="quantity" value="quantity"></td> 
+						<td class="narrow"><i>price</i></td>
+						<td class="narrow"><i>total</i></td>
+						<td class="narrow remove"><a href="#" data-ajax-handler="shop:cart" {#
+							data-ajax-confirm="Do you really want to remove this item from the cart?"
+							#}
+        data-ajax-update="#cart-content=shop-cart-content, #mini-cart=shop-minicart"
+							data-ajax-extra-fields="delete_item='{{ item.key }}'">Remove</a></td>
+					</tr>
+				</table>
+			</div>
+			<div class="row">
+				<!-- shipping estimate calculator... how to do this? -->
+				<div class="six columns" style="display: none">
+					<h3>Shipping rates calculator</h3>
+					<div class="row">
+						<div class="four columns">
+							<label for="country">Country</label>
+							<select id="country" name="country" data-state-select="state"
+								data-current-state="{{ shipping_info.state }}">
+								<option value="{{ country.id }}"{{ option_state(country.id, shipping_info.country) }}>{{
+									country.name }}</option>
+							</select>
+						</div>
+						<div class="four columns">
+							<label for="state">State</label> <select id="state" name="state"> {#
+								partial('shop-stateoptions', {'states': states, 'current_state': shipping_info.state}) #}
+							</select>
+						</div>
+						<div class="four columns">
+							<label for="zip">Zip/Postal Code</label> <input name="zip" type="text"
+								value="{{ shipping_info.zip }}" />
+						</div>
+					</div>
+					<a class="button" href="#" data-ajax-handler="shop:onEvalShippingRate"
+						data-ajax-update="#shipping_options=shopestimatedshippingoptions">Calculate</a>
+					<div id="shipping_options"></div>
+				</div>
+				<div class="three columns offset-by-three data-list align-right">
+					<p>
+						<strong>Cart total:</strong> <i>subtotal</i>
+					</p>
+					<p>
+						<strong>Shipping:</strong> <i>ShippingQuote</i>
+					</p>
+					<p class="subtotal">
+						<strong>Estimated total:</strong> <i>total</i>
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="buttons-block">
+					<div class="six columns">
+						<a class="secondary button" href="{{ site_url('shop') }}">Continue shopping</a>
+					</div>
+					<div class="six columns">
+						<div class="right">
+							<input type="text" id="coupon" name="coupon" value="{{ coupon_code }}"
+								placeholder="Coupon code" /> <a class="secondary button" href="#"
+								data-ajax-handler="shop:cart"
+								data-ajax-update="#cart-content=shop-cart-content, #mini-cart=shop-minicart">Update cart</a>
+							<a class="button" href="{{ site_url('/checkout') }}">Checkout</a> 
+							
+						<!-- 	<a class="button"
+								href="{{ site_url('/checkout-start') }}">Checkout</a> -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="six columns">
+					<a class="secondary button" href="{{ site_url('shop') }}">Your cart is empty! Continue
+						shopping.</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

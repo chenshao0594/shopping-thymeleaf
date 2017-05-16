@@ -1,0 +1,85 @@
+<header>
+	<div class="row">
+		<div class="six columns login">
+			<a th:href="@{/customer/register}">Login or Register</a>
+		</div>
+		<div class="six columns">
+			<div class="row">
+				<div class="seven columns">
+					<form class="search" method="get" action="//zest.lemonstand.com/search">
+						<input type="text" name="query" value="" placeholder="Search store…">
+					</form>
+				</div>
+				<div class="five columns" id="mini-cart">
+					<a class="button right" th:href="@{/cart}">
+					 <span>0</span> Items <span>$0.00</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="four columns logo-container">
+			<a href="/"><img src="/shop/img/zest-logo.png" alt="" class="logo"></a>
+		</div>
+		<div class="eight columns header-menu-bar">
+			<ul class="nav-bar">
+				<li class="{{ active_page == 'home' ? 'active' : null }}"><a href='/'>Home</a></li>
+				<li
+					class="{% if categories.count %}has-flyout{% endif %} {{ active_page == 'shop' ? 'active' : null }} right-border-li">
+					<a href="{{ site_url('shop') }}">Shop</a> <a class="flyout-toggle"
+					href="{{ site_url('shop') }}"><span> </span></a>
+					<ul class="flyout" style="display: none;">
+						<li><a href="/category/{{ category.fullUrlName }}">{{ category.name }}</a></li>
+					</ul>
+				</li>
+				<li class="menu-item-seperator"></li>
+				<li
+					class="has-flyout {{ active_page == 'profile' or 
+                                   active_page == 'orders' or 
+                                   active_page == 'subscriptions' ? 'active' : null }} right-border-li">
+					<a href="{{ site_url('profile') }}">Profile</a> <a class="flyout-toggle"
+					href="{{ site_url('profile') }}"><span> </span></a>
+					<ul class="flyout" style="display: none;">
+						<li><a href="/orders">My Orders</a></li>
+						<li><a href="/subscriptions">My Subscriptions</a></li>
+					</ul>
+				</li>
+				<li class="menu-item-seperator"></li>
+			</ul>
+		</div>
+		<div class="header-menu-bar-mobile">
+			<div class="icon">
+				<a href="javascript:void(0)">&#9776;</a>
+			</div>
+			<div class="header-menu-bar-mobile-dropdown">
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="{{ site_url('shop') }}">Shop</a></li>
+					<li class="mobile-subnav">
+						<ul>
+							<li><a href="/category/{{ category.fullUrlName }}">{{ category.name }}</a></li>
+						</ul>
+					</li>
+					<li><a href="{{ site_url('orders') }}">My Orders</a></li>
+					<li><a href="{{ site_url('profile') }}">My Profile</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row secondhead">
+		<div class="twelve columns omega">
+			<div id="breadcrumbs-area" class="product left">
+				<h2>breadcrumbs</h2>
+			</div>
+			<div class="right">
+				<ul class="mybreadcrumbs">
+					<li><a href="/">Home</a></li>
+					<li><a href="/shop">Shop</a></li>
+					<li><a href="/category/shoes">Shoes</a></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</header>

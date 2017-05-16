@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.codahale.metrics.annotation.Timed;
 import com.smart.shop.common.ShopControllerConstants;
 import com.smart.shop.customer.CustomerModel;
 import com.smart.shopping.common.service.MessageService;
@@ -47,12 +48,14 @@ public class CustomerRegistrationController {
 	@Inject
 	private MailService emailService;
 
+	@Timed
 	@GetMapping(value = "/register")
 	public ModelAndView displayRegistration(ModelAndView model) throws Exception {
 		model.setViewName("shop/register");
 		return model;
 	}
 
+	@Timed
 	@PostMapping(value = "/register")
 	public String registerCustomer(@Valid CustomerModel customer, BindingResult bindingResult, Model model)
 			throws Exception {
