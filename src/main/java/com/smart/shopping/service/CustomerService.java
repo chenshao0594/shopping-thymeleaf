@@ -7,4 +7,6 @@ import com.smart.shopping.domain.Customer;
  */
 public interface CustomerService extends AbstractDomainService<Customer, Long> {
 
+	Customer findCustomerByEmailAddress(String emailAddress);
+
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.smart.shopping.domain.Customer;
+import com.smart.shopping.domain.QCustomer;
 import com.smart.shopping.repository.CustomerRepository;
 import com.smart.shopping.repository.search.CustomerSearchRepository;
 import com.smart.shopping.service.CustomerService;
@@ -26,6 +27,13 @@ public class CustomerServiceImpl extends AbstractDomainServiceImpl<Customer, Lon
 		super(customerRepository, customerSearchRepository);
 		this.customerRepository = customerRepository;
 		this.customerSearchRepository = customerSearchRepository;
+	}
+
+	@Override
+	public Customer findCustomerByEmailAddress(String emailAddress) {
+		QCustomer qCustomer = QCustomer.customer;
+		Customer result = this.customerRepository.findOne(qCustomer.emailAddress.eq(emailAddress));
+		return result;
 	}
 
 }

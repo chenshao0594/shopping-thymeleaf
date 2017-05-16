@@ -4,27 +4,26 @@ import java.util.Date;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.smart.shopping.config.AppConstants;
+
 @Controller
 @ControllerAdvice
-public class GeneralController {
-	@RequestMapping("/")
+public class AdminGeneralController {
+	@GetMapping("/" + AppConstants.ADMIN_PREFIX)
 	public String index() {
 		return "welcome";
 	}
 
-	@RequestMapping("/router")
+	@GetMapping(AppConstants.ADMIN_PREFIX + "/router")
 	public String accessDeniedRouter(@RequestParam("q") String resource) {
-		// log.debug("In accessDeniedRouter resource = " + resource);
-
 		return "redirect:/" + resource;
 	}
 
-	@RequestMapping("/unauthorized")
+	@GetMapping(AppConstants.ADMIN_PREFIX + "/unauthorized")
 	public ModelAndView accessDenied() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("timestamp", new Date());
@@ -32,7 +31,7 @@ public class GeneralController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/oups", method = RequestMethod.GET)
+	@GetMapping(value = "/oups")
 	public String triggerException() {
 		throw new RuntimeException("Expected: controller used to showcase what happens when an exception is thrown");
 	}

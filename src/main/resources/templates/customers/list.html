@@ -27,7 +27,7 @@
 				<tbody>
 					<tr th:each="row : ${page}">
 						<th scope="row" th:text="${row.id}">1</th>
-						<td th:text="${row.lastName} ${row.firstName}">DisplayName</td>
+						<td th:text="${row.lastName} +' '+ ${row.firstName}">DisplayName</td>
 						<td th:text="${row.gender}">Gender</td>
 						<td th:text="${row.emailAddress}">Email</td>
 						<td th:text="${row.company}">Company</td>

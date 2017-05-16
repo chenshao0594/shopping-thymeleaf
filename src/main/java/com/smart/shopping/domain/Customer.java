@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -78,6 +79,10 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	@ManyToOne
 	private MerchantStore merchantStore;
+
+	@ManyToOne
+	@JoinColumn(name = "authority_name", updatable = false)
+	private Authority authority;
 
 	@Valid
 	@Embedded
@@ -270,6 +275,14 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Authority getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Authority authority) {
+		this.authority = authority;
 	}
 
 }

@@ -18,7 +18,7 @@ import com.smart.shopping.exception.BusinessException;
 import com.smart.shopping.service.ProductService;
 
 @Controller("ShopHomeController")
-@RequestMapping("/shop")
+@RequestMapping
 public class HomeController {
 	private final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 

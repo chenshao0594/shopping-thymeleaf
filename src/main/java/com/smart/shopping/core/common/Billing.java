@@ -38,11 +38,11 @@ public class Billing {
 	private String state;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Country.class)
-	@JoinColumn(name = "BILLING_COUNTRY_ID", nullable = false)
+	@JoinColumn(name = "BILLING_COUNTRY_ID")
 	private Country country;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Zone.class)
-	@JoinColumn(name = "BILLING_ZONE_ID", nullable = true)
+	@JoinColumn(name = "BILLING_ZONE_ID")
 	private Zone zone;
 
 	public String getCompany() {

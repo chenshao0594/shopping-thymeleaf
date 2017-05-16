@@ -30,7 +30,6 @@ public class CustomerModel implements Serializable {
 
 	private String checkPassword;
 
-	@NotEmpty(message = "{NotEmpty.customer.userName}")
 	private String userName;
 
 	public String getEmailAddress() {

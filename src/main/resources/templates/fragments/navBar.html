@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/"> <i class="fa fa-home fa-fw"></i>&nbsp; Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="..admin/" th:href="@{/{admin}(admin=${admin_url})}"> <i class="fa fa-home fa-fw"></i>&nbsp; Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../admin/categories/list.html" th:href="@{/{admin}/categories(admin=${admin_url})}">Category</a>
@@ -33,9 +33,13 @@
       <li class="nav-item">
         <a class="nav-link" href="../attachment/list.html" th:href="@{/{admin}/attachments(admin=${admin_url})}">Images</a>
       </li>
-      <li class="nav-item push-right">
-        <a class="nav-link" href="#" th:href="@{/register}">Register</a>
+      
+       <li class="nav-item push-right">
+        <a class="nav-link" href="#" th:href="@{/customer/register}">Customer Register</a>
       </li>
+     <!--  <li class="nav-item push-right">
+        <a class="nav-link" href="#" th:href="@{/register}">Register</a>
+      </li> -->
       <!-- <li class="nav-item">
         <a class="nav-link" href="../productOptions/list.html" th:href="@{/productOptions}">Product Option</a>
       </li> -->
