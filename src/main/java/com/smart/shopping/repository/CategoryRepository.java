@@ -10,4 +10,7 @@ import com.smart.shopping.core.catalog.Category;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 	@Query("select distinct c from Category c order by c.lineage, c.sortOrder asc")
 	public List<Category> findByStore();
+	
 }
+
+

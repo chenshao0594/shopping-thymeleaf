@@ -23,7 +23,7 @@ import com.smart.shopping.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterConstants;
 
-@ComponentScan
+@ComponentScan(basePackages = { "com.smart.shopping", "com.smart.shop" })
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ LiquibaseProperties.class, ApplicationProperties.class })
 public class ShoppingApplication {

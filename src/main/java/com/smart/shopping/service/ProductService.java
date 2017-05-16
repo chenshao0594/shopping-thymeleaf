@@ -1,6 +1,7 @@
 package com.smart.shopping.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.smart.shopping.core.catalog.Product;
 
@@ -10,4 +11,7 @@ import com.smart.shopping.core.catalog.Product;
 public interface ProductService extends AbstractDomainService<Product, Long> {
 
 	void generateAdditionalSKUsByBatch(Long productId, List<Long> optionIds);
+
+	List<Map<String, Long>> countProductsByCategories();
+
 }

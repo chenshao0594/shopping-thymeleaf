@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -107,7 +108,6 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 			permutatedSKU.setSalePrice(product.getSalePrice());
 			permutatedSKU.setDescription(product.getDescription());
 			permutatedSKU.setProduct(product);
-			LOGGER.info("permutation list : ", permutation);
 			List<String> skuAttributes = new LinkedList<String>();
 			for (ProductOptionValue value : permutation) {
 				skuAttributes.add(value.getCode());
@@ -164,6 +164,12 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 			permutation.add(option);
 			result.addAll(generatePermutations(currentTypeIndex + 1, permutation, options));
 		}
+		return result;
+	}
+
+	@Override
+	public List<Map<String, Long>> countProductsByCategories() {
+		List<Map<String, Long>> result = this.productRepository.countProductsByCategories();
 		return result;
 	}
 }
