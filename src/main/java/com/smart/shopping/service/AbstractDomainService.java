@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.smart.shopping.domain.common.BusinessDomain;
+import com.smart.shopping.domain.common.BusinessDomainInterface;
 
-public interface AbstractDomainService<E extends BusinessDomain, K extends Serializable & Comparable<K>> {
+public interface AbstractDomainService<E extends BusinessDomainInterface, K extends Serializable & Comparable<K>> {
 
 	E save(E entity);
 
