@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
+import com.google.gson.Gson;
+import com.smart.shop.model.ProductOptionDTO;
+import com.smart.shop.model.ProductOptionPricing;
 import com.smart.shopping.attachment.common.AttachmentEnum;
 import com.smart.shopping.core.catalog.Product;
 import com.smart.shopping.domain.Attachment;
@@ -34,8 +37,15 @@ public class ProductController {
 	public ModelAndView detail(@PathVariable("id") Long id, ModelAndView model) throws Exception {
 		Product product = this.productService.findOne(id);
 		List<Attachment> images = this.attachmentService.findAllByBOInfo("product", id, AttachmentEnum.IMAGE);
+		List<ProductOptionPricing> skuPricing = this.productService.buildSKUsPricing(product);
+		List<ProductOptionDTO> allProductOptions = this.productService.buildProductOptionsDTO(product);
+		Gson gson = new Gson();
+		String skuPricingJson = gson.toJson(skuPricing);
+		String allProductOptionsJson = gson.toJson(allProductOptions);
 		model.addObject("product", product);
 		model.addObject("images", images);
+		model.addObject("skuPricing", skuPricingJson);
+		model.addObject("allProductOptions", allProductOptionsJson);
 		LOGGER.info("product images info {}", images);
 		model.setViewName("shop/product/detail");
 		return model;

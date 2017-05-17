@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
 	layout:decorate="~{shop/layouts/layout}">
-	<head>
-	<link rel="stylesheet" type="text/css" href="shop/css/foundation.min.css"
+<head>
+<link rel="stylesheet" type="text/css" href="shop/css/foundation.min.css"
 	th:href="@{/shop/css/productOption.css}">
-	</head>
+<script src="shop/js/productOption.js" th:src="@{/shop/js/productOption.js}"></script>
+<script src="shop/js/globalOnReady.js" th:src="@{/shop/js/globalOnReady.js}"></script>
+</head>
 <body>
 	<section layout:fragment="content">
 		<div class="six columns">
@@ -13,48 +15,30 @@
 					<img src="/shop/demo/1.jpeg" />
 				</div>
 				<ul class="row">
-					<li class="four columns mobile-two" th:each="image : ${images}">
-					<a href="#"><img th:src="@{\images\{productId}(productId=${image.id})}" /></a>
-				</li>
+					<li class="four columns mobile-two" th:each="image : ${images}"><a href="#"><img
+							th:src="@{\images\{productId}(productId=${image.id})}" style="width: 82px; height: 82px;" /></a>
+					</li>
 				</ul>
-				<div class="social social-links">
-					<div id="sharrre" data-title="sharrre">
-						<div class="facebook"></div>
-						<div class="twitter"></div>
-						<div class="pinterest"></div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<div class="six columns">
 			<div class="short-description {{ on_sale ? 'sale' : null }}">
 				<h2 class="product-title" th:text="${{product.name}}"></h2>
-				<div class="product-rating-container">
-					<!-- product ratings -->
-					<p style="display: inline;">
-						<span style="margin-right: -4px"> &starf; </span> &star;&star;&star;&star;&star;
-					</p>
-					<!-- View Review -->
-					<!-- <a id="view-review" href="#">View Review(s)</a> <input class="modal-state" id="modal-2"
-						type="checkbox" style="display: none;">&nbsp;&nbsp;|&nbsp;&nbsp;
-					 --><!-- Write Review -->
-					<a id="write-review" href="#">Write Review</a> <input class="modal-state" id="modal-1"
-						type="checkbox" style="display: none;"> <a id="write-review" href="#">Write Review</a>
-					<input class="modal-state" id="modal-1" type="checkbox" style="display: none;">
-				</div>
+				<br />
 				<div class="price">
-					<span> <i> <span class="oldprice" th:text="${{product.retailPrice}}"></span>
+					<span> <i> <span id="price" th:text="${{product.retailPrice}}"></span>
 					</i>
 					</span>
 				</div>
 				<div>
 					<h3>Description</h3>
-					<span th:text="${{ product.description}}"></span>
+					<span th:text="${{ product.briefDescription}}"></span>
 				</div>
 				<h3>Product Options</h3>
 				<div class="clearfix">
 					<div class="option">
-					<div th:include="shop/product/partials/productOptions" th:remove="tag">REPLACE BEFORE COMMITTING</div>
+						<div th:include="shop/product/partials/productOptions" th:remove="tag">REPLACE BEFORE
+							COMMITTING</div>
 						<!-- <label class="title" for="{{ 'option-'~index }}">{{ option.name }}</label> <select
 							id="{{ 'option-'~index }}" name="options[{{ option.id }}]" class="product-option"
 							data-ajax-handler="shop:product" data-ajax-update="#product-page=shop-product">
@@ -69,13 +53,22 @@
 						<input class="quantity-input" type="text" value='1' name="quantity" />
 					</div>
 					<div class="four mobile-four columns left">
-						<input type="hidden" name="productId" value="{{ product.id }}" /> <a class="button" href="#"
-							data-ajax-handler="shop:onAddToCart"
-							data-ajax-update="#mini-cart=shop-minicart, #product-page=shop-product">Add to Cart</a>
+						<input type="hidden" name="productId" value="{{ product.id }}" /> <a class="button" href="#">Add
+							to Cart</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 </body>
+<section layout:fragment="footer-script">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/* $(".product-option-value-class").click(function(){
+			    alert("click work ");
+			  }); */
+	
+		});
+	</script>
+</section>
 </html>

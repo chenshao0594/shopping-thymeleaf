@@ -1,4 +1,4 @@
-package com.smart.shop.dto;
+package com.smart.shop.model;
 
 public class CategoryCountInfo {
 	private String code;

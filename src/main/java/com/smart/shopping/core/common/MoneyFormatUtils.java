@@ -7,6 +7,6 @@ public class MoneyFormatUtils {
 		if (price == null) {
 			return "Not Available";
 		}
-		return "$ " + price.toString();
+		return "$" + price.toString();
 	}
 }

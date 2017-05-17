@@ -1,20 +1,23 @@
 <div class="product-options hidden" th:fragment="productOptions">
-    <div id="product-option-data" hidden="hidden" th:attr="data-product-option-pricing=${skuPricing}, data-product-options=${allProductOptions}"></div>
+	<div id="product-option-data" hidden="hidden"
+		th:attr="data-product-option-pricing=${skuPricing}, data-product-options=${allProductOptions}"></div>
 	<ul>
 		<li th:each="productOption : ${product.productOptions}" th:object="${productOption}"
 			class="product-option-group cf" th:classappend="*{type == 'COLOR'}? 'colors'"><label
 			th:utext="*{code}"></label>
 			<ul class="cf" th:switch="*{type}">
-				<li th:case="TEXT"><input th:name="${'itemAttributes[' + productOption.code + ']'}"
+				<li th:case="TEXT" shop:product_option_value="${optionValue}"><input th:name="${'itemAttributes[' + productOption.code + ']'}"
 					value="" th:type="*{type}" th:required="*{required}" maxlength="255" /></li>
+					
 				<li th:case="'SELECT'"><select
 					th:name="${'itemAttributes[' + productOption.attributeName + ']'}">
 						<option th:each="optionValue : *{allowedValues}" th:object="${optionValue}"
 							th:utext="*{attributeValue}"></option>
 				</select></li>
+				
 				<th:block th:case="*" th:remove="tag">
-					<li th:each="optionValue : *{productOptionValues}" blc:product_option_value="${optionValue}"
-						th:object="${optionValue}"
+					<li th:each="optionValue : *{productOptionValues}" th:object="${optionValue}"
+						class="product-option-value-class" shop:product_option_value="${optionValue}"
 						th:classappend="${productOption.type == 'COLOR'}? ${optionValue.code}">
 						<div>
 							<a href="#" class="option-label" th:utext="*{code}"></a>

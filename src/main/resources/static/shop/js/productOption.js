@@ -55,19 +55,19 @@ var HC = (function($) {
         for (var i = 0; i < productOptionPricing.length; i++) {
             var pricing = productOptionPricing[i];
             if ($(pricing.selectedOptions).not(selectedProductOptions).length == 0 && $(selectedProductOptions).not(pricing.selectedOptions).length == 0) {
-                price = pricing.price;
+                price = pricing.retailPrice;// retailPrice
                 break;
             }
         }
         
         if (price) {
-            $price = $('#price div');
+            $price = $('#price');
             if ($price.length != 0) {
                 $price.text(price);
             } else {
                 $('.product-options.modal:visible ul').first().append('<div id="price"><div>' + price + '</div></div>');
             }
-            $('#price div').text(price);
+            $('#price').text(price);
         }
     }
     

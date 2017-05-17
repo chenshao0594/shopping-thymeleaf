@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Description;
 import org.thymeleaf.dialect.springdata.SpringDataDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+import com.smart.shopping.thymeleaf.ShopDialect;
+
 @Configuration
 public class ThymeleafConfiguration {
 
@@ -17,7 +19,7 @@ public class ThymeleafConfiguration {
 
 	@Bean
 	@Description("Thymeleaf template")
-	public ClassLoaderTemplateResolver TemplateResolver() {
+	public ClassLoaderTemplateResolver templateResolver() {
 		ClassLoaderTemplateResolver emailTemplateResolver = new ClassLoaderTemplateResolver();
 		emailTemplateResolver.setPrefix("templates/");
 		emailTemplateResolver.setSuffix(".html");
@@ -31,6 +33,11 @@ public class ThymeleafConfiguration {
 	@Bean
 	public SpringDataDialect springDataDialect() {
 		return new SpringDataDialect();
+	}
+
+	@Bean
+	public ShopDialect shopDialect() {
+		return new ShopDialect();
 	}
 
 	/*

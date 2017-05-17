@@ -59,6 +59,9 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@Column(name = "description")
 	private String description;
 
+	@Column(name = "brief_description")
+	private String briefDescription;
+
 	@Column(name = "metatag_title")
 	private String metatagTitle;
 
@@ -388,6 +391,14 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getBriefDescription() {
+		return briefDescription;
+	}
+
+	public void setBriefDescription(String briefDescription) {
+		this.briefDescription = briefDescription;
 	}
 
 }

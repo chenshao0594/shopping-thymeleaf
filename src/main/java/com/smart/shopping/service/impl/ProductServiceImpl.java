@@ -2,6 +2,7 @@ package com.smart.shopping.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.smart.shop.dto.ProductOptionPricing;
+import com.smart.shop.model.ProductOptionDTO;
+import com.smart.shop.model.ProductOptionPricing;
 import com.smart.shopping.core.catalog.Product;
 import com.smart.shopping.core.catalog.ProductOption;
 import com.smart.shopping.core.catalog.ProductOptionValue;
@@ -189,8 +191,27 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 			dto.setRetailPrice(MoneyFormatUtils.formatPrice(sku.getRetailPrice()));
 			dto.setSalePrice(MoneyFormatUtils.formatPrice(sku.getSalePrice()));
 			dto.setSelectedOptions(productOptionValueIds);
+			dto.setSkuId(sku.getId());
 			skuPricing.add(dto);
 		}
 		return skuPricing;
+	}
+
+	@Override
+	public List<ProductOptionDTO> buildProductOptionsDTO(Product product) {
+		List<ProductOptionDTO> dtos = new ArrayList<>();
+		for (ProductOption option : product.getProductOptions()) {
+			ProductOptionDTO dto = new ProductOptionDTO();
+			dto.setId(option.getId());
+			dto.setType(option.getType().name());
+			Map<Long, String> values = new HashMap<>();
+			for (ProductOptionValue value : option.getProductOptionValues()) {
+				values.put(value.getId(), value.getCode());
+			}
+			dto.setValues(values);
+			dtos.add(dto);
+		}
+
+		return dtos;
 	}
 }

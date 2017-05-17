@@ -126,6 +126,9 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			model.addAttribute("item", entity);
 			return this.getSectionKey() + "/dialog";
 		} else {
+
+			E e = this.service.findOne(id);
+
 			this.service.save(entity);
 			model.addAttribute("item", entity);
 			redirect.addFlashAttribute("statusMessage", "Update Successfully !");

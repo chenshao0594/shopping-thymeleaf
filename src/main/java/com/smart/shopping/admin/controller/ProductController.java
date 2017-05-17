@@ -125,7 +125,6 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		for (String each : optionContent.split("@")) {
 			optionIds.add(Long.parseLong(each));
 		}
-		System.out.println("option ids :" + optionIds);
 		log.debug("create generateSkusByBatch----------------{}", id);
 		this.productService.generateAdditionalSKUsByBatch(id, optionIds);
 
