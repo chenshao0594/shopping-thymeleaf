@@ -1,7 +1,3 @@
-//
-//
-// Zurb Foundation stuff
-//
 ;(function ($, window, undefined) {
   'use strict';
 
@@ -96,9 +92,6 @@
 
 })(jQuery, this);
 
-//
-// Theme scripts
-//
 
 (function ($) {
   //

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
 	layout:decorate="~{shop/layouts/layout}">
+	<head>
+	<link rel="stylesheet" type="text/css" href="shop/css/foundation.min.css"
+	th:href="@{/shop/css/productOption.css}">
+	</head>
 <body>
 	<section layout:fragment="content">
 		<div class="six columns">
@@ -50,12 +54,13 @@
 				<h3>Product Options</h3>
 				<div class="clearfix">
 					<div class="option">
-						<label class="title" for="{{ 'option-'~index }}">{{ option.name }}</label> <select
+					<div th:include="shop/product/partials/productOptions" th:remove="tag">REPLACE BEFORE COMMITTING</div>
+						<!-- <label class="title" for="{{ 'option-'~index }}">{{ option.name }}</label> <select
 							id="{{ 'option-'~index }}" name="options[{{ option.id }}]" class="product-option"
 							data-ajax-handler="shop:product" data-ajax-update="#product-page=shop-product">
 							<option value='{{ key }}'{{ option_state(postedOptions[option.id], key) }}>{{ value
 								}}</option>
-						</select>
+						</select> -->
 					</div>
 				</div>
 				<label class="title" for="customDropdown">Quantity</label>

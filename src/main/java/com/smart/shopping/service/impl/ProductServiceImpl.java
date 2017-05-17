@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.smart.shop.dto.ProductOptionPricing;
 import com.smart.shopping.core.catalog.Product;
 import com.smart.shopping.core.catalog.ProductOption;
 import com.smart.shopping.core.catalog.ProductOptionValue;
@@ -24,6 +25,7 @@ import com.smart.shopping.core.catalog.SKU;
 import com.smart.shopping.core.catalog.service.CategoryService;
 import com.smart.shopping.core.catalog.service.ProductOptionService;
 import com.smart.shopping.core.catalog.service.ProductOptionValueService;
+import com.smart.shopping.core.common.MoneyFormatUtils;
 import com.smart.shopping.repository.ProductRepository;
 import com.smart.shopping.repository.search.ProductSearchRepository;
 import com.smart.shopping.service.ProductService;
@@ -171,5 +173,24 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 	public List<Map<String, Long>> countProductsByCategories() {
 		List<Map<String, Long>> result = this.productRepository.countProductsByCategories();
 		return result;
+	}
+
+	@Override
+	public List<ProductOptionPricing> buildSKUsPricing(Product product) {
+		Set<SKU> skus = product.getAdditionalSKUs();
+		List<ProductOptionPricing> skuPricing = new ArrayList<>();
+		for (SKU sku : skus) {
+			Set<Long> productOptionValueIds = new HashSet<>();
+			Set<ProductOptionValue> productOptionValues = sku.getProductOptionValues();
+			for (ProductOptionValue productOptionValue : productOptionValues) {
+				productOptionValueIds.add(productOptionValue.getId());
+			}
+			ProductOptionPricing dto = new ProductOptionPricing();
+			dto.setRetailPrice(MoneyFormatUtils.formatPrice(sku.getRetailPrice()));
+			dto.setSalePrice(MoneyFormatUtils.formatPrice(sku.getSalePrice()));
+			dto.setSelectedOptions(productOptionValueIds);
+			skuPricing.add(dto);
+		}
+		return skuPricing;
 	}
 }
