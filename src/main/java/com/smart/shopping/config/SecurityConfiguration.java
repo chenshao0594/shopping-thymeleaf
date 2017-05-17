@@ -99,7 +99,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
-				.antMatchers("/" + AppConstants.ADMIN_PREFIX + "/**").hasAuthority(AuthoritiesConstants.ANONYMOUS)
+				.antMatchers(AppConstants.ADMIN_PREFIX + "/**").hasAuthority(AuthoritiesConstants.ANONYMOUS)
 
 				.and().formLogin().loginPage("/login").permitAll().and().logout().logoutUrl("/logout").permitAll().and()
 				.headers().frameOptions().disable().and().exceptionHandling().accessDeniedPage("/access?error").and()

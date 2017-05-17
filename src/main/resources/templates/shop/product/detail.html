@@ -6,12 +6,12 @@
 		<div class="six columns">
 			<div class="item-images">
 				<div class="big-image">
-					<img
-						src="/shop/demo/1.jpeg" />
+					<img src="/shop/demo/1.jpeg" />
 				</div>
 				<ul class="row">
-					<li class="four columns mobile-two"><a href="{{ image.thumbnail(746, 'auto') }}"><img
-							src="{{ image.thumbnail(367, 367) }}" /></a></li>
+					<li class="four columns mobile-two" th:each="image : ${images}">
+					<a href="#"><img th:src="@{\images\{productId}(productId=${image.id})}" /></a>
+				</li>
 				</ul>
 				<div class="social social-links">
 					<div id="sharrre" data-title="sharrre">

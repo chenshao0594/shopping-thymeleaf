@@ -12,7 +12,7 @@ import com.smart.shopping.core.catalog.service.PaymentConfigurationService;
 import com.smart.shopping.domain.PaymentConfiguration;
 
 @Controller
-@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + PaymentConfigurationController.SECTION_KEY)
+@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + PaymentConfigurationController.SECTION_KEY)
 public class PaymentConfigurationController extends AbstractDomainController<PaymentConfiguration, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);

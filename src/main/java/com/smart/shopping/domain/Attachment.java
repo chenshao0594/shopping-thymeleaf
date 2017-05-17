@@ -1,11 +1,14 @@
 package com.smart.shopping.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +18,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -42,7 +46,9 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 
 	@NotNull
 	@Lob
+	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "content", nullable = false, updatable = false)
+	@Type(type = "org.hibernate.type.MaterializedBlobType")
 	private byte[] content;
 
 	@Column(name = "content_type", nullable = false, updatable = false)
@@ -166,6 +172,13 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 
 	public void setAttachmentType(AttachmentEnum attachmentType) {
 		this.attachmentType = attachmentType;
+	}
+
+	@Override
+	public String toString() {
+		return "Attachment [id=" + id + ", name=" + name + ", content=" + Arrays.toString(content) + ", contentType="
+				+ contentType + ", size=" + size + ", boName=" + boName + ", boId=" + boId + ", attachmentType="
+				+ attachmentType + "]";
 	}
 
 }

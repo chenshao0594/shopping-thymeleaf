@@ -3,7 +3,7 @@
 		<div class="item">
 			<div>
 				<a th:href="@{/product/{productId}(productId=${{item.id}})}">
-				<img src="/shop/demo/1.jpeg" width="365" height="365" /></a>
+				<img th:src="@{/images/product/{productId}/thumbnail(productId=${{item.id}})}" width="365" height="365" /></a>
 			</div>
 			<div class="short-description">
 				<h3>

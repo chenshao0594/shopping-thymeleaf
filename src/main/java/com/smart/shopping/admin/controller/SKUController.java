@@ -13,7 +13,7 @@ import com.smart.shopping.service.SKUService;
  * REST controller for managing ProductOption.
  */
 @Controller
-@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + SKUController.SECTION_KEY)
+@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + SKUController.SECTION_KEY)
 public class SKUController extends AbstractDomainController<SKU, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(SKUController.class);

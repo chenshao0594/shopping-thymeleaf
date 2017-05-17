@@ -13,7 +13,7 @@ import com.smart.shopping.core.catalog.Category;
 import com.smart.shopping.core.catalog.service.CategoryService;
 
 @Controller
-@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + CategoryController.SECTION_KEY)
+@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + CategoryController.SECTION_KEY)
 public class CategoryController extends AbstractDomainController<Category, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(CategoryController.class);

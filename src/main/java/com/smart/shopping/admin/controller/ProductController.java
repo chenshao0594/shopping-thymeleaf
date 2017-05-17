@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
+import com.smart.shopping.attachment.common.AttachmentEnum;
 import com.smart.shopping.attachment.common.PreviewConfig;
 import com.smart.shopping.config.AppConstants;
 import com.smart.shopping.core.catalog.Product;
@@ -35,7 +36,7 @@ import com.smart.shopping.service.ProductService;
  */
 @Transactional
 @Controller("AdminProductController")
-@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + ProductController.SECTION_KEY)
+@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + ProductController.SECTION_KEY)
 public class ProductController extends AbstractDomainController<Product, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
@@ -93,7 +94,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		}
 		this.productService.save(product);
 		model.setViewName(this.getSectionKey() + "/skus");
-		model.setViewName("redirect:/" + AppConstants.ADMIN_PREFIX + "/" + SECTION_KEY + "/" + productId + "/skus");
+		model.setViewName("redirect:" + AppConstants.ADMIN_PREFIX + "/" + SECTION_KEY + "/" + productId + "/skus");
 		return model;
 	}
 
@@ -101,13 +102,13 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 	@GetMapping("/{id}/images")
 	public String getAllImages(@PathVariable("id") Long productId, Model model) {
 		log.debug("REST request to get a page of Attachments");
-		List<Attachment> results = attachmentService.findAllByBOInfo("product", productId);
+		List<Attachment> results = attachmentService.findAllByBOInfo("product", productId, AttachmentEnum.IMAGE);
 		List<PreviewConfig> inititalPreviewConfigs = new LinkedList<PreviewConfig>();
 		for (Attachment attachment : results) {
 			PreviewConfig config = new PreviewConfig(attachment.getName());
 			config.addKey(Long.toString(attachment.getId()));
 			config.addSize(attachment.getSize());
-			config.addUrl("/" + AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
+			config.addUrl(AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
 			inititalPreviewConfigs.add(config);
 		}
 		model.addAttribute("priviewConfig", inititalPreviewConfigs);

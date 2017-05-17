@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +22,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smart.shopping.core.enumeration.ProductOptionEnum;
 import com.smart.shopping.domain.MerchantStore;
 import com.smart.shopping.domain.common.BusinessDomain;
 
@@ -41,8 +44,9 @@ public class ProductOption extends BusinessDomain<Long, ProductOption> {
 	@Column(name = "read_only")
 	private Boolean readOnly = true;
 
-	@Column(name = "product_option_type")
-	private String productOptionType;
+	@Column(name = "type")
+	@Enumerated(value = EnumType.STRING)
+	private ProductOptionEnum type = ProductOptionEnum.TEXT;
 
 	@NotNull
 	@Column(name = "code", nullable = false)
@@ -84,17 +88,17 @@ public class ProductOption extends BusinessDomain<Long, ProductOption> {
 		this.readOnly = readOnly;
 	}
 
-	public String getProductOptionType() {
-		return productOptionType;
+	public ProductOptionEnum getType() {
+		return type;
 	}
 
-	public ProductOption productOptionType(String productOptionType) {
-		this.productOptionType = productOptionType;
+	public ProductOption type(ProductOptionEnum productOptionType) {
+		this.type = productOptionType;
 		return this;
 	}
 
-	public void setProductOptionType(String productOptionType) {
-		this.productOptionType = productOptionType;
+	public void setType(ProductOptionEnum productOptionType) {
+		this.type = productOptionType;
 	}
 
 	public String getCode() {
@@ -153,9 +157,9 @@ public class ProductOption extends BusinessDomain<Long, ProductOption> {
 
 	@Override
 	public String toString() {
-		return "ProductOption [id=" + id + ", readOnly=" + readOnly + ", productOptionType=" + productOptionType
-				+ ", code=" + code + ", sortOrder=" + sortOrder + ", description=" + description
-				+ ", productOptionValues=" + productOptionValues + ", merchantStore=" + merchantStore + "]";
+		return "ProductOption [id=" + id + ", readOnly=" + readOnly + ", productOptionType=" + type + ", code=" + code
+				+ ", sortOrder=" + sortOrder + ", description=" + description + ", productOptionValues="
+				+ productOptionValues + ", merchantStore=" + merchantStore + "]";
 	}
 
 }

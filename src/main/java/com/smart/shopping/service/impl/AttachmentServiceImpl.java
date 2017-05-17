@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.smart.shopping.attachment.common.AttachmentEnum;
 import com.smart.shopping.domain.Attachment;
 import com.smart.shopping.domain.QAttachment;
 import com.smart.shopping.repository.AttachmentRepository;
@@ -122,12 +124,30 @@ public class AttachmentServiceImpl implements AttachmentService {
 	}
 
 	@Override
-	public List<Attachment> findAllByBOInfo(String boName, Long boId) {
+	public List<Attachment> findAllByBOInfo(String boName, Long boId, AttachmentEnum attachmentType) {
 		QAttachment qAttachment = QAttachment.attachment;
 		BooleanExpression boname = qAttachment.boName.eq(boName);
 		BooleanExpression boid = qAttachment.boId.eq(boId);
-		List<Attachment> results = (List<Attachment>) this.attachmentRepository.findAll(boid.and(boname));
+
+		Predicate predicate = null;
+		if (attachmentType != null) {
+			predicate = boid.and(boname).and(qAttachment.attachmentType.eq(attachmentType));
+		} else {
+			predicate = boid.and(boname);
+		}
+
+		List<Attachment> results = (List<Attachment>) this.attachmentRepository.findAll(predicate);
 		return results;
+	}
+
+	@Override
+	public Attachment findThumbnail(String boName, Long boId) {
+		QAttachment qAttachment = QAttachment.attachment;
+		BooleanExpression boname = qAttachment.boName.eq(boName);
+		BooleanExpression boid = qAttachment.boId.eq(boId);
+		BooleanExpression type = qAttachment.attachmentType.eq(AttachmentEnum.THUMBNAIL);
+		Attachment result = this.attachmentRepository.findOne(boid.and(boname).and(type));
+		return result;
 	}
 
 }

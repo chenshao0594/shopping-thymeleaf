@@ -21,7 +21,7 @@ import com.smart.shopping.service.CustomerService;
  * REST controller for managing Customer.
  */
 @Controller
-@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + CustomerController.SECTION_KEY)
+@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + CustomerController.SECTION_KEY)
 public class CustomerController extends AbstractDomainController<Customer, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(CustomerController.class);

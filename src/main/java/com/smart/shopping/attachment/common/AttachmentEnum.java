@@ -1,7 +1,7 @@
 package com.smart.shopping.attachment.common;
 
 public enum AttachmentEnum {
-	AVATAR("avatar"), IMAGE("image"), ATTACHMENT("attachment");
+	AVATAR("avatar"), IMAGE("image"), ATTACHMENT("attachment"), THUMBNAIL("thumbnail");
 	private String value;
 
 	AttachmentEnum(String value) {

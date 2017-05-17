@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -24,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @ControllerAdvice
 public class ExceptionTranslator {
+
+	private final Logger LOGGER = LoggerFactory.getLogger(ExceptionTranslator.class);
 
 	@ExceptionHandler(ConcurrencyFailureException.class)
 	@ResponseStatus(HttpStatus.CONFLICT)
@@ -81,6 +85,7 @@ public class ExceptionTranslator {
 
 	@ExceptionHandler(Exception.class)
 	public ModelAndView handleException(HttpServletRequest req, Exception e) {
+		LOGGER.error("error {}", e);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("exception", e);
 		mav.addObject("timestamp", new Date());

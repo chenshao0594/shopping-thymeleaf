@@ -12,7 +12,7 @@ import com.smart.shopping.domain.ShippingConfiguration;
 import com.smart.shopping.service.ShippingConfigurationService;
 
 @Controller
-@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + ShippingConfigurationController.SECTION_KEY)
+@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + ShippingConfigurationController.SECTION_KEY)
 public class ShippingConfigurationController extends AbstractDomainController<ShippingConfiguration, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);

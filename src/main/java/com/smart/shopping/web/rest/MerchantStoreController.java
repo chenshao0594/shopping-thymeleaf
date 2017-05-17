@@ -14,7 +14,7 @@ import com.smart.shopping.service.MerchantStoreService;
  * REST controller for managing MerchantStore.
  */
 @Controller
-@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + MerchantStoreController.SECTION_KEY)
+@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + MerchantStoreController.SECTION_KEY)
 public class MerchantStoreController extends AbstractDomainController<MerchantStore, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(MerchantStoreController.class);

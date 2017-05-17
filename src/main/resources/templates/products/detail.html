@@ -17,7 +17,9 @@
 			<legend class="section">Basic Info</legend>
 			<div class="row justify-content-md-center">
 				<div class="col-3">
-					<img src="/images/jpeg/2.jpg" class="rounded float-left" alt="...">
+					<img
+						th:src="@{/{admin}/attachments/product/{productId}/thumbnail(admin=${admin_url}, productId=${item.id})}"
+						class="img-rounded float-left" height="150"/>
 				</div>
 				<dl class="col-md-9 row">
 					<dt class="col-md-2 text-right">Title</dt>
@@ -51,9 +53,7 @@
 			</dl>
 		</fieldset>
 		<fieldset>
-			<legend class="section">
-				SKUs Info
-			</legend>
+			<legend class="section"> SKUs Info </legend>
 			<div id="skus-block">
 				<table class="table table-striped">
 					<thead class="thead-default">

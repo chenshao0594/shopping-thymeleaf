@@ -11,7 +11,7 @@ import com.smart.shopping.core.order.SalesOrder;
 import com.smart.shopping.service.SalesOrderService;
 
 @Controller
-@RequestMapping("/" + AppConstants.ADMIN_PREFIX + "/" + SalesOrderController.SECTION_KEY)
+@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + SalesOrderController.SECTION_KEY)
 
 public class SalesOrderController extends AbstractDomainController<SalesOrder, Long> {
 

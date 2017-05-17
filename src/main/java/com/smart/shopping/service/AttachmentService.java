@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.smart.shopping.attachment.common.AttachmentEnum;
 import com.smart.shopping.domain.Attachment;
 
 /**
@@ -61,5 +62,7 @@ public interface AttachmentService {
 
 	Page<Attachment> findAllByBOInfo(String boName, Long boId, Pageable pageable);
 
-	List<Attachment> findAllByBOInfo(String boName, Long boId);
+	Attachment findThumbnail(String boName, Long boId);
+
+	List<Attachment> findAllByBOInfo(String boName, Long boId, AttachmentEnum attachmentType);
 }

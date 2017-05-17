@@ -13,7 +13,7 @@ import com.smart.shopping.config.AppConstants;
 @Controller
 @ControllerAdvice
 public class AdminGeneralController {
-	@GetMapping("/" + AppConstants.ADMIN_PREFIX)
+	@GetMapping(AppConstants.ADMIN_PREFIX)
 	public String index() {
 		return "welcome";
 	}
