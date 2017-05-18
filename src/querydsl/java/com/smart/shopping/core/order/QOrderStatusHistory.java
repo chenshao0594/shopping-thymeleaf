@@ -8,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import com.smartshop.core.order.OrderStatusHistory;
 
 
 /**
@@ -32,7 +33,7 @@ public class QOrderStatusHistory extends EntityPathBase<OrderStatusHistory> {
 
     public final QSalesOrder order;
 
-    public final EnumPath<com.smart.shopping.core.order.enumeration.OrderStatus> status = createEnum("status", com.smart.shopping.core.order.enumeration.OrderStatus.class);
+    public final EnumPath<com.smartshop.core.order.enumeration.OrderStatus> status = createEnum("status", com.smartshop.core.order.enumeration.OrderStatus.class);
 
     public QOrderStatusHistory(String variable) {
         this(OrderStatusHistory.class, forVariable(variable), INITS);

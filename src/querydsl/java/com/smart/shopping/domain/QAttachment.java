@@ -3,7 +3,7 @@ package com.smart.shopping.domain;
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
 import com.querydsl.core.types.dsl.*;
-
+import com.smartshop.domain.Attachment;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
@@ -19,7 +19,7 @@ public class QAttachment extends EntityPathBase<Attachment> {
 
     public static final QAttachment attachment = new QAttachment("attachment");
 
-    public final EnumPath<com.smart.shopping.attachment.common.AttachmentEnum> attachmentType = createEnum("attachmentType", com.smart.shopping.attachment.common.AttachmentEnum.class);
+    public final EnumPath<com.smartshop.attachment.common.AttachmentEnum> attachmentType = createEnum("attachmentType", com.smartshop.attachment.common.AttachmentEnum.class);
 
     public final NumberPath<Long> boId = createNumber("boId", Long.class);
 

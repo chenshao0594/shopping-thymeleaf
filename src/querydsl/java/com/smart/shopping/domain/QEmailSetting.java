@@ -3,7 +3,7 @@ package com.smart.shopping.domain;
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
 import com.querydsl.core.types.dsl.*;
-
+import com.smartshop.domain.EmailSetting;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
@@ -29,7 +29,7 @@ public class QEmailSetting extends EntityPathBase<EmailSetting> {
 
     public final NumberPath<Integer> port = createNumber("port", Integer.class);
 
-    public final EnumPath<com.smart.shopping.core.enumeration.SMTPSecurityEnum> smtpSecurity = createEnum("smtpSecurity", com.smart.shopping.core.enumeration.SMTPSecurityEnum.class);
+    public final EnumPath<com.smartshop.core.enumeration.SMTPSecurityEnum> smtpSecurity = createEnum("smtpSecurity", com.smartshop.core.enumeration.SMTPSecurityEnum.class);
 
     public final StringPath userName = createString("userName");
 

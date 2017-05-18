@@ -8,6 +8,8 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import com.smartshop.core.catalog.ProductOption;
+import com.smartshop.core.catalog.ProductOptionValue;
 
 
 /**

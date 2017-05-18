@@ -40,8 +40,8 @@ defaultTasks 'bootRun'
 
 eclipse {
     classpath {
-       downloadSources=true
        downloadJavadoc = true
+       downloadSources=true
     }
 }
 
@@ -229,6 +229,7 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
     compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
     compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1'
+    compile group: 'com.maxmind.geoip2', name: 'geoip2', version: '2.9.0'
     
     
     optional "org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}"

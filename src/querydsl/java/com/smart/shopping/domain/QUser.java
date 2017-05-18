@@ -8,6 +8,9 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import com.smartshop.domain.Authority;
+import com.smartshop.domain.PersistentToken;
+import com.smartshop.domain.User;
 
 
 /**

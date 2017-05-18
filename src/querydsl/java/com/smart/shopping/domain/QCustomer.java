@@ -8,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import com.smartshop.domain.Customer;
 
 
 /**
@@ -36,7 +37,7 @@ public class QCustomer extends EntityPathBase<Customer> {
 
     public final StringPath firstName = createString("firstName");
 
-    public final EnumPath<com.smart.shopping.core.enumeration.Gender> gender = createEnum("gender", com.smart.shopping.core.enumeration.Gender.class);
+    public final EnumPath<com.smartshop.core.enumeration.Gender> gender = createEnum("gender", com.smartshop.core.enumeration.Gender.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

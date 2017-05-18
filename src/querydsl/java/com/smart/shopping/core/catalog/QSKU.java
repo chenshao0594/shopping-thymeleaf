@@ -8,6 +8,8 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import com.smartshop.core.catalog.ProductOptionValue;
+import com.smartshop.core.catalog.SKU;
 
 
 /**
@@ -40,7 +42,7 @@ public class QSKU extends EntityPathBase<SKU> {
 
     public final NumberPath<java.math.BigDecimal> salePrice = createNumber("salePrice", java.math.BigDecimal.class);
 
-    public final EnumPath<com.smart.shopping.core.enumeration.StatusEnum> status = createEnum("status", com.smart.shopping.core.enumeration.StatusEnum.class);
+    public final EnumPath<com.smartshop.core.enumeration.StatusEnum> status = createEnum("status", com.smartshop.core.enumeration.StatusEnum.class);
 
     public QSKU(String variable) {
         this(SKU.class, forVariable(variable), INITS);
