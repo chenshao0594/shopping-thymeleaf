@@ -14,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.smartshop.common.utils.GeoLocationUtils;
 import com.smartshop.config.AppConstants;
 import com.smartshop.core.common.Address;
 import com.smartshop.domain.Customer;
@@ -41,20 +40,16 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 		try {
 			/** merchant store **/
 			MerchantStore store = (MerchantStore) request.getSession().getAttribute(AppConstants.MERCHANT_STORE);
-
 			String storeCode = request.getParameter(STORE_REQUEST_PARAMETER);
-
 			// remove link set from controllers for declaring active - inactive
 			// links
 			request.removeAttribute(AppConstants.LINK_CODE);
-
 			if (!StringUtils.isBlank(storeCode)) {
 				if (store != null) {
 					if (!store.getCode().equals(storeCode)) {
 						store = setMerchantStoreInSession(request, storeCode);
 					}
-				} else { // when url sm-shop/shop is being loaded for first time
-							// store is null
+				} else {
 					store = setMerchantStoreInSession(request, storeCode);
 				}
 			}
@@ -66,7 +61,7 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 			/** customer **/
 			Customer customer = (Customer) request.getSession().getAttribute(AppConstants.CUSTOMER);
 			if (customer != null) {
-				if (customer.getMerchantStore().getId().intValue() != store.getId().intValue()) {
+				if (customer.getMerchantStore().getId() != store.getId()) {
 					request.getSession().removeAttribute(AppConstants.CUSTOMER);
 				}
 				if (!customer.isAnonymous()) {
@@ -78,7 +73,6 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 			}
 
 			if (customer == null) {
-
 				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 				if (auth != null && request.isUserInRole("AUTH_CUSTOMER")) {
 					customer = customerService.findCustomerByEmailAddress(auth.getName());
@@ -86,18 +80,15 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 						request.setAttribute(AppConstants.CUSTOMER, customer);
 					}
 				}
-
 			}
-
 			AnonymousCustomer anonymousCustomer = (AnonymousCustomer) request.getSession()
 					.getAttribute(AppConstants.ANONYMOUS_CUSTOMER);
 			if (anonymousCustomer == null) {
-
 				Address address = null;
 				try {
-
-					String ipAddress = GeoLocationUtils.getClientIpAddress(request);
-					Address geoAddress = customerService.getCustomerAddress(store, ipAddress);
+					String ipAddress = "";// GeoLocationUtils.getClientIpAddress(request);
+					Address geoAddress = null;// customerService.getCustomerAddress(store,
+												// ipAddress);
 					if (geoAddress != null) {
 						address = new Address();
 						address.setCountry(geoAddress.getCountry());

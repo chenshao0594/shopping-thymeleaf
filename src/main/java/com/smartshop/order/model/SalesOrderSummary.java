@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.smartshop.core.cart.ShoppingCartItem;
+import com.smartshop.core.cart.CartItem;
 import com.smartshop.core.shipping.model.ShippingSummary;
 
 public class SalesOrderSummary implements Serializable {
@@ -15,13 +15,13 @@ public class SalesOrderSummary implements Serializable {
 	private static final long serialVersionUID = -8683318345130020683L;
 	private OrderSummaryEnum orderSummaryType = OrderSummaryEnum.ORDERTOTAL;
 	private ShippingSummary shippingSummary;
-	private List<ShoppingCartItem> products = new ArrayList<ShoppingCartItem>();
+	private List<CartItem> products = new ArrayList<CartItem>();
 
-	public void setProducts(List<ShoppingCartItem> products) {
+	public void setProducts(List<CartItem> products) {
 		this.products = products;
 	}
 
-	public List<ShoppingCartItem> getProducts() {
+	public List<CartItem> getProducts() {
 		return products;
 	}
 

@@ -27,7 +27,6 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 			ModelAndView modelAndView) throws Exception {
 		if (modelAndView != null) {
 			modelAndView.addObject("admin_url", AppConstants.ADMIN_PREFIX.substring(1));
-
 		}
 
 	}

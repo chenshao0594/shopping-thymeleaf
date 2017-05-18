@@ -66,7 +66,7 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 	@Column(name = "POSTAL_CODE", length = 15)
 	private String postalcode;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Country.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Country.class)
 	@JoinColumn(name = "COUNTRY_ID", nullable = false, updatable = true)
 	private Country country;
 
@@ -81,7 +81,7 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 	private String weightUnit = MeasureUnit.LB.name();
 
 	@Column(name = "SIZE_UNIT", length = 5)
-	private String seizeUnit = MeasureUnit.IN.name();
+	private String sizeUnit = MeasureUnit.IN.name();
 
 	// @Temporal(TemporalType.DATE)
 	// @Column(name = "IN_BUSINESS_SINCE")
@@ -198,12 +198,12 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 		this.weightUnit = weightUnit;
 	}
 
-	public String getSeizeUnit() {
-		return seizeUnit;
+	public String getSizeUnit() {
+		return sizeUnit;
 	}
 
-	public void setSeizeUnit(String seizeUnit) {
-		this.seizeUnit = seizeUnit;
+	public void setSizeUnit(String sizeUnit) {
+		this.sizeUnit = sizeUnit;
 	}
 
 	public String getInvoiceTemplate() {

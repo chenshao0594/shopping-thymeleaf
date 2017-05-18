@@ -2,7 +2,6 @@ package com.smartshop.populator;
 
 import java.util.Locale;
 
-import com.itextpdf.text.pdf.fonts.otf.Language;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.ConversionException;
 
@@ -19,8 +18,8 @@ public abstract class AbstractDataPopulator<Source, Target> implements DataPopul
 	}
 
 	@Override
-	public Target populate(Source source, MerchantStore store, Language language) throws ConversionException {
-		return populate(source, createTarget(), store, language);
+	public Target populate(Source source, MerchantStore store) throws ConversionException {
+		return populate(source, createTarget(), store);
 	}
 
 	protected abstract Target createTarget();

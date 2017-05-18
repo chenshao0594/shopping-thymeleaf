@@ -10,6 +10,8 @@ public class ShoppingCartItem implements Serializable {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private long id;
 	private String name;
 	private String price;
 	private String image;
@@ -22,6 +24,14 @@ public class ShoppingCartItem implements Serializable {
 	private String subTotal;
 
 	private List<ShoppingCartAttribute> shoppingCartAttributes;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -109,6 +119,14 @@ public class ShoppingCartItem implements Serializable {
 
 	public void setSkuId(long skuId) {
 		this.skuId = skuId;
+	}
+
+	@Override
+	public String toString() {
+		return "ShoppingCartItem [id=" + id + ", name=" + name + ", price=" + price + ", image=" + image
+				+ ", productPrice=" + productPrice + ", quantity=" + quantity + ", productId=" + productId + ", skuId="
+				+ skuId + ", productCode=" + productCode + ", code=" + code + ", subTotal=" + subTotal
+				+ ", shoppingCartAttributes=" + shoppingCartAttributes + "]";
 	}
 
 }

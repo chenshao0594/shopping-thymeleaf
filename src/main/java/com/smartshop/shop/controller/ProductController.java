@@ -46,7 +46,6 @@ public class ProductController {
 		model.addObject("images", images);
 		model.addObject("skuPricing", skuPricingJson);
 		model.addObject("allProductOptions", allProductOptionsJson);
-		LOGGER.info("product images info {}", images);
 		model.setViewName("shop/product/detail");
 		return model;
 	}

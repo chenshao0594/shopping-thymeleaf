@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.smartshop.core.cart.ShoppingCartItem;
-import com.smartshop.core.cart.service.ShoppingCartItemService;
+import com.smartshop.core.cart.CartItem;
+import com.smartshop.core.cart.service.CartItemService;
 import com.smartshop.repository.ShoppingCartItemRepository;
 
 /**
@@ -14,8 +14,8 @@ import com.smartshop.repository.ShoppingCartItemRepository;
  */
 @Service
 @Transactional
-public class ShoppingCartItemServiceImpl extends AbstractDomainServiceImpl<ShoppingCartItem, Long>
-		implements ShoppingCartItemService {
+public class ShoppingCartItemServiceImpl extends AbstractDomainServiceImpl<CartItem, Long>
+		implements CartItemService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCartItemServiceImpl.class);
 	private final ShoppingCartItemRepository shoppingCartItemRepository;

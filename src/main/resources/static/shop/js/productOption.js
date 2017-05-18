@@ -56,6 +56,7 @@ var HC = (function($) {
             var pricing = productOptionPricing[i];
             if ($(pricing.selectedOptions).not(selectedProductOptions).length == 0 && $(selectedProductOptions).not(pricing.selectedOptions).length == 0) {
                 price = pricing.retailPrice;// retailPrice
+                $("#skuId").val(pricing.skuId);
                 break;
             }
         }

@@ -139,7 +139,6 @@ public class AttachmentController {
 	@Timed
 	@DeleteMapping("/{id}")
 	public @ResponseBody ResponseEntity<Map> deleteImage(@PathVariable("id") Long id) throws IOException {
-		System.out.println("delete attachment by " + id);
 		this.attachmentService.delete(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("deleteThumb", "file delete");

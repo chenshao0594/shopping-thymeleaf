@@ -2,7 +2,7 @@ package com.smartshop.facade;
 
 import java.util.List;
 
-import com.smartshop.core.cart.ShoppingCart;
+import com.smartshop.core.cart.Cart;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.shop.model.ShoppingCartData;
@@ -12,7 +12,7 @@ public interface ShoppingCartFacade {
 	public ShoppingCartData addItemsToShoppingCart(ShoppingCartData shoppingCart, final ShoppingCartItem item,
 			final MerchantStore store, final Customer customer) throws Exception;
 
-	public ShoppingCart createCartModel(final String shoppingCartCode, final MerchantStore store,
+	public Cart createCartModel(final String shoppingCartCode, final MerchantStore store,
 			final Customer customer) throws Exception;
 
 	/**
@@ -22,7 +22,7 @@ public interface ShoppingCartFacade {
 	public ShoppingCartData getShoppingCartData(final Customer customer, final MerchantStore store,
 			final String shoppingCartId) throws Exception;
 
-	public ShoppingCartData getShoppingCartData(final ShoppingCart shoppingCart) throws Exception;
+	public ShoppingCartData getShoppingCartData(final Cart shoppingCart) throws Exception;
 
 	public ShoppingCartData getShoppingCartData(String code, MerchantStore store) throws Exception;
 
@@ -36,12 +36,12 @@ public interface ShoppingCartFacade {
 
 	ShoppingCartData updateCartItems(List<ShoppingCartItem> shoppingCartItems, MerchantStore store) throws Exception;
 
-	public ShoppingCart getShoppingCartModel(final String shoppingCartCode, MerchantStore store) throws Exception;
+	public Cart getShoppingCartModel(final String shoppingCartCode, MerchantStore store) throws Exception;
 
-	public ShoppingCart getShoppingCartModel(final Customer customer, MerchantStore store) throws Exception;
+	public Cart getShoppingCartModel(final Customer customer, MerchantStore store) throws Exception;
 
 	void deleteShoppingCart(String code, MerchantStore store) throws Exception;
 
-	void saveOrUpdateShoppingCart(ShoppingCart cart) throws Exception;
+	void saveOrUpdateShoppingCart(Cart cart) throws Exception;
 
 }

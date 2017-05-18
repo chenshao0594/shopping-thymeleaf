@@ -44,16 +44,13 @@ public class CacheConfiguration {
 			cm.createCache(com.smartshop.domain.PersistentToken.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
 			cm.createCache(com.smartshop.core.catalog.Category.class.getName(), jcacheConfiguration);
-			cm.createCache(com.smartshop.core.catalog.Category.class.getName() + ".categories",
-					jcacheConfiguration);
+			cm.createCache(com.smartshop.core.catalog.Category.class.getName() + ".categories", jcacheConfiguration);
 			cm.createCache(com.smartshop.domain.Attachment.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.domain.EmailSetting.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.domain.MerchantStore.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.core.catalog.Product.class.getName(), jcacheConfiguration);
-			cm.createCache(com.smartshop.core.catalog.Product.class.getName() + ".productOptions",
-					jcacheConfiguration);
-			cm.createCache(com.smartshop.core.catalog.Product.class.getName() + ".additionalSKUs",
-					jcacheConfiguration);
+			cm.createCache(com.smartshop.core.catalog.Product.class.getName() + ".productOptions", jcacheConfiguration);
+			cm.createCache(com.smartshop.core.catalog.Product.class.getName() + ".additionalSKUs", jcacheConfiguration);
 			cm.createCache(com.smartshop.core.catalog.SKU.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.core.catalog.SKU.class.getName() + ".productOptionValues",
 					jcacheConfiguration);
@@ -69,9 +66,15 @@ public class CacheConfiguration {
 			cm.createCache(com.smartshop.domain.PaymentConfiguration.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.domain.ShippingConfiguration.class.getName(), jcacheConfiguration);
 			// cart
-			cm.createCache(com.smartshop.core.cart.ShoppingCart.class.getName(), jcacheConfiguration);
-			cm.createCache(com.smartshop.core.cart.ShoppingCartItem.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smartshop.core.cart.Cart.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smartshop.core.cart.CartItem.class.getName(), jcacheConfiguration);
+			// order
+			cm.createCache(com.smartshop.core.order.OrderTotal.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smartshop.domain.Transaction.class.getName(), jcacheConfiguration);
 
+			cm.createCache(com.smartshop.domain.Currency.class.getName(), jcacheConfiguration);
+
+			//
 			// jhipster-needle-ehcache-add-entry
 		};
 	}
