@@ -46,7 +46,7 @@ eclipse {
 }
 
 bootRepackage {
-   mainClass = 'com.smart.shopping.ShoppingApplication'
+   mainClass = 'com.smartshop.ShoppingApplication'
 }
 
 war {

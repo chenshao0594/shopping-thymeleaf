@@ -68,7 +68,7 @@ public class ShoppingCartFacadeImpl implements ShoppingCartFacade {
 		shoppingCartDataPopulator.setPricingService(pricingService);
 		shoppingCartDataPopulator.setimageUtils(imageUtils);
 
-		return shoppingCartDataPopulator.populate(cartModel, store, language);
+		return shoppingCartDataPopulator.populate(cartModel, store);
 		return null;
 	}
 
