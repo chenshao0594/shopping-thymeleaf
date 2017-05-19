@@ -22,10 +22,10 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import com.smartshop.domain.common.BusinessDomain;
 
 @Entity
-@Table(name = "ORDER_total")
+@Table(name = "SALES_ORDER_total")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "orderTotal")
-public class OrderTotal extends BusinessDomain<Long, OrderTotal> implements Serializable {
+@Document(indexName = "salesordertotal")
+public class SalesOrderTotal extends BusinessDomain<Long, SalesOrderTotal> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,7 +34,7 @@ public class OrderTotal extends BusinessDomain<Long, OrderTotal> implements Seri
 	private Long id;
 
 	@Column(name = "CODE", nullable = false)
-	private String orderTotalCode;// SHIPPING, TAX
+	private String code;// SHIPPING, TAX
 
 	@Column(name = "TITLE", nullable = true)
 	private String title;
@@ -58,7 +58,7 @@ public class OrderTotal extends BusinessDomain<Long, OrderTotal> implements Seri
 
 	@Column(name = "ORDER_TOTAL_TYPE")
 	@Enumerated(value = EnumType.STRING)
-	private OrderTotalType orderTotalType = null;
+	private SalesOrderTotalType orderTotalType = null;
 
 	@Column(name = "SORT_ORDER", nullable = false)
 	private int sortOrder;
@@ -77,12 +77,12 @@ public class OrderTotal extends BusinessDomain<Long, OrderTotal> implements Seri
 		this.id = id;
 	}
 
-	public String getOrderTotalCode() {
-		return orderTotalCode;
+	public String getCode() {
+		return code;
 	}
 
-	public void setOrderTotalCode(String orderTotalCode) {
-		this.orderTotalCode = orderTotalCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getTitle() {
@@ -133,11 +133,11 @@ public class OrderTotal extends BusinessDomain<Long, OrderTotal> implements Seri
 		this.order = order;
 	}
 
-	public OrderTotalType getOrderTotalType() {
+	public SalesOrderTotalType getOrderTotalType() {
 		return orderTotalType;
 	}
 
-	public void setOrderTotalType(OrderTotalType orderTotalType) {
+	public void setOrderTotalType(SalesOrderTotalType orderTotalType) {
 		this.orderTotalType = orderTotalType;
 	}
 

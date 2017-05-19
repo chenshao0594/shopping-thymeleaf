@@ -1,5 +1,5 @@
 package com.smartshop.core.order.enumeration;
 
-public enum OrderChannel {
-	ONLINE
+public enum SalesOrderType {
+	ORDER, BOOKING
 }

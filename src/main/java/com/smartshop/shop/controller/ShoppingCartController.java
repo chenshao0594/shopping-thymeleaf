@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import com.smartshop.core.cart.service.CartService;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
+import com.smartshop.exception.ConversionException;
 import com.smartshop.facade.ShoppingCartFacade;
 import com.smartshop.shop.model.ShoppingCartData;
 import com.smartshop.shop.model.ShoppingCartItem;
@@ -49,7 +51,7 @@ public class ShoppingCartController extends AbstractShopController {
 	@PostMapping()
 	public ResponseEntity<ShoppingCartData> addShoppingCartItem(final ShoppingCartItem item,
 			final HttpServletRequest request, final HttpServletResponse response, final Locale locale)
-			throws BusinessException {
+			throws BusinessException, ConversionException {
 		log.info("shopping cart item  {}", item);
 		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
@@ -58,12 +60,17 @@ public class ShoppingCartController extends AbstractShopController {
 		if (customer != null) {
 			shoppingCart = shoppingCartService.getShoppingCart(customer);
 		}
+		String cartCode = (String) request.getSession().getAttribute(AppConstants.SHOPPING_CART);
+		System.out.println("cartCode:  " + cartCode);
+		if (!StringUtils.isBlank(cartCode)) {
+			shoppingCart = shoppingCartService.getShoppingCartByCode(cartCode);
+		}
 		if (shoppingCart == null) {
 			shoppingCart = shoppingCartService.createEmptyCart(customer);
 		}
 		shoppingCart = shoppingCartFacade.addItemsToShoppingCart(shoppingCart, item, store, customer);
 
-		shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart);
+		shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart, store);
 		request.getSession().setAttribute(AppConstants.SHOPPING_CART, shoppingCart.getCode());
 		log.info("shopping cart", shoppingCart);
 		return ResponseEntity.ok().body(shoppingCartData);

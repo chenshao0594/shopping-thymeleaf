@@ -4,39 +4,35 @@ import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.itextpdf.text.pdf.fonts.otf.Language;
 import com.smartshop.constants.BusinessConstants;
 import com.smartshop.core.cart.Cart;
 import com.smartshop.core.cart.CartItem;
-import com.smartshop.core.order.OrderStatusHistory;
-import com.smartshop.core.order.OrderTotal;
-import com.smartshop.core.order.OrderTotalType;
+import com.smartshop.core.enumeration.OrderSummaryEnum;
 import com.smartshop.core.order.SalesOrder;
-import com.smartshop.core.order.model.OrderSummary;
-import com.smartshop.core.order.model.OrderTotalSummary;
+import com.smartshop.core.order.SalesOrderStatusHistory;
+import com.smartshop.core.order.SalesOrderTotal;
+import com.smartshop.core.order.SalesOrderTotalType;
+import com.smartshop.core.order.model.SalesOrderSummary;
+import com.smartshop.core.order.model.SalesOrderTotalSummary;
+import com.smartshop.core.order.service.SalesOrderService;
+import com.smartshop.core.order.service.SalesOrderTotalService;
 import com.smartshop.core.payments.model.Payment;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
-import com.smartshop.domain.ShippingConfiguration;
 import com.smartshop.domain.Transaction;
 import com.smartshop.exception.BusinessException;
-import com.smartshop.order.model.OrderSummaryEnum;
-import com.smartshop.order.model.SalesOrderSummary;
-import com.smartshop.order.service.OrderTotalService;
 import com.smartshop.repository.SalesOrderRepository;
 import com.smartshop.repository.search.SalesOrderSearchRepository;
-import com.smartshop.service.SalesOrderService;
 
 /**
  * Service Implementation for managing Product.
@@ -50,7 +46,7 @@ public class SalesOrderServiceImpl extends AbstractDomainServiceImpl<SalesOrder,
 	private final SalesOrderSearchRepository salesOrderSearchRepository;
 
 	@Inject
-	private OrderTotalService orderTotalService;
+	private SalesOrderTotalService orderTotalService;
 
 	public SalesOrderServiceImpl(SalesOrderRepository salesOrderRepository,
 			SalesOrderSearchRepository salesOrderSearchRepository) {
@@ -60,37 +56,43 @@ public class SalesOrderServiceImpl extends AbstractDomainServiceImpl<SalesOrder,
 	}
 
 	@Override
-	public void addOrderStatusHistory(SalesOrder order, OrderStatusHistory history) throws BusinessException {
+	public void addOrderStatusHistory(SalesOrder order, SalesOrderStatusHistory history) throws BusinessException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public OrderTotalSummary caculateOrderTotal(OrderSummary orderSummary, Customer customer, MerchantStore store)
+	public SalesOrderTotalSummary caculateOrderTotal(SalesOrderSummary orderSummary, Customer customer,
+			MerchantStore store) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SalesOrderTotalSummary caculateOrderTotal(SalesOrderSummary orderSummary, MerchantStore store)
 			throws BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public OrderTotalSummary caculateOrderTotal(OrderSummary orderSummary, MerchantStore store)
+	public SalesOrderTotalSummary calculateShoppingCartTotal(Cart shoppingCart, Customer customer, MerchantStore store)
 			throws BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public OrderTotalSummary calculateShoppingCartTotal(Cart shoppingCart, Customer customer, MerchantStore store)
+	public SalesOrderTotalSummary calculateShoppingCartTotal(Cart shoppingCart, MerchantStore store)
 			throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OrderTotalSummary calculateShoppingCartTotal(Cart shoppingCart, MerchantStore store)
-			throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		Validate.notNull(shoppingCart, "Order summary cannot be null");
+		Validate.notNull(store, "MerchantStore cannot be null");
+		try {
+			return caculateShoppingCart(shoppingCart, null, store);
+		} catch (Exception e) {
+			LOGGER.error("Error while calculating shopping cart total" + e);
+			throw new BusinessException(e);
+		}
 	}
 
 	@Override
@@ -112,33 +114,35 @@ public class SalesOrderServiceImpl extends AbstractDomainServiceImpl<SalesOrder,
 	}
 
 	@Override
-	public SalesOrder processOrder(SalesOrder order, Customer customer, List<CartItem> items, OrderTotalSummary summary,
-			Payment payment, MerchantStore store) throws BusinessException {
+	public SalesOrder processOrder(SalesOrder order, Customer customer, List<CartItem> items,
+			SalesOrderTotalSummary summary, Payment payment, MerchantStore store) throws BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public SalesOrder processOrder(SalesOrder order, Customer customer, List<CartItem> items, OrderTotalSummary summary,
-			Payment payment, Transaction transaction, MerchantStore store) throws BusinessException {
+	public SalesOrder processOrder(SalesOrder order, Customer customer, List<CartItem> items,
+			SalesOrderTotalSummary summary, Payment payment, Transaction transaction, MerchantStore store)
+			throws BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private OrderTotalSummary caculateShoppingCart(final Cart shoppingCart, final Customer customer,
-			final MerchantStore store, final Language language) throws Exception {
+	private SalesOrderTotalSummary caculateShoppingCart(final Cart shoppingCart, final Customer customer,
+			final MerchantStore store) throws Exception {
 		SalesOrderSummary orderSummary = new SalesOrderSummary();
 		orderSummary.setOrderSummaryType(OrderSummaryEnum.SHOPPINGCART);
 		orderSummary.setCartItems(shoppingCart.getLineItems());
-		return this.caculateOrder(orderSummary, customer, store, language);
+		return this.caculateOrder(orderSummary, customer, store);
 	}
 
-	private OrderTotalSummary caculateOrder(SalesOrderSummary summary, Customer customer, final MerchantStore store,
-			final Language language) throws Exception {
-		OrderTotalSummary totalSummary = new OrderTotalSummary();
-		List<OrderTotal> orderTotals = new ArrayList<OrderTotal>();
-		Map<String, OrderTotal> otherPricesTotals = new HashMap<String, OrderTotal>();
-		ShippingConfiguration shippingConfiguration = null;
+	private SalesOrderTotalSummary caculateOrder(SalesOrderSummary summary, Customer customer,
+			final MerchantStore store) throws Exception {
+		SalesOrderTotalSummary totalSummary = new SalesOrderTotalSummary();
+		List<SalesOrderTotal> orderTotals = new ArrayList<SalesOrderTotal>();
+		// Map<String, OrderTotal> otherPricesTotals = new HashMap<String,
+		// OrderTotal>();
+		// ShippingConfiguration shippingConfiguration = null;
 
 		BigDecimal grandTotal = new BigDecimal(0);
 		grandTotal.setScale(2, RoundingMode.HALF_UP);
@@ -201,10 +205,10 @@ public class SalesOrderServiceImpl extends AbstractDomainServiceImpl<SalesOrder,
 		 */
 		totalSummary.setSubTotal(subTotal);
 		grandTotal = grandTotal.add(subTotal);
-		OrderTotal orderTotalSubTotal = new OrderTotal();
+		SalesOrderTotal orderTotalSubTotal = new SalesOrderTotal();
 		orderTotalSubTotal.setModule(BusinessConstants.OT_SUBTOTAL_MODULE_CODE);
-		orderTotalSubTotal.setOrderTotalType(OrderTotalType.SUBTOTAL);
-		orderTotalSubTotal.setOrderTotalCode("order.total.subtotal");
+		orderTotalSubTotal.setOrderTotalType(SalesOrderTotalType.SUBTOTAL);
+		orderTotalSubTotal.setCode("order.total.subtotal");
 		orderTotalSubTotal.setTitle(BusinessConstants.OT_SUBTOTAL_MODULE_CODE);
 		// orderTotalSubTotal.setText("order.total.subtotal");
 		orderTotalSubTotal.setSortOrder(5);
@@ -213,10 +217,10 @@ public class SalesOrderServiceImpl extends AbstractDomainServiceImpl<SalesOrder,
 		// shipping
 		if (summary.getShippingSummary() != null) {
 
-			OrderTotal shippingSubTotal = new OrderTotal();
+			SalesOrderTotal shippingSubTotal = new SalesOrderTotal();
 			shippingSubTotal.setModule(BusinessConstants.OT_SHIPPING_MODULE_CODE);
-			shippingSubTotal.setOrderTotalType(OrderTotalType.SHIPPING);
-			shippingSubTotal.setOrderTotalCode("order.total.shipping");
+			shippingSubTotal.setOrderTotalType(SalesOrderTotalType.SHIPPING);
+			shippingSubTotal.setCode("order.total.shipping");
 			shippingSubTotal.setTitle(BusinessConstants.OT_SHIPPING_MODULE_CODE);
 			// shippingSubTotal.setText("order.total.shipping");
 			shippingSubTotal.setSortOrder(100);
@@ -282,10 +286,10 @@ public class SalesOrderServiceImpl extends AbstractDomainServiceImpl<SalesOrder,
 		 */
 
 		// grand total
-		OrderTotal orderTotal = new OrderTotal();
+		SalesOrderTotal orderTotal = new SalesOrderTotal();
 		orderTotal.setModule(BusinessConstants.OT_TOTAL_MODULE_CODE);
-		orderTotal.setOrderTotalType(OrderTotalType.TOTAL);
-		orderTotal.setOrderTotalCode("order.total.total");
+		orderTotal.setOrderTotalType(SalesOrderTotalType.TOTAL);
+		orderTotal.setCode("order.total.total");
 		orderTotal.setTitle(BusinessConstants.OT_TOTAL_MODULE_CODE);
 		orderTotal.setText("order.total.total");
 		orderTotal.setSortOrder(500);

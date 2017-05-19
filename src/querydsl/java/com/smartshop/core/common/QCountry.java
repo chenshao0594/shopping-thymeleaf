@@ -20,7 +20,7 @@ public class QCountry extends EntityPathBase<Country> {
 
     public static final QCountry country = new QCountry("country");
 
-    public final StringPath descriptions = createString("descriptions");
+    public final StringPath description = createString("description");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

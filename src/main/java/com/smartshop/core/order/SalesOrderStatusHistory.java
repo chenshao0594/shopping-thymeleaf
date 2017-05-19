@@ -20,14 +20,14 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smartshop.core.order.enumeration.OrderStatus;
+import com.smartshop.core.order.enumeration.SalesOrderStatus;
 import com.smartshop.domain.common.BusinessDomain;
 
 @Entity
 @Table(name = "Order_Status_History")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "orderStatusHistory")
-public class OrderStatusHistory extends BusinessDomain<Long, SalesOrder> implements Serializable {
+public class SalesOrderStatusHistory extends BusinessDomain<Long, SalesOrder> implements Serializable {
 
 	/**
 	 *
@@ -43,7 +43,7 @@ public class OrderStatusHistory extends BusinessDomain<Long, SalesOrder> impleme
 	private SalesOrder order;
 
 	@Enumerated(value = EnumType.STRING)
-	private OrderStatus status;
+	private SalesOrderStatus status;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DATE_ADDED", nullable = false)
@@ -55,7 +55,7 @@ public class OrderStatusHistory extends BusinessDomain<Long, SalesOrder> impleme
 	@Column(name = "COMMENTS")
 	private String comments;
 
-	public OrderStatusHistory() {
+	public SalesOrderStatusHistory() {
 	}
 
 	@Override
@@ -76,11 +76,11 @@ public class OrderStatusHistory extends BusinessDomain<Long, SalesOrder> impleme
 		this.order = order;
 	}
 
-	public OrderStatus getStatus() {
+	public SalesOrderStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(OrderStatus status) {
+	public void setStatus(SalesOrderStatus status) {
 		this.status = status;
 	}
 

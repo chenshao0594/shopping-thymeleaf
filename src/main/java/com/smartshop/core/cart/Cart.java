@@ -41,7 +41,7 @@ public class Cart extends BusinessDomain<Long, Cart> implements Serializable {
 	@Column(name = "CODE", unique = true, nullable = false)
 	private String code;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "shoppingCart")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "shoppingCart")
 	private Set<CartItem> lineItems = new HashSet<CartItem>();
 
 	@ManyToOne(fetch = FetchType.LAZY)

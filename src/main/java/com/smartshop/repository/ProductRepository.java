@@ -12,6 +12,9 @@ import com.smartshop.core.catalog.Product;
 public interface ProductRepository extends JpaRepository<Product, Long>, QueryDslPredicateExecutor<Product> {
 
 	@Query("select category.id as id, category.code as code , count(product.category.id) as count from Product product group by product.category.id")
-	public List<Map<String, Long>> countProductsByCategories();
+	List<Map<String, Long>> countProductsByCategories();
+
+	@Query("select product.name from Product product where product.id=?1")
+	String findNameById(Long id);
 
 }

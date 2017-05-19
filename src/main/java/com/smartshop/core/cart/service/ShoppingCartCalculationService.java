@@ -1,7 +1,7 @@
 package com.smartshop.core.cart.service;
 
 import com.smartshop.core.cart.Cart;
-import com.smartshop.core.order.model.OrderTotalSummary;
+import com.smartshop.core.order.model.SalesOrderTotalSummary;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
@@ -18,7 +18,7 @@ public interface ShoppingCartCalculationService {
 	 * @param language
 	 * @throws BusinessException
 	 */
-	public OrderTotalSummary calculate(final Cart cartModel, final Customer customer, final MerchantStore store)
+	public SalesOrderTotalSummary calculate(final Cart cartModel, final Customer customer, final MerchantStore store)
 			throws BusinessException;
 
 	/**
@@ -31,5 +31,5 @@ public interface ShoppingCartCalculationService {
 	 * @param language
 	 * @throws BusinessException
 	 */
-	public OrderTotalSummary calculate(final Cart cartModel, final MerchantStore store) throws BusinessException;
+	public SalesOrderTotalSummary calculate(final Cart cartModel, final MerchantStore store) throws BusinessException;
 }

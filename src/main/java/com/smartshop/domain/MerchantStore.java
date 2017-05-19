@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.Cache;
@@ -18,6 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.smartshop.constants.BusinessConstants;
 import com.smartshop.core.common.Country;
 import com.smartshop.core.common.Zone;
 import com.smartshop.core.enumeration.MeasureUnit;
@@ -107,6 +109,9 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 	// @ManyToOne(targetEntity = Currency.class)
 	// @JoinColumn(name = "CURRENCY_ID", nullable=false)
 	// private Currency currency;
+
+	@Transient
+	private java.util.Currency currency = BusinessConstants.DEFAULT_CURRENCY;
 
 	@Override
 	public Long getId() {
@@ -244,6 +249,14 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 
 	public void setLogo(String logo) {
 		Logo = logo;
+	}
+
+	public java.util.Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(java.util.Currency currency) {
+		this.currency = currency;
 	}
 
 }

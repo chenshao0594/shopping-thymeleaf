@@ -6,6 +6,7 @@ import com.smartshop.core.cart.Cart;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
+import com.smartshop.exception.ConversionException;
 import com.smartshop.shop.model.ShoppingCartData;
 import com.smartshop.shop.model.ShoppingCartItem;
 
@@ -23,7 +24,8 @@ public interface ShoppingCartFacade {
 	public ShoppingCartData getShoppingCartData(final Customer customer, final MerchantStore store,
 			final String shoppingCartId) throws BusinessException;
 
-	public ShoppingCartData getShoppingCartData(final Cart shoppingCart) throws BusinessException;
+	public ShoppingCartData getShoppingCartData(final Cart shoppingCart, final MerchantStore store)
+			throws BusinessException, ConversionException;
 
 	public ShoppingCartData getShoppingCartData(String code, MerchantStore store) throws BusinessException;
 

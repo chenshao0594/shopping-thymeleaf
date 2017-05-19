@@ -24,7 +24,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smartshop.domain.common.BusinessDomain;
@@ -115,10 +114,6 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	@Column(name = "length", precision = 10, scale = 2)
 	private BigDecimal length;
-
-	@NotEmpty
-	@Column(name = "sku", nullable = false)
-	private String sku;
 
 	@ManyToOne
 	private Category category;
@@ -331,14 +326,6 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	public void setLength(BigDecimal length) {
 		this.length = length;
-	}
-
-	public String getSku() {
-		return sku;
-	}
-
-	public void setSku(String sku) {
-		this.sku = sku;
 	}
 
 	public BigDecimal getStandardPrice() {

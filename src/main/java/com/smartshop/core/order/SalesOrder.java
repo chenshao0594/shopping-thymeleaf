@@ -32,9 +32,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smartshop.core.common.Billing;
 import com.smartshop.core.common.Delivery;
-import com.smartshop.core.order.enumeration.OrderChannel;
-import com.smartshop.core.order.enumeration.OrderStatus;
-import com.smartshop.core.order.enumeration.OrderType;
+import com.smartshop.core.order.enumeration.SalesOrderChannel;
+import com.smartshop.core.order.enumeration.SalesOrderStatus;
+import com.smartshop.core.order.enumeration.SalesOrderType;
 import com.smartshop.core.payment.enumeration.PaymentType;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.domain.common.BusinessDomain;
@@ -53,7 +53,7 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 
 	@Column(name = "ORDER_STATUS")
 	@Enumerated(value = EnumType.STRING)
-	private OrderStatus status;
+	private SalesOrderStatus status;
 
 	// the customer object can be detached. An order can exist and the customer
 	// deleted
@@ -81,11 +81,11 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 
 	@Column(name = "CHANNEL")
 	@Enumerated(value = EnumType.STRING)
-	private OrderChannel channel;
+	private SalesOrderChannel channel;
 
 	@Column(name = "ORDER_TYPE")
 	@Enumerated(value = EnumType.STRING)
-	private OrderType orderType = OrderType.ORDER;
+	private SalesOrderType orderType = SalesOrderType.ORDER;
 
 	@Column(name = "PAYMENT_TYPE")
 	@Enumerated(value = EnumType.STRING)
@@ -134,7 +134,7 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	@OrderBy(clause = "ORDER_STATUS_HISTORY_ID asc")
-	private Set<OrderStatusHistory> orderHistory = new LinkedHashSet<OrderStatusHistory>();
+	private Set<SalesOrderStatusHistory> orderHistory = new LinkedHashSet<SalesOrderStatusHistory>();
 
 	public SalesOrder() {
 	}
@@ -152,11 +152,11 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 		this.id = id;
 	}
 
-	public OrderStatus getStatus() {
+	public SalesOrderStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(OrderStatus status) {
+	public void setStatus(SalesOrderStatus status) {
 		this.status = status;
 	}
 
@@ -192,11 +192,11 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 		this.merchant = merchant;
 	}
 
-	public Set<OrderStatusHistory> getOrderHistory() {
+	public Set<SalesOrderStatusHistory> getOrderHistory() {
 		return orderHistory;
 	}
 
-	public void setOrderHistory(Set<OrderStatusHistory> orderHistory) {
+	public void setOrderHistory(Set<SalesOrderStatusHistory> orderHistory) {
 		this.orderHistory = orderHistory;
 	}
 
@@ -232,11 +232,11 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 		this.customerEmailAddress = customerEmailAddress;
 	}
 
-	public void setChannel(OrderChannel channel) {
+	public void setChannel(SalesOrderChannel channel) {
 		this.channel = channel;
 	}
 
-	public OrderChannel getChannel() {
+	public SalesOrderChannel getChannel() {
 		return channel;
 	}
 
@@ -248,11 +248,11 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 		return paymentType;
 	}
 
-	public OrderType getOrderType() {
+	public SalesOrderType getOrderType() {
 		return orderType;
 	}
 
-	public void setOrderType(OrderType orderType) {
+	public void setOrderType(SalesOrderType orderType) {
 		this.orderType = orderType;
 	}
 

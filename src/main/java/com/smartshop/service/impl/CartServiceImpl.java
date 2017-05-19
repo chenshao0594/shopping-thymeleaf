@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.smartshop.core.cart.Cart;
 import com.smartshop.core.cart.CartItem;
+import com.smartshop.core.cart.QCart;
 import com.smartshop.core.cart.service.CartService;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.domain.Customer;
@@ -98,6 +99,12 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 		// cart.setCustomerId(customer.getId());
 		this.shoppingCartRepository.save(cart);
 		return cart;
+	}
+
+	@Override
+	public Cart getShoppingCartByCode(String cartCode) {
+		QCart qCart = QCart.cart;
+		return this.shoppingCartRepository.findOne(qCart.code.eq(cartCode));
 	}
 
 }

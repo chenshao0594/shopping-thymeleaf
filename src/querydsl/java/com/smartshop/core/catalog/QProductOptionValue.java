@@ -28,11 +28,7 @@ public class QProductOptionValue extends EntityPathBase<ProductOptionValue> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final com.smartshop.domain.QMerchantStore merchantStore;
-
     public final QProductOption productOption;
-
-    public final StringPath productOptionValueImage = createString("productOptionValueImage");
 
     public final NumberPath<Integer> sortOrder = createNumber("sortOrder", Integer.class);
 
@@ -54,7 +50,6 @@ public class QProductOptionValue extends EntityPathBase<ProductOptionValue> {
 
     public QProductOptionValue(Class<? extends ProductOptionValue> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.merchantStore = inits.isInitialized("merchantStore") ? new com.smartshop.domain.QMerchantStore(forProperty("merchantStore"), inits.get("merchantStore")) : null;
         this.productOption = inits.isInitialized("productOption") ? new QProductOption(forProperty("productOption"), inits.get("productOption")) : null;
     }
 

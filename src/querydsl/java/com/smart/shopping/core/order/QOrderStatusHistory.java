@@ -8,14 +8,14 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import com.smartshop.core.order.OrderStatusHistory;
+import com.smartshop.core.order.SalesOrderStatusHistory;
 
 
 /**
  * QOrderStatusHistory is a Querydsl query type for OrderStatusHistory
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QOrderStatusHistory extends EntityPathBase<OrderStatusHistory> {
+public class QOrderStatusHistory extends EntityPathBase<SalesOrderStatusHistory> {
 
     private static final long serialVersionUID = -1043843377L;
 
@@ -33,13 +33,13 @@ public class QOrderStatusHistory extends EntityPathBase<OrderStatusHistory> {
 
     public final QSalesOrder order;
 
-    public final EnumPath<com.smartshop.core.order.enumeration.OrderStatus> status = createEnum("status", com.smartshop.core.order.enumeration.OrderStatus.class);
+    public final EnumPath<com.smartshop.core.order.enumeration.SalesOrderStatus> status = createEnum("status", com.smartshop.core.order.enumeration.SalesOrderStatus.class);
 
     public QOrderStatusHistory(String variable) {
-        this(OrderStatusHistory.class, forVariable(variable), INITS);
+        this(SalesOrderStatusHistory.class, forVariable(variable), INITS);
     }
 
-    public QOrderStatusHistory(Path<? extends OrderStatusHistory> path) {
+    public QOrderStatusHistory(Path<? extends SalesOrderStatusHistory> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -48,10 +48,10 @@ public class QOrderStatusHistory extends EntityPathBase<OrderStatusHistory> {
     }
 
     public QOrderStatusHistory(PathMetadata metadata, PathInits inits) {
-        this(OrderStatusHistory.class, metadata, inits);
+        this(SalesOrderStatusHistory.class, metadata, inits);
     }
 
-    public QOrderStatusHistory(Class<? extends OrderStatusHistory> type, PathMetadata metadata, PathInits inits) {
+    public QOrderStatusHistory(Class<? extends SalesOrderStatusHistory> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.order = inits.isInitialized("order") ? new QSalesOrder(forProperty("order"), inits.get("order")) : null;
     }

@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.smartshop.core.order.OrderTotal;
+import com.smartshop.core.order.SalesOrderTotal;
 
-public class OrderTotalSummary implements Serializable {
+public class SalesOrderTotalSummary implements Serializable {
 
 	/**
 	 *
@@ -16,7 +16,7 @@ public class OrderTotalSummary implements Serializable {
 	private BigDecimal total;// final price
 	private BigDecimal taxTotal;// total of taxes
 
-	private List<OrderTotal> totals;// all other fees (tax, shipping ....)
+	private List<SalesOrderTotal> totals;// all other fees (tax, shipping ....)
 
 	public BigDecimal getSubTotal() {
 		return subTotal;
@@ -34,11 +34,11 @@ public class OrderTotalSummary implements Serializable {
 		this.total = total;
 	}
 
-	public List<OrderTotal> getTotals() {
+	public List<SalesOrderTotal> getTotals() {
 		return totals;
 	}
 
-	public void setTotals(List<OrderTotal> totals) {
+	public void setTotals(List<SalesOrderTotal> totals) {
 		this.totals = totals;
 	}
 

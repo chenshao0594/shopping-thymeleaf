@@ -55,8 +55,9 @@
 						class="form-control col-4" name="category.id">
 						<option th:each="category : ${categories}" th:value="${category.id}"
 							th:selected="${category.id==item.category?.id}" th:text="${category.code}"></option>
-					</select> <label for="sku" class="col-2 col-form-label text-right">SKU</label> <input type="text"
-						th:value="${item.sku}" class="form-control col-4" name="sku" /> <label for="salePrice_input"
+					</select> 
+						
+						<label for="salePrice_input"
 						class="col-2 col-form-label text-right">Sale Price</label>
 					<div class="input-group  col-4">
 						<span class="input-group-addon">$</span> <input type="number" th:value="${item.salePrice}"

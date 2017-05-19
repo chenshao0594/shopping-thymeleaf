@@ -1,6 +1,6 @@
 package com.smartshop.core.enumeration;
 
-public enum OrderSummaryType {
+public enum OrderSummaryEnum {
 	SHOPPINGCART, ORDERTOTAL
 
 }

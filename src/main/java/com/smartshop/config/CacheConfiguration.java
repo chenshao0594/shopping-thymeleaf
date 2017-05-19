@@ -62,14 +62,14 @@ public class CacheConfiguration {
 					jcacheConfiguration);
 			cm.createCache(com.smartshop.domain.Customer.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.core.order.SalesOrder.class.getName(), jcacheConfiguration);
-			cm.createCache(com.smartshop.core.order.OrderStatusHistory.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smartshop.core.order.SalesOrderStatusHistory.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.domain.PaymentConfiguration.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.domain.ShippingConfiguration.class.getName(), jcacheConfiguration);
 			// cart
 			cm.createCache(com.smartshop.core.cart.Cart.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.core.cart.CartItem.class.getName(), jcacheConfiguration);
 			// order
-			cm.createCache(com.smartshop.core.order.OrderTotal.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smartshop.core.order.SalesOrderTotal.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.domain.Transaction.class.getName(), jcacheConfiguration);
 
 			cm.createCache(com.smartshop.domain.Currency.class.getName(), jcacheConfiguration);

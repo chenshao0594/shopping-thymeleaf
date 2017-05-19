@@ -11,16 +11,18 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QOrderTotal is a Querydsl query type for OrderTotal
+ * QSalesOrderTotal is a Querydsl query type for SalesOrderTotal
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QOrderTotal extends EntityPathBase<SalesOrderTotal> {
+public class QSalesOrderTotal extends EntityPathBase<SalesOrderTotal> {
 
-    private static final long serialVersionUID = 906042601L;
+    private static final long serialVersionUID = -2071007665L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QOrderTotal orderTotal = new QOrderTotal("orderTotal");
+    public static final QSalesOrderTotal salesOrderTotal = new QSalesOrderTotal("salesOrderTotal");
+
+    public final StringPath code = createString("code");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -28,7 +30,7 @@ public class QOrderTotal extends EntityPathBase<SalesOrderTotal> {
 
     public final QSalesOrder order;
 
-    public final StringPath orderTotalCode = createString("orderTotalCode");
+    public final EnumPath<SalesOrderTotalType> orderTotalType = createEnum("orderTotalType", SalesOrderTotalType.class);
 
     public final NumberPath<Integer> sortOrder = createNumber("sortOrder", Integer.class);
 
@@ -38,23 +40,23 @@ public class QOrderTotal extends EntityPathBase<SalesOrderTotal> {
 
     public final NumberPath<java.math.BigDecimal> value = createNumber("value", java.math.BigDecimal.class);
 
-    public QOrderTotal(String variable) {
+    public QSalesOrderTotal(String variable) {
         this(SalesOrderTotal.class, forVariable(variable), INITS);
     }
 
-    public QOrderTotal(Path<? extends SalesOrderTotal> path) {
+    public QSalesOrderTotal(Path<? extends SalesOrderTotal> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QOrderTotal(PathMetadata metadata) {
+    public QSalesOrderTotal(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QOrderTotal(PathMetadata metadata, PathInits inits) {
+    public QSalesOrderTotal(PathMetadata metadata, PathInits inits) {
         this(SalesOrderTotal.class, metadata, inits);
     }
 
-    public QOrderTotal(Class<? extends SalesOrderTotal> type, PathMetadata metadata, PathInits inits) {
+    public QSalesOrderTotal(Class<? extends SalesOrderTotal> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.order = inits.isInitialized("order") ? new QSalesOrder(forProperty("order"), inits.get("order")) : null;
     }

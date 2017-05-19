@@ -9,11 +9,11 @@ import com.smartshop.core.cart.Cart;
 import com.smartshop.core.cart.CartItem;
 import com.smartshop.core.cart.service.CartService;
 import com.smartshop.core.cart.service.ShoppingCartCalculationService;
-import com.smartshop.core.order.model.OrderTotalSummary;
+import com.smartshop.core.order.model.SalesOrderTotalSummary;
+import com.smartshop.core.order.service.SalesOrderService;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
-import com.smartshop.service.SalesOrderService;
 
 @Service
 public class ShoppingCartCalculationServiceImpl implements ShoppingCartCalculationService {
@@ -45,15 +45,15 @@ public class ShoppingCartCalculationServiceImpl implements ShoppingCartCalculati
 	 * @throws BusinessException
 	 */
 	@Override
-	public OrderTotalSummary calculate(final Cart cartModel, final Customer customer, final MerchantStore store)
+	public SalesOrderTotalSummary calculate(final Cart cartModel, final Customer customer, final MerchantStore store)
 			throws BusinessException {
 
 		Validate.notNull(cartModel, "cart cannot be null");
 		Validate.notNull(cartModel.getLineItems(), "Cart should have line items.");
 		Validate.notNull(store, "MerchantStore cannot be null");
 		Validate.notNull(customer, "Customer cannot be null");
-		OrderTotalSummary orderTotalSummary = orderService.calculateShoppingCartTotal(cartModel, customer, store);
-		updateCartModel(cartModel);
+		SalesOrderTotalSummary orderTotalSummary = orderService.calculateShoppingCartTotal(cartModel, customer, store);
+		// updateCart(cartModel);
 		return orderTotalSummary;
 
 	}
@@ -79,13 +79,13 @@ public class ShoppingCartCalculationServiceImpl implements ShoppingCartCalculati
 	 * @throws BusinessException
 	 */
 	@Override
-	public OrderTotalSummary calculate(final Cart cartModel, final MerchantStore store) throws BusinessException {
+	public SalesOrderTotalSummary calculate(final Cart cart, final MerchantStore store) throws BusinessException {
 
-		Validate.notNull(cartModel, "cart cannot be null");
-		Validate.notNull(cartModel.getLineItems(), "Cart should have line items.");
+		Validate.notNull(cart, "cart cannot be null");
+		Validate.notNull(cart.getLineItems(), "Cart should have line items.");
 		Validate.notNull(store, "MerchantStore cannot be null");
-		OrderTotalSummary orderTotalSummary = orderService.calculateShoppingCartTotal(cartModel, store);
-		updateCartModel(cartModel);
+		SalesOrderTotalSummary orderTotalSummary = orderService.calculateShoppingCartTotal(cart, store);
+		// updateCart(cart);
 		return orderTotalSummary;
 
 	}
@@ -94,8 +94,8 @@ public class ShoppingCartCalculationServiceImpl implements ShoppingCartCalculati
 		return shoppingCartService;
 	}
 
-	private void updateCartModel(final Cart cartModel) throws BusinessException {
-		shoppingCartService.save(cartModel);
+	private void updateCart(final Cart cart) throws BusinessException {
+		shoppingCartService.save(cart);
 	}
 
 }

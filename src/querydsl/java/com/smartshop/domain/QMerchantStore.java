@@ -48,7 +48,7 @@ public class QMerchantStore extends EntityPathBase<MerchantStore> {
 
     public final StringPath postalcode = createString("postalcode");
 
-    public final StringPath seizeUnit = createString("seizeUnit");
+    public final StringPath sizeUnit = createString("sizeUnit");
 
     public final StringPath stateProvince = createString("stateProvince");
 

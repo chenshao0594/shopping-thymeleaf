@@ -20,4 +20,6 @@ public interface ProductService extends AbstractDomainService<Product, Long> {
 
 	List<ProductOptionDTO> buildProductOptionsDTO(Product product);
 
+	String findNameById(Long productId);
+
 }

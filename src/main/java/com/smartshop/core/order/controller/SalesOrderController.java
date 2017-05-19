@@ -1,4 +1,4 @@
-package com.smartshop.core.salesorder.controller;
+package com.smartshop.core.order.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.smartshop.admin.controller.AbstractDomainController;
 import com.smartshop.constants.AppConstants;
 import com.smartshop.core.order.SalesOrder;
-import com.smartshop.service.SalesOrderService;
+import com.smartshop.core.order.service.SalesOrderService;
 
 @Controller
 @RequestMapping(AppConstants.ADMIN_PREFIX + "/" + SalesOrderController.SECTION_KEY)

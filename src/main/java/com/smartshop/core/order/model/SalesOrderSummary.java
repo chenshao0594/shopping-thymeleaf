@@ -1,4 +1,4 @@
-package com.smartshop.order.model;
+package com.smartshop.core.order.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -13,8 +13,8 @@ public class SalesOrderSummary implements Serializable {
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = -8683318345130020683L;
 	private OrderSummaryEnum orderSummaryType = OrderSummaryEnum.ORDERTOTAL;
+	private static final long serialVersionUID = 1L;
 	private ShippingSummary shippingSummary;
 	private Set<CartItem> cartItems = new HashSet<CartItem>();
 

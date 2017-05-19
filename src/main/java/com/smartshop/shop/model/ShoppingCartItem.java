@@ -12,14 +12,14 @@ public class ShoppingCartItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private long id;
-	private String name;
+	private String productName;
+	private String skuName;
 	private String price;
 	private String image;
-	private BigDecimal productPrice;
+	private BigDecimal itemPrice;
 	private int quantity;
 	private Long productId;
 	private Long skuId;
-	private String productCode;
 	private String code;// shopping cart code
 	private String subTotal;
 
@@ -31,14 +31,6 @@ public class ShoppingCartItem implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getPrice() {
@@ -57,12 +49,12 @@ public class ShoppingCartItem implements Serializable {
 		this.image = image;
 	}
 
-	public BigDecimal getProductPrice() {
-		return productPrice;
+	public BigDecimal getItemPrice() {
+		return itemPrice;
 	}
 
-	public void setProductPrice(BigDecimal productPrice) {
-		this.productPrice = productPrice;
+	public void setItemPrice(BigDecimal itemPrice) {
+		this.itemPrice = itemPrice;
 	}
 
 	public int getQuantity() {
@@ -71,14 +63,6 @@ public class ShoppingCartItem implements Serializable {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-	}
-
-	public String getProductCode() {
-		return productCode;
-	}
-
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
 	}
 
 	public String getCode() {
@@ -121,11 +105,27 @@ public class ShoppingCartItem implements Serializable {
 		this.skuId = skuId;
 	}
 
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getSkuName() {
+		return skuName;
+	}
+
+	public void setSkuName(String skuName) {
+		this.skuName = skuName;
+	}
+
 	@Override
 	public String toString() {
-		return "ShoppingCartItem [id=" + id + ", name=" + name + ", price=" + price + ", image=" + image
-				+ ", productPrice=" + productPrice + ", quantity=" + quantity + ", productId=" + productId + ", skuId="
-				+ skuId + ", productCode=" + productCode + ", code=" + code + ", subTotal=" + subTotal
+		return "ShoppingCartItem [id=" + id + ", productName=" + productName + ", skuName=" + skuName + ", price="
+				+ price + ", image=" + image + ", itemPrice=" + itemPrice + ", quantity=" + quantity + ", productId="
+				+ productId + ", skuId=" + skuId + ", code=" + code + ", subTotal=" + subTotal
 				+ ", shoppingCartAttributes=" + shoppingCartAttributes + "]";
 	}
 

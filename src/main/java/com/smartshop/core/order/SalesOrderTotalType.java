@@ -1,6 +1,6 @@
 package com.smartshop.core.order;
 
-public enum OrderTotalType {
+public enum SalesOrderTotalType {
 	SHIPPING, HANDLING, TAX, PRODUCT, SUBTOTAL, TOTAL, CREDIT, REFUND
 
 }

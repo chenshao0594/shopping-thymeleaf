@@ -24,7 +24,7 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final com.smartshop.core.common.QBilling billing;
 
-    public final EnumPath<com.smartshop.core.order.enumeration.OrderChannel> channel = createEnum("channel", com.smartshop.core.order.enumeration.OrderChannel.class);
+    public final EnumPath<com.smartshop.core.order.enumeration.SalesOrderChannel> channel = createEnum("channel", com.smartshop.core.order.enumeration.SalesOrderChannel.class);
 
     public final BooleanPath confirmedAddress = createBoolean("confirmedAddress");
 
@@ -50,9 +50,9 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final DateTimePath<java.util.Date> orderDateFinished = createDateTime("orderDateFinished", java.util.Date.class);
 
-    public final SetPath<OrderStatusHistory, QOrderStatusHistory> orderHistory = this.<OrderStatusHistory, QOrderStatusHistory>createSet("orderHistory", OrderStatusHistory.class, QOrderStatusHistory.class, PathInits.DIRECT2);
+    public final SetPath<SalesOrderStatusHistory, QSalesOrderStatusHistory> orderHistory = this.<SalesOrderStatusHistory, QSalesOrderStatusHistory>createSet("orderHistory", SalesOrderStatusHistory.class, QSalesOrderStatusHistory.class, PathInits.DIRECT2);
 
-    public final EnumPath<com.smartshop.core.order.enumeration.OrderType> orderType = createEnum("orderType", com.smartshop.core.order.enumeration.OrderType.class);
+    public final EnumPath<com.smartshop.core.order.enumeration.SalesOrderType> orderType = createEnum("orderType", com.smartshop.core.order.enumeration.SalesOrderType.class);
 
     public final StringPath paymentCode = createString("paymentCode");
 
@@ -60,7 +60,7 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final StringPath shippingCode = createString("shippingCode");
 
-    public final EnumPath<com.smartshop.core.order.enumeration.OrderStatus> status = createEnum("status", com.smartshop.core.order.enumeration.OrderStatus.class);
+    public final EnumPath<com.smartshop.core.order.enumeration.SalesOrderStatus> status = createEnum("status", com.smartshop.core.order.enumeration.SalesOrderStatus.class);
 
     public final NumberPath<java.math.BigDecimal> total = createNumber("total", java.math.BigDecimal.class);
 

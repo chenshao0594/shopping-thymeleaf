@@ -78,4 +78,6 @@ public interface CartService extends AbstractDomainService<Cart, Long> {
 
 	Cart createEmptyCart(Customer customer);
 
+	Cart getShoppingCartByCode(String cartCode);
+
 }

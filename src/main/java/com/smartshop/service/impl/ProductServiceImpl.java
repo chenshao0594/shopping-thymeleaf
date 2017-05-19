@@ -214,4 +214,9 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 
 		return dtos;
 	}
+
+	@Override
+	public String findNameById(Long id) {
+		return this.productRepository.findNameById(id);
+	}
 }

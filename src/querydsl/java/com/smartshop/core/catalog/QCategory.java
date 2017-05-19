@@ -24,8 +24,6 @@ public class QCategory extends EntityPathBase<Category> {
 
     public final SetPath<Category, QCategory> categories = this.<Category, QCategory>createSet("categories", Category.class, QCategory.class, PathInits.DIRECT2);
 
-    public final StringPath categoryImage = createString("categoryImage");
-
     public final BooleanPath categoryStatus = createBoolean("categoryStatus");
 
     public final StringPath code = createString("code");
@@ -33,6 +31,8 @@ public class QCategory extends EntityPathBase<Category> {
     public final NumberPath<Integer> depth = createNumber("depth", Integer.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final StringPath image = createString("image");
 
     public final StringPath lineage = createString("lineage");
 

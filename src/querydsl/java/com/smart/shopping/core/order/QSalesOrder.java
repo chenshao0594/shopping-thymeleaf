@@ -8,7 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import com.smartshop.core.order.OrderStatusHistory;
+import com.smartshop.core.order.SalesOrderStatusHistory;
 import com.smartshop.core.order.SalesOrder;
 
 
@@ -26,7 +26,7 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final com.smart.shopping.core.common.QBilling billing;
 
-    public final EnumPath<com.smartshop.core.order.enumeration.OrderChannel> channel = createEnum("channel", com.smartshop.core.order.enumeration.OrderChannel.class);
+    public final EnumPath<com.smartshop.core.order.enumeration.SalesOrderChannel> channel = createEnum("channel", com.smartshop.core.order.enumeration.SalesOrderChannel.class);
 
     public final BooleanPath confirmedAddress = createBoolean("confirmedAddress");
 
@@ -52,9 +52,9 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final DateTimePath<java.util.Date> orderDateFinished = createDateTime("orderDateFinished", java.util.Date.class);
 
-    public final SetPath<OrderStatusHistory, QOrderStatusHistory> orderHistory = this.<OrderStatusHistory, QOrderStatusHistory>createSet("orderHistory", OrderStatusHistory.class, QOrderStatusHistory.class, PathInits.DIRECT2);
+    public final SetPath<SalesOrderStatusHistory, QOrderStatusHistory> orderHistory = this.<SalesOrderStatusHistory, QOrderStatusHistory>createSet("orderHistory", SalesOrderStatusHistory.class, QOrderStatusHistory.class, PathInits.DIRECT2);
 
-    public final EnumPath<com.smartshop.core.order.enumeration.OrderType> orderType = createEnum("orderType", com.smartshop.core.order.enumeration.OrderType.class);
+    public final EnumPath<com.smartshop.core.order.enumeration.SalesOrderType> orderType = createEnum("orderType", com.smartshop.core.order.enumeration.SalesOrderType.class);
 
     public final StringPath paymentCode = createString("paymentCode");
 
@@ -62,7 +62,7 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final StringPath shippingCode = createString("shippingCode");
 
-    public final EnumPath<com.smartshop.core.order.enumeration.OrderStatus> status = createEnum("status", com.smartshop.core.order.enumeration.OrderStatus.class);
+    public final EnumPath<com.smartshop.core.order.enumeration.SalesOrderStatus> status = createEnum("status", com.smartshop.core.order.enumeration.SalesOrderStatus.class);
 
     public final NumberPath<java.math.BigDecimal> total = createNumber("total", java.math.BigDecimal.class);
 
