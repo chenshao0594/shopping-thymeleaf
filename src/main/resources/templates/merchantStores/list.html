@@ -31,9 +31,9 @@
 						<td th:text="${row.domainName}">Domain Name</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{'/merchantStores/'+${row.id}}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{/{admin}/merchantStores/{id}(admin=${admin_url}, id=${row.id})}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/merchantStores/'+${row.id}+'/edit'}">
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/merchantStores/{id}/edit(admin=${admin_url}, id=${row.id})}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

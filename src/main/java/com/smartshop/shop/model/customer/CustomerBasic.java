@@ -22,7 +22,6 @@ public class CustomerBasic implements Serializable {
 	private Address billing;
 	private Address delivery;
 	private String gender;
-
 	private String language;
 	private String firstName;
 	private String lastName;

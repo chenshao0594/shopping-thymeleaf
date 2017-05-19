@@ -14,13 +14,9 @@ public interface CartService extends AbstractDomainService<Cart, Long> {
 
 	Cart getShoppingCart(Customer customer) throws BusinessException;
 
-	void saveOrUpdate(Cart shoppingCart) throws BusinessException;
-
 	Cart getById(Long id, MerchantStore store) throws BusinessException;
 
 	Cart getByCode(String code, MerchantStore store) throws BusinessException;
-
-	Cart getByCustomer(Customer customer) throws BusinessException;
 
 	/**
 	 * Creates a list of ShippingProduct based on the ShoppingCart if items are
@@ -53,10 +49,6 @@ public interface CartService extends AbstractDomainService<Cart, Long> {
 	 */
 	CartItem populateShoppingCartItem(Product product) throws BusinessException;
 
-	void deleteCart(Cart cart) throws BusinessException;
-
-	void removeShoppingCart(Cart cart) throws BusinessException;
-
 	/**
 	 *
 	 * @param userShoppingModel
@@ -65,8 +57,8 @@ public interface CartService extends AbstractDomainService<Cart, Long> {
 	 * @return {@link Cart} merged Shopping Cart
 	 * @throws Exception
 	 */
-	public Cart mergeShoppingCarts(final Cart userShoppingCart, final Cart sessionCart,
-			final MerchantStore store) throws Exception;
+	public Cart mergeShoppingCarts(final Cart userShoppingCart, final Cart sessionCart, final MerchantStore store)
+			throws BusinessException;
 
 	/**
 	 * Determines if the shopping cart requires shipping
@@ -83,5 +75,7 @@ public interface CartService extends AbstractDomainService<Cart, Long> {
 	 * @param item
 	 */
 	void deleteShoppingCartItem(Long id);
+
+	Cart createEmptyCart(Customer customer);
 
 }

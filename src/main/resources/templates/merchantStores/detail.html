@@ -18,12 +18,24 @@
 			<dl class="row justify-content-md-center">
 				<dt class="col-md-2 text-right">Code</dt>
 				<dd class="col-md-4 text-left" th:text="${item.code}">Code</dd>
-				<dt class="col-md-2 text-right">Sort Order</dt>
-				<dd class="col-md-4 text-left" th:text="${item.sortOrder}">Code</dd>
-				<dt class="col-md-2 text-right">Parent</dt>
-				<dd class="col-md-4 text-left" th:text="${item.parent?.code}">Parent</dd>
-				<dt class="col-md-2 text-right"></dt>
-				<dd class="col-md-4 text-left"></dd>
+				<dt class="col-md-2 text-right">Name</dt>
+				<dd class="col-md-4 text-left" th:text="${item.name}">Name</dd>
+				<dt class="col-md-2 text-right">Domain Name</dt>
+				<dd class="col-md-4 text-left" th:text="${item.domainName}">Name</dd>
+				<dt class="col-md-2 text-right">phone</dt>
+				<dd class="col-md-4 text-left" th:text="${item.phone}">Phone</dd>
+				<dt class="col-md-2 text-right">Address</dt>
+				<dd class="col-md-4 text-left" th:text="${item.address}">Address</dd>
+				<dt class="col-md-2 text-right">City</dt>
+				<dd class="col-md-4 text-left" th:text="${item.city}">Parent</dd>
+				<dt class="col-md-2 text-right">Postal Code</dt>
+				<dd class="col-md-4 text-left" th:text="${item.postalcode}">Postal Code</dd>
+				<dt class="col-md-2 text-right">STATE PROVINCE</dt>
+				<dd class="col-md-4 text-left" th:text="${item.stateProvince}">STATE PROVINCE</dd>
+				<dt class="col-md-2 text-right">SIZE UNIT</dt>
+				<dd class="col-md-4 text-left" th:text="${item.sizeUnit}">SIZE_UNIT</dd>
+				<dt class="col-md-2 text-right">WEIGHT UNIT</dt>
+				<dd class="col-md-4 text-left" th:text="${item.weightUnit}">WEIGHT_UNIT</dd>
 			</dl>
 		</fieldset>
 		<fieldset>

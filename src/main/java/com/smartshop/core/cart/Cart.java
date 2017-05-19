@@ -27,7 +27,7 @@ import com.smartshop.domain.common.BusinessDomain;
 @Entity
 @Table(name = "SHOPPING_CART")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "shoppingCart")
+@Document(indexName = "shoppingcart")
 public class Cart extends BusinessDomain<Long, Cart> implements Serializable {
 
 	/**

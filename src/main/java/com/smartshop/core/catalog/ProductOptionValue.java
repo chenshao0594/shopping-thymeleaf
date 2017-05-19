@@ -14,7 +14,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smartshop.domain.MerchantStore;
 import com.smartshop.domain.common.BusinessDomain;
 import com.smartshop.domain.common.BusinessDomainInterface;
 
@@ -33,9 +32,6 @@ public class ProductOptionValue extends BusinessDomain<Long, ProductOption> impl
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "product_option_value_image")
-	private String productOptionValueImage;
-
 	@NotEmpty
 	@Column(name = "code", nullable = false)
 	private String code;
@@ -45,9 +41,6 @@ public class ProductOptionValue extends BusinessDomain<Long, ProductOption> impl
 
 	@Column(name = "display_only")
 	private Boolean displayOnly;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	private MerchantStore merchantStore;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private ProductOption productOption;
@@ -78,19 +71,6 @@ public class ProductOptionValue extends BusinessDomain<Long, ProductOption> impl
 		this.displayOnly = displayOnly;
 	}
 
-	public String getProductOptionValueImage() {
-		return productOptionValueImage;
-	}
-
-	public ProductOptionValue productOptionValueImage(String productOptionValueImage) {
-		this.productOptionValueImage = productOptionValueImage;
-		return this;
-	}
-
-	public void setProductOptionValueImage(String productOptionValueImage) {
-		this.productOptionValueImage = productOptionValueImage;
-	}
-
 	public String getCode() {
 		return code;
 	}
@@ -102,19 +82,6 @@ public class ProductOptionValue extends BusinessDomain<Long, ProductOption> impl
 
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-	public MerchantStore getMerchantStore() {
-		return merchantStore;
-	}
-
-	public ProductOptionValue merchantStore(MerchantStore merchantStore) {
-		this.merchantStore = merchantStore;
-		return this;
-	}
-
-	public void setMerchantStore(MerchantStore merchantStore) {
-		this.merchantStore = merchantStore;
 	}
 
 	public ProductOption getProductOption() {

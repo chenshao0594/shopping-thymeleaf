@@ -33,7 +33,7 @@ public class Country extends BusinessDomain<Long, Country> implements Serializab
 	@Column(name = "name")
 	private String name;
 
-	private String descriptions;
+	private String description;
 
 	@OneToMany(mappedBy = "country")
 	private Set<Zone> zones = new HashSet<>();
@@ -101,12 +101,12 @@ public class Country extends BusinessDomain<Long, Country> implements Serializab
 		this.zones = zones;
 	}
 
-	public String getDescriptions() {
-		return descriptions;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescriptions(String descriptions) {
-		this.descriptions = descriptions;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

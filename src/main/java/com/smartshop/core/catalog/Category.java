@@ -57,7 +57,7 @@ public class Category extends BusinessDomain<Long, Category> implements Serializ
 	private String code;
 
 	@Column(name = "image")
-	private String categoryImage;
+	private String image;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "parent")
@@ -156,19 +156,6 @@ public class Category extends BusinessDomain<Long, Category> implements Serializ
 		this.code = code;
 	}
 
-	public String getCategoryImage() {
-		return categoryImage;
-	}
-
-	public Category categoryImage(String categoryImage) {
-		this.categoryImage = categoryImage;
-		return this;
-	}
-
-	public void setCategoryImage(String categoryImage) {
-		this.categoryImage = categoryImage;
-	}
-
 	public Set<Category> getCategories() {
 		return categories;
 	}
@@ -205,6 +192,22 @@ public class Category extends BusinessDomain<Long, Category> implements Serializ
 
 	public void setParent(Category category) {
 		this.parent = category;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Boolean getCategoryStatus() {
+		return categoryStatus;
+	}
+
+	public Boolean getVisible() {
+		return visible;
 	}
 
 }

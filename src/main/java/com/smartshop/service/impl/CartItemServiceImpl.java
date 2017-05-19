@@ -7,20 +7,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.smartshop.core.cart.CartItem;
 import com.smartshop.core.cart.service.CartItemService;
-import com.smartshop.repository.ShoppingCartItemRepository;
+import com.smartshop.repository.CartItemRepository;
 
 /**
  * Service Implementation for managing Category.
  */
 @Service
 @Transactional
-public class ShoppingCartItemServiceImpl extends AbstractDomainServiceImpl<CartItem, Long>
+public class CartItemServiceImpl extends AbstractDomainServiceImpl<CartItem, Long>
 		implements CartItemService {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCartItemServiceImpl.class);
-	private final ShoppingCartItemRepository shoppingCartItemRepository;
+	private final Logger LOGGER = LoggerFactory.getLogger(CartItemServiceImpl.class);
+	private final CartItemRepository shoppingCartItemRepository;
 
-	public ShoppingCartItemServiceImpl(ShoppingCartItemRepository shoppingCartItemRepository) {
+	public CartItemServiceImpl(CartItemRepository shoppingCartItemRepository) {
 		super(shoppingCartItemRepository, null);
 		this.shoppingCartItemRepository = shoppingCartItemRepository;
 	}

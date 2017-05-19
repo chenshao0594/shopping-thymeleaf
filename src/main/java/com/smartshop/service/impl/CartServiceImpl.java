@@ -1,6 +1,7 @@
 package com.smartshop.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ import com.smartshop.core.catalog.Product;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
-import com.smartshop.repository.ShoppingCartRepository;
+import com.smartshop.repository.CartRepository;
 import com.smartshop.repository.search.ShoppingCartSearchRepository;
 
 /**
@@ -22,14 +23,13 @@ import com.smartshop.repository.search.ShoppingCartSearchRepository;
  */
 @Service
 @Transactional
-public class ShoppingCartServiceImpl extends AbstractDomainServiceImpl<Cart, Long>
-		implements CartService {
+public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> implements CartService {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCartServiceImpl.class);
-	private final ShoppingCartRepository shoppingCartRepository;
+	private final Logger LOGGER = LoggerFactory.getLogger(CartServiceImpl.class);
+	private final CartRepository shoppingCartRepository;
 	private final ShoppingCartSearchRepository shoppingCartSearchRepository;
 
-	public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository,
+	public CartServiceImpl(CartRepository shoppingCartRepository,
 			ShoppingCartSearchRepository shoppingCartSearchRepository) {
 		super(shoppingCartRepository, shoppingCartSearchRepository);
 		this.shoppingCartRepository = shoppingCartRepository;
@@ -38,14 +38,7 @@ public class ShoppingCartServiceImpl extends AbstractDomainServiceImpl<Cart, Lon
 
 	@Override
 	public Cart getShoppingCart(Customer customer) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void saveOrUpdate(Cart shoppingCart) throws BusinessException {
-		// TODO Auto-generated method stub
-
+		return shoppingCartRepository.findByCustomer(customer.getId());
 	}
 
 	@Override
@@ -56,12 +49,6 @@ public class ShoppingCartServiceImpl extends AbstractDomainServiceImpl<Cart, Lon
 
 	@Override
 	public Cart getByCode(String code, MerchantStore store) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Cart getByCustomer(Customer customer) throws BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -85,20 +72,8 @@ public class ShoppingCartServiceImpl extends AbstractDomainServiceImpl<Cart, Lon
 	}
 
 	@Override
-	public void deleteCart(Cart cart) throws BusinessException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void removeShoppingCart(Cart cart) throws BusinessException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public Cart mergeShoppingCarts(Cart userShoppingCart, Cart sessionCart, MerchantStore store)
-			throws Exception {
+			throws BusinessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -113,6 +88,16 @@ public class ShoppingCartServiceImpl extends AbstractDomainServiceImpl<Cart, Lon
 	public void deleteShoppingCartItem(Long id) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Cart createEmptyCart(Customer customer) {
+		Cart cart = new Cart();
+		String code = UUID.randomUUID().toString().replaceAll("-", "");
+		cart.setCode(code);
+		// cart.setCustomerId(customer.getId());
+		this.shoppingCartRepository.save(cart);
+		return cart;
 	}
 
 }

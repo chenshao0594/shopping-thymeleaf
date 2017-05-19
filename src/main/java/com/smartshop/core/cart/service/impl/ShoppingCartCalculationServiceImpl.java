@@ -95,7 +95,7 @@ public class ShoppingCartCalculationServiceImpl implements ShoppingCartCalculati
 	}
 
 	private void updateCartModel(final Cart cartModel) throws BusinessException {
-		shoppingCartService.saveOrUpdate(cartModel);
+		shoppingCartService.save(cartModel);
 	}
 
 }

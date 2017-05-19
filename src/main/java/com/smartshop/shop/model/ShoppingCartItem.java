@@ -17,8 +17,8 @@ public class ShoppingCartItem implements Serializable {
 	private String image;
 	private BigDecimal productPrice;
 	private int quantity;
-	private long productId;
-	private long skuId;
+	private Long productId;
+	private Long skuId;
 	private String productCode;
 	private String code;// shopping cart code
 	private String subTotal;
@@ -73,14 +73,6 @@ public class ShoppingCartItem implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(long productId) {
-		this.productId = productId;
-	}
-
 	public String getProductCode() {
 		return productCode;
 	}
@@ -113,11 +105,19 @@ public class ShoppingCartItem implements Serializable {
 		this.shoppingCartAttributes = shoppingCartAttributes;
 	}
 
-	public long getSkuId() {
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public Long getSkuId() {
 		return skuId;
 	}
 
-	public void setSkuId(long skuId) {
+	public void setSkuId(Long skuId) {
 		this.skuId = skuId;
 	}
 

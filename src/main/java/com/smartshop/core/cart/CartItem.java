@@ -45,8 +45,8 @@ public class CartItem extends LiteDomain<Long, CartItem> implements Serializable
 	@Column(name = "PRODUCT_ID", nullable = false)
 	private Long productId;
 
-	@Transient
-	private boolean productVirtual;
+	@Column(name = "SKU_ID")
+	private Long skuId;
 
 	@Transient
 	private BigDecimal itemPrice;// item final price including all rebates
@@ -94,14 +94,6 @@ public class CartItem extends LiteDomain<Long, CartItem> implements Serializable
 		this.productId = productId;
 	}
 
-	public boolean isProductVirtual() {
-		return productVirtual;
-	}
-
-	public void setProductVirtual(boolean productVirtual) {
-		this.productVirtual = productVirtual;
-	}
-
 	public BigDecimal getItemPrice() {
 		return itemPrice;
 	}
@@ -132,6 +124,14 @@ public class CartItem extends LiteDomain<Long, CartItem> implements Serializable
 
 	public void setObsolete(boolean obsolete) {
 		this.obsolete = obsolete;
+	}
+
+	public Long getSkuId() {
+		return skuId;
+	}
+
+	public void setSkuId(Long skuId) {
+		this.skuId = skuId;
 	}
 
 }
