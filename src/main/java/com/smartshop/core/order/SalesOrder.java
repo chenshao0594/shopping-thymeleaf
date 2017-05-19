@@ -42,7 +42,7 @@ import com.smartshop.domain.common.BusinessDomain;
 @Entity
 @Table(name = "SALES_ORDER")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "salesOrder")
+@Document(indexName = "salesorder")
 public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

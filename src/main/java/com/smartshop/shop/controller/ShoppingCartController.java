@@ -8,14 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
@@ -32,8 +31,6 @@ import com.smartshop.shop.model.ShoppingCartItem;
 @RequestMapping("/cart")
 public class ShoppingCartController extends AbstractShopController {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCartController.class);
-
 	@Inject
 	private CartService shoppingCartService;
 
@@ -49,10 +46,10 @@ public class ShoppingCartController extends AbstractShopController {
 
 	@Timed
 	@PostMapping()
-	public ShoppingCartData addShoppingCartItem(@RequestBody final ShoppingCartItem item,
+	public @ResponseBody ShoppingCartData addShoppingCartItem(@RequestBody final ShoppingCartItem item,
 			final HttpServletRequest request, final HttpServletResponse response, final Locale locale)
 			throws Exception {
-		LOGGER.info("shopping cart item is {}", item);
+
 		ShoppingCartData shoppingCart = null;
 		// Look in the HttpSession to see if a customer is logged in
 		MerchantStore store = getSessionAttribute(AppConstants.MERCHANT_STORE, request);

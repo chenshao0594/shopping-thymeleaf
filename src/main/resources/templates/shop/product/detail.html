@@ -58,20 +58,23 @@
 <section layout:fragment="footer-script">
 	<script type="text/javascript">
 		$(document).ready(function() {
+			/* $.ajaxSetup({
+				contentType : 'application/json',
+			}); */
 			$("#addCart").click(function(){
 				var productId = $("#productId").val();
 				var skuId = $("#skuId").val();
 				var quantity = $("#quantity").val();
 				$.post("/cart", 
 						{productId : productId,
-						 skuId:skuId,
-						 quantity:quantity,
+						 skuId: skuId,
+						 quantity: quantity,
 						 [[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
 						}, 
 						function(data, textStatus, req) {
 							alert("add cart item work !!!");
 					
-						});
+						},'json');
 			});  
 		});
 	</script>
