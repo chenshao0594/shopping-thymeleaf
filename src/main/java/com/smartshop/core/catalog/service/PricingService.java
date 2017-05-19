@@ -1,8 +1,6 @@
 package com.smartshop.core.catalog.service;
 
 import java.math.BigDecimal;
-import java.util.Currency;
-import java.util.Locale;
 
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.price.FinalPrice;
@@ -43,19 +41,21 @@ public interface PricingService {
 	 */
 	String getDisplayAmount(BigDecimal amount, MerchantStore store) throws BusinessException;
 
-	/**
-	 * Method to be used when building an amount formatted with the appropriate
-	 * currency
-	 *
-	 * @param amount
-	 * @param locale
-	 * @param currency
-	 * @param store
-	 * @return
-	 * @throws BusinessException
-	 */
-	String getDisplayAmount(BigDecimal amount, Locale locale, Currency currency, MerchantStore store)
-			throws BusinessException;
+	// /**
+	// * Method to be used when building an amount formatted with the
+	// appropriate
+	// * currency
+	// *
+	// * @param amount
+	// * @param locale
+	// * @param currency
+	// * @param store
+	// * @return
+	// * @throws BusinessException
+	// */
+	// String getDisplayAmount(BigDecimal amount, Locale locale, Currency
+	// currency, MerchantStore store)
+	// throws BusinessException;
 
 	/**
 	 * String format of the money amount without currency symbol

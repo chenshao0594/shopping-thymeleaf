@@ -2,8 +2,6 @@ package com.smartshop.core.catalog.service.impl;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
-import java.util.Currency;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,17 +32,18 @@ public class PricingServiceImpl implements PricingService {
 
 	@Override
 	public String getDisplayAmount(BigDecimal amount, MerchantStore store) throws BusinessException {
-		NumberFormat currencyInstance = NumberFormat.getCurrencyInstance();
+		NumberFormat currencyInstance = NumberFormat.getCurrencyInstance(store.getLocale());
 		currencyInstance.setCurrency(store.getCurrency());
 		return currencyInstance.format(amount.doubleValue());
 	}
-
-	@Override
-	public String getDisplayAmount(BigDecimal amount, Locale locale, Currency currency, MerchantStore store)
-			throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	//
+	// @Override
+	// public String getDisplayAmount(BigDecimal amount, Locale locale, Currency
+	// currency, MerchantStore store)
+	// throws BusinessException {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 
 	@Override
 	public String getStringAmount(BigDecimal amount, MerchantStore store) throws BusinessException {

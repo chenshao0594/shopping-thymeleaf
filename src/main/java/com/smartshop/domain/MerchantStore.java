@@ -1,6 +1,7 @@
 package com.smartshop.domain;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -112,6 +113,8 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 
 	@Transient
 	private java.util.Currency currency = BusinessConstants.DEFAULT_CURRENCY;
+	@Transient
+	private Locale locale = Locale.US;
 
 	@Override
 	public Long getId() {
@@ -257,6 +260,14 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 
 	public void setCurrency(java.util.Currency currency) {
 		this.currency = currency;
+	}
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 
 }
