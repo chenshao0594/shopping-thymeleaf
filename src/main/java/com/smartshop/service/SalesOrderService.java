@@ -98,13 +98,4 @@ public interface SalesOrderService extends AbstractDomainService<SalesOrder, Lon
 	SalesOrder processOrder(SalesOrder order, Customer customer, List<CartItem> items, OrderTotalSummary summary,
 			Payment payment, Transaction transaction, MerchantStore store) throws BusinessException;
 
-	/**
-	 * Determines if an Order has download files
-	 *
-	 * @param order
-	 * @return
-	 * @throws BusinessException
-	 */
-	boolean hasDownloadFiles(SalesOrder order) throws BusinessException;
-
 }

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.smartshop.constants.AppConstants;
 import com.smartshop.interceptor.AdminInterceptor;
 import com.smartshop.interceptor.ShopInterceptor;
 

@@ -18,10 +18,9 @@ public class ShoppingCartData implements Serializable {
 	private int quantity;
 	private String total;
 	private String subTotal;
-
 	private List<OrderTotal> totals;// calculated from OrderTotalSummary
 	private List<ShoppingCartItem> shoppingCartItems;
-	private List<ShoppingCartItem> unavailables;
+	// private List<ShoppingCartItem> unavailables;
 
 	public String getMessage() {
 		return message;
@@ -71,14 +70,12 @@ public class ShoppingCartData implements Serializable {
 		this.shoppingCartItems = shoppingCartItems;
 	}
 
-	public List<ShoppingCartItem> getUnavailables() {
-		return unavailables;
-	}
-
-	public void setUnavailables(List<ShoppingCartItem> unavailables) {
-		this.unavailables = unavailables;
-	}
-
+	/*
+	 * public List<ShoppingCartItem> getUnavailables() { return unavailables; }
+	 * 
+	 * public void setUnavailables(List<ShoppingCartItem> unavailables) {
+	 * this.unavailables = unavailables; }
+	 */
 	public Long getId() {
 		return id;
 	}

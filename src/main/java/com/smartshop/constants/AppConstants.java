@@ -1,4 +1,4 @@
-package com.smartshop.config;
+package com.smartshop.constants;
 
 /**
  * Application constants.

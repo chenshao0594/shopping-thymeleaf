@@ -28,7 +28,7 @@ import org.hibernate.validator.constraints.Email;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 
 /**
  * A user.

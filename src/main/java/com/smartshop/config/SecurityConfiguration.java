@@ -21,6 +21,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 
+import com.smartshop.constants.AppConstants;
 import com.smartshop.security.AuthoritiesConstants;
 
 import io.github.jhipster.config.JHipsterProperties;

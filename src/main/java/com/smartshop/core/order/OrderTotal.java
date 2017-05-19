@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,13 +49,16 @@ public class OrderTotal extends BusinessDomain<Long, OrderTotal> implements Seri
 	@Column(name = "MODULE", length = 60, nullable = true)
 	private String module;
 
-	// @Column(name = "ORDER_VALUE_TYPE")
-	// @Enumerated(value = EnumType.STRING)
-	// private OrderValueType orderValueType = OrderValueType.ONE_TIME;
-	//
-	// @Column(name = "ORDER_TOTAL_TYPE")
-	// @Enumerated(value = EnumType.STRING)
-	// private OrderTotalType orderTotalType = null;
+	/*
+	 * @Column(name = "ORDER_VALUE_TYPE")
+	 *
+	 * @Enumerated(value = EnumType.STRING) private OrderValueType
+	 * orderValueType = OrderValueType.ONE_TIME;
+	 */
+
+	@Column(name = "ORDER_TOTAL_TYPE")
+	@Enumerated(value = EnumType.STRING)
+	private OrderTotalType orderTotalType = null;
 
 	@Column(name = "SORT_ORDER", nullable = false)
 	private int sortOrder;
@@ -70,6 +75,70 @@ public class OrderTotal extends BusinessDomain<Long, OrderTotal> implements Seri
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getOrderTotalCode() {
+		return orderTotalCode;
+	}
+
+	public void setOrderTotalCode(String orderTotalCode) {
+		this.orderTotalCode = orderTotalCode;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public BigDecimal getValue() {
+		return value;
+	}
+
+	public void setValue(BigDecimal value) {
+		this.value = value;
+	}
+
+	public String getModule() {
+		return module;
+	}
+
+	public void setModule(String module) {
+		this.module = module;
+	}
+
+	public int getSortOrder() {
+		return sortOrder;
+	}
+
+	public void setSortOrder(int sortOrder) {
+		this.sortOrder = sortOrder;
+	}
+
+	public SalesOrder getOrder() {
+		return order;
+	}
+
+	public void setOrder(SalesOrder order) {
+		this.order = order;
+	}
+
+	public OrderTotalType getOrderTotalType() {
+		return orderTotalType;
+	}
+
+	public void setOrderTotalType(OrderTotalType orderTotalType) {
+		this.orderTotalType = orderTotalType;
 	}
 
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 import com.smartshop.core.catalog.ProductOption;
 import com.smartshop.core.catalog.ProductOptionValue;
 import com.smartshop.core.catalog.service.ProductOptionService;

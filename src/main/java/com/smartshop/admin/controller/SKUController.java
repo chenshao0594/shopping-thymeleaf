@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 import com.smartshop.core.catalog.SKU;
 import com.smartshop.service.SKUService;
 

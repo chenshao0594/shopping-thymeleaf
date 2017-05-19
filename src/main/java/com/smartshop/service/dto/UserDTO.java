@@ -1,6 +1,6 @@
 package com.smartshop.service.dto;
 
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 import com.smartshop.domain.Authority;
 import com.smartshop.domain.User;
 

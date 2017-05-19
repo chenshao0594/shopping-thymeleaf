@@ -1,7 +1,7 @@
 package com.smartshop.repository;
 
-import com.smartshop.config.AppConstants;
 import com.smartshop.config.audit.AuditEventConverter;
+import com.smartshop.constants.AppConstants;
 import com.smartshop.domain.PersistentAuditEvent;
 
 import org.springframework.boot.actuate.audit.AuditEvent;

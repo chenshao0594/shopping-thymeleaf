@@ -80,8 +80,12 @@ public class ShoppingCartFacadeImpl implements ShoppingCartFacade {
 
 	@Override
 	public ShoppingCartData getShoppingCartData(Cart shoppingCart) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		ShoppingCartData shoppingCartData = new ShoppingCartData();
+		shoppingCartData.setCode(shoppingCart.getCode());
+		shoppingCartData.setId(shoppingCart.getId());
+		BigDecimal total = new BigDecimal(0);
+		shoppingCartData.setTotal(shoppingCart);
+		return shoppingCartData;
 	}
 
 	@Override

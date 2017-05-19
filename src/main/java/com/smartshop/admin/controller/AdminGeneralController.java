@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 
 @Controller
 @ControllerAdvice

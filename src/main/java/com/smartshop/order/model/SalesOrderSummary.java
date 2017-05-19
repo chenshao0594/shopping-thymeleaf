@@ -1,8 +1,8 @@
 package com.smartshop.order.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.smartshop.core.cart.CartItem;
 import com.smartshop.core.shipping.model.ShippingSummary;
@@ -15,14 +15,14 @@ public class SalesOrderSummary implements Serializable {
 	private static final long serialVersionUID = -8683318345130020683L;
 	private OrderSummaryEnum orderSummaryType = OrderSummaryEnum.ORDERTOTAL;
 	private ShippingSummary shippingSummary;
-	private List<CartItem> products = new ArrayList<CartItem>();
+	private Set<CartItem> cartItems = new HashSet<CartItem>();
 
-	public void setProducts(List<CartItem> products) {
-		this.products = products;
+	public Set<CartItem> getCartItems() {
+		return cartItems;
 	}
 
-	public List<CartItem> getProducts() {
-		return products;
+	public void setCartItems(Set<CartItem> cartItems) {
+		this.cartItems = cartItems;
 	}
 
 	public void setShippingSummary(ShippingSummary shippingSummary) {

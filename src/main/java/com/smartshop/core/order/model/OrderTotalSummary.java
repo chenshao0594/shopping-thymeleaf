@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.smartshop.order.model.OrderTotal;
+import com.smartshop.core.order.OrderTotal;
 
 public class OrderTotalSummary implements Serializable {
 

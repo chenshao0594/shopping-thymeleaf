@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smartshop.admin.controller.AbstractDomainController;
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 import com.smartshop.customer.CustomerDTO;
 import com.smartshop.domain.Customer;
 import com.smartshop.exception.BusinessException;

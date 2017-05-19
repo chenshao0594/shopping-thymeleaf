@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.smartshop.admin.controller.AbstractDomainController;
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 import com.smartshop.core.order.SalesOrder;
 import com.smartshop.service.SalesOrderService;
 

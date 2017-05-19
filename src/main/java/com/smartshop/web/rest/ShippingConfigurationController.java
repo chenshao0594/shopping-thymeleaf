@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.smartshop.admin.controller.AbstractDomainController;
 import com.smartshop.admin.controller.ProductOptionController;
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 import com.smartshop.domain.ShippingConfiguration;
 import com.smartshop.service.ShippingConfigurationService;
 

@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 import com.smartshop.core.cart.Cart;
 import com.smartshop.core.cart.service.CartService;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.facade.ShoppingCartFacade;
+import com.smartshop.shop.model.ShoppingCartData;
 import com.smartshop.shop.model.ShoppingCartItem;
 
 @RestController("ShopCartController")
@@ -46,9 +47,11 @@ public class ShoppingCartController extends AbstractShopController {
 
 	@Timed
 	@PostMapping()
-	public ResponseEntity<Cart> addShoppingCartItem(final ShoppingCartItem item, final HttpServletRequest request,
-			final HttpServletResponse response, final Locale locale) throws BusinessException {
+	public ResponseEntity<ShoppingCartData> addShoppingCartItem(final ShoppingCartItem item,
+			final HttpServletRequest request, final HttpServletResponse response, final Locale locale)
+			throws BusinessException {
 		log.info("shopping cart item  {}", item);
+		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
 		MerchantStore store = getSessionAttribute(AppConstants.MERCHANT_STORE, request);
 		Customer customer = getSessionAttribute(AppConstants.CUSTOMER, request);
@@ -59,9 +62,11 @@ public class ShoppingCartController extends AbstractShopController {
 			shoppingCart = shoppingCartService.createEmptyCart(customer);
 		}
 		shoppingCart = shoppingCartFacade.addItemsToShoppingCart(shoppingCart, item, store, customer);
+
+		shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart);
 		request.getSession().setAttribute(AppConstants.SHOPPING_CART, shoppingCart.getCode());
 		log.info("shopping cart", shoppingCart);
-		return ResponseEntity.ok().body(shoppingCart);
+		return ResponseEntity.ok().body(shoppingCartData);
 	}
 
 	@Timed

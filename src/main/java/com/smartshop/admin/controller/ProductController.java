@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.codahale.metrics.annotation.Timed;
 import com.smartshop.attachment.common.AttachmentEnum;
 import com.smartshop.attachment.common.PreviewConfig;
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.ProductOption;
 import com.smartshop.core.catalog.service.CategoryService;

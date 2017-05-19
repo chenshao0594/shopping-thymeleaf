@@ -41,7 +41,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.smartshop.attachment.common.AttachmentEnum;
 import com.smartshop.attachment.common.AttachmentResponse;
 import com.smartshop.attachment.common.PreviewConfig;
-import com.smartshop.config.AppConstants;
+import com.smartshop.constants.AppConstants;
 import com.smartshop.domain.Attachment;
 import com.smartshop.service.AttachmentService;
 
