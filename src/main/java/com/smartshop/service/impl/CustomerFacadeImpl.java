@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.smartshop.core.common.Address;
+import com.smartshop.customer.CustomerRO;
 import com.smartshop.domain.Authority;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
@@ -70,13 +71,13 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	}
 
 	@Override
-	public boolean checkIfUserExists(String userName, MerchantStore store) throws BusinessException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean checkIfUserExists(String email, MerchantStore store) throws BusinessException {
+		Customer customer = this.customerService.findCustomerByEmailAddress(email);
+		return customer != null;
 	}
 
 	@Override
-	public CustomerModel registerCustomer(CustomerModel customerInfo, MerchantStore merchantStore)
+	public CustomerModel registerCustomer(CustomerRO customerInfo, MerchantStore merchantStore)
 			throws BusinessException {
 		Customer customer = new Customer();
 		BeanUtils.copyProperties(customerInfo, customer);

@@ -44,6 +44,10 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 	private Long id;
 
 	@NotEmpty
+	@Column(name = "name", length = 64, nullable = false)
+	private String name;
+
+	@NotEmpty
 	@Column(name = "LAST_NAME", length = 64, nullable = false)
 	private String lastName;
 
@@ -63,9 +67,6 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	@Column(name = "company")
 	private String company;
-
-	@Column(name = "nick")
-	private String nick;
 
 	@Column(name = "remark")
 	private String remark;
@@ -160,19 +161,6 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	public void setCompany(String company) {
 		this.company = company;
-	}
-
-	public String getNick() {
-		return nick;
-	}
-
-	public Customer nick(String nick) {
-		this.nick = nick;
-		return this;
-	}
-
-	public void setNick(String nick) {
-		this.nick = nick;
 	}
 
 	public String getEmailAddress() {
@@ -283,6 +271,14 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	public void setAuthority(Authority authority) {
 		this.authority = authority;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

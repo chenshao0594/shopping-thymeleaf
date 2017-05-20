@@ -46,7 +46,7 @@ public class QCustomer extends EntityPathBase<Customer> {
 
     public final QMerchantStore merchantStore;
 
-    public final StringPath nick = createString("nick");
+    public final StringPath name = createString("name");
 
     public final StringPath password = createString("password");
 

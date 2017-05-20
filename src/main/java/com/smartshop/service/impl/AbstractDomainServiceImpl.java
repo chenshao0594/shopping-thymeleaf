@@ -48,13 +48,17 @@ public abstract class AbstractDomainServiceImpl<E extends BusinessDomainInterfac
 	@Override
 	public void delete(E entity) throws ServiceException {
 		repository.delete(entity);
-		searchRepository.delete(entity);
+		if (searchRepository != null) {
+			searchRepository.delete(entity);
+		}
 	}
 
 	@Override
 	public void delete(K id) throws ServiceException {
 		repository.delete(id);
-		searchRepository.delete(id);
+		if (searchRepository != null) {
+			searchRepository.delete(id);
+		}
 	}
 
 	@Override

@@ -12,7 +12,7 @@
 		<div class="six columns">
 			<div class="item-images">
 				<div class="big-image">
-					<img src="/shop/demo/1.jpeg" />
+					<img th:src="@{/images/product/{productId}/thumbnail(productId=${product.id})}" />
 				</div>
 				<ul class="row">
 					<li class="four columns mobile-two" th:each="image : ${images}"><a href="#"><img

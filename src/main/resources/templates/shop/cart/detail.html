@@ -13,37 +13,33 @@
 						<th class="narrow">Total</th>
 						<th class="narrow"></th>
 					</tr>
-					<tr>
-						<td><a class="hide-for-small" href="/product/{{ item.product.url_name }}"><img
-								src="/shop/demo/Boatshoe.png" /></a>
+					<tr th:each="item : ${shoppingcart.shoppingCartItems}">
+						<td><a class="hide-for-small"
+							th:href="@{/product/{productId}(productId=${item.productId})}"><img
+								th:src="@{/images/product/{productId}/thumbnail(productId=${item.productId})}"
+								style="width: 52px;" /></a>
 							<div class="short-description">
 								<h3>
-									<a href="/product/{{ item.product.url_name }}">{{ item.product.name }}</a>
+									<a th:href="@{/product/{productId}(productId=${item.productId})}"> [[${item.productName
+										}]]</a>
 								</h3>
-							</div>
-						</td>
-						<td class="narrow">
-						<input type="text" name="item_quantity[{{ item.key }}]"
-							class="quantity" value="quantity"></td> 
-						<td class="narrow"><i>price</i></td>
-						<td class="narrow"><i>total</i></td>
-						<td class="narrow remove"><a href="#" data-ajax-handler="shop:cart" {#
-							data-ajax-confirm="Do you really want to remove this item from the cart?"
-							#}
-        data-ajax-update="#cart-content=shop-cart-content, #mini-cart=shop-minicart"
-							data-ajax-extra-fields="delete_item='{{ item.key }}'">Remove</a></td>
+							</div></td>
+						<td class="narrow"><input type="text" name="item_quantity[{{ item.quantity}}]"
+							class="quantity" th:value="${item.quantity}"></td>
+						<td class="narrow"><i>[[${item.itemPrice}]]</i></td>
+						<td class="narrow"><i>[[${item.subTotal}]]</i></td>
+						<td class="narrow remove"><a href="#">Remove</a></td>
 					</tr>
 				</table>
 			</div>
-			<div class="row">
+			<div class="row" th:if="!${isEmpty}">
 				<!-- shipping estimate calculator... how to do this? -->
 				<div class="six columns" style="display: none">
 					<h3>Shipping rates calculator</h3>
 					<div class="row">
 						<div class="four columns">
-							<label for="country">Country</label>
-							<select id="country" name="country" data-state-select="state"
-								data-current-state="{{ shipping_info.state }}">
+							<label for="country">Country</label> <select id="country" name="country"
+								data-state-select="state" data-current-state="{{ shipping_info.state }}">
 								<option value="{{ country.id }}"{{ option_state(country.id, shipping_info.country) }}>{{
 									country.name }}</option>
 							</select>
@@ -64,36 +60,34 @@
 				</div>
 				<div class="three columns offset-by-three data-list align-right">
 					<p>
-						<strong>Cart total:</strong> <i>subtotal</i>
+						<strong>Cart total:</strong> <i>[[${shoppingcart.subTotal}]]</i>
 					</p>
-					<p>
+					<!-- <p>
 						<strong>Shipping:</strong> <i>ShippingQuote</i>
-					</p>
+					</p> -->
 					<p class="subtotal">
-						<strong>Estimated total:</strong> <i>total</i>
+						<strong>Estimated total:</strong> <i>[[${shoppingcart.total}]]</i>
 					</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="buttons-block">
 					<div class="six columns">
-						<a class="secondary button" href="{{ site_url('shop') }}">Continue shopping</a>
+						<a class="secondary button" th:href="${continueShopping}">Continue shopping</a>
 					</div>
 					<div class="six columns">
 						<div class="right">
-							<input type="text" id="coupon" name="coupon" value="{{ coupon_code }}"
-								placeholder="Coupon code" /> <a class="secondary button" href="#"
-								data-ajax-handler="shop:cart"
-								data-ajax-update="#cart-content=shop-cart-content, #mini-cart=shop-minicart">Update cart</a>
-							<a class="button" href="{{ site_url('/checkout') }}">Checkout</a> 
-							
-						<!-- 	<a class="button"
+							<!-- 	<input type="text" id="coupon" name="coupon" value="{{ coupon_code }}"
+								placeholder="Coupon code" />  -->
+							<a class="secondary button" href="#">Update cart</a> <a class="button"
+								th:href="@{/checkout}">Checkout</a>
+							<!-- 	<a class="button"
 								href="{{ site_url('/checkout-start') }}">Checkout</a> -->
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" th:if="${isEmpty}">
 				<div class="six columns">
 					<a class="secondary button" href="{{ site_url('shop') }}">Your cart is empty! Continue
 						shopping.</a>

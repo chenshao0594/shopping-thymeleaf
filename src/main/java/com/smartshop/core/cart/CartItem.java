@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class CartItem extends LiteDomain<Long, CartItem> implements Serializable
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(targetEntity = Cart.class)
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Cart.class)
 	@JoinColumn(name = "SHP_CART_ID", nullable = false)
 	private Cart shoppingCart;
 

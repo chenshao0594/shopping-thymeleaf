@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.smartshop.constants.AppConstants;
@@ -41,9 +42,6 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 			/** merchant store **/
 			MerchantStore store = (MerchantStore) request.getSession().getAttribute(AppConstants.MERCHANT_STORE);
 			String storeCode = request.getParameter(STORE_REQUEST_PARAMETER);
-			// remove link set from controllers for declaring active - inactive
-			// links
-			request.removeAttribute(AppConstants.LINK_CODE);
 			if (!StringUtils.isBlank(storeCode)) {
 				if (store != null) {
 					if (!store.getCode().equals(storeCode)) {
@@ -53,7 +51,6 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 					store = setMerchantStoreInSession(request, storeCode);
 				}
 			}
-
 			if (store == null) {
 				store = setMerchantStoreInSession(request, MerchantStore.DEFAULT_STORE);
 			}
@@ -133,30 +130,6 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 			 *
 			 **/
 			// setBreadcrumb(request, Locale.ENGLISH);
-
-			/**
-			 * Get global objects Themes are built on a similar way displaying
-			 * Header, Body and Footer Header and Footer are displayed on each
-			 * page Some themes also contain side bars which may include similar
-			 * emements
-			 *
-			 * Elements from Header : - CMS links - Customer - Mini shopping
-			 * cart - Store name / logo - Top categories - Search
-			 *
-			 * Elements from Footer : - CMS links - Store address - Global
-			 * payment information - Global shipping information
-			 */
-
-			// get from the cache first
-			/**
-			 * The cache for each object contains 2 objects, a Cache and a
-			 * Missed-Cache Get objects from the cache If not null use those
-			 * objects If null, get entry from missed-cache If missed-cache not
-			 * null then nothing exist If missed-cache null, add missed-cache
-			 * entry and load from the database If objects from database not
-			 * null store in cache
-			 */
-
 			/*******
 			 * Top Categories **
 			 *
@@ -185,8 +158,18 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 		} catch (Exception e) {
 			LOGGER.error("Error in StoreFilter", e);
 		}
-
 		return true;
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		if (modelAndView != null) {
+			modelAndView.addObject("continueShopping",
+					request.getSession().getAttribute(AppConstants.CONTINUE_SHOPPING));
+			modelAndView.addObject("cartTotal", request.getSession().getAttribute(AppConstants.CART_TOTAL));
+			modelAndView.addObject("cartItemsTotal", request.getSession().getAttribute(AppConstants.CARTITEMS_TOTAL));
+		}
 
 	}
 
@@ -196,6 +179,7 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 		MerchantStore store = merchantService.getByCode(storeCode);
 		if (store != null) {
 			request.getSession().setAttribute(AppConstants.MERCHANT_STORE, store);
+			request.getSession().setAttribute(AppConstants.CONTINUE_SHOPPING, store.getContinueShoppingURL());
 		}
 		return store;
 	}

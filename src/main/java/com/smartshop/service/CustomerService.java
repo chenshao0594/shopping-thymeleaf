@@ -10,6 +10,8 @@ import com.smartshop.exception.BusinessException;
  */
 public interface CustomerService extends AbstractDomainService<Customer, Long> {
 
+	Customer findCustomerByName(String name);
+
 	Customer findCustomerByEmailAddress(String emailAddress);
 
 	Address getCustomerAddress(MerchantStore store, String ipAddress) throws BusinessException;

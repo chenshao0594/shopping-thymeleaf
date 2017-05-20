@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.codahale.metrics.annotation.Timed;
 import com.smartshop.common.ShopControllerConstants;
 import com.smartshop.common.service.MessageService;
+import com.smartshop.customer.CustomerRO;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
@@ -57,11 +58,12 @@ public class CustomerRegistrationController {
 
 	@Timed
 	@PostMapping(value = "/register")
-	public String registerCustomer(@Valid CustomerModel customer, BindingResult bindingResult, Model model)
+	public String registerCustomer(@Valid CustomerRO customer, BindingResult bindingResult, Model model)
 			throws Exception {
 		MerchantStore merchantStore = this.merchantStoreService.findOne(1L);
 
 		if (bindingResult.hasErrors()) {
+			LOGGER.error("found validation error {}", bindingResult.getAllErrors());
 			LOGGER.debug("found {} validation error while validating in customer registration ",
 					bindingResult.getErrorCount());
 			StringBuilder template = new StringBuilder().append(ShopControllerConstants.Tiles.Customer.register);
@@ -69,8 +71,8 @@ public class CustomerRegistrationController {
 
 		}
 
-		if (customerFacade.checkIfUserExists(customer.getUserName(), merchantStore)) {
-			LOGGER.debug("Customer with username {} already exists for this store ", customer.getUserName());
+		if (customerFacade.checkIfUserExists(customer.getEmailAddress(), merchantStore)) {
+			LOGGER.debug("Customer with email  {} already exists for this store ", customer.getEmailAddress());
 			FieldError error = new FieldError("userName", "userName",
 					messageService.getMessage("registration.username.already.exists", Locale.ENGLISH));
 			bindingResult.addError(error);

@@ -1,6 +1,7 @@
 package com.smartshop.service;
 
 import com.smartshop.core.common.Address;
+import com.smartshop.customer.CustomerRO;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
@@ -18,9 +19,9 @@ public interface CustomerFacade {
 	public Customer getCustomerByEmailAddress(final String emailAddress, final MerchantStore store)
 			throws BusinessException;
 
-	public boolean checkIfUserExists(final String userName, final MerchantStore store) throws BusinessException;
+	public boolean checkIfUserExists(final String email, final MerchantStore store) throws BusinessException;
 
-	public CustomerModel registerCustomer(final CustomerModel customer, final MerchantStore merchantStore)
+	public CustomerModel registerCustomer(final CustomerRO customer, final MerchantStore merchantStore)
 			throws BusinessException;
 
 	public Address getAddress(final Long userId, final MerchantStore merchantStore, boolean isBillingAddress);

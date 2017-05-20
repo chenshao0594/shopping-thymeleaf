@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.smartshop.core.enumeration.Gender;
 
-public class CustomerDTO {
+public class CustomerRO {
 
 	private Long id;
 	@NotEmpty

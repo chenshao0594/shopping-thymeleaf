@@ -51,4 +51,11 @@ public class CustomerServiceImpl extends AbstractDomainServiceImpl<Customer, Lon
 
 	}
 
+	@Override
+	public Customer findCustomerByName(String name) {
+		QCustomer qCustomer = QCustomer.customer;
+		Customer result = this.customerRepository.findOne(qCustomer.name.eq(name));
+		return result;
+	}
+
 }

@@ -15,9 +15,16 @@ public final class AppConstants {
 	// customer
 	public static final String CUSTOMER = "customer";
 	public final static String ANONYMOUS_CUSTOMER = "ANONYMOUS_CUSTOMER";
+	public final static String PERMISSION_CUSTOMER_AUTHENTICATED = "AUTH_CUSTOMER";
+
 	// shopping cart
 	public final static String SHOPPING_CART = "SHOPPING-CART";
 	public final static String STORE_CODE = "STRORE-CODE";
+
+	public final static String CART_TOTAL = "CART_TOTAL";
+	public final static String CARTITEMS_TOTAL = "CARTITEMS_TOTAL";
+
+	public final static String CONTINUE_SHOPPING = "CONTINUE_SHOPPING";
 	// temp
 	public final static String LINK_CODE = "LINK_CODE";
 

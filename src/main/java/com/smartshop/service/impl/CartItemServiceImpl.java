@@ -36,4 +36,13 @@ public class CartItemServiceImpl extends AbstractDomainServiceImpl<CartItem, Lon
 		return this.shoppingCartItemRepository.findOne(resultExp);
 	}
 
+	@Override
+	public CartItem findCartItemByItemInfo(Long cartId, Long itemId) {
+		QCartItem qCartItem = QCartItem.cartItem;
+		BooleanExpression cartExp = qCartItem.shoppingCart.id.eq(cartId);
+		BooleanExpression productExp = qCartItem.id.eq(itemId);
+		BooleanExpression resultExp = cartExp.and(productExp);
+		return this.shoppingCartItemRepository.findOne(resultExp);
+	}
+
 }
