@@ -12,6 +12,7 @@ public final class AppConstants {
 	public static final String ANONYMOUS_USER = "anonymoususer";
 	public static final String ADMIN_PREFIX = "/admin";
 	public static final String MERCHANT_STORE = "merchantStore";
+	public static final String LANG = "en";
 	// customer
 	public static final String CUSTOMER = "customer";
 	public final static String ANONYMOUS_CUSTOMER = "ANONYMOUS_CUSTOMER";

@@ -25,19 +25,13 @@ public class CustomerUserServiceImpl implements UserDetailsService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(CustomerUserServiceImpl.class);
 
-	public final static String ROLE_PREFIX = "ROLE_";// Spring Security 4
-
 	@Inject
 	private CustomerService customerService;
 
-	// @Inject
-	// protected PermissionService permissionService;
-	//
-	// @Inject
-	// protected GroupService groupService;
-
 	@Override
 	public UserDetails loadUserByUsername(String customerName) throws UsernameNotFoundException, DataAccessException {
+		System.out.println("cusotmer user service ...");
+
 		Customer user = null;
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		user = customerService.findCustomerByName(customerName);

@@ -28,7 +28,6 @@ import com.smartshop.service.CustomerFacade;
 import com.smartshop.service.CustomerService;
 import com.smartshop.service.MailService;
 import com.smartshop.service.MerchantStoreService;
-import com.smartshop.shop.model.customer.CustomerModel;
 
 @Controller("ShopCustomerController")
 @RequestMapping("/customer")
@@ -68,7 +67,6 @@ public class CustomerRegistrationController {
 					bindingResult.getErrorCount());
 			StringBuilder template = new StringBuilder().append(ShopControllerConstants.Tiles.Customer.register);
 			return template.toString();
-
 		}
 
 		if (customerFacade.checkIfUserExists(customer.getEmailAddress(), merchantStore)) {
@@ -78,7 +76,7 @@ public class CustomerRegistrationController {
 			bindingResult.addError(error);
 		}
 		try {
-			CustomerModel customerData = customerFacade.registerCustomer(customer, merchantStore);
+			customerFacade.registerCustomer(customer, merchantStore);
 		} catch (BusinessException e) {
 			LOGGER.error("Error while registering customer.. ", e);
 			ObjectError error = new ObjectError("registration",
@@ -91,7 +89,7 @@ public class CustomerRegistrationController {
 			// refresh customer
 			Customer c = customerFacade.getCustomerByUserName(customer.getEmailAddress(), merchantStore);
 			// authenticate
-			customerFacade.authenticate(c, c.getEmailAddress(), c.getPassword());
+			customerFacade.authenticate(c, c.getEmailAddress(), customer.getPassword());
 			return "redirect:/shop/customer/dashboard.html";
 
 		} catch (BusinessException e) {

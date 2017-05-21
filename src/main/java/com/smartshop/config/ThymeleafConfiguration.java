@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.thymeleaf.dialect.springdata.SpringDataDialect;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import com.smartshop.thymeleaf.ShopDialect;
@@ -33,6 +34,11 @@ public class ThymeleafConfiguration {
 	@Bean
 	public SpringDataDialect springDataDialect() {
 		return new SpringDataDialect();
+	}
+
+	@Bean
+	public SpringSecurityDialect springSecurity() {
+		return new SpringSecurityDialect();
 	}
 
 	@Bean

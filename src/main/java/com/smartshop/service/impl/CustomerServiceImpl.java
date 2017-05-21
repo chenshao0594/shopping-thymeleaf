@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.smart.shopping.domain.QCustomer;
 import com.smartshop.common.utils.GeoLocationUtils;
 import com.smartshop.core.common.Address;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
+import com.smartshop.domain.QCustomer;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.repository.CustomerRepository;
 import com.smartshop.repository.search.CustomerSearchRepository;

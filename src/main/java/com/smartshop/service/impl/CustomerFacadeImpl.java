@@ -16,17 +16,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.smartshop.constants.AppConstants;
 import com.smartshop.core.common.Address;
 import com.smartshop.customer.CustomerRO;
 import com.smartshop.domain.Authority;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
+import com.smartshop.domain.User;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.repository.AuthorityRepository;
 import com.smartshop.security.AuthoritiesConstants;
 import com.smartshop.service.CustomerFacade;
 import com.smartshop.service.CustomerService;
 import com.smartshop.service.MailService;
+import com.smartshop.service.UserService;
 import com.smartshop.shop.model.customer.CustomerModel;
 
 @Service("customerFacade")
@@ -42,6 +45,8 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
 	@Inject
 	private PasswordEncoder passwordEncoder;
+	@Inject
+	private UserService userService;
 
 	@Inject
 	private AuthenticationManager customerAuthenticationManager;
@@ -60,8 +65,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
 	@Override
 	public Customer getCustomerByUserName(String userName, MerchantStore store) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.customerService.findCustomerByName(userName);
 	}
 
 	@Override
@@ -77,8 +81,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	}
 
 	@Override
-	public CustomerModel registerCustomer(CustomerRO customerInfo, MerchantStore merchantStore)
-			throws BusinessException {
+	public CustomerRO registerCustomer(CustomerRO customerInfo, MerchantStore merchantStore) throws BusinessException {
 		Customer customer = new Customer();
 		BeanUtils.copyProperties(customerInfo, customer);
 		String encryptedPassword = passwordEncoder.encode(customerInfo.getPassword());
@@ -86,10 +89,15 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		customer.getBilling().setFirstName(customer.getFirstName());
 		customer.getBilling().setLastName(customer.getLastName());
 		customer.anonymous(false);
+		customer.setName(customerInfo.getEmailAddress());
 		Authority authority = authorityRepository.findOne(AuthoritiesConstants.CUSTOMER);
 		customer.setAuthority(authority);
+		User customerUser = userService.createCustomerUser(customer.getName(), customerInfo.getPassword(),
+				customerInfo.getFirstName(), customerInfo.getLastName(), customerInfo.getEmailAddress().toLowerCase(),
+				customerInfo.getImage(), AppConstants.LANG);
+		customer.setUserId(customerUser.getId());
 		this.customerService.save(customer);
-		return null;
+		return customerInfo;
 	}
 
 	@Override

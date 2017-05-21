@@ -21,7 +21,7 @@ public interface CustomerFacade {
 
 	public boolean checkIfUserExists(final String email, final MerchantStore store) throws BusinessException;
 
-	public CustomerModel registerCustomer(final CustomerRO customer, final MerchantStore merchantStore)
+	public CustomerRO registerCustomer(final CustomerRO customer, final MerchantStore merchantStore)
 			throws BusinessException;
 
 	public Address getAddress(final Long userId, final MerchantStore merchantStore, boolean isBillingAddress);

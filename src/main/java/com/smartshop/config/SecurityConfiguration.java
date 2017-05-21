@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -32,6 +33,7 @@ import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
 
 @Configuration
 @EnableWebSecurity
+@Order(1)
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -67,7 +69,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler() {
-		System.out.println("ajax   authentication .....");
 		return new AjaxAuthenticationSuccessHandler();
 	}
 
@@ -100,18 +101,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
-				.antMatchers(AppConstants.ADMIN_PREFIX + "/**").hasAuthority(AuthoritiesConstants.ANONYMOUS)
-
-				.and().formLogin().loginPage("/login").permitAll().and().logout().logoutUrl("/logout").permitAll().and()
+				.antMatchers(AppConstants.ADMIN_PREFIX + "/**").hasAuthority(AuthoritiesConstants.ADMIN).and()
+				.formLogin().loginPage("/login").permitAll().and().logout().logoutUrl("/logout").permitAll().and()
 				.headers().frameOptions().disable().and().exceptionHandling().accessDeniedPage("/access?error").and()
 				.rememberMe().rememberMeServices(rememberMeServices).rememberMeParameter("remember-me")
 				.key(jHipsterProperties.getSecurity().getRememberMe().getKey()).and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/?logout").and()
 				.sessionManagement().maximumSessions(1).expiredUrl("/login?expired");
-		// .and()
-		// .authorizeRequests()
-		// .antMatchers("/register").permitAll()
-		// .antMatchers("/activate").permitAll()
 		// .antMatchers("/authenticate").permitAll()
 		// .antMatchers("/account/reset_password/init").permitAll()
 		// .antMatchers("/account/reset_password/finish").permitAll()

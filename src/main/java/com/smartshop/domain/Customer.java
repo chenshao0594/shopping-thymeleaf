@@ -101,6 +101,9 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 	@Transient
 	private String showDeliveryStateList;
 
+	@Column(updatable = false, nullable = false)
+	private Long userId;
+
 	@Override
 	public Long getId() {
 		return id;
@@ -279,6 +282,14 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 }
