@@ -1,5 +1,7 @@
 package com.smartshop.service;
 
+import com.itextpdf.text.pdf.fonts.otf.Language;
+import com.smartshop.core.cart.Cart;
 import com.smartshop.core.common.Address;
 import com.smartshop.customer.CustomerRO;
 import com.smartshop.domain.Customer;
@@ -33,6 +35,9 @@ public interface CustomerFacade {
 	Customer getCustomerModel(CustomerModel customer, MerchantStore merchantStore) throws BusinessException;
 
 	Customer populateCustomerModel(Customer customerModel, CustomerModel customer, MerchantStore merchantStore)
+			throws BusinessException;
+
+	Cart mergeCart(Customer customerModel, String sessionShoppingCartId, MerchantStore store, Language language)
 			throws BusinessException;
 
 }

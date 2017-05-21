@@ -5,7 +5,10 @@ import java.util.Collection;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +19,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.itextpdf.text.pdf.fonts.otf.Language;
 import com.smartshop.constants.AppConstants;
+import com.smartshop.core.cart.Cart;
+import com.smartshop.core.cart.service.CartService;
 import com.smartshop.core.common.Address;
 import com.smartshop.customer.CustomerRO;
 import com.smartshop.domain.Authority;
@@ -35,6 +41,8 @@ import com.smartshop.shop.model.customer.CustomerModel;
 @Service("customerFacade")
 public class CustomerFacadeImpl implements CustomerFacade {
 
+	private final Logger LOGGER = LoggerFactory.getLogger(CustomerFacadeImpl.class);
+
 	@Inject
 	private CustomerService customerService;
 
@@ -47,6 +55,9 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	private PasswordEncoder passwordEncoder;
 	@Inject
 	private UserService userService;
+
+	@Inject
+	private CartService shoppingCartService;
 
 	@Inject
 	private AuthenticationManager customerAuthenticationManager;
@@ -136,4 +147,73 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		return null;
 	}
 
+	@Override
+	public Cart mergeCart(final Customer customerModel, final String sessionShoppingCartId, final MerchantStore store,
+			final Language language) throws BusinessException {
+
+		LOGGER.debug("Starting merge cart process");
+		if (customerModel != null) {
+			Cart customerCart = shoppingCartService.getByCustomer(customerModel);
+			if (StringUtils.isNotBlank(sessionShoppingCartId)) {
+				Cart sessionShoppingCart = shoppingCartService.getByCode(sessionShoppingCartId, store);
+				if (sessionShoppingCart != null) {
+					if (customerCart == null) {
+						if (sessionShoppingCart.getCustomerId() == null) {
+							LOGGER.debug("Not able to find any shoppingCart with current customer");
+							// give it to the customer
+							sessionShoppingCart.setCustomerId(customerModel.getId());
+							shoppingCartService.save(sessionShoppingCart);
+							customerCart = shoppingCartService.getById(sessionShoppingCart.getId(), store);
+							return customerCart;
+							// return
+							// populateShoppingCartData(customerCart,store,language);
+						} else {
+							return null;
+						}
+					} else {
+						if (sessionShoppingCart.getCustomerId() == null) {
+							LOGGER.debug("Customer shopping cart as well session cart is available, merging carts");
+							customerCart = shoppingCartService.mergeShoppingCarts(customerCart, sessionShoppingCart,
+									store);
+							customerCart = shoppingCartService.getById(customerCart.getId(), store);
+							return customerCart;
+							// return
+							// populateShoppingCartData(customerCart,store,language);
+						} else {
+							if (sessionShoppingCart.getCustomerId().longValue() == customerModel.getId().longValue()) {
+								if (!customerCart.getCode().equals(sessionShoppingCart.getCode())) {
+									LOGGER.info("Customer shopping cart as well session cart is available");
+									customerCart = shoppingCartService.mergeShoppingCarts(customerCart,
+											sessionShoppingCart, store);
+									customerCart = shoppingCartService.getById(customerCart.getId(), store);
+									return customerCart;
+									// return
+									// populateShoppingCartData(customerCart,store,language);
+								} else {
+									return customerCart;
+									// return
+									// populateShoppingCartData(sessionShoppingCart,store,language);
+								}
+							} else {
+								// the saved cart belongs to another user
+								return null;
+							}
+						}
+
+					}
+				}
+			} else {
+				if (customerCart != null) {
+					// return
+					// populateShoppingCartData(customerCart,store,language);
+					return customerCart;
+				}
+				return null;
+
+			}
+		}
+		LOG.info("Seems some issue with system, unable to find any customer after successful authentication");
+		return null;
+
+	}
 }

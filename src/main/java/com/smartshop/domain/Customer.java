@@ -292,4 +292,15 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 		this.userId = userId;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", lastName=" + lastName + ", firstName=" + firstName
+				+ ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + ", anonymous=" + anonymous + ", company="
+				+ company + ", remark=" + remark + ", emailAddress=" + emailAddress + ", password=" + password
+				+ ", merchantStore=" + merchantStore + ", authority=" + authority + ", billing=" + billing
+				+ ", delivery=" + delivery + ", showCustomerStateList=" + showCustomerStateList
+				+ ", showBillingStateList=" + showBillingStateList + ", showDeliveryStateList=" + showDeliveryStateList
+				+ ", userId=" + userId + "]";
+	}
+
 }

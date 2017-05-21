@@ -5,7 +5,8 @@
 				<a th:href="@{/customer/register}">Login or Register</a>
 			</div>
 			<div sec:authorize="isAuthenticated()">
-				<span sec:authentication="name">Bob</span> Welcome !
+				Welcome, <span sec:authentication="name">Bob</span>!
+				<a href="#">Logout</a>
 			</div>
 		</div>
 		<div class="six columns">

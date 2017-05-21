@@ -31,8 +31,8 @@ import com.smartshop.service.MerchantStoreService;
 
 @Controller("ShopCustomerController")
 @RequestMapping("/customer")
-public class CustomerRegistrationController {
-	private final Logger LOGGER = LoggerFactory.getLogger(CustomerRegistrationController.class);
+public class ShopCustomerController extends AbstractShopController {
+	private final Logger LOGGER = LoggerFactory.getLogger(ShopCustomerController.class);
 
 	@Inject
 	private CustomerService customerService;
@@ -102,5 +102,4 @@ public class CustomerRegistrationController {
 		return template.toString();
 
 	}
-
 }

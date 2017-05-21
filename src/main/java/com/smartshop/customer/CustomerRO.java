@@ -10,6 +10,7 @@ import com.smartshop.core.enumeration.Gender;
 public class CustomerRO {
 
 	private Long id;
+	private String name;
 	@NotEmpty
 	private String lastName;
 	@NotEmpty
@@ -118,6 +119,14 @@ public class CustomerRO {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

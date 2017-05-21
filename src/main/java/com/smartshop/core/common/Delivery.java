@@ -143,4 +143,13 @@ public class Delivery {
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
+
+	@Override
+	public String toString() {
+		return "Delivery [lastName=" + lastName + ", firstName=" + firstName + ", company=" + company + ", address="
+				+ address + ", city=" + city + ", postalCode=" + postalCode + ", state=" + state + ", telephone="
+				+ telephone + ", country=" + country + ", zone=" + zone + ", latitude=" + latitude + ", longitude="
+				+ longitude + "]";
+	}
+
 }

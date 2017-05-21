@@ -1,8 +1,10 @@
 package com.smartshop.service.impl;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -73,10 +75,33 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 	}
 
 	@Override
-	public Cart mergeShoppingCarts(Cart userShoppingCart, Cart sessionCart, MerchantStore store)
+	public Cart mergeShoppingCarts(final Cart userShoppingCart, final Cart sessionCart, MerchantStore store)
 			throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		if (sessionCart.getCustomerId() != null && sessionCart.getCustomerId() == userShoppingCart.getCustomerId()) {
+			LOGGER.info("Session Shopping cart belongs to same logged in user");
+			if (CollectionUtils.isNotEmpty(userShoppingCart.getLineItems())
+					&& CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {
+				return userShoppingCart;
+			}
+		}
+
+		LOGGER.info("Starting merging shopping carts");
+		if (CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {
+			Set<CartItem> shoppingCartItemsSet = getShoppingCartItems(sessionCart, store, userShoppingCart);
+			boolean duplicateFound = false;
+			if (CollectionUtils.isNotEmpty(shoppingCartItemsSet)) {
+				for (CartItem sessionShoppingCartItem : shoppingCartItemsSet) {
+					if (!duplicateFound) {
+						LOGGER.info("New item found..adding item to Shopping cart");
+						userShoppingCart.getLineItems().add(sessionShoppingCartItem);
+					}
+				}
+			}
+		}
+		LOGGER.info("Shopping Cart merged successfully.....");
+		this.save(userShoppingCart);
+		this.delete(sessionCart);
+		return userShoppingCart;
 	}
 
 	@Override

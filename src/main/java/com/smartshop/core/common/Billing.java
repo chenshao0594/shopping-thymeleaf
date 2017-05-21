@@ -23,7 +23,10 @@ public class Billing {
 	private String company;
 
 	@Column(name = "BILLING_STREET_ADDRESS", length = 256)
-	private String address;
+	private String streetAddress;
+
+	@Column(name = "BILLING_EMAIL", length = 50)
+	private String email;
 
 	@Column(name = "BILLING_CITY", length = 100)
 	private String city;
@@ -53,12 +56,12 @@ public class Billing {
 		this.company = company;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getStreetAddress() {
+		return streetAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
 	}
 
 	public String getCity() {
@@ -123,6 +126,14 @@ public class Billing {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
