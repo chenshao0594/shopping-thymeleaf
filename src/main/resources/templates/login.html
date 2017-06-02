@@ -12,7 +12,7 @@
 			<div role="alert" th:if="${param.error}" class="alert alert-error">There was an error,
 				please try again.</div>
 			<h2 th:text="#{welcome}">Please log in:</h2>
-			<form name="form" th:action="@{/login}" action="welcome.html" method="POST">
+			<form name="form" th:action="@{{admin}/login(admin=${admin_url})}" action="welcome.html" method="POST">
 				<fieldset>
 					<!-- Field MUST be called 'username' or Spring won't find it. -->
 					<div class="form-group row">

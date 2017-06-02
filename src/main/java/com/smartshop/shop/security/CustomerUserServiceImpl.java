@@ -12,23 +12,19 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 import com.smartshop.domain.Customer;
 import com.smartshop.security.AuthoritiesConstants;
 import com.smartshop.service.CustomerService;
 
-@Service("customerUserDetailsService")
-public class CustomerUserServiceImpl implements UserDetailsService {
+public class CustomerUserServiceImpl {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(CustomerUserServiceImpl.class);
 
 	@Inject
 	private CustomerService customerService;
 
-	@Override
 	public UserDetails loadUserByUsername(String customerName) throws UsernameNotFoundException, DataAccessException {
 		System.out.println("cusotmer user service ...");
 

@@ -21,8 +21,13 @@ import com.smartshop.constants.AppConstants;
 @ControllerAdvice
 @RequestMapping(AppConstants.ADMIN_PREFIX)
 public class AdminGenericController {
-	@GetMapping(AppConstants.ADMIN_PREFIX)
+	@GetMapping({ "/login" })
 	public String index() {
+		return "login";
+	}
+
+	@GetMapping("/home")
+	public String home() {
 		return "welcome";
 	}
 
@@ -38,12 +43,6 @@ public class AdminGenericController {
 		mav.setViewName("unauthorized");
 		return mav;
 	}
-
-	// @GetMapping(value = "/oups")
-	// public String triggerException() {
-	// throw new RuntimeException("Expected: controller used to showcase what
-	// happens when an exception is thrown");
-	// }
 
 	@GetMapping(value = "/logout")
 	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {

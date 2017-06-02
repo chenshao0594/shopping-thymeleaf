@@ -103,8 +103,9 @@ public class ShopCustomerController extends AbstractShopController {
 					messageService.getMessage("registration.failed", Locale.ENGLISH));
 			bindingResult.addError(error);
 		}
-		StringBuilder template = new StringBuilder().append(ShopControllerConstants.Customer.register);
-		return template.toString();
+		// StringBuilder template = new
+		// StringBuilder().append(ShopControllerConstants.Customer.register);
+		return "/";
 
 	}
 
@@ -114,7 +115,7 @@ public class ShopCustomerController extends AbstractShopController {
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "redirect:/shop";
+		return "redirect:/";
 	}
 
 }

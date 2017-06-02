@@ -37,6 +37,8 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		String authorization = request.getHeader("Authorization");
+		LOGGER.info("The authorization is: {}", authorization);
 		request.setCharacterEncoding("UTF-8");
 		try {
 			/** merchant store **/

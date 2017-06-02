@@ -26,10 +26,6 @@ import com.smartshop.constants.AppConstants;
 import com.smartshop.security.AuthoritiesConstants;
 
 import io.github.jhipster.config.JHipsterProperties;
-import io.github.jhipster.security.AjaxAuthenticationFailureHandler;
-import io.github.jhipster.security.AjaxAuthenticationSuccessHandler;
-import io.github.jhipster.security.AjaxLogoutSuccessHandler;
-import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
 
 @Configuration
 @EnableWebSecurity
@@ -68,26 +64,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler() {
-		return new AjaxAuthenticationSuccessHandler();
-	}
-
-	@Bean
-	public AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler() {
-		return new AjaxAuthenticationFailureHandler();
-	}
-
-	@Bean
-	public AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler() {
-		return new AjaxLogoutSuccessHandler();
-	}
-
-	@Bean
-	public Http401UnauthorizedEntryPoint http401UnauthorizedEntryPoint() {
-		return new Http401UnauthorizedEntryPoint();
-	}
-
-	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
@@ -102,12 +78,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
 				.antMatchers(AppConstants.ADMIN_PREFIX + "/**").hasAuthority(AuthoritiesConstants.ADMIN).and()
-				.formLogin().loginPage("/login").permitAll().and().logout().logoutUrl("/logout").permitAll().and()
-				.headers().frameOptions().disable().and().exceptionHandling().accessDeniedPage("/access?error").and()
+				.formLogin().loginPage(AppConstants.ADMIN_PREFIX + "/login").permitAll()
+				.successForwardUrl(AppConstants.ADMIN_PREFIX + "/home").and().logout()
+				.logoutUrl(AppConstants.ADMIN_PREFIX + "/logout").permitAll().and().headers().frameOptions().disable()
+				.and().exceptionHandling().accessDeniedPage(AppConstants.ADMIN_PREFIX + "/access?error").and()
 				.rememberMe().rememberMeServices(rememberMeServices).rememberMeParameter("remember-me")
 				.key(jHipsterProperties.getSecurity().getRememberMe().getKey()).and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/?logout").and()
-				.sessionManagement().maximumSessions(1).expiredUrl("/login?expired");
+				.logoutRequestMatcher(new AntPathRequestMatcher(AppConstants.ADMIN_PREFIX + "/logout"))
+				.logoutSuccessUrl(AppConstants.ADMIN_PREFIX + "/?logout").and().sessionManagement().maximumSessions(1)
+				.expiredUrl(AppConstants.ADMIN_PREFIX + "/login?expired");
 		// .antMatchers("/authenticate").permitAll()
 		// .antMatchers("/account/reset_password/init").permitAll()
 		// .antMatchers("/account/reset_password/finish").permitAll()
