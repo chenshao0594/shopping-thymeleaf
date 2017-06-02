@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.inject.Inject;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,8 @@ import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.repository.CartRepository;
 import com.smartshop.repository.search.ShoppingCartSearchRepository;
+import com.smartshop.service.ProductService;
+import com.smartshop.shop.model.ShoppingCartItem;
 
 /**
  * Service Implementation for managing Category.
@@ -31,6 +35,9 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 	private final Logger LOGGER = LoggerFactory.getLogger(CartServiceImpl.class);
 	private final CartRepository shoppingCartRepository;
 	private final ShoppingCartSearchRepository shoppingCartSearchRepository;
+
+	@Inject
+	private ProductService productService;
 
 	public CartServiceImpl(CartRepository shoppingCartRepository,
 			ShoppingCartSearchRepository shoppingCartSearchRepository) {
@@ -86,19 +93,6 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 		}
 
 		LOGGER.info("Starting merging shopping carts");
-		if (CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {
-			Set<CartItem> shoppingCartItemsSet = getShoppingCartItems(sessionCart, store, userShoppingCart);
-			boolean duplicateFound = false;
-			if (CollectionUtils.isNotEmpty(shoppingCartItemsSet)) {
-				for (CartItem sessionShoppingCartItem : shoppingCartItemsSet) {
-					if (!duplicateFound) {
-						LOGGER.info("New item found..adding item to Shopping cart");
-						userShoppingCart.getLineItems().add(sessionShoppingCartItem);
-					}
-				}
-			}
-		}
-		LOGGER.info("Shopping Cart merged successfully.....");
 		this.save(userShoppingCart);
 		this.delete(sessionCart);
 		return userShoppingCart;
@@ -130,6 +124,16 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 	public Cart getShoppingCartByCode(String cartCode) {
 		QCart qCart = QCart.cart;
 		return this.shoppingCartRepository.findOne(qCart.code.eq(cartCode));
+	}
+
+	@Override
+	public Cart getShoppingCartByCustomer(Customer customer) {
+		QCart qCart = QCart.cart;
+		return this.shoppingCartRepository.findOne(qCart.customerId.eq(customer.getId()));
+	}
+
+	private Set<ShoppingCartItem> getShoppingCartItems(final Cart sessionCart, final MerchantStore store) {
+		return null;
 	}
 
 }

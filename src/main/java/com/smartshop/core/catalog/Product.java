@@ -52,9 +52,6 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@Column(name = "highlight")
 	private String highlight;
 
-	@Column(name = "title")
-	private String title;
-
 	@Column(name = "description")
 	private String description;
 
@@ -214,14 +211,6 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	public void setMetatagKeywords(String metatagKeywords) {
 		this.metatagKeywords = metatagKeywords;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getDescription() {

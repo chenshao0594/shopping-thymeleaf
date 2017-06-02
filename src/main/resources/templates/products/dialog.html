@@ -30,35 +30,19 @@
 				</div>
 			</div>
 		</div>
-		<div role="alert" th:if="${statusMessage}"
-			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
 		<form name="form"
 			th:action="@{(${item.id} ? '/'+${admin_url}+'/products/'+${item.id}+'/edit' : '/'+${admin_url}+'/products')}"
 			action="products/edit.html" method="POST">
 			<fieldset>
 				<legend class="section">Basic Info</legend>
 				<div class="row">
-					<!-- <div class="col-3">
-						<div id="kv-avatar-errors-2" class="center-block" style="width: 800px; display: none"></div>
-						<div class="kv-avatar center-block" style="width: 200px">
-							<input id="avatar-2" name="file" type="file" class="file-loading">
-						</div>
-							<img src="/img/image_add.png" class="rounded float-left">
-					</div> -->
 					<label for="name_input" class="col-2 col-form-label text-right">Name</label> <input type="text"
 						th:value="${item.name}" class="form-control col-4" id="name_input" name="name" /> <label
-						for="title_input" class="col-2 col-form-label text-right">Title</label> <input type="text"
-						th:value="${item.title}" class="form-control col-4" id="title_input" name="title" /> <label
-						for="category" class="col-2 col-form-label text-right"> Category</label> 
-						
-						<select
+						for="category" class="col-2 col-form-label text-right"> Category</label> <select
 						class="form-control col-4" name="category.id">
 						<option th:each="category : ${categories}" th:value="${category.id}"
 							th:selected="${category.id==item.category?.id}" th:text="${category.code}"></option>
-					</select> 
-						
-						<label for="salePrice_input"
-						class="col-2 col-form-label text-right">Sale Price</label>
+					</select> <label for="salePrice_input" class="col-2 col-form-label text-right">Sale Price</label>
 					<div class="input-group  col-4">
 						<span class="input-group-addon">$</span> <input type="number" th:value="${item.salePrice}"
 							class="form-control" id="salePrice_input" name="salePrice" />
@@ -68,14 +52,18 @@
 						<span class="input-group-addon">$</span> <input type="number" th:value="${item.retailPrice}"
 							class="form-control" id="retailPrice_input" name="retailPrice" />
 					</div>
-					<label for="name_input" class="col-2 col-form-label text-right">Remark</label> 
-					<textarea rows="4" cols="50" th:value="${item.remark}" class="col-10" id="remark_input" name="remark">
+				</div>
+				<div class="row">
+					<label for="name_input" class="col-2 col-form-label text-right">Remark</label>
+					<textarea rows="4" cols="50" th:value="${item.remark}" class="col-4" id="remark_input"
+						name="remark">
 					
 					</textarea>
-					<label for="briefDescription_input" class="col-2 col-form-label text-right">Brief Description</label> 
+					<!-- <label for="briefDescription_input" class="col-2 col-form-label text-right">Brief Description</label> 
 					<textarea rows="4" cols="50" th:value="${item.briefDescription}" class="col-10" id="briefDescription_input" name="briefDescription">
 					
 					</textarea>
+					 -->
 				</div>
 				<!-- <br />
 				<div class="row offset-2 col-10">
@@ -129,16 +117,5 @@
 		</form>
 	</section>
 </body>
-<section layout:fragment="footer-script">
-	<script th:inline="javascript">
-		$(document).ready(function() {
-			$('#summernote').summernote({
-				height : 300, // set editor height
-				minHeight : null, // set minimum height of editor
-				maxHeight : null, // set maximum height of editor
-			//focus: true                  // set focus to editable area after initializing summernote
-			}); // set focus to editable area after initializing summernote);
-		});
-	</script>
-</section>
+<section layout:fragment="footer-script"></section>
 </html>

@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title th:text="#{app.title}">Shopping Manager</title>
 <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.min.css"
 	th:href="@{/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.min.css}" rel="stylesheet" />
@@ -29,26 +29,27 @@
 	<![endif]-->
 </head>
 <body>
-	<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE COMMITTING</div>
+	<div class="row" style="height: 50px;"></div>
 	<div class="container-fluid">
 		<div class="row">
-			<nav class="hidden-xs-down bg-faded sidebar" style="width: 160px;">
-				<!-- <ul class="nav nav-pills flex-column">
-					<li class="nav-item"><a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a></li>
-				</ul> -->
-			</nav>
-			<main class="col col pt-3 content">
+			<div class="col-2">
+				<nav class="hidden-xs-down bg-faded sidebar" style="min-width: 160px;">
+					<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE COMMITTING</div>
+				</nav>
+			</div>
+			<div class="col pt-3 content">
+				<div role="alert" th:if="${statusMessage}" class="alert"
+					th:classappend="(${statusMessage} ? 'alert-success')" th:text="${statusMessage}">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="alert-heading">Well done!</h4>
+					[[${statusMessage}]]
+				</div>
 				<section layout:fragment="content">
 					<p>Content goes here...</p>
 				</section>
-			</main>
+			</div>
 		</div>
 		<footer>
 			<div th:replace="fragments/footer :: footer">REPLACE BEFORE COMMITTING</div>

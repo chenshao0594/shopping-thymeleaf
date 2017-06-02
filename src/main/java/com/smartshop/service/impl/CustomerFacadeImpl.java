@@ -19,7 +19,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.itextpdf.text.pdf.fonts.otf.Language;
 import com.smartshop.constants.AppConstants;
 import com.smartshop.core.cart.Cart;
 import com.smartshop.core.cart.service.CartService;
@@ -148,12 +147,12 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	}
 
 	@Override
-	public Cart mergeCart(final Customer customerModel, final String sessionShoppingCartId, final MerchantStore store,
-			final Language language) throws BusinessException {
+	public Cart mergeCart(final Customer customer, final String sessionShoppingCartId, final MerchantStore store)
+			throws BusinessException {
 
 		LOGGER.debug("Starting merge cart process");
-		if (customerModel != null) {
-			Cart customerCart = shoppingCartService.getByCustomer(customerModel);
+		if (customer != null) {
+			Cart customerCart = shoppingCartService.getShoppingCartByCustomer(customer);
 			if (StringUtils.isNotBlank(sessionShoppingCartId)) {
 				Cart sessionShoppingCart = shoppingCartService.getByCode(sessionShoppingCartId, store);
 				if (sessionShoppingCart != null) {
@@ -161,7 +160,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 						if (sessionShoppingCart.getCustomerId() == null) {
 							LOGGER.debug("Not able to find any shoppingCart with current customer");
 							// give it to the customer
-							sessionShoppingCart.setCustomerId(customerModel.getId());
+							sessionShoppingCart.setCustomerId(customer.getId());
 							shoppingCartService.save(sessionShoppingCart);
 							customerCart = shoppingCartService.getById(sessionShoppingCart.getId(), store);
 							return customerCart;
@@ -180,7 +179,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 							// return
 							// populateShoppingCartData(customerCart,store,language);
 						} else {
-							if (sessionShoppingCart.getCustomerId().longValue() == customerModel.getId().longValue()) {
+							if (sessionShoppingCart.getCustomerId() == customer.getId()) {
 								if (!customerCart.getCode().equals(sessionShoppingCart.getCode())) {
 									LOGGER.info("Customer shopping cart as well session cart is available");
 									customerCart = shoppingCartService.mergeShoppingCarts(customerCart,
@@ -212,7 +211,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
 			}
 		}
-		LOG.info("Seems some issue with system, unable to find any customer after successful authentication");
+		LOGGER.info("Seems some issue with system, unable to find any customer after successful authentication");
 		return null;
 
 	}

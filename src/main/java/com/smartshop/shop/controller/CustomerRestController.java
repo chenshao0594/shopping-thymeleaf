@@ -22,6 +22,8 @@ import com.smartshop.core.catalog.service.PricingService;
 import com.smartshop.customer.CustomerRO;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
+import com.smartshop.exception.ConversionException;
+import com.smartshop.populator.ShoppingCartDataPopulator;
 import com.smartshop.service.CustomerFacade;
 import com.smartshop.shop.model.ShoppingCartData;
 
@@ -67,7 +69,7 @@ public class CustomerRestController extends AbstractShopController {
 			String sessionShoppingCartCode = (String) request.getSession().getAttribute(AppConstants.SHOPPING_CART);
 			if (!StringUtils.isBlank(sessionShoppingCartCode)) {
 				Cart shoppingCart = customerFacade.mergeCart(customerModel, sessionShoppingCartCode, store);
-				ShoppingCartData shoppingCartData = this.populateShoppingCartData(shoppingCart, store, language);
+				ShoppingCartData shoppingCartData = this.populateShoppingCartData(shoppingCart, store);
 				if (shoppingCartData != null) {
 					// jsonObject.addEntry(AppConstants.SHOPPING_CART,
 					// shoppingCartData.getCode());
@@ -89,7 +91,7 @@ public class CustomerRestController extends AbstractShopController {
 				}
 
 			} else {
-				Cart cartModel = shoppingCartService.getByCustomer(customerModel);
+				Cart cartModel = shoppingCartService.getShoppingCartByCustomer(customerModel);
 				if (cartModel != null) {
 					// jsonObject.addEntry(Constants.SHOPPING_CART,
 					// cartModel.getShoppingCartCode());
@@ -105,7 +107,7 @@ public class CustomerRestController extends AbstractShopController {
 			}
 
 			StringBuilder cookieValue = new StringBuilder();
-			cookieValue.append(store.getCode()).append("_").append(customerModel.getNick());
+			cookieValue.append(store.getCode()).append("_").append(customerModel.getName());
 
 			// set username in the cookie
 			// Cookie c = new Cookie(AppConstants.COOKIE_NAME_USER,
@@ -121,4 +123,20 @@ public class CustomerRestController extends AbstractShopController {
 		return null;
 
 	}
+
+	private ShoppingCartData populateShoppingCartData(final Cart cartModel, final MerchantStore store) {
+
+		ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
+		shoppingCartDataPopulator.setShoppingCartCalculationService(shoppingCartCalculationService);
+		shoppingCartDataPopulator.setPricingService(pricingService);
+
+		try {
+			return shoppingCartDataPopulator.populate(cartModel, store);
+		} catch (ConversionException ce) {
+			LOGGER.error("Error in converting shopping cart to shopping cart data", ce);
+
+		}
+		return null;
+	}
+
 }

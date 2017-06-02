@@ -50,10 +50,7 @@ spring:
         username:
         password:
     thymeleaf:
-        cache: true
-
-liquibase:
-    contexts: prod
+        cache: false
 
 # ===================================================================
 # To enable SSL, generate a certificate using:
