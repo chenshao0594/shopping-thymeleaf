@@ -22,13 +22,13 @@ public class QProduct extends EntityPathBase<Product> {
 
     public static final QProduct product = new QProduct("product");
 
-    public final SetPath<SKU, QSKU> additionalSKUs = this.<SKU, QSKU>createSet("additionalSKUs", SKU.class, QSKU.class, PathInits.DIRECT2);
-
     public final BooleanPath available = createBoolean("available");
 
     public final StringPath briefDescription = createString("briefDescription");
 
     public final QCategory category;
+
+    public final StringPath code = createString("code");
 
     public final DatePath<java.time.LocalDate> dateAvailable = createDate("dateAvailable", java.time.LocalDate.class);
 
@@ -64,6 +64,8 @@ public class QProduct extends EntityPathBase<Product> {
 
     public final StringPath refSku = createString("refSku");
 
+    public final SetPath<ProductRelationship, QProductRelationship> relationships = this.<ProductRelationship, QProductRelationship>createSet("relationships", ProductRelationship.class, QProductRelationship.class, PathInits.DIRECT2);
+
     public final StringPath remark = createString("remark");
 
     public final NumberPath<java.math.BigDecimal> retailPrice = createNumber("retailPrice", java.math.BigDecimal.class);
@@ -72,11 +74,11 @@ public class QProduct extends EntityPathBase<Product> {
 
     public final StringPath searchUrl = createString("searchUrl");
 
+    public final SetPath<SKU, QSKU> skus = this.<SKU, QSKU>createSet("skus", SKU.class, QSKU.class, PathInits.DIRECT2);
+
     public final NumberPath<Integer> sortOrder = createNumber("sortOrder", Integer.class);
 
     public final NumberPath<java.math.BigDecimal> standardPrice = createNumber("standardPrice", java.math.BigDecimal.class);
-
-    public final StringPath title = createString("title");
 
     public final NumberPath<java.math.BigDecimal> width = createNumber("width", java.math.BigDecimal.class);
 

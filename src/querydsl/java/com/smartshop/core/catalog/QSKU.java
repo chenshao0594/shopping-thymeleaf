@@ -30,6 +30,8 @@ public class QSKU extends EntityPathBase<SKU> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final BooleanPath isDefault = createBoolean("isDefault");
+
     public final StringPath name = createString("name");
 
     public final QProduct product;

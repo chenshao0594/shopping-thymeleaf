@@ -61,6 +61,9 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@Column(name = "metatag_title")
 	private String metatagTitle;
 
+	@Column(name = "code")
+	private String code;
+
 	@NotNull
 	@Column(name = "name", nullable = false)
 	private String name;
@@ -125,7 +128,10 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	@OneToMany(fetch = FetchType.EAGER, targetEntity = SKU.class, mappedBy = "product", cascade = CascadeType.ALL)
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-	protected Set<SKU> additionalSKUs = new HashSet<>();
+	protected Set<SKU> skus = new HashSet<>();
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "product")
+	private Set<ProductRelationship> relationships = new HashSet<ProductRelationship>();
 
 	@Override
 	public Long getId() {
@@ -345,12 +351,12 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 		this.category = category;
 	}
 
-	public Set<SKU> getAdditionalSKUs() {
-		return additionalSKUs;
+	public Set<SKU> getSkus() {
+		return skus;
 	}
 
-	public void setAdditionalSKUs(Set<SKU> additionalSKUs) {
-		this.additionalSKUs = additionalSKUs;
+	public void setSkus(Set<SKU> skus) {
+		this.skus = skus;
 	}
 
 	public boolean isHasSKU() {
@@ -375,6 +381,22 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	public void setBriefDescription(String briefDescription) {
 		this.briefDescription = briefDescription;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Set<ProductRelationship> getRelationships() {
+		return relationships;
+	}
+
+	public void setRelationships(Set<ProductRelationship> relationships) {
+		this.relationships = relationships;
 	}
 
 }

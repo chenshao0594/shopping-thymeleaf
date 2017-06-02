@@ -18,16 +18,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.ProductOption;
 import com.smartshop.core.catalog.ProductOptionValue;
+import com.smartshop.core.catalog.ProductRelationship;
+import com.smartshop.core.catalog.QProduct;
 import com.smartshop.core.catalog.SKU;
 import com.smartshop.core.catalog.service.CategoryService;
 import com.smartshop.core.catalog.service.ProductOptionService;
 import com.smartshop.core.catalog.service.ProductOptionValueService;
 import com.smartshop.core.common.MoneyFormatUtils;
+import com.smartshop.core.enumeration.ProductRelationshipEnum;
 import com.smartshop.repository.ProductRepository;
 import com.smartshop.repository.search.ProductSearchRepository;
+import com.smartshop.service.ProductRelationshipService;
 import com.smartshop.service.ProductService;
 import com.smartshop.service.SKUService;
 import com.smartshop.shop.model.ProductOptionDTO;
@@ -45,8 +50,12 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 	private final ProductSearchRepository productSearchRepository;
 	@Inject
 	CategoryService categoryService;
+
 	@Inject
 	ProductOptionService productOptionService;
+
+	@Inject
+	ProductRelationshipService productRelationshipService;
 
 	@Inject
 	SKUService skuService;
@@ -80,8 +89,8 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 			return;
 		}
 		List<List<ProductOptionValue>> previouslyGeneratedPermutations = new ArrayList<List<ProductOptionValue>>();
-		if (CollectionUtils.isNotEmpty(product.getAdditionalSKUs())) {
-			for (SKU additionalSKU : product.getAdditionalSKUs()) {
+		if (CollectionUtils.isNotEmpty(product.getSkus())) {
+			for (SKU additionalSKU : product.getSkus()) {
 				if (CollectionUtils.isNotEmpty(additionalSKU.getProductOptionValues())) {
 					previouslyGeneratedPermutations.add(new ArrayList(additionalSKU.getProductOptionValues()));
 				}
@@ -120,7 +129,7 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 			// permutatedSKU = this.skuService.save(permutatedSKU);
 			permutatedSKU.setProductOptionValues(new HashSet<ProductOptionValue>(permutation));
 			this.skuService.save(permutatedSKU);
-			product.getAdditionalSKUs().add(permutatedSKU);
+			product.getSkus().add(permutatedSKU);
 		}
 		product.getProductOptions().addAll(productOptions);
 		product.setHasSKU(true);
@@ -179,7 +188,7 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 
 	@Override
 	public List<ProductOptionPricing> buildSKUsPricing(Product product) {
-		Set<SKU> skus = product.getAdditionalSKUs();
+		Set<SKU> skus = product.getSkus();
 		List<ProductOptionPricing> skuPricing = new ArrayList<>();
 		for (SKU sku : skus) {
 			Set<Long> productOptionValueIds = new HashSet<>();
@@ -218,5 +227,41 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 	@Override
 	public String findNameById(Long id) {
 		return this.productRepository.findNameById(id);
+	}
+
+	@Override
+	public Iterable<Product> findOthers(Product product) {
+		QProduct qProduct = QProduct.product;
+		BooleanExpression exp = qProduct.id.notIn(product.getId());
+		return this.productRepository.findAll(exp);
+	}
+
+	@Override
+	public Iterable<Product> findRelations(Product product) {
+		return this.productRelationshipService.getRelations(product);
+	}
+
+	@Override
+	public void addRelations(long id, List<Long> ids) {
+		Product product = this.findOne(id);
+		List<Product> exitedRelations = this.productRelationshipService.getRelations(product);
+		if (product == null) {
+			return;
+		}
+		for (Long item : ids) {
+			Product temp = this.findOne(item);
+			if (temp == null) {
+				continue;
+			}
+			if (exitedRelations.contains(temp)) {
+				continue;
+			}
+			ProductRelationship rel = new ProductRelationship();
+			rel.setProduct(product);
+			rel.setRelatedProduct(temp);
+			rel.setType(ProductRelationshipEnum.RELATED);
+			product.getRelationships().add(rel);
+		}
+		this.save(product);
 	}
 }

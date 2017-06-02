@@ -12,6 +12,8 @@ import com.smartshop.shop.model.ProductOptionPricing;
  */
 public interface ProductService extends AbstractDomainService<Product, Long> {
 
+	Iterable<Product> findOthers(Product product);
+
 	void generateAdditionalSKUsByBatch(Long productId, List<Long> optionIds);
 
 	List<Map<String, Long>> countProductsByCategories();
@@ -21,5 +23,9 @@ public interface ProductService extends AbstractDomainService<Product, Long> {
 	List<ProductOptionDTO> buildProductOptionsDTO(Product product);
 
 	String findNameById(Long productId);
+
+	Iterable<Product> findRelations(Product product);
+
+	void addRelations(long id, List<Long> ids);
 
 }

@@ -50,7 +50,8 @@ public class CacheConfiguration {
 			cm.createCache(com.smartshop.domain.MerchantStore.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.core.catalog.Product.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.core.catalog.Product.class.getName() + ".productOptions", jcacheConfiguration);
-			cm.createCache(com.smartshop.core.catalog.Product.class.getName() + ".additionalSKUs", jcacheConfiguration);
+			cm.createCache(com.smartshop.core.catalog.Product.class.getName() + ".skus", jcacheConfiguration);
+			cm.createCache(com.smartshop.core.catalog.Product.class.getName() + ".relationships", jcacheConfiguration);
 			cm.createCache(com.smartshop.core.catalog.SKU.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.core.catalog.SKU.class.getName() + ".productOptionValues",
 					jcacheConfiguration);
@@ -60,6 +61,7 @@ public class CacheConfiguration {
 			cm.createCache(com.smartshop.core.catalog.ProductOptionValue.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.core.catalog.ProductOptionValue.class.getName() + ".productOption",
 					jcacheConfiguration);
+			cm.createCache(com.smartshop.core.catalog.ProductRelationship.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.domain.Customer.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.core.order.SalesOrder.class.getName(), jcacheConfiguration);
 			cm.createCache(com.smartshop.core.order.SalesOrderStatusHistory.class.getName(), jcacheConfiguration);

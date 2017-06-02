@@ -52,6 +52,8 @@ public class QCustomer extends EntityPathBase<Customer> {
 
     public final StringPath remark = createString("remark");
 
+    public final NumberPath<Long> userId = createNumber("userId", Long.class);
+
     public QCustomer(String variable) {
         this(Customer.class, forVariable(variable), INITS);
     }

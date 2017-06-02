@@ -22,8 +22,6 @@
 						class="img-rounded float-left" height="150"/>
 				</div>
 				<dl class="col-md-9 row">
-					<dt class="col-md-2 text-right">Title</dt>
-					<dd class="col-md-4 text-left" th:text="${item.title}">Title</dd>
 					<dt class="col-md-2 text-right">Sale Price</dt>
 					<dd class="col-md-4 text-left" th:text="${item.salePrice}">Sale Price</dd>
 					<dt class="col-md-2 text-right">Retail Price</dt>
@@ -66,7 +64,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="sku : ${item.additionalSKUs}">
+						<tr th:each="sku : ${item.skus}">
 							<th scope="row" th:text="${sku?.id}">1</th>
 							<td th:text="${sku?.name}">Name</td>
 							<td th:text="${sku?.attributes}">Attributes</td>

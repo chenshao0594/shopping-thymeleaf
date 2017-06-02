@@ -58,7 +58,7 @@ public class ShoppingCartFacadeImpl implements ShoppingCartFacade {
 		BigDecimal price = product.getRetailPrice();
 		if (item.getSkuId() != null) {
 			boolean flag = false;
-			for (SKU each : product.getAdditionalSKUs()) {
+			for (SKU each : product.getSkus()) {
 				if (each.getId() == item.getSkuId()) {
 					price = each.getRetailPrice();
 					flag = true;

@@ -22,13 +22,13 @@ public class QBilling extends BeanPath<Billing> {
 
     public static final QBilling billing = new QBilling("billing");
 
-    public final StringPath address = createString("address");
-
     public final StringPath city = createString("city");
 
     public final StringPath company = createString("company");
 
     public final QCountry country;
+
+    public final StringPath email = createString("email");
 
     public final StringPath firstName = createString("firstName");
 
@@ -37,6 +37,8 @@ public class QBilling extends BeanPath<Billing> {
     public final StringPath postalCode = createString("postalCode");
 
     public final StringPath state = createString("state");
+
+    public final StringPath streetAddress = createString("streetAddress");
 
     public final StringPath telephone = createString("telephone");
 

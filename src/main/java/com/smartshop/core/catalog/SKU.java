@@ -47,6 +47,9 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 	@Column(name = "name")
 	private String name;
 
+	@Column(name = "IS_DEFAULT")
+	private boolean isDefault;
+
 	@NotEmpty
 	@Column(name = "sku_attributes", updatable = false)
 	private String attributes;
@@ -155,6 +158,14 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 
 	public void setAttributes(String attributes) {
 		this.attributes = attributes;
+	}
+
+	public boolean isDefault() {
+		return isDefault;
+	}
+
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
 	}
 
 }

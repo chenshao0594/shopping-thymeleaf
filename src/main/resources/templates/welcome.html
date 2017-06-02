@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en"
-	layout:decorate="~{layouts/layout}">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" layout:decorate="~{layouts/layout}">
 </head>
 <body>
 	<section layout:fragment="content">
 		<div class="starter-template" style="padding-top: 80px;">
-			<div role="alert" th:if="${statusMessage}"
-				th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-			<div role="alert" th:if="${param.logout}" class="alert alert-info">You have been logged out</div>
-			<div role="alert" th:if="${param.error}" class="alert alert-error">There was an error,
-				please try again.</div>
 			<h2 th:text="#{welcome}">Welcome!</h2>
-			<img src="../static/images/pets.png" th:src="@{/images/pets.png}" />
+			<img src="../static/images/pets.png" th:src="@{/img/pets.png}" />
 		</div>
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>

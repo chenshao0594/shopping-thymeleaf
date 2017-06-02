@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
@@ -24,12 +25,15 @@ import com.smartshop.attachment.common.PreviewConfig;
 import com.smartshop.constants.AppConstants;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.ProductOption;
+import com.smartshop.core.catalog.SKU;
 import com.smartshop.core.catalog.service.CategoryService;
 import com.smartshop.core.catalog.service.ProductOptionService;
 import com.smartshop.domain.Attachment;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.service.AttachmentService;
+import com.smartshop.service.ProductRelationshipService;
 import com.smartshop.service.ProductService;
+import com.smartshop.service.SKUService;
 
 /**
  * REST controller for managing Product.
@@ -42,6 +46,8 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
 	public static final String SECTION_KEY = "products";
 	private static final String SKUS_FRAGMENT = "skus/list :: skusList";
+
+	private static final String RELATIONS_FRAGMENT = "products/relation-list :: relation-section";
 	private static final Class ENTITY_CLASS = Product.class;
 
 	private final ProductService productService;
@@ -51,14 +57,32 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private SKUService skuService;
 
 	@Autowired
 	private ProductOptionService productOptionService;
+
+	@Autowired
+	private ProductRelationshipService productRelationshipService;
 
 	public ProductController(ProductService productService) {
 		super(productService);
 		this.productService = productService;
 	}
+
+	@Override
+	protected void preCreate(Product product) {
+		SKU sku = new SKU();
+		sku.setCode(product.getCode());
+		sku.setName(product.getName());
+		sku.setRetailPrice(product.getRetailPrice());
+		sku.setSalePrice(product.getSalePrice());
+		sku.setProduct(product);
+		sku.setDefault(true);
+		skuService.save(sku);
+		product.getSkus().add(sku);
+	};
 
 	@Override
 	protected void preNew(ModelAndView model) {
@@ -75,7 +99,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 			throw new BusinessException("can't find product by id " + productId);
 		}
 		model.addObject("options", this.productOptionService.findAll(null));
-		model.addObject("skus", product.getAdditionalSKUs());
+		model.addObject("skus", product.getSkus());
 		model.setViewName(this.getSectionKey() + "/skus");
 		return model;
 	}
@@ -129,8 +153,33 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		this.productService.generateAdditionalSKUsByBatch(id, optionIds);
 
 		Product product = this.productService.findOne(id);
-		model.addAttribute("skus", product.getAdditionalSKUs());
+		model.addAttribute("skus", product.getSkus());
 		return SKUS_FRAGMENT;
+	}
+
+	@Timed
+	@GetMapping("/{productId}/relations")
+	public ModelAndView queryRelations(@PathVariable("productId") Long productId, ModelAndView model)
+			throws BusinessException {
+		model.addObject("productId", productId);
+		Product product = this.productService.findOne(productId);
+		if (product == null) {
+			throw new BusinessException("can't find product by id " + productId);
+		}
+		model.addObject("relations", this.productService.findRelations(product));
+		model.setViewName(this.getSectionKey() + "/relations");
+		return model;
+	}
+
+	@Timed
+	@PostMapping("{id}/relations")
+	public String addRelations(@PathVariable Long id, @RequestParam("relationIds[]") List<Long> ids, Model model)
+			throws URISyntaxException {
+		log.debug("add  Relations----------------{}", ids);
+		this.productService.addRelations(id, ids);
+		List<Product> relations = this.productRelationshipService.getRelations(this.productService.findOne(id));
+		model.addAttribute("relations", relations);
+		return RELATIONS_FRAGMENT;
 	}
 
 	@Override
