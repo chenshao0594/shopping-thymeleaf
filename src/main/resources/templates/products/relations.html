@@ -148,9 +148,8 @@
 					});
 		};
 		function deleteRelation(relationId){
-			$.ajax({url: "/[[${admin_url}]]/catalogue/product/[[${productId}]]/relations",
+			$.ajax({url: "/[[${admin_url}]]/catalogue/product/[[${productId}]]/relations/"+relationId,
 				   data:{
-					   relationId : relationId,
 						[[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
 				   },
 				   type: 'DELETE',

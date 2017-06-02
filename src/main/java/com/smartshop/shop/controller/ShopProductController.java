@@ -16,19 +16,24 @@ import com.codahale.metrics.annotation.Timed;
 import com.google.gson.Gson;
 import com.smartshop.attachment.common.AttachmentEnum;
 import com.smartshop.core.catalog.Product;
+import com.smartshop.core.catalog.SKU;
 import com.smartshop.domain.Attachment;
 import com.smartshop.service.AttachmentService;
 import com.smartshop.service.ProductService;
+import com.smartshop.service.SKUService;
 import com.smartshop.shop.model.ProductOptionDTO;
 import com.smartshop.shop.model.ProductOptionPricing;
 
 @Controller("ShopProductController")
 @RequestMapping("/product")
-public class ProductController {
-	private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+public class ShopProductController {
+	private final Logger LOGGER = LoggerFactory.getLogger(ShopProductController.class);
 
 	@Inject
 	private ProductService productService;
+
+	@Inject
+	private SKUService skuService;
 	@Inject
 	private AttachmentService attachmentService;
 
@@ -39,6 +44,8 @@ public class ProductController {
 		List<Attachment> images = this.attachmentService.findAllByBOInfo("product", id, AttachmentEnum.IMAGE);
 		List<ProductOptionPricing> skuPricing = this.productService.buildSKUsPricing(product);
 		List<ProductOptionDTO> allProductOptions = this.productService.buildProductOptionsDTO(product);
+		SKU defaultSKU = this.skuService.findDefaultSKU(id);
+		product.setDefaultSKU(defaultSKU);
 		Gson gson = new Gson();
 		String skuPricingJson = gson.toJson(skuPricing);
 		String allProductOptionsJson = gson.toJson(allProductOptions);

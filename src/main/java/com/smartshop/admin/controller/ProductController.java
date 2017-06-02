@@ -80,6 +80,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		sku.setSalePrice(product.getSalePrice());
 		sku.setProduct(product);
 		sku.setDefault(true);
+		sku.setAttributes("default SKU");
 		skuService.save(sku);
 		product.getSkus().add(sku);
 	};

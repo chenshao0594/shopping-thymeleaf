@@ -11,4 +11,6 @@ public interface SKUService extends AbstractDomainService<SKU, Long> {
 
 	BigDecimal findRetailPriceById(Long id);
 
+	SKU findDefaultSKU(Long productId);
+
 }

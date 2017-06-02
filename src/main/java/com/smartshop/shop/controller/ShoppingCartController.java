@@ -36,7 +36,6 @@ public class ShoppingCartController extends AbstractShopController {
 	@Timed
 	@GetMapping()
 	public ModelAndView detail(ModelAndView model, final HttpServletRequest request) throws Exception {
-
 		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
 		MerchantStore store = getSessionAttribute(AppConstants.MERCHANT_STORE, request);

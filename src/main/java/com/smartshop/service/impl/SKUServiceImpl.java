@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.smartshop.core.catalog.QSKU;
 import com.smartshop.core.catalog.SKU;
 import com.smartshop.repository.SKURepository;
 import com.smartshop.repository.search.SKUSearchRepository;
@@ -33,6 +34,12 @@ public class SKUServiceImpl extends AbstractDomainServiceImpl<SKU, Long> impleme
 	public BigDecimal findRetailPriceById(Long id) {
 		LOGGER.info("sku id {}", id);
 		return this.skuRepository.findRetailPriceById(id);
+	}
+
+	@Override
+	public SKU findDefaultSKU(Long productId) {
+		QSKU qsku = QSKU.sKU;
+		return this.skuRepository.findOne(qsku.product.id.eq(productId));
 	}
 
 }

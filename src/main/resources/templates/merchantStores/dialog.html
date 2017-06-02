@@ -6,21 +6,37 @@
 		<div class="page-title">
 			<h2>Merchant Store</h2>
 		</div>
-		<div role="alert" th:if="${statusMessage}"
-			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-		<form name="form" th:action="@{(${item.id} ? '/categories/'+${item.id}+'/edit': '/categories')}"
-			action="category/edit.html" method="POST">
+		<form name="form" th:action="@{/{admin}/merchantStores/{id}(admin=${admin_url}, id=${item.id})}"
+			action="merchantStores/edit.html" method="POST">
 			<div class="row form-group">
-				<label for="codeInput" class="col-2 col-form-label text-right">Code</label> <input type="text"
-					th:value="${item.code}" class="form-control col-4" id="codeInput" name="code"
+				<label for="codeInput" class="col-2 col-form-label text-right">Code</label> 
+				<input type="text" th:value="${item.code}" class="form-control col-4" id="codeInput" name="code"
 					placeholder="Code" /> 
-				<label for="sortOrder" class="col-2 col-form-label text-right">Sort
-					Order</label> <input type="number" value="${item.sortOrder}" name="sortOrder"
-					class="form-control col-4" placeholder="Sort Order" />
-				<label for="parent"
-					class="col-2 col-form-label text-right">Parent Category</label> <select
-					class="form-control col-4" name="parent.id">
-					<option th:each="item : ${categories}" th:value="${item.id}" th:text="${item.code}"></option>
+				<label class="col-2 col-form-label text-right">Name</label> 
+				<input type="text" th:value="${item.name}" name="sortOrder" class="form-control col-4" /> 
+				<label class="col-2 col-form-label text-right">Phone</label> 
+				<input type="text" th:value="${item.phone}" name="phone" class="form-control col-4" /> 
+				<label class="col-2 col-form-label text-right">address</label> 
+				<input type="text" th:value="${item.address}" name="address" class="form-control col-4" /> 
+				<label class="col-2 col-form-label text-right">stateProvince</label> 
+				<input type="text" th:value="${item.stateProvince}" name="stateProvince" class="form-control col-4" /> 
+				<label class="col-2 col-form-label text-right">zone</label> 
+				<input type="text" th:value="${item.zone}" name="zone" class="form-control col-4" /> 
+				<label class="col-2 col-form-label text-right">Postal Code</label> 
+				<input type="text" th:value="${item.postalcode}" name="postalcode" class="form-control col-4" /> 
+				<label  class="col-2 col-form-label text-right" th:text="#{label.generic.weightunit}"></label>
+				<select class="col-4  form-control" name="item.weightUnit">
+							<option ></option>
+				</select> 
+					
+				<label  class="col-2 col-form-label text-right" th:text="#{label.generic.sizeunit}"></label>
+				<select class="form-control col-4 "  name="item.sizeUnit">
+							<option ></option>
+				</select> 
+				
+				<label class="col-2 col-form-label text-right">Country</label> <select
+					class="form-control col-4" name="country.id">
+					<option th:each="item : ${countries}" th:value="${item.id}" th:text="${item.code}"></option>
 				</select>
 			</div>
 			<div class="form-actions">

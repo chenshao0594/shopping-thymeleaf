@@ -36,14 +36,6 @@ public class PricingServiceImpl implements PricingService {
 		currencyInstance.setCurrency(store.getCurrency());
 		return currencyInstance.format(amount.doubleValue());
 	}
-	//
-	// @Override
-	// public String getDisplayAmount(BigDecimal amount, Locale locale, Currency
-	// currency, MerchantStore store)
-	// throws BusinessException {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
 
 	@Override
 	public String getStringAmount(BigDecimal amount, MerchantStore store) throws BusinessException {

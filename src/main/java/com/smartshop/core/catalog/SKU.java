@@ -23,7 +23,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smartshop.core.enumeration.StatusEnum;
@@ -50,7 +49,6 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 	@Column(name = "IS_DEFAULT")
 	private boolean isDefault;
 
-	@NotEmpty
 	@Column(name = "sku_attributes", updatable = false)
 	private String attributes;
 
@@ -70,7 +68,7 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 	private StatusEnum status = StatusEnum.ACTIVITY;
 
 	@ManyToOne(optional = true, targetEntity = Product.class, fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "ADDL_PRODUCT_ID")
+	@JoinColumn(name = "PRODUCT_ID")
 	protected Product product;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

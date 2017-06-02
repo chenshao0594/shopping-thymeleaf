@@ -6,12 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smartshop.constants.AppConstants;
@@ -27,7 +26,7 @@ import com.smartshop.populator.ShoppingCartDataPopulator;
 import com.smartshop.service.CustomerFacade;
 import com.smartshop.shop.model.ShoppingCartData;
 
-@RestController("ShopCustomerRestController")
+@Controller("ShopCustomerRestController")
 @RequestMapping("/customer")
 public class CustomerRestController extends AbstractShopController {
 	private final Logger LOGGER = LoggerFactory.getLogger(CustomerRestController.class);
@@ -49,11 +48,10 @@ public class CustomerRestController extends AbstractShopController {
 
 	@Timed
 	@PostMapping(value = "/login")
-	public ResponseEntity<Void> login(CustomerRO customerInfo, HttpServletRequest request) {
+	public String login(CustomerRO customerInfo, HttpServletRequest request) {
 		try {
 			LOGGER.debug("Authenticating user " + customerInfo.getName());
 			MerchantStore store = (MerchantStore) request.getAttribute(AppConstants.MERCHANT_STORE);
-			// Language language = (Language) request.getAttribute("LANGUAGE");
 			Customer customerModel = customerFacade.getCustomerByUserName(customerInfo.getName(), store);
 			if (customerModel == null) {
 			}
@@ -62,7 +60,6 @@ public class CustomerRestController extends AbstractShopController {
 			}
 
 			customerFacade.authenticate(customerModel, customerInfo.getName(), customerInfo.getPassword());
-			// set customer in the http session
 			super.setSessionAttribute(AppConstants.CUSTOMER, customerModel, request);
 
 			LOGGER.info("Fetching and merging Shopping Cart data");
@@ -71,17 +68,7 @@ public class CustomerRestController extends AbstractShopController {
 				Cart shoppingCart = customerFacade.mergeCart(customerModel, sessionShoppingCartCode, store);
 				ShoppingCartData shoppingCartData = this.populateShoppingCartData(shoppingCart, store);
 				if (shoppingCartData != null) {
-					// jsonObject.addEntry(AppConstants.SHOPPING_CART,
-					// shoppingCartData.getCode());
 					request.getSession().setAttribute(AppConstants.SHOPPING_CART, shoppingCartData.getCode());
-
-					// set cart in the cookie
-					// Cookie c = new Cookie(AppConstants.COOKIE_NAME_CART,
-					// shoppingCartData.getCode());
-					// c.setMaxAge(60 * 24 * 3600);
-					// c.setPath(Constants.SLASH);
-					// response.addCookie(c);
-
 				} else {
 					// DELETE COOKIE
 					// Cookie c = new Cookie(AppConstants.COOKIE_NAME_CART, "");
@@ -120,7 +107,7 @@ public class CustomerRestController extends AbstractShopController {
 		} catch (Exception e) {
 		}
 
-		return null;
+		return "redirect:/";
 
 	}
 

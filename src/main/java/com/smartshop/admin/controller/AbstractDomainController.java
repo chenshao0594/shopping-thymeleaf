@@ -98,6 +98,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			this.preNew(mv);
 			return mv;
 		} else {
+			this.preCreate(entity);
 			this.service.save(entity);
 			redirect.addFlashAttribute("statusMessage", "Successfully created!");
 			return new ModelAndView(

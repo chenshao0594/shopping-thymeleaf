@@ -3,10 +3,15 @@ package com.smartshop.shop.controller;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -65,7 +70,7 @@ public class ShopCustomerController extends AbstractShopController {
 			LOGGER.error("found validation error {}", bindingResult.getAllErrors());
 			LOGGER.debug("found {} validation error while validating in customer registration ",
 					bindingResult.getErrorCount());
-			StringBuilder template = new StringBuilder().append(ShopControllerConstants.Tiles.Customer.register);
+			StringBuilder template = new StringBuilder().append(ShopControllerConstants.Customer.register);
 			return template.toString();
 		}
 
@@ -82,7 +87,7 @@ public class ShopCustomerController extends AbstractShopController {
 			ObjectError error = new ObjectError("registration",
 					messageService.getMessage("registration.failed", Locale.ENGLISH));
 			bindingResult.addError(error);
-			StringBuilder template = new StringBuilder().append(ShopControllerConstants.Tiles.Customer.register);
+			StringBuilder template = new StringBuilder().append(ShopControllerConstants.Customer.register);
 			return template.toString();
 		}
 		try {
@@ -90,7 +95,7 @@ public class ShopCustomerController extends AbstractShopController {
 			Customer c = customerFacade.getCustomerByUserName(customer.getEmailAddress(), merchantStore);
 			// authenticate
 			customerFacade.authenticate(c, c.getEmailAddress(), customer.getPassword());
-			return "redirect:/shop/customer/dashboard.html";
+			return "redirect:/shop";
 
 		} catch (BusinessException e) {
 			LOGGER.error("Cannot authenticate user ", e);
@@ -98,8 +103,18 @@ public class ShopCustomerController extends AbstractShopController {
 					messageService.getMessage("registration.failed", Locale.ENGLISH));
 			bindingResult.addError(error);
 		}
-		StringBuilder template = new StringBuilder().append(ShopControllerConstants.Tiles.Customer.register);
+		StringBuilder template = new StringBuilder().append(ShopControllerConstants.Customer.register);
 		return template.toString();
 
 	}
+
+	@GetMapping(value = "/logout")
+	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/shop";
+	}
+
 }

@@ -50,9 +50,8 @@ public class ProductRelationshipServiceImpl extends AbstractDomainServiceImpl<Pr
 		BooleanExpression idExp = qProductRelationship.id.in(relationIds);
 		BooleanExpression productExp = qProductRelationship.product.eq(product);
 		Iterable<ProductRelationship> relations = this.repository.findAll(idExp.and(productExp));
-		for (ProductRelationship t : relations) {
-			this.repository.delete(t);
-		}
+		this.repository.delete(relations);
+		this.repository.flush();
 	}
 
 }

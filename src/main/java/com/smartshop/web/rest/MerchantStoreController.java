@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.smartshop.admin.controller.AbstractDomainController;
 import com.smartshop.constants.AppConstants;
@@ -26,6 +27,11 @@ public class MerchantStoreController extends AbstractDomainController<MerchantSt
 	public MerchantStoreController(MerchantStoreService merchantStoreService) {
 		super(merchantStoreService);
 		this.merchantStoreService = merchantStoreService;
+	}
+
+	@Override
+	protected void preNew(ModelAndView model) {
+
 	}
 
 	@Override

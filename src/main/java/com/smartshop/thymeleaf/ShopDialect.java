@@ -25,6 +25,8 @@ public class ShopDialect extends AbstractProcessorDialect {
 	public Set<IProcessor> getProcessors(final String dialectPrefix) {
 		final Set<IProcessor> processors = new HashSet<IProcessor>();
 		processors.add(new ProductOptionAttributeTagProcessor(dialectPrefix));
+		processors.add(new PriceProcessor(dialectPrefix));
+		processors.add(new AddressProcessor(dialectPrefix));
 		return processors;
 	}
 }

@@ -1,11 +1,8 @@
-<nav class="navbar  navbar-default" role="navigation">
 	<ul class="nav flex-column">
-		<li><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button> <a class="navbar-brand" href="#" th:text="#{app.title}">Application Name </a></li>
-		<li class="nav-item active"><a class="nav-link" href="..admin/"
+		<li class="nav-item">
+		 <a class="nav-link" href="#" th:text="#{app.title}">Application Name </a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="..admin/"
 			th:href="@{/{admin}(admin=${admin_url})}"> <i class="fa fa-home"></i>&nbsp; Home <span
 				class="sr-only">(current)</span></a></li>
 		<li class="nav-item"><a class="nav-link" href="../admin/categories/list.html"
@@ -17,14 +14,13 @@
 		<li class="nav-item"><a class="nav-link" href="../customers/list.html"
 			th:href="@{/{admin}/customers(admin=${admin_url})}"><i class="fa fa-user"></i>&nbsp;Customer</a></li>
 		<li class="nav-item"><a class="nav-link" href="../paymentConfigurations/list.html"
-			th:href="@{/{admin}/paymentConfigurations(admin=${admin_url})}"><i class="fa fa-credit-card"></i>&nbsp;PaymentConfiguration</a></li>
+			th:href="@{/{admin}/paymentConfigurations(admin=${admin_url})}"><i class="fa fa-credit-card"></i>&nbsp;Payment</a></li>
 		<li class="nav-item"><a class="nav-link" href="../shippingConfigurations/list.html"
-			th:href="@{/{admin}/shippingConfigurations(admin=${admin_url})}"><i class="fa fa-plane"></i>&nbsp;ShippingConfiguration</a></li>
+			th:href="@{/{admin}/shippingConfigurations(admin=${admin_url})}"><i class="fa fa-plane"></i>&nbsp;Shipping</a></li>
 		<li class="nav-item"><a class="nav-link" href="../admin/merchantStores/list.html"
-			th:href="@{/{admin}/merchantStores(admin=${admin_url})}"><i class="fa fa-home"></i>&nbsp;Merchant Store</a></li>
+			th:href="@{/{admin}/merchantStores(admin=${admin_url})}"><i class="fa fa-home"></i>&nbsp; Store</a></li>
 		<li class="nav-item"><a class="nav-link" href="../attachment/list.html"
 			th:href="@{/{admin}/attachments(admin=${admin_url})}">Images</a></li>
 		<li class="nav-item push-right"><a class="nav-link" href="#" th:href="@{/customer/register}"><i class="fa fa-home"></i>&nbsp;Customer
 				Register</a></li>
 	</ul>
-</nav>

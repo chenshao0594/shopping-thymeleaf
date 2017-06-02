@@ -25,7 +25,7 @@
 }
 
 .content {
-	padding: 25px 2.5641%;
+	padding: 15px 2.5641%;
 	opacity: 1;
 	margin-bottom: 80px;
 }
@@ -156,18 +156,7 @@ fieldset {
 
 body {
 	font-size: 0.9rem;
-	/* padding-bottom: 100px;
-	background-color: #2b6e80 20%;
-	background-image: radial-gradient(farthest-side ellipse at 10% 0, #2b6e80 20%, #0c3252);
-	background-image: -webkit-radial-gradient(10% 0, farthest-side ellipse, #2b6e80 20%,
-		#0c3252);
-	background-image: -moz-radial-gradient(10% 0, farthest-side ellipse, #2b6e80 20%, #0c3252);
-	background-attachment: fixed, fixed; */
-	/* background-color: #2b6e80 20%;
-	
-	background-image: radial-gradient(farthest-side ellipse at 10% 0, #2b6e80 20%, #0c3252);
-	background-image: -webkit-radial-gradient(10% 0, farthest-side ellipse, #2b6e80 20%,
-		#0c3252);
-	background-image: -moz-radial-gradient(10% 0, farthest-side ellipse, #2b6e80 20%, #0c3252);
-	background-attachment: fixed, fixed; */
+}
+.page-title{
+    margin-top: 0px;
 }

@@ -29,7 +29,22 @@
 	<![endif]-->
 </head>
 <body>
-	<div class="row" style="height: 50px;"></div>
+	<div class="header clearfix" role="navigation" style=" padding-left: 10px; padding-right: 15px; padding-top: 10px;">
+		<div class="navbar-header" >
+			<a class="navbar-brand" href="#"><img src="/img/shopizer_small.jpg" /></a>
+			<ul class="nav float-right top-nav" style="padding-right: 30px;">
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+					aria-expanded="false"><i class="fa fa-user"></i> <span sec:authentication="name">miquel</span>
+						<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a th:href="@{/{admin}/profile(admin=${admin_url})}"><i class="fa fa-fw fa-user"></i> <span
+								th:text="#{label.generic.profile}" text="My profile"></span></a></li>
+						<li><a th:href="@{/{admin}/logout(admin=${admin_url})}"><i class="fa fa-fw fa-power-off"></i><span
+								th:text="#{label.generic.logout}" text="Logout"></span></a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-2">
@@ -37,7 +52,7 @@
 					<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE COMMITTING</div>
 				</nav>
 			</div>
-			<div class="col pt-3 content">
+			<div class="col content">
 				<div role="alert" th:if="${statusMessage}" class="alert"
 					th:classappend="(${statusMessage} ? 'alert-success')" th:text="${statusMessage}">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">

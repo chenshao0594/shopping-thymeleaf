@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -132,6 +133,9 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "product")
 	private Set<ProductRelationship> relationships = new HashSet<ProductRelationship>();
+
+	@Transient
+	private SKU defaultSKU;
 
 	@Override
 	public Long getId() {
@@ -397,6 +401,14 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	public void setRelationships(Set<ProductRelationship> relationships) {
 		this.relationships = relationships;
+	}
+
+	public SKU getDefaultSKU() {
+		return defaultSKU;
+	}
+
+	public void setDefaultSKU(SKU defaultSKU) {
+		this.defaultSKU = defaultSKU;
 	}
 
 }

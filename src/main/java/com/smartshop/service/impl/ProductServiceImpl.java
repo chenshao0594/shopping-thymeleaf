@@ -70,6 +70,13 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 	}
 
 	@Override
+	public Product findOne(Long id) {
+		Product product = productRepository.findOne(id);
+
+		return product;
+	}
+
+	@Override
 	public void generateAdditionalSKUsByBatch(Long productId, List<Long> optionIds) {
 		Product product = this.productRepository.getOne(productId);
 		if (product == null) {
@@ -142,7 +149,6 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 			Collection<Long> perm1Ids = CollectionUtils.collect(perm1, new Transformer<ProductOptionValue, Long>() {
 				@Override
 				public Long transform(ProductOptionValue input) {
-					// TODO Auto-generated method stub
 					return input.getId();
 				}
 			});
@@ -264,4 +270,5 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 		}
 		this.save(product);
 	}
+
 }
