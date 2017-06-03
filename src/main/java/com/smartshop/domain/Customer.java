@@ -104,6 +104,8 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 	@Column(updatable = false, nullable = false)
 	private Long userId;
 
+	private boolean isActivity = true;
+
 	@Override
 	public Long getId() {
 		return id;
@@ -290,6 +292,14 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public boolean isActivity() {
+		return isActivity;
+	}
+
+	public void setActivity(boolean isActivity) {
+		this.isActivity = isActivity;
 	}
 
 	@Override

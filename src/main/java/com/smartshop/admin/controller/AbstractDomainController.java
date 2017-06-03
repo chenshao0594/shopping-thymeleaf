@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.codahale.metrics.annotation.Timed;
 import com.smartshop.constants.AppConstants;
 import com.smartshop.domain.common.BusinessDomain;
+import com.smartshop.exception.BusinessException;
 import com.smartshop.service.AbstractDomainService;
 
 @Controller("BasicEntityController")
@@ -41,7 +42,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	protected void postNew(E entity, Model model) {
 	};
 
-	protected void preCreate(E entity) {
+	protected void preCreate(E entity) throws BusinessException {
 	};
 
 	protected E postCreate(E entity) {
@@ -87,7 +88,8 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 
 	@Timed
 	@PostMapping()
-	public ModelAndView createEntity(@Valid E entity, BindingResult result, RedirectAttributes redirect) {
+	public ModelAndView createEntity(@Valid E entity, BindingResult result, RedirectAttributes redirect)
+			throws BusinessException {
 		log.debug("REST request to save entity : {}", entity);
 		ModelAndView mv = new ModelAndView();
 		if (result.hasErrors()) {

@@ -4,13 +4,15 @@ package com.smartshop.constants;
  * Application constants.
  */
 public final class AppConstants {
-
+	public final static String SLASH = "/";
+	public final static String BLANK = "";
 	// Regex for acceptable logins
 	public static final String LOGIN_REGEX = "^[_'.@A-Za-z0-9-]*$";
 
 	public static final String SYSTEM_ACCOUNT = "system";
 	public static final String ANONYMOUS_USER = "anonymoususer";
 	public static final String ADMIN_PREFIX = "/admin";
+	public static final String CUSTOMER_PREFIX = "/customer";
 	public static final String MERCHANT_STORE = "merchantStore";
 	public static final String LANG = "en";
 	// customer
@@ -21,6 +23,7 @@ public final class AppConstants {
 	// shopping cart
 	public final static String SHOPPING_CART = "SHOPPING-CART";
 	public final static String STORE_CODE = "STRORE-CODE";
+	public final static String COOKIE_NAME_CART = "cart";
 
 	public final static String CART_TOTAL = "CART_TOTAL";
 	public final static String CARTITEMS_TOTAL = "CARTITEMS_TOTAL";

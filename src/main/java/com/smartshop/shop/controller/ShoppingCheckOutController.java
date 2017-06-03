@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smartshop.domain.Customer;
+import com.smartshop.service.CountryService;
 import com.smartshop.service.CustomerService;
 
 @Controller("ShopCheckOutController")
@@ -26,6 +28,9 @@ public class ShoppingCheckOutController extends AbstractShopController {
 	@Inject
 	private CustomerService customerService;
 
+	@Inject
+	private CountryService countryService;
+
 	@Timed
 	@GetMapping()
 	public ModelAndView checkout(ModelAndView model, final HttpServletRequest request) {
@@ -35,6 +40,8 @@ public class ShoppingCheckOutController extends AbstractShopController {
 			LOGGER.info("UserDetails user {}", principal);
 			String username = ((UserDetails) principal).getUsername();
 			Customer customer = customerService.findCustomerByName(username);
+			Page page = this.countryService.findAll(null);
+			model.addObject("countries", page.getContent());
 			model.addObject("customer", customer);
 			model.setViewName(CHECKOUT_ADDRESS);
 		} else {

@@ -25,29 +25,4 @@ public abstract class AbstractShopController {
 	protected void removeAttribute(final String key, HttpServletRequest request) {
 		SessionUtil.removeSessionAttribute(key, request);
 	}
-	//
-	// protected Language getLanguage(HttpServletRequest request) {
-	// return (Language) request.getAttribute(Constants.LANGUAGE);
-	// }
-
-	// protected PaginationData createPaginaionData(final int pageNumber, final
-	// int pageSize) {
-	// final PaginationData paginaionData = new PaginationData(pageSize,
-	// pageNumber);
-	//
-	// return paginaionData;
-	// }
-
-	// protected PaginationData calculatePaginaionData(final PaginationData
-	// paginationData, final int pageSize,
-	// final int resultCount) {
-	//
-	// int currentPage = paginationData.getCurrentPage();
-	//
-	// int count = Math.min((currentPage * pageSize), resultCount);
-	// paginationData.setCountByPage(count);
-	//
-	// paginationData.setTotalCount(resultCount);
-	// return paginationData;
-	// }
 }

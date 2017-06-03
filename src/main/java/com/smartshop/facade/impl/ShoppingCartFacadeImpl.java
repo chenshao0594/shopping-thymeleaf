@@ -4,7 +4,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.service.spi.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.smartshop.core.cart.Cart;
@@ -28,6 +33,8 @@ import com.smartshop.shop.model.ShoppingCartItem;
 
 @Service("shoppingCartFacadeImpl")
 public class ShoppingCartFacadeImpl implements ShoppingCartFacade {
+
+	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCartFacadeImpl.class);
 
 	@Inject
 	private ProductService productService;
@@ -103,8 +110,37 @@ public class ShoppingCartFacadeImpl implements ShoppingCartFacade {
 	@Override
 	public ShoppingCartData getShoppingCartData(Customer customer, MerchantStore store, String shoppingCartId)
 			throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		Cart cart = null;
+		try {
+			if (customer != null) {
+				LOGGER.info("Reteriving customer shopping cart...");
+				cart = cartService.getShoppingCart(customer);
+			} else if (StringUtils.isNotBlank(shoppingCartId) && cart == null) {
+				cart = cartService.getByCode(shoppingCartId, store);
+			}
+		} catch (ServiceException ex) {
+			LOGGER.error("Error while retriving cart from customer", ex);
+		} catch (NoResultException nre) {
+			// nothing
+		}
+
+		if (cart == null) {
+			return null;
+		}
+		LOGGER.info("Cart  found .....");
+		ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
+		shoppingCartDataPopulator.setShoppingCartCalculationService(shoppingCartCalculationService);
+		shoppingCartDataPopulator.setPricingService(pricingService);
+		shoppingCartDataPopulator.setProductService(this.productService);
+		shoppingCartDataPopulator.setSkuService(this.skuService);
+		ShoppingCartData shoppingCartData = null;
+		try {
+			shoppingCartData = shoppingCartDataPopulator.populate(cart, store);
+		} catch (ConversionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return shoppingCartData;
 	}
 
 	@Override

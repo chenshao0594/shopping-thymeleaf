@@ -21,12 +21,12 @@ import com.smartshop.constants.AppConstants;
 @ControllerAdvice
 @RequestMapping(AppConstants.ADMIN_PREFIX)
 public class AdminGenericController {
-	@GetMapping({ "/login" })
+	@GetMapping("/login")
 	public String index() {
 		return "login";
 	}
 
-	@GetMapping("/home")
+	@GetMapping({ "", "/home" })
 	public String home() {
 		return "welcome";
 	}

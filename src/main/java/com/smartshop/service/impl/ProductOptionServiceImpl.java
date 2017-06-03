@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.smartshop.core.catalog.ProductOption;
+import com.smartshop.core.catalog.QProductOption;
 import com.smartshop.core.catalog.service.ProductOptionService;
-import com.smartshop.domain.MerchantStore;
 import com.smartshop.repository.ProductOptionRepository;
 
 /**
@@ -28,8 +28,9 @@ public class ProductOptionServiceImpl extends AbstractDomainServiceImpl<ProductO
 	}
 
 	@Override
-	public ProductOption getByCode(MerchantStore store, String optionCode) {
-		return productOptionRepository.findByCode(store.getId(), optionCode);
+	public boolean isExist(String optionCode) {
+		QProductOption qProductOption = QProductOption.productOption;
+		return productOptionRepository.exists(qProductOption.code.eq(optionCode));
 	}
 
 }

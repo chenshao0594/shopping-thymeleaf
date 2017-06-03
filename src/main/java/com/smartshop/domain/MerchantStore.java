@@ -86,10 +86,6 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 	@Column(name = "SIZE_UNIT", length = 5)
 	private String sizeUnit = MeasureUnit.IN.name();
 
-	// @Temporal(TemporalType.DATE)
-	// @Column(name = "IN_BUSINESS_SINCE")
-	// private Date inBusinessSince = new Date();
-
 	@Column(name = "INVOICE_TEMPLATE", length = 25)
 	private String invoiceTemplate;
 

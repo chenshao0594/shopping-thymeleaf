@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.smartshop.core.catalog.QSKU;
 import com.smartshop.core.catalog.SKU;
 import com.smartshop.repository.SKURepository;
@@ -39,7 +40,9 @@ public class SKUServiceImpl extends AbstractDomainServiceImpl<SKU, Long> impleme
 	@Override
 	public SKU findDefaultSKU(Long productId) {
 		QSKU qsku = QSKU.sKU;
-		return this.skuRepository.findOne(qsku.product.id.eq(productId));
+		BooleanExpression idExp = qsku.product.id.eq(productId);
+		BooleanExpression defaultExp = qsku.isDefault.eq(true);
+		return this.skuRepository.findOne(idExp.and(defaultExp));
 	}
 
 }

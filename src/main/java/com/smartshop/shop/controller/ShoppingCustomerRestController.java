@@ -1,7 +1,9 @@
 package com.smartshop.shop.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -49,7 +51,7 @@ public class ShoppingCustomerRestController extends AbstractShopController {
 
 	@Timed
 	@PostMapping(value = "/login")
-	public String login(CustomerRO customerInfo, HttpServletRequest request) {
+	public String login(CustomerRO customerInfo, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			LOGGER.debug("Authenticating user " + customerInfo.getName());
 			MerchantStore store = (MerchantStore) request.getAttribute(AppConstants.MERCHANT_STORE);
@@ -67,24 +69,20 @@ public class ShoppingCustomerRestController extends AbstractShopController {
 					request.getSession().setAttribute(AppConstants.SHOPPING_CART, shoppingCartData.getCode());
 				} else {
 					// DELETE COOKIE
-					// Cookie c = new Cookie(AppConstants.COOKIE_NAME_CART, "");
-					// c.setMaxAge(0);
-					// c.setPath(AppConstants.SLASH);
-					// response.addCookie(c);
+					Cookie c = new Cookie(AppConstants.COOKIE_NAME_CART, "");
+					c.setMaxAge(0);
+					c.setPath(AppConstants.SLASH);
+					response.addCookie(c);
 				}
 
 			} else {
 				Cart cartModel = shoppingCartService.getShoppingCartByCustomer(customerModel);
 				if (cartModel != null) {
-					// jsonObject.addEntry(Constants.SHOPPING_CART,
-					// cartModel.getShoppingCartCode());
-					// request.getSession().setAttribute(Constants.SHOPPING_CART,
-					// cartModel.getShoppingCartCode());
-					// Cookie c = new Cookie(Constants.COOKIE_NAME_CART,
-					// cartModel.getShoppingCartCode());
-					// c.setMaxAge(60 * 24 * 3600);
-					// c.setPath(Constants.SLASH);
-					// response.addCookie(c);
+					request.getSession().setAttribute(AppConstants.SHOPPING_CART, cartModel.getCode());
+					Cookie c = new Cookie(AppConstants.COOKIE_NAME_CART, cartModel.getCode());
+					c.setMaxAge(60 * 24 * 3600);
+					c.setPath(AppConstants.SLASH);
+					response.addCookie(c);
 				}
 
 			}

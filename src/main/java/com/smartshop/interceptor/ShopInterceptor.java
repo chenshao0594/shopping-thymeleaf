@@ -37,6 +37,7 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		LOGGER.info("shop interceptor .....");
 		String authorization = request.getHeader("Authorization");
 		LOGGER.info("The authorization is: {}", authorization);
 		request.setCharacterEncoding("UTF-8");
@@ -60,9 +61,6 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 			/** customer **/
 			Customer customer = (Customer) request.getSession().getAttribute(AppConstants.CUSTOMER);
 			if (customer != null) {
-				if (customer.getMerchantStore().getId() != store.getId()) {
-					request.getSession().removeAttribute(AppConstants.CUSTOMER);
-				}
 				if (!customer.isAnonymous()) {
 					if (!request.isUserInRole(AuthoritiesConstants.CUSTOMER)) {
 						request.removeAttribute(AppConstants.CUSTOMER);

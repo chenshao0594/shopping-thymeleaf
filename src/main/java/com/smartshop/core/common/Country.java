@@ -12,14 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.smartshop.domain.common.BusinessDomain;
+import com.smartshop.domain.common.LiteDomain;
 
 /**
  * A Country.
  */
 @Entity
 @Table(name = "country")
-public class Country extends BusinessDomain<Long, Country> implements Serializable {
+public class Country extends LiteDomain<Long, Country> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

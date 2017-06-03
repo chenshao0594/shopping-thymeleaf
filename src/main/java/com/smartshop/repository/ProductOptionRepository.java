@@ -8,5 +8,5 @@ import com.smartshop.core.catalog.ProductOption;
 public interface ProductOptionRepository
 		extends JpaRepository<ProductOption, Long>, QueryDslPredicateExecutor<ProductOption> {
 
-	ProductOption findByCode(Long id, String optionCode);
+	ProductOption findByCode(String optionCode);
 }

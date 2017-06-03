@@ -21,6 +21,7 @@ import com.smartshop.core.catalog.ProductOption;
 import com.smartshop.core.catalog.ProductOptionValue;
 import com.smartshop.core.catalog.service.ProductOptionService;
 import com.smartshop.core.catalog.service.ProductOptionValueService;
+import com.smartshop.exception.BusinessException;
 
 /**
  * REST controller for managing ProductOption.
@@ -44,10 +45,9 @@ public class ProductOptionController extends AbstractDomainController<ProductOpt
 	}
 
 	@Override
-	protected void preCreate(ProductOption option) {
-		ProductOption productOption = this.productOptionService.getByCode(option.getMerchantStore(), option.getCode());
-		if (productOption != null) {
-			// throw new BusinessException("code has been existed !!!");
+	protected void preCreate(ProductOption option) throws BusinessException {
+		if (this.productOptionService.isExist(option.getCode())) {
+			throw new BusinessException("code has been existed !!!");
 		}
 	};
 

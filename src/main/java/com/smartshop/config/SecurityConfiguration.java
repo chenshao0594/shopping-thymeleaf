@@ -23,6 +23,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 
 import com.smartshop.constants.AppConstants;
+import com.smartshop.security.AdminUserAuthenticationSuccessHandler;
 import com.smartshop.security.AuthoritiesConstants;
 
 import io.github.jhipster.config.JHipsterProperties;
@@ -79,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
 				.antMatchers(AppConstants.ADMIN_PREFIX + "/**").hasAuthority(AuthoritiesConstants.ADMIN).and()
 				.formLogin().loginPage(AppConstants.ADMIN_PREFIX + "/login").permitAll()
-				.successForwardUrl(AppConstants.ADMIN_PREFIX + "/home").and().logout()
+				.successHandler(new AdminUserAuthenticationSuccessHandler()).and().logout()
 				.logoutUrl(AppConstants.ADMIN_PREFIX + "/logout").permitAll().and().headers().frameOptions().disable()
 				.and().exceptionHandling().accessDeniedPage(AppConstants.ADMIN_PREFIX + "/access?error").and()
 				.rememberMe().rememberMeServices(rememberMeServices).rememberMeParameter("remember-me")

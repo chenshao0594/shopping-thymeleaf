@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,4 +97,28 @@ public class ShoppingCartRestController extends AbstractShopController {
 		this.cartItemService.delete(itemId);
 		return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("cartItem", itemId.toString())).build();
 	}
+
+	@Timed
+	@GetMapping("/miniCart")
+	public ResponseEntity<ShoppingCartData> getMiniCart(final String cartCode, HttpServletRequest request) {
+		try {
+			MerchantStore store = getSessionAttribute(AppConstants.MERCHANT_STORE, request);
+			Customer customer = getSessionAttribute(AppConstants.CUSTOMER, request);
+			ShoppingCartData cart = shoppingCartFacade.getShoppingCartData(customer, store, cartCode);
+			if (cart != null) {
+				request.getSession().setAttribute(AppConstants.SHOPPING_CART, cart.getCode());
+			}
+			if (cart == null) {
+				request.getSession().removeAttribute(AppConstants.SHOPPING_CART);
+				cart = new ShoppingCartData();// create an empty cart
+			}
+			return ResponseEntity.ok().body(cart);
+		} catch (Exception e) {
+			LOGGER.error("Error while getting the shopping cart", e);
+		}
+
+		return null;
+
+	}
+
 }

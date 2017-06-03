@@ -115,6 +115,9 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 		Cart cart = new Cart();
 		String code = UUID.randomUUID().toString().replaceAll("-", "");
 		cart.setCode(code);
+		if (customer != null) {
+			cart.setCustomerId(customer.getId());
+		}
 		// cart.setCustomerId(customer.getId());
 		this.shoppingCartRepository.save(cart);
 		return cart;

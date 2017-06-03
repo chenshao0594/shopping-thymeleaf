@@ -70,8 +70,8 @@
 						 [[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
 						}, 
 						function(data, textStatus, req) {
-							$("#cartItems").text(data['quantity']);
-							$("#cartTotal").text(data['total']);
+							$("#cart-items").text(data['quantity']);
+							$("#cart-total").text(data['total']);
 						},'json');
 			});  
 		});
