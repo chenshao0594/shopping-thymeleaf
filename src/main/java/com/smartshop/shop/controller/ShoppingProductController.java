@@ -26,8 +26,8 @@ import com.smartshop.shop.model.ProductOptionPricing;
 
 @Controller("ShopProductController")
 @RequestMapping("/product")
-public class ShopProductController {
-	private final Logger LOGGER = LoggerFactory.getLogger(ShopProductController.class);
+public class ShoppingProductController {
+	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingProductController.class);
 
 	@Inject
 	private ProductService productService;

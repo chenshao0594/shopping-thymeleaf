@@ -18,9 +18,9 @@ import com.smartshop.service.CustomerService;
 
 @Controller("ShopCheckOutController")
 @RequestMapping("/checkout")
-public class CheckOutController extends AbstractShopController {
+public class ShoppingCheckOutController extends AbstractShopController {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(CheckOutController.class);
+	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCheckOutController.class);
 	private final static String CHECKOUT_START = "shop/checkout/checkout_start";
 	private final static String CHECKOUT_ADDRESS = "shop/checkout/checkout_address";
 	@Inject

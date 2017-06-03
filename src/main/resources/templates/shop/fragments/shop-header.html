@@ -33,7 +33,7 @@
 				<li class="{{ active_page == 'home' ? 'active' : null }}"><a href='/'>Home</a></li>
 				<li
 					class="{% if categories.count %}has-flyout{% endif %} {{ active_page == 'shop' ? 'active' : null }} right-border-li">
-					<a href="{{ site_url('shop') }}">Shop</a> <a class="flyout-toggle"
+					<a href="/">Shop</a> <a class="flyout-toggle"
 					href="{{ site_url('shop') }}"><span> </span></a>
 					<ul class="flyout" style="display: none;">
 						<li><a href="/category/{{ category.fullUrlName }}">{{ category.name }}</a></li>

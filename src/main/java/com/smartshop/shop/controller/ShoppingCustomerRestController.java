@@ -21,6 +21,7 @@ import com.smartshop.core.catalog.service.PricingService;
 import com.smartshop.customer.CustomerRO;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
+import com.smartshop.exception.BusinessException;
 import com.smartshop.exception.ConversionException;
 import com.smartshop.populator.ShoppingCartDataPopulator;
 import com.smartshop.service.CustomerFacade;
@@ -28,8 +29,8 @@ import com.smartshop.shop.model.ShoppingCartData;
 
 @Controller("ShopCustomerRestController")
 @RequestMapping("/customer")
-public class CustomerRestController extends AbstractShopController {
-	private final Logger LOGGER = LoggerFactory.getLogger(CustomerRestController.class);
+public class ShoppingCustomerRestController extends AbstractShopController {
+	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCustomerRestController.class);
 
 	@Inject
 	private AuthenticationManager customerAuthenticationManager;
@@ -54,9 +55,11 @@ public class CustomerRestController extends AbstractShopController {
 			MerchantStore store = (MerchantStore) request.getAttribute(AppConstants.MERCHANT_STORE);
 			Customer customerModel = customerFacade.getCustomerByUserName(customerInfo.getName(), store);
 			if (customerModel == null) {
+				throw new BusinessException("customer not exist");
 			}
 
 			if (!customerModel.getMerchantStore().getCode().equals(store.getCode())) {
+				throw new BusinessException("customer ");
 			}
 
 			customerFacade.authenticate(customerModel, customerInfo.getName(), customerInfo.getPassword());

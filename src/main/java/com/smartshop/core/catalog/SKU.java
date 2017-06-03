@@ -55,6 +55,9 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 	@Column(name = "description")
 	private String description;
 
+	@Column(name = "QUANTITY")
+	protected long quantity = 0;
+
 	@NotNull
 	@Column(name = "RETAIL_PRICE", precision = 19, scale = 2, nullable = false)
 	protected BigDecimal retailPrice = BigDecimal.ZERO;
@@ -164,6 +167,14 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 
 	public void setDefault(boolean isDefault) {
 		this.isDefault = isDefault;
+	}
+
+	public long getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(long quantity) {
+		this.quantity = quantity;
 	}
 
 }
