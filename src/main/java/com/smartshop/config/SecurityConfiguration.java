@@ -87,16 +87,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logoutRequestMatcher(new AntPathRequestMatcher(AppConstants.ADMIN_PREFIX + "/logout"))
 				.logoutSuccessUrl(AppConstants.ADMIN_PREFIX + "/?logout").and().sessionManagement().maximumSessions(1)
 				.expiredUrl(AppConstants.ADMIN_PREFIX + "/login?expired");
-		// .antMatchers("/authenticate").permitAll()
-		// .antMatchers("/account/reset_password/init").permitAll()
-		// .antMatchers("/account/reset_password/finish").permitAll()
-		// .antMatchers("/profile-info").permitAll()
-		// .antMatchers("/api/**").authenticated()
-		// .antMatchers("/websocket/tracker").hasAuthority(AuthoritiesConstants.ADMIN)
-		// .antMatchers("/websocket/**").permitAll()
-		// .antMatchers("/management/health").permitAll()
-		// .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN);
-
 	}
 
 	@Bean

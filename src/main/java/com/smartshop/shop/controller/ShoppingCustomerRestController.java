@@ -57,15 +57,8 @@ public class ShoppingCustomerRestController extends AbstractShopController {
 			if (customerModel == null) {
 				throw new BusinessException("customer not exist");
 			}
-
-			if (!customerModel.getMerchantStore().getCode().equals(store.getCode())) {
-				throw new BusinessException("customer ");
-			}
-
 			customerFacade.authenticate(customerModel, customerInfo.getName(), customerInfo.getPassword());
 			super.setSessionAttribute(AppConstants.CUSTOMER, customerModel, request);
-
-			LOGGER.info("Fetching and merging Shopping Cart data");
 			String sessionShoppingCartCode = (String) request.getSession().getAttribute(AppConstants.SHOPPING_CART);
 			if (!StringUtils.isBlank(sessionShoppingCartCode)) {
 				Cart shoppingCart = customerFacade.mergeCart(customerModel, sessionShoppingCartCode, store);
@@ -98,7 +91,6 @@ public class ShoppingCustomerRestController extends AbstractShopController {
 
 			StringBuilder cookieValue = new StringBuilder();
 			cookieValue.append(store.getCode()).append("_").append(customerModel.getName());
-
 			// set username in the cookie
 			// Cookie c = new Cookie(AppConstants.COOKIE_NAME_USER,
 			// cookieValue.toString());
@@ -107,7 +99,10 @@ public class ShoppingCustomerRestController extends AbstractShopController {
 			// response.addCookie(c);
 
 		} catch (AuthenticationException ex) {
+			ex.printStackTrace();
+			return "redirect:/login";
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return "redirect:/";
@@ -115,16 +110,13 @@ public class ShoppingCustomerRestController extends AbstractShopController {
 	}
 
 	private ShoppingCartData populateShoppingCartData(final Cart cartModel, final MerchantStore store) {
-
 		ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
 		shoppingCartDataPopulator.setShoppingCartCalculationService(shoppingCartCalculationService);
 		shoppingCartDataPopulator.setPricingService(pricingService);
-
 		try {
 			return shoppingCartDataPopulator.populate(cartModel, store);
 		} catch (ConversionException ce) {
 			LOGGER.error("Error in converting shopping cart to shopping cart data", ce);
-
 		}
 		return null;
 	}
