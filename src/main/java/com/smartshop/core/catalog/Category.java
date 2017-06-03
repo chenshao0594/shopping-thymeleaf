@@ -52,6 +52,9 @@ public class Category extends BusinessDomain<Long, Category> implements Serializ
 	@Column(name = "visible")
 	private Boolean visible;
 
+	@Column(name = "search_URL")
+	private String searchURL;
+
 	@NotEmpty
 	@Column(name = "code", nullable = false, unique = true)
 	private String code;
@@ -208,6 +211,14 @@ public class Category extends BusinessDomain<Long, Category> implements Serializ
 
 	public Boolean getVisible() {
 		return visible;
+	}
+
+	public String getSearchURL() {
+		return searchURL;
+	}
+
+	public void setSearchURL(String searchURL) {
+		this.searchURL = searchURL;
 	}
 
 }

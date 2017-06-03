@@ -38,6 +38,8 @@ public class QSKU extends EntityPathBase<SKU> {
 
     public final SetPath<ProductOptionValue, QProductOptionValue> productOptionValues = this.<ProductOptionValue, QProductOptionValue>createSet("productOptionValues", ProductOptionValue.class, QProductOptionValue.class, PathInits.DIRECT2);
 
+    public final NumberPath<Long> quantity = createNumber("quantity", Long.class);
+
     public final NumberPath<java.math.BigDecimal> retailPrice = createNumber("retailPrice", java.math.BigDecimal.class);
 
     public final NumberPath<java.math.BigDecimal> salePrice = createNumber("salePrice", java.math.BigDecimal.class);

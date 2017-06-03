@@ -271,4 +271,10 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 		this.save(product);
 	}
 
+	@Override
+	public Product findBySearchURL(String searchURL) {
+		QProduct qProduct = QProduct.product;
+		return this.productRepository.findOne(qProduct.searchUrl.eq(searchURL));
+	}
+
 }

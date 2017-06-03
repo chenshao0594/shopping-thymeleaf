@@ -11,6 +11,10 @@ public interface ShopControllerConstants {
 		final static String category = "shop/category";
 	}
 
+	interface Catalogue {
+		final static String catalogue = "shop/catalogue/list";
+	}
+
 	interface Product {
 		final static String product = "shop/product";
 	}

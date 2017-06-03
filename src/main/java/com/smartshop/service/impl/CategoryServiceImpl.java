@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.smartshop.core.catalog.Category;
+import com.smartshop.core.catalog.QCategory;
 import com.smartshop.core.catalog.service.CategoryService;
 import com.smartshop.repository.CategoryRepository;
 import com.smartshop.repository.search.CategorySearchRepository;
@@ -21,12 +22,18 @@ public class CategoryServiceImpl extends AbstractDomainServiceImpl<Category, Lon
 	private final CategoryRepository categoryRepository;
 	private final CategorySearchRepository categorySearchRepository;
 
-
 	public CategoryServiceImpl(CategoryRepository categoryRepository,
 			CategorySearchRepository categorySearchRepository) {
 		super(categoryRepository, categorySearchRepository);
 		this.categoryRepository = categoryRepository;
 		this.categorySearchRepository = categorySearchRepository;
+	}
+
+	@Override
+	public Category findBySearchURL(String searchURL) {
+		QCategory q = QCategory.category;
+		// this.categoryRepository.findOne(q.sear)
+		return null;
 	}
 
 }

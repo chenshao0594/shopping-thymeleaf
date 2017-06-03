@@ -42,6 +42,8 @@ public class QCustomer extends EntityPathBase<Customer> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final BooleanPath isActivity = createBoolean("isActivity");
+
     public final StringPath lastName = createString("lastName");
 
     public final QMerchantStore merchantStore;

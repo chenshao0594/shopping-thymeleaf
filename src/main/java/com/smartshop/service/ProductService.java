@@ -28,4 +28,6 @@ public interface ProductService extends AbstractDomainService<Product, Long> {
 
 	void addRelations(long id, List<Long> ids);
 
+	Product findBySearchURL(String searchURL);
+
 }

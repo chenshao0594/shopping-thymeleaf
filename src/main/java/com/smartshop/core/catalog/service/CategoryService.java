@@ -8,4 +8,6 @@ import com.smartshop.service.AbstractDomainService;
  */
 public interface CategoryService extends AbstractDomainService<Category, Long> {
 
+	Category findBySearchURL(final String searchURL);
+
 }
