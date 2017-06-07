@@ -3,6 +3,7 @@ package com.smartshop.service;
 import java.util.List;
 import java.util.Map;
 
+import com.smartshop.core.catalog.Category;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.shop.model.ProductOptionDTO;
 import com.smartshop.shop.model.ProductOptionPricing;
@@ -29,5 +30,7 @@ public interface ProductService extends AbstractDomainService<Product, Long> {
 	void addRelations(long id, List<Long> ids);
 
 	Product findBySearchURL(String searchURL);
+
+	long countByCategory(Category category);
 
 }

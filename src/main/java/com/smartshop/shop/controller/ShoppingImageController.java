@@ -19,7 +19,7 @@ import com.smartshop.service.AttachmentService;
 
 @Controller("ShopImageController")
 @RequestMapping("/images")
-public class ImageController {
+public class ShoppingImageController {
 
 	@Inject
 	private AttachmentService attachmentService;

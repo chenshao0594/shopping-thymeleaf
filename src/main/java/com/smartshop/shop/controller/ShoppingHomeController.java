@@ -18,9 +18,9 @@ import com.smartshop.exception.BusinessException;
 import com.smartshop.service.ProductService;
 
 @Controller("ShopHomeController")
-@RequestMapping
-public class HomeController {
-	private final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+@RequestMapping("")
+public class ShoppingHomeController {
+	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingHomeController.class);
 
 	@Autowired
 	private ProductService productService;

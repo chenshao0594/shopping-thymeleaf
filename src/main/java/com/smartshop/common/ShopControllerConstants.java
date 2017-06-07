@@ -12,7 +12,7 @@ public interface ShopControllerConstants {
 	}
 
 	interface Catalogue {
-		final static String catalogue = "shop/catalogue/list";
+		final static String catalogue = "shop/catalogue/catalogue";
 	}
 
 	interface Product {
@@ -29,7 +29,7 @@ public interface ShopControllerConstants {
 		final static String review = "shop/review";
 		final static String register = "shop/register";
 		final static String changePassword = "shop/customerPassword";
-		final static String customerOrders = "shop/customerOrders";
+		final static String customerOrders = "shop/customer/Orders";
 		final static String customerOrder = "shop/customerOrder";
 		final static String Billing = "shop/customerAddress";
 		final static String EditAddress = "shop/editCustomerAddress";

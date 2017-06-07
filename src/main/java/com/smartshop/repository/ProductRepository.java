@@ -17,4 +17,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, QueryDs
 	@Query("select product.name from Product product where product.id=?1")
 	String findNameById(Long id);
 
+	// select category_id, count(*) from product where available=1 group by
+	// category_id;
+
 }

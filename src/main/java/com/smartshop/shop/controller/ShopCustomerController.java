@@ -36,6 +36,7 @@ import com.smartshop.service.MerchantStoreService;
 
 @Controller("ShopCustomerController")
 @RequestMapping("/customer")
+
 public class ShopCustomerController extends AbstractShopController {
 	private final Logger LOGGER = LoggerFactory.getLogger(ShopCustomerController.class);
 
@@ -116,6 +117,11 @@ public class ShopCustomerController extends AbstractShopController {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
 		return "redirect:/";
+	}
+
+	@GetMapping(value = "/orders")
+	public String orders(HttpServletRequest request, HttpServletResponse response) {
+		return ShopControllerConstants.Customer.customerOrders;
 	}
 
 }

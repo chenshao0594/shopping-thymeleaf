@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.smartshop.core.catalog.Category;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.ProductOption;
 import com.smartshop.core.catalog.ProductOptionValue;
@@ -275,6 +276,12 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 	public Product findBySearchURL(String searchURL) {
 		QProduct qProduct = QProduct.product;
 		return this.productRepository.findOne(qProduct.searchUrl.eq(searchURL));
+	}
+
+	@Override
+	public long countByCategory(Category category) {
+		QProduct qProduct = QProduct.product;
+		return this.productRepository.count(qProduct.category.id.eq(category.getId()));
 	}
 
 }

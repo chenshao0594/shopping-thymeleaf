@@ -5,8 +5,7 @@
 				<a th:href="@{/customer/register}">Login or Register</a>
 			</div>
 			<div sec:authorize="isAuthenticated()">
-				Welcome, <span sec:authentication="name">Bob</span>!
-				<a href="/customer/logout">Logout</a>
+				Welcome, <span sec:authentication="name">Bob</span>! <a href="/customer/logout">Logout</a>
 			</div>
 		</div>
 		<div class="six columns">
@@ -33,8 +32,8 @@
 				<li class="{{ active_page == 'home' ? 'active' : null }}"><a href='/'>Home</a></li>
 				<li
 					class="{% if categories.count %}has-flyout{% endif %} {{ active_page == 'shop' ? 'active' : null }} right-border-li">
-					<a href="/">Shop</a> <a class="flyout-toggle"
-					href="{{ site_url('shop') }}"><span> </span></a>
+					<a href="/catalogue">Shop</a> <a class="flyout-toggle" href="{{ site_url('shop') }}"><span>
+					</span></a>
 					<ul class="flyout" style="display: none;">
 						<li><a href="/category/{{ category.fullUrlName }}">{{ category.name }}</a></li>
 					</ul>
@@ -44,11 +43,11 @@
 					class="has-flyout {{ active_page == 'profile' or 
                                    active_page == 'orders' or 
                                    active_page == 'subscriptions' ? 'active' : null }} right-border-li">
-					<a href="{{ site_url('profile') }}">Profile</a> <a class="flyout-toggle"
-					href="{{ site_url('profile') }}"><span> </span></a>
+					<a href="#">Profile</a> <a class="flyout-toggle" href="{{ site_url('profile') }}"><span>
+					</span></a>
 					<ul class="flyout" style="display: none;">
-						<li><a href="/orders">My Orders</a></li>
-						<li><a href="/subscriptions">My Subscriptions</a></li>
+						<li><a th:href="@{/customer/orders}">My Orders</a></li>
+						<li><a href="/customer/subscriptions">My Subscriptions</a></li>
 					</ul>
 				</li>
 				<li class="menu-item-seperator"></li>

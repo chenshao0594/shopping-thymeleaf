@@ -32,6 +32,13 @@ public class ShoppingCatalogueController {
 	private ProductService productService;
 
 	@Timed
+	@GetMapping("")
+	public String catalogue(Model model, HttpServletRequest request, HttpServletResponse response, Locale locale)
+			throws Exception {
+		return ShopControllerConstants.Catalogue.catalogue;
+	}
+
+	@Timed
 	@GetMapping("/{friendlyUrl}.html")
 	public String displayCategoryNoReference(@PathVariable final String friendlyUrl, Model model,
 			HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {

@@ -57,25 +57,29 @@ public class ShoppingProductController {
 		return model;
 	}
 
-	@Timed
-	@GetMapping(value = "/{searchURL}")
-	public ModelAndView findBySearchURL(@PathVariable("searchURL") String url, ModelAndView model) throws Exception {
-		Product product = this.productService.findBySearchURL(url);
-		List<Attachment> images = this.attachmentService.findAllByBOInfo("product", product.getId(),
-				AttachmentEnum.IMAGE);
-		List<ProductOptionPricing> skuPricing = this.productService.buildSKUsPricing(product);
-		List<ProductOptionDTO> allProductOptions = this.productService.buildProductOptionsDTO(product);
-		SKU defaultSKU = this.skuService.findDefaultSKU(product.getId());
-		product.setDefaultSKU(defaultSKU);
-		Gson gson = new Gson();
-		String skuPricingJson = gson.toJson(skuPricing);
-		String allProductOptionsJson = gson.toJson(allProductOptions);
-		model.addObject("product", product);
-		model.addObject("images", images);
-		model.addObject("skuPricing", skuPricingJson);
-		model.addObject("allProductOptions", allProductOptionsJson);
-		model.setViewName("shop/product/detail");
-		return model;
-	}
+	// @Timed
+	// @GetMapping(value = "/{searchURL}")
+	// public ModelAndView findBySearchURL(@PathVariable("searchURL") String
+	// url, ModelAndView model) throws Exception {
+	// Product product = this.productService.findBySearchURL(url);
+	// List<Attachment> images =
+	// this.attachmentService.findAllByBOInfo("product", product.getId(),
+	// AttachmentEnum.IMAGE);
+	// List<ProductOptionPricing> skuPricing =
+	// this.productService.buildSKUsPricing(product);
+	// List<ProductOptionDTO> allProductOptions =
+	// this.productService.buildProductOptionsDTO(product);
+	// SKU defaultSKU = this.skuService.findDefaultSKU(product.getId());
+	// product.setDefaultSKU(defaultSKU);
+	// Gson gson = new Gson();
+	// String skuPricingJson = gson.toJson(skuPricing);
+	// String allProductOptionsJson = gson.toJson(allProductOptions);
+	// model.addObject("product", product);
+	// model.addObject("images", images);
+	// model.addObject("skuPricing", skuPricingJson);
+	// model.addObject("allProductOptions", allProductOptionsJson);
+	// model.setViewName("shop/product/detail");
+	// return model;
+	// }
 
 }
