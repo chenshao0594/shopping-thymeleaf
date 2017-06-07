@@ -3,7 +3,7 @@
 	layout:decorate="~{layouts/layout}">
 </head>
 <body>
-	<section layout:fragment="content">
+	<section layout:fragment="content" th:remove="tag">
 		<div class="page-title">
 			<h2>
 				Categories <a th:href="@{/{admin}/categories/new(admin=${admin_url})}" class="btn btn-success pull-right"><span

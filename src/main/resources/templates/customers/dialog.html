@@ -6,7 +6,7 @@
 <script src="/vendor/tapatar/tapatar.min.js" th:src="@{/vendor/tapatar/tapatar.min.js}"></script>
 </head>
 <body>
-	<section layout:fragment="content">
+	<section layout:fragment="content" th:remove="tag">
 		<div class="page-title">
 			<h2>
 				Customer <small th:text="${item?.id}"></small>

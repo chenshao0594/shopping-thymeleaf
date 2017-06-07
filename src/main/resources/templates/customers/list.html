@@ -3,7 +3,7 @@
 	layout:decorate="~{layouts/layout}">
 </head>
 <body>
-	<section layout:fragment="content">
+	<section layout:fragment="content" th:remove="tag">
 		<div class="page-title">
 			<h2>
 				Customer <a th:href="@{/{admin}/customers/new(admin=${admin_url})}"
