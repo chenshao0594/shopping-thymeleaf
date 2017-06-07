@@ -5,6 +5,8 @@ import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -80,11 +82,13 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 	@Column(name = "STATE_PROVINCE", length = 100)
 	private String stateProvince;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "WEIGHT_UNIT", length = 5)
-	private String weightUnit = MeasureUnit.LB.name();
+	private MeasureUnit weightUnit;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "SIZE_UNIT", length = 5)
-	private String sizeUnit = MeasureUnit.IN.name();
+	private MeasureUnit sizeUnit;
 
 	@Column(name = "INVOICE_TEMPLATE", length = 25)
 	private String invoiceTemplate;
@@ -194,19 +198,19 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 		this.stateProvince = stateProvince;
 	}
 
-	public String getWeightUnit() {
+	public MeasureUnit getWeightUnit() {
 		return weightUnit;
 	}
 
-	public void setWeightUnit(String weightUnit) {
+	public void setWeightUnit(MeasureUnit weightUnit) {
 		this.weightUnit = weightUnit;
 	}
 
-	public String getSizeUnit() {
+	public MeasureUnit getSizeUnit() {
 		return sizeUnit;
 	}
 
-	public void setSizeUnit(String sizeUnit) {
+	public void setSizeUnit(MeasureUnit sizeUnit) {
 		this.sizeUnit = sizeUnit;
 	}
 
@@ -264,6 +268,16 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
+	}
+
+	@Override
+	public String toString() {
+		return "MerchantStore [id=" + id + ", name=" + name + ", code=" + code + ", phone=" + phone + ", address="
+				+ address + ", city=" + city + ", postalcode=" + postalcode + ", country=" + country + ", zone=" + zone
+				+ ", stateProvince=" + stateProvince + ", weightUnit=" + weightUnit + ", sizeUnit=" + sizeUnit
+				+ ", invoiceTemplate=" + invoiceTemplate + ", domainName=" + domainName + ", continueShoppingURL="
+				+ continueShoppingURL + ", emailAddress=" + emailAddress + ", Logo=" + Logo + ", currency=" + currency
+				+ ", locale=" + locale + "]";
 	}
 
 }

@@ -15,7 +15,7 @@
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
 		<form name="form"
-			th:action="@{(${item.id} ? '/'+${admin_url}+'customers/'+${item.id}+'/edit': '/'+${admin_url}+'/customers')}"
+			th:action="@{(${item.id} ? '/'+${admin_url}+'/customers/'+${item.id}+'/edit': '/'+${admin_url}+'/customers')}"
 			action="customer/edit.html" method="POST">
 			<fieldset>
 				<legend class="section">Basic Info</legend>
