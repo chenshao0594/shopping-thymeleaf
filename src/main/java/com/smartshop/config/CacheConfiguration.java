@@ -75,6 +75,7 @@ public class CacheConfiguration {
 			cm.createCache(com.smartshop.domain.Transaction.class.getName(), jcacheConfiguration);
 
 			cm.createCache(com.smartshop.domain.Currency.class.getName(), jcacheConfiguration);
+			cm.createCache(com.smartshop.core.common.Zone.class.getName(), jcacheConfiguration);
 
 			//
 			// jhipster-needle-ehcache-add-entry

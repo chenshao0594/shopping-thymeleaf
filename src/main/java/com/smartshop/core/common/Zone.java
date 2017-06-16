@@ -11,10 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.smartshop.domain.common.BusinessDomain;
 
 @Entity
 @Table(name = "zone")
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Zone extends BusinessDomain<Long, Zone> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

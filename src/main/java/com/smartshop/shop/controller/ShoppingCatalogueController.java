@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.codahale.metrics.annotation.Timed;
 import com.smartshop.common.ShopControllerConstants;
 import com.smartshop.core.catalog.Category;
+import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.service.CategoryService;
 import com.smartshop.service.ProductService;
 
@@ -33,8 +36,12 @@ public class ShoppingCatalogueController {
 
 	@Timed
 	@GetMapping("")
-	public String catalogue(Model model, HttpServletRequest request, HttpServletResponse response, Locale locale)
-			throws Exception {
+	public String catalogue(Model model, Pageable pageable, HttpServletRequest request, HttpServletResponse response,
+			Locale locale) throws Exception {
+		Page<Category> page = this.categoryService.findAll(null);
+		Page<Product> productPage = this.productService.findAll(pageable);
+		model.addAttribute("categories", page.getContent());
+		model.addAttribute("page", productPage);
 		return ShopControllerConstants.Catalogue.catalogue;
 	}
 

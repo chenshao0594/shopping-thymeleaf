@@ -31,7 +31,7 @@ import com.smartshop.domain.common.BusinessDomain;
 
 @Entity
 @Table(name = "product")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Document(indexName = "product")
 public class Product extends BusinessDomain<Long, Product> implements Serializable {
 
