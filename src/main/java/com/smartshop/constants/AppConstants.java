@@ -6,6 +6,8 @@ package com.smartshop.constants;
 public final class AppConstants {
 	public final static String SLASH = "/";
 	public final static String BLANK = "";
+
+	public final static String BASE_PATH = "/static/images/";
 	// Regex for acceptable logins
 	public static final String LOGIN_REGEX = "^[_'.@A-Za-z0-9-]*$";
 

@@ -1,24 +1,19 @@
 package com.smartshop.domain;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -44,13 +39,6 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 	@Column(name = "name", nullable = false, updatable = false)
 	private String name;
 
-	@NotNull
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	@Column(name = "content", nullable = false, updatable = false)
-	@Type(type = "org.hibernate.type.MaterializedBlobType")
-	private byte[] content;
-
 	@Column(name = "content_type", nullable = false, updatable = false)
 	private String contentType;
 
@@ -68,6 +56,9 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 	@NotNull
 	@Enumerated(value = EnumType.STRING)
 	private AttachmentEnum attachmentType = AttachmentEnum.ATTACHMENT;
+
+	@NotEmpty
+	private String path;
 
 	public Attachment() {
 
@@ -99,19 +90,6 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public byte[] getContent() {
-		return content;
-	}
-
-	public Attachment content(byte[] content) {
-		this.content = content;
-		return this;
-	}
-
-	public void setContent(byte[] content) {
-		this.content = content;
 	}
 
 	public String getContentType() {
@@ -174,11 +152,12 @@ public class Attachment extends BusinessDomain<Long, Attachment> implements Seri
 		this.attachmentType = attachmentType;
 	}
 
-	@Override
-	public String toString() {
-		return "Attachment [id=" + id + ", name=" + name + ", content=" + Arrays.toString(content) + ", contentType="
-				+ contentType + ", size=" + size + ", boName=" + boName + ", boId=" + boId + ", attachmentType="
-				+ attachmentType + "]";
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 }

@@ -25,7 +25,7 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/shopping?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/shopping?useUnicode=true&characterEncoding=utf8&useSSL=true
         username: root
         password:
         hikari:
@@ -40,12 +40,13 @@ spring:
         database: MYSQL
         show-sql: true
         properties:
-            hibernate.hbm2ddl.auto: update
+            hibernate.hbm2ddl.auto: create-drop
             hibernate.id.new_generator_mappings: true
             hibernate.cache.use_second_level_cache: true
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
+            hibernate.hbm2ddl.import_files:  sql/load_admin_user.sql
     data:
         elasticsearch:
             cluster-name:

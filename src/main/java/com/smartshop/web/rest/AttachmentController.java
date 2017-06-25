@@ -3,9 +3,14 @@ package com.smartshop.web.rest;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,6 +49,7 @@ import com.smartshop.attachment.common.PreviewConfig;
 import com.smartshop.constants.AppConstants;
 import com.smartshop.domain.Attachment;
 import com.smartshop.service.AttachmentService;
+import com.smartshop.utils.AttachmentUtils;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -68,12 +74,15 @@ public class AttachmentController {
 	public @ResponseBody ResponseEntity<AttachmentResponse> createImage(@RequestParam("file") MultipartFile file,
 			String boName, Long boId, String attachmentType, RedirectAttributes redirectAttributes,
 			HttpServletResponse response) throws IOException, URISyntaxException {
+
 		Attachment attachment = new Attachment(boName, boId);
-		attachment.setContent(file.getBytes());
 		attachment.setContentType(file.getContentType());
 		attachment.setSize(file.getSize());
 		attachment.setName(file.getOriginalFilename());
 		attachment.setAttachmentType(AttachmentEnum.valueOf(attachmentType));
+
+		String filePath = this.saveFile(attachment, file.getBytes());
+		attachment.setPath(filePath);
 		this.attachmentService.save(attachment);
 		PreviewConfig previewConfig = new PreviewConfig(attachment.getName());
 		previewConfig.setKey(Long.toString(attachment.getId()));
@@ -84,10 +93,10 @@ public class AttachmentController {
 		body.getInitialPreviewConfig().add(previewConfig);
 		switch (attachment.getAttachmentType()) {
 		case AVATAR:
-			this.createThumbnail(attachment);
+			this.createThumbnail(attachment, file.getBytes());
 			break;
 		case IMAGE:
-			this.createThumbnail(attachment);
+			this.createThumbnail(attachment, file.getBytes());
 			break;
 		default:
 
@@ -95,14 +104,9 @@ public class AttachmentController {
 		body.getInitialPreview().add(AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
 		return ResponseEntity.created(new URI(AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId()))
 				.body(body);
-
-		/*
-		 * this.attachmentService.save(attachment);
-		 *
-		 */
 	}
 
-	private void createThumbnail(Attachment attachment) {
+	private void createThumbnail(Attachment attachment, byte[] content) {
 		List<Attachment> list = this.attachmentService.findAllByBOInfo(attachment.getBoName(), attachment.getBoId(),
 				AttachmentEnum.THUMBNAIL);
 		if (!CollectionUtils.isEmpty(list)) {
@@ -115,7 +119,7 @@ public class AttachmentController {
 		ByteArrayInputStream in = null;
 		ByteArrayOutputStream baos = null;
 		try {
-			in = new ByteArrayInputStream(attachment.getContent());
+			in = new ByteArrayInputStream(content);
 			BufferedImage originalImage = ImageIO.read(in);
 			BufferedImage thumbnail = Thumbnails.of(originalImage).size(200, 200).asBufferedImage();
 			baos = new ByteArrayOutputStream();
@@ -123,7 +127,9 @@ public class AttachmentController {
 			ImageIO.write(originalImage, typeArr[1], baos);
 			baos.flush();
 			byte[] imageInByte = baos.toByteArray();
-			thumbnailAttachment.setContent(imageInByte);
+
+			String thumbnailPath = this.saveFile(thumbnailAttachment, imageInByte);
+			thumbnailAttachment.setPath(thumbnailPath);
 			thumbnailAttachment.setSize((long) imageInByte.length);
 			this.attachmentService.save(thumbnailAttachment);
 			baos.close();
@@ -168,7 +174,8 @@ public class AttachmentController {
 		Attachment attachment = this.attachmentService.findOne(id);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.valueOf(attachment.getContentType()));
-		return new ResponseEntity<byte[]>(attachment.getContent(), headers, HttpStatus.OK);
+		byte[] attachmentContent = AttachmentUtils.getAttachmentContent(attachment);
+		return new ResponseEntity<byte[]>(attachmentContent, headers, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/{roName}/{id}/thumbnail")
@@ -181,7 +188,26 @@ public class AttachmentController {
 		if (attachment == null) {
 			return new ResponseEntity<byte[]>(null, headers, HttpStatus.OK);
 		}
-		return new ResponseEntity<byte[]>(attachment.getContent(), headers, HttpStatus.OK);
+		return new ResponseEntity<byte[]>(AttachmentUtils.getAttachmentContent(attachment), headers, HttpStatus.OK);
 	}
 
+	private String saveFile(Attachment attachment, byte[] content) {
+		String filePath = AppConstants.BASE_PATH + attachment.getBoName() + "/" + attachment.getBoId() + "/"
+				+ attachment.getName();
+		OutputStream os = null;
+		try {
+			Path file = Paths.get(filePath);
+			Files.write(file, content);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			IOUtils.closeWhileHandlingException(os);
+		}
+
+		return filePath;
+	}
 }

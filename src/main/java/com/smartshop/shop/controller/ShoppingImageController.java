@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.smartshop.domain.Attachment;
 import com.smartshop.service.AttachmentService;
+import com.smartshop.utils.AttachmentUtils;
 
 @Controller("ShopImageController")
 @RequestMapping("/images")
@@ -30,7 +31,7 @@ public class ShoppingImageController {
 		Attachment attachment = this.attachmentService.findOne(id);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.valueOf(attachment.getContentType()));
-		return new ResponseEntity<byte[]>(attachment.getContent(), headers, HttpStatus.OK);
+		return new ResponseEntity<byte[]>(AttachmentUtils.getAttachmentContent(attachment), headers, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/{roName}/{id}/thumbnail")
@@ -43,7 +44,7 @@ public class ShoppingImageController {
 		if (attachment == null) {
 			return new ResponseEntity<byte[]>(null, headers, HttpStatus.OK);
 		}
-		return new ResponseEntity<byte[]>(attachment.getContent(), headers, HttpStatus.OK);
+		return new ResponseEntity<byte[]>(AttachmentUtils.getAttachmentContent(attachment), headers, HttpStatus.OK);
 	}
 
 }

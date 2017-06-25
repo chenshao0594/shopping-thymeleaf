@@ -56,15 +56,15 @@
 					</div>
 					<div class="six columns">
 						<label for="billing_state">State *</label> <select id="billing_state"
-							name="customer.billing[stateId]" data-ajax-refresh> {{ partial('shop-stateoptions',
-							{'states': billingStates, 'selected': customer.billing.stateId}) }}
+							name="customer.billing[stateId]">
+							'shop-stateoptions',
+							{'states': billingStates, 'selected': customer.billing.stateId})
 						</select> <span class="error"></span>
 					</div>
 				</div>
 			</div>
 			<div class="six columns">
 				<h3 class="inline-block">delivery Information</h3>
-				<!-- See the onCopyBillingTodelivery AJAX handler implementation on the Checkout page's AJAX tab -->
 				<a href="#" id="copy_billing_to_delivery">Copy Billing Information</a>
 				<div class="row">
 					<div class="six columns">
@@ -101,12 +101,13 @@
 				</div>
 				<div class="row">
 					<div class="six columns">
-						<label for="delivery_country">Country *</label> <select id="delivery_country"
-							name="customer.delivery[countryId]" data-state-selector="#delivery_state"
-							data-current-state="{{ customer.delivery.stateId }}"> {% for country in countries %}
-							<option {{ option_state(customer.delivery.countryId, country.id) }} value="{{ country.id }}">{{
-								country.name }}</option> {% endfor %}
-						</select> <span class="error"></span>
+						<label for="delivery_country">Country *</label> 						
+						<select id="billing_country"
+							name="customer.delivery[countryId]" data-state-selector="#delivery_country"
+							data-current-state="{{ customer.delivery.countryId }}">
+							<option th:each="item :${countries}" th:value="${item.id}" th:text="${item.name}"></option>
+						</select>
+						<span class="error"></span>
 					</div>
 					<div class="six columns">
 						<label for="delivery_state">State </label> <select id="delivery_state"
