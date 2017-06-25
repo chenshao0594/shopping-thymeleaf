@@ -48,11 +48,11 @@ public class QMerchantStore extends EntityPathBase<MerchantStore> {
 
     public final StringPath postalcode = createString("postalcode");
 
-    public final StringPath sizeUnit = createString("sizeUnit");
+    public final EnumPath<com.smartshop.core.enumeration.MeasureUnit> sizeUnit = createEnum("sizeUnit", com.smartshop.core.enumeration.MeasureUnit.class);
 
     public final StringPath stateProvince = createString("stateProvince");
 
-    public final StringPath weightUnit = createString("weightUnit");
+    public final EnumPath<com.smartshop.core.enumeration.MeasureUnit> weightUnit = createEnum("weightUnit", com.smartshop.core.enumeration.MeasureUnit.class);
 
     public final com.smartshop.core.common.QZone zone;
 

@@ -87,10 +87,6 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@Column(name = "product_ordered")
 	private Integer productOrdered;
 
-	@Min(value = 0, message = "The Product sale price must bo not lee than zero.")
-	@Column(name = "sale_price", precision = 10, scale = 2)
-	private BigDecimal salePrice;
-
 	@Min(value = 0, message = "The Product retail price must bo not lee than zero.")
 	@Column(name = "retail_price", precision = 10, scale = 2)
 	private BigDecimal retailPrice;
@@ -131,7 +127,7 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	protected Set<SKU> skus = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "product")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "product")
 	private Set<ProductRelationship> relationships = new HashSet<ProductRelationship>();
 
 	@Transient
@@ -261,14 +257,6 @@ public class Product extends BusinessDomain<Long, Product> implements Serializab
 
 	public void setExternalDl(String externalDl) {
 		this.externalDl = externalDl;
-	}
-
-	public BigDecimal getSalePrice() {
-		return salePrice;
-	}
-
-	public void setSalePrice(BigDecimal salePrice) {
-		this.salePrice = salePrice;
 	}
 
 	public BigDecimal getRetailPrice() {

@@ -77,7 +77,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		sku.setCode(product.getCode());
 		sku.setName(product.getName());
 		sku.setRetailPrice(product.getRetailPrice());
-		sku.setSalePrice(product.getSalePrice());
+		sku.setStandardPrice(product.getStandardPrice());
 		sku.setProduct(product);
 		sku.setDefault(true);
 		sku.setAttributes("default SKU");

@@ -20,10 +20,11 @@ import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.facade.ShoppingCartFacade;
 import com.smartshop.shop.model.ShoppingCartData;
+import com.smartshop.shop.utils.UserInfoContextHolder;
 
 @Controller("ShopCartController")
 @RequestMapping("/shoppingcart")
-public class ShoppingCartController extends AbstractShopController {
+public class ShoppingCartController extends AbstractShoppingController {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCartController.class);
 
@@ -38,7 +39,7 @@ public class ShoppingCartController extends AbstractShopController {
 	public ModelAndView detail(ModelAndView model, final HttpServletRequest request) throws Exception {
 		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
-		MerchantStore store = getSessionAttribute(AppConstants.MERCHANT_STORE, request);
+		MerchantStore store = UserInfoContextHolder.getMerchantStore();
 		Customer customer = getSessionAttribute(AppConstants.CUSTOMER, request);
 		if (customer != null) {
 			shoppingCart = shoppingCartService.getShoppingCart(customer);

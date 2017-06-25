@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
 	layout:decorate="~{shop/layouts/layout}">
 <head>
-<!-- <script src="/vendor/bootstrap/carousel.js" th:src="@{/vendor/bootstrap/carousel.js}"></script>
- -->
 </head>
 <body>
 	<section layout:fragment="content">
@@ -18,8 +16,8 @@
 					</div>
 					<div class="six columns">
 						<label for="billing_lastName">Last Name *</label> <input type="text"
-							name="customer.billing[lastName]" id="billing_lastName" th:value="${customer.billing?.lastName}" />
-						<span class="error"></span>
+							name="customer.billing[lastName]" id="billing_lastName"
+							th:value="${customer.billing?.lastName}" /> <span class="error"></span>
 					</div>
 				</div>
 				<div class="row">
@@ -30,13 +28,13 @@
 					</div>
 					<div class="six columns">
 						<label for="billing_phone">Phone Number *</label> <input type="text"
-							name="customer.billing[telephone]" id="billing_phone" th:value="${customer.billing.telephone}" /> <span
-							class="error"></span>
+							name="customer.billing[telephone]" id="billing_phone"
+							th:value="${customer.billing.telephone}" /> <span class="error"></span>
 					</div>
 				</div>
 				<label for="billing_address">Address *</label>
 				<textarea id="billing_address" name="customer.billing[address]">[[${customer.billing.streetAddress}]]</textarea>
-				<span class="error"></span> 
+				<span class="error"></span>
 				<div class="row">
 					<div class="six columns">
 						<label for="billing_city">City *</label> <input type="text" name="customer.billing[city]"
@@ -44,13 +42,15 @@
 					</div>
 					<div class="six columns">
 						<label for="billing_postalCode">Zip Code *</label> <input type="text" id="billing_postalCode"
-							name="customer.billing[postalCode]" th:value="${customer.billing.postalCode}" /> <span class="error"></span>
+							name="customer.billing[postalCode]" th:value="${customer.billing.postalCode}" /> <span
+							class="error"></span>
 					</div>
 				</div>
 				<div class="row">
 					<div class="six columns">
-						<label for="billing_country">Country *</label>
-						<select id="billing_country" name="customer.billing[country.id]" data-state-selector="#billing_state" data-current-state="{{ customer.billing.stateId }}">
+						<label for="billing_country">Country *</label> <select id="billing_country"
+							name="customer.billing[country.id]" data-state-selector="#billing_state"
+							data-current-state="{{ customer.billing.stateId }}">
 							<option th:each="item :${countries}" th:value="${item.id}" th:text="${item.name}"></option>
 						</select> <span class="error"></span>
 					</div>
@@ -69,20 +69,20 @@
 				<div class="row">
 					<div class="six columns">
 						<label for="delivery_firstName">First Name *</label> <input type="text"
-							name="customer.delivery[firstName]" id="delivery_firstName" value="{{ customer.delivery.firstName }}" />
-						<span class="error"></span>
+							name="customer.delivery[firstName]" id="delivery_firstName"
+							th:value="{{customer.delivery.firstName}}" /> <span class="error"></span>
 					</div>
 					<div class="six columns">
 						<label for="delivery_lastName">Last Name *</label> <input type="text"
-							name="customer.delivery[lastName]" id="delivery_lastName" value="{{ customer.delivery.lastName }}" />
-						<span class="error"></span>
+							name="customer.delivery[lastName]" id="delivery_lastName"
+							th:value="{{ customer.delivery.lastName }}" /> <span class="error"></span>
 					</div>
 				</div>
 				<div class="row">
 					<div class="twelve columns">
 						<label for="delivery_phone">Phone Number *</label> <input type="text"
-							name="customer.delivery[phone]" id="delivery_phone" value="{{ customer.delivery.phone }}" /> <span
-							class="error"></span>
+							name="customer.delivery[phone]" id="delivery_phone" th:value="{{ customer.delivery.phone }}" />
+						<span class="error"></span>
 					</div>
 				</div>
 				<label for="delivery_address">Address</label>
@@ -91,7 +91,7 @@
 				<div class="row">
 					<div class="six columns">
 						<label for="delivery_city">City *</label> <input type="text" name="customer.delivery[city]"
-							id="delivery_city" value="{{ customer.delivery.city }}" /> <span class="error"></span>
+							id="delivery_city" th:value="{{ customer.delivery.city }}" /> <span class="error"></span>
 					</div>
 					<div class="six columns">
 						<label for="delivery_postalCode">Zip Code *</label> <input type="text"
@@ -136,3 +136,4 @@
 			</div>
 		</div>
 		<input type="hidden" name="step" value="billing_info,delivery_info" />
+	</section>

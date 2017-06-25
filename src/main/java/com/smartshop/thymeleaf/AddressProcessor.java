@@ -20,7 +20,6 @@ public class AddressProcessor extends AbstractElementTagProcessor {
 
 	public AddressProcessor(final String dialectPrefix) {
 		super(TemplateMode.HTML, dialectPrefix, ELEMENT_NAME, (dialectPrefix != null), null, false, PRECEDENCE);
-
 	}
 
 	@Override

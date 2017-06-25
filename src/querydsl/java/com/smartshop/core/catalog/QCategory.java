@@ -38,6 +38,8 @@ public class QCategory extends EntityPathBase<Category> {
 
     public final QCategory parent;
 
+    public final StringPath searchURL = createString("searchURL");
+
     public final NumberPath<Integer> sortOrder = createNumber("sortOrder", Integer.class);
 
     public final BooleanPath visible = createBoolean("visible");

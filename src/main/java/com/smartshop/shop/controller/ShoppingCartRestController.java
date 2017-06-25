@@ -30,11 +30,12 @@ import com.smartshop.exception.ConversionException;
 import com.smartshop.facade.ShoppingCartFacade;
 import com.smartshop.shop.model.ShoppingCartData;
 import com.smartshop.shop.model.ShoppingCartItem;
+import com.smartshop.shop.utils.UserInfoContextHolder;
 import com.smartshop.web.rest.util.HeaderUtil;
 
 @RestController("ShopCartRestController")
 @RequestMapping("/cart")
-public class ShoppingCartRestController extends AbstractShopController {
+public class ShoppingCartRestController extends AbstractShoppingController {
 	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCartRestController.class);
 
 	@Inject
@@ -54,7 +55,7 @@ public class ShoppingCartRestController extends AbstractShopController {
 		LOGGER.info("shopping cart item  {}", item);
 		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
-		MerchantStore store = getSessionAttribute(AppConstants.MERCHANT_STORE, request);
+		MerchantStore store = UserInfoContextHolder.getMerchantStore();
 		Customer customer = getSessionAttribute(AppConstants.CUSTOMER, request);
 		if (customer != null) {
 			shoppingCart = shoppingCartService.getShoppingCart(customer);
@@ -102,7 +103,7 @@ public class ShoppingCartRestController extends AbstractShopController {
 	@GetMapping("/miniCart")
 	public ResponseEntity<ShoppingCartData> getMiniCart(final String cartCode, HttpServletRequest request) {
 		try {
-			MerchantStore store = getSessionAttribute(AppConstants.MERCHANT_STORE, request);
+			MerchantStore store = UserInfoContextHolder.getMerchantStore();
 			Customer customer = getSessionAttribute(AppConstants.CUSTOMER, request);
 			ShoppingCartData cart = shoppingCartFacade.getShoppingCartData(customer, store, cartCode);
 			if (cart != null) {

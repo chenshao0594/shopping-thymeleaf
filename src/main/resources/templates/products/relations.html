@@ -47,7 +47,7 @@
 								class="img-rounded" height="50"></th>
 							<td th:text="${row.name}">name</td>
 							<td th:text="${row.category?.code}">Category</td>
-							<td th:text="${row.salePrice}">Sale Price</td>
+							<td th:text="${row.standardPrice}">Sale Price</td>
 							<td th:text="${row.retailPrice}">Retail Price</td>
 							<td>
 								<div class="flex-btn-group-container">
@@ -104,7 +104,7 @@
 			<tr>
 				<td>{{name}}</td>
 				<td>{{category.code}}</td>
-				<td>{{salePrice}}</td>
+				<td>{{standardPrice}}</td>
 				<td>{{retailPrice}}</td>
 				<td><input type="checkbox" name="relation" value={{id}}></input></td>				
 			</tr>

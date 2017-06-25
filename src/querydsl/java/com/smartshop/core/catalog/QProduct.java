@@ -70,8 +70,6 @@ public class QProduct extends EntityPathBase<Product> {
 
     public final NumberPath<java.math.BigDecimal> retailPrice = createNumber("retailPrice", java.math.BigDecimal.class);
 
-    public final NumberPath<java.math.BigDecimal> salePrice = createNumber("salePrice", java.math.BigDecimal.class);
-
     public final StringPath searchUrl = createString("searchUrl");
 
     public final SetPath<SKU, QSKU> skus = this.<SKU, QSKU>createSet("skus", SKU.class, QSKU.class, PathInits.DIRECT2);

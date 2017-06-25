@@ -37,7 +37,7 @@ import com.smartshop.service.MerchantStoreService;
 @Controller("ShopCustomerController")
 @RequestMapping("/customer")
 
-public class ShopCustomerController extends AbstractShopController {
+public class ShopCustomerController extends AbstractShoppingController {
 	private final Logger LOGGER = LoggerFactory.getLogger(ShopCustomerController.class);
 
 	@Inject

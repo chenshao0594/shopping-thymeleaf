@@ -10,7 +10,7 @@
 					<a th:href="@{/product/{productId}(productId=${{item.id}})}" th:text="${{item.name }}"></a>
 				</h3>
 				<span> <a th:href="@{/product/{productId}(productId=${{item.id}})}" > <i> <span class="oldprice"
-							th:text="${item.salePrice}">price</span> <span th:text="${item.retailPrice}"></span>
+							th:text="${item.standardPrice}">price</span> <span th:text="${item.retailPrice}"></span>
 					</i>
 				</a>
 				</span>

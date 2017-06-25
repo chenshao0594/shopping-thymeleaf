@@ -63,8 +63,8 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 	protected BigDecimal retailPrice = BigDecimal.ZERO;
 
 	@NotNull
-	@Column(name = "SALE_PRICE", precision = 19, scale = 2, nullable = false)
-	private BigDecimal salePrice = BigDecimal.ZERO;
+	@Column(name = "STANDARD_PRICE", precision = 19, scale = 2, nullable = false)
+	private BigDecimal standardPrice = BigDecimal.ZERO;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
@@ -121,12 +121,12 @@ public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 		this.retailPrice = retailPrice;
 	}
 
-	public BigDecimal getSalePrice() {
-		return salePrice;
+	public BigDecimal getStandardPrice() {
+		return standardPrice;
 	}
 
-	public void setSalePrice(BigDecimal salePrice) {
-		this.salePrice = salePrice;
+	public void setStandardPrice(BigDecimal standardPrice) {
+		this.standardPrice = standardPrice;
 	}
 
 	public StatusEnum getStatus() {

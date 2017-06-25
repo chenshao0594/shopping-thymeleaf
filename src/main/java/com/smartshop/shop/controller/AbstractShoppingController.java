@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.smartshop.shop.utils.SessionUtil;
 
-public abstract class AbstractShopController {
+public abstract class AbstractShoppingController {
 	/**
 	 * Method which will help to retrieving values from Session based on the key
 	 * being passed to the method.

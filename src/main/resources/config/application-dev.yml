@@ -34,6 +34,7 @@ spring:
                 prepStmtCacheSize: 250
                 prepStmtCacheSqlLimit: 2048
                 useServerPrepStmts: true
+                maximum-pool-size: 100
     jpa:
         database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
         database: MYSQL
@@ -61,7 +62,7 @@ spring:
     messages:
         cache-seconds: 1
     thymeleaf:
-        cache: false
+        cache: true
 
 
 # ===================================================================
@@ -82,7 +83,7 @@ spring:
 #        keyAlias: jhipster
 # ===================================================================
 server:
-    port: 8080
+    port: 9080
 
 # ===================================================================
 # JHipster specific properties

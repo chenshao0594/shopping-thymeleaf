@@ -4,16 +4,16 @@ import java.util.Set;
 
 public class ProductOptionPricing {
 	private Long skuId;
-	private String salePrice;
+	private String standardPrice;
 	private String retailPrice;
 	private Set<Long> selectedOptions;
 
-	public String getSalePrice() {
-		return salePrice;
+	public String getStandardPrice() {
+		return standardPrice;
 	}
 
-	public void setSalePrice(String salePrice) {
-		this.salePrice = salePrice;
+	public void setStandardPrice(String standardPrice) {
+		this.standardPrice = standardPrice;
 	}
 
 	public String getRetailPrice() {
@@ -42,8 +42,8 @@ public class ProductOptionPricing {
 
 	@Override
 	public String toString() {
-		return "ProductOptionPricing [skuId=" + skuId + ", salePrice=" + salePrice + ", retailPrice=" + retailPrice
-				+ ", selectedOptions=" + selectedOptions + "]";
+		return "ProductOptionPricing [skuId=" + skuId + ", standardPrice=" + standardPrice + ", retailPrice="
+				+ retailPrice + ", selectedOptions=" + selectedOptions + "]";
 	}
 
 }

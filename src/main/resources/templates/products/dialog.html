@@ -49,8 +49,8 @@
 							th:selected="${category.id==item.category?.id}" th:text="${category.code}"></option>
 					</select> <label for="salePrice_input" class="col-2 col-form-label text-right">Sale Price</label>
 					<div class="input-group  col-4">
-						<span class="input-group-addon">$</span> <input type="number" th:value="${item.salePrice}"
-							class="form-control" id="salePrice_input" name="salePrice" />
+						<span class="input-group-addon">$</span> <input type="number" th:value="${item.standardPrice}"
+							class="form-control" id="salePrice_input" name="standardPrice" />
 					</div>
 					<label for="retailPrice_input" class="col-2 col-form-label text-right">Retail Price</label>
 					<div class="input-group  col-4">

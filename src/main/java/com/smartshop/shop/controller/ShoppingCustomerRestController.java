@@ -28,10 +28,11 @@ import com.smartshop.exception.ConversionException;
 import com.smartshop.populator.ShoppingCartDataPopulator;
 import com.smartshop.service.CustomerFacade;
 import com.smartshop.shop.model.ShoppingCartData;
+import com.smartshop.shop.utils.UserInfoContextHolder;
 
 @Controller("ShopCustomerRestController")
 @RequestMapping("/customer")
-public class ShoppingCustomerRestController extends AbstractShopController {
+public class ShoppingCustomerRestController extends AbstractShoppingController {
 	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCustomerRestController.class);
 
 	@Inject
@@ -54,7 +55,7 @@ public class ShoppingCustomerRestController extends AbstractShopController {
 	public String login(CustomerRO customerInfo, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			LOGGER.debug("Authenticating user " + customerInfo.getName());
-			MerchantStore store = (MerchantStore) request.getAttribute(AppConstants.MERCHANT_STORE);
+			MerchantStore store = UserInfoContextHolder.getMerchantStore();
 			Customer customerModel = customerFacade.getCustomerByUserName(customerInfo.getName(), store);
 			if (customerModel == null) {
 				throw new BusinessException("customer not exist");

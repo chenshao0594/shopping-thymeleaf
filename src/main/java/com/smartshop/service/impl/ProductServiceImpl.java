@@ -126,7 +126,7 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 			SKU permutatedSKU = new SKU();
 			permutatedSKU.setName(product.getName());
 			permutatedSKU.setRetailPrice(product.getRetailPrice());
-			permutatedSKU.setSalePrice(product.getSalePrice());
+			permutatedSKU.setStandardPrice(product.getStandardPrice());
 			permutatedSKU.setDescription(product.getDescription());
 			permutatedSKU.setProduct(product);
 			List<String> skuAttributes = new LinkedList<String>();
@@ -205,7 +205,7 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 			}
 			ProductOptionPricing dto = new ProductOptionPricing();
 			dto.setRetailPrice(MoneyFormatUtils.formatPrice(sku.getRetailPrice()));
-			dto.setSalePrice(MoneyFormatUtils.formatPrice(sku.getSalePrice()));
+			dto.setStandardPrice(MoneyFormatUtils.formatPrice(sku.getStandardPrice()));
 			dto.setSelectedOptions(productOptionValueIds);
 			dto.setSkuId(sku.getId());
 			skuPricing.add(dto);

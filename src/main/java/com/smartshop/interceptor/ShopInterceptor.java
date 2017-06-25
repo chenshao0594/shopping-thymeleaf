@@ -23,6 +23,8 @@ import com.smartshop.security.AuthoritiesConstants;
 import com.smartshop.service.CustomerService;
 import com.smartshop.service.MerchantStoreService;
 import com.smartshop.shop.model.customer.AnonymousCustomer;
+import com.smartshop.shop.utils.UserInfoContextHolder;
+import com.smartshop.shop.utils.UserInfoContextHolder.UserInfo;
 
 public class ShopInterceptor extends HandlerInterceptorAdapter {
 	private final Logger LOGGER = LoggerFactory.getLogger(ShopInterceptor.class);
@@ -38,6 +40,7 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		LOGGER.info("shop interceptor .....");
+		UserInfo userInfo = new UserInfo();
 		String authorization = request.getHeader("Authorization");
 		LOGGER.info("The authorization is: {}", authorization);
 		request.setCharacterEncoding("UTF-8");
@@ -57,6 +60,7 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 			if (store == null) {
 				store = setMerchantStoreInSession(request, MerchantStore.DEFAULT_STORE);
 			}
+			userInfo.setMerchantStore(store);
 			request.setAttribute(AppConstants.MERCHANT_STORE, store);
 			/** customer **/
 			Customer customer = (Customer) request.getSession().getAttribute(AppConstants.CUSTOMER);
@@ -66,6 +70,7 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 						request.removeAttribute(AppConstants.CUSTOMER);
 					}
 				}
+
 				request.setAttribute(AppConstants.CUSTOMER, customer);
 			}
 
@@ -78,6 +83,7 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 					}
 				}
 			}
+			userInfo.setCustomer(customer);
 			AnonymousCustomer anonymousCustomer = (AnonymousCustomer) request.getSession()
 					.getAttribute(AppConstants.ANONYMOUS_CUSTOMER);
 			if (anonymousCustomer == null) {
@@ -158,6 +164,8 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 		} catch (Exception e) {
 			LOGGER.error("Error in StoreFilter", e);
 		}
+
+		UserInfoContextHolder.setUserInfo(userInfo);
 		return true;
 	}
 
@@ -166,11 +174,12 @@ public class ShopInterceptor extends HandlerInterceptorAdapter {
 			ModelAndView modelAndView) throws Exception {
 		if (modelAndView != null) {
 			modelAndView.addObject("continueShopping",
-					request.getSession().getAttribute(AppConstants.CONTINUE_SHOPPING));
+					UserInfoContextHolder.getMerchantStore().getContinueShoppingURL());
 			modelAndView.addObject("cartTotal", request.getSession().getAttribute(AppConstants.CART_TOTAL));
 			modelAndView.addObject("cartItemsTotal", request.getSession().getAttribute(AppConstants.CARTITEMS_TOTAL));
 		}
 
+		UserInfoContextHolder.clear();
 	}
 
 	private MerchantStore setMerchantStoreInSession(HttpServletRequest request, String storeCode) throws Exception {

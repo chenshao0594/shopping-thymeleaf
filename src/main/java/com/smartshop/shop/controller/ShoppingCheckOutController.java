@@ -20,7 +20,7 @@ import com.smartshop.service.CustomerService;
 
 @Controller("ShopCheckOutController")
 @RequestMapping("/checkout")
-public class ShoppingCheckOutController extends AbstractShopController {
+public class ShoppingCheckOutController extends AbstractShoppingController {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCheckOutController.class);
 	private final static String CHECKOUT_START = "shop/checkout/checkout_start";
@@ -46,7 +46,6 @@ public class ShoppingCheckOutController extends AbstractShopController {
 			model.setViewName(CHECKOUT_ADDRESS);
 		} else {
 			LOGGER.info(" not UserDetails user {}", principal.getClass());
-			String username = principal.toString();
 			model.setViewName(CHECKOUT_START);
 		}
 		return model;

@@ -3,6 +3,7 @@ package com.smartshop.core.order;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -81,7 +82,7 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 
 	@Column(name = "CHANNEL")
 	@Enumerated(value = EnumType.STRING)
-	private SalesOrderChannel channel;
+	private SalesOrderChannel channel = SalesOrderChannel.ONLINE;
 
 	@Column(name = "ORDER_TYPE")
 	@Enumerated(value = EnumType.STRING)
@@ -120,9 +121,10 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 	@ManyToOne(targetEntity = MerchantStore.class)
 	@JoinColumn(name = "MERCHANTID")
 	private MerchantStore merchant;
+	// SalesOrderLine
 
-	// @OneToMany(mappedBy = "order")
-	// private Set<OrderAccount> orderAccounts = new HashSet<OrderAccount>();
+	@OneToMany(mappedBy = "salesOrder")
+	private Set<OrderProductLine> productLines = new HashSet<OrderProductLine>();
 	//
 	// @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	// private Set<OrderProduct> orderProducts = new
@@ -310,6 +312,14 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 
 	public void setShippingCode(String shippingCode) {
 		this.shippingCode = shippingCode;
+	}
+
+	public Set<OrderProductLine> getProductLines() {
+		return productLines;
+	}
+
+	public void setProductLines(Set<OrderProductLine> productLines) {
+		this.productLines = productLines;
 	}
 
 }

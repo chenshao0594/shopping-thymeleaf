@@ -42,7 +42,7 @@ public class QSKU extends EntityPathBase<SKU> {
 
     public final NumberPath<java.math.BigDecimal> retailPrice = createNumber("retailPrice", java.math.BigDecimal.class);
 
-    public final NumberPath<java.math.BigDecimal> salePrice = createNumber("salePrice", java.math.BigDecimal.class);
+    public final NumberPath<java.math.BigDecimal> standardPrice = createNumber("standardPrice", java.math.BigDecimal.class);
 
     public final EnumPath<com.smartshop.core.enumeration.StatusEnum> status = createEnum("status", com.smartshop.core.enumeration.StatusEnum.class);
 

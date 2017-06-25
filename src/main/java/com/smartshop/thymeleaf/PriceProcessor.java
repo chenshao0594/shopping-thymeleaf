@@ -18,12 +18,12 @@ import org.thymeleaf.templatemode.TemplateMode;
 import com.smartshop.core.catalog.service.PricingService;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
+import com.smartshop.shop.utils.UserInfoContextHolder;
 
 public class PriceProcessor extends AbstractElementTagProcessor {
 	public static final int PRECEDENCE = 100000;
 	public static final String ELEMENT_NAME = "monetary";
 	private static final String VALUE = "value";
-	private static final String STORE_ID = "store";
 	private PricingService pricingService;
 
 	public PriceProcessor(final String dialectPrefix) {
@@ -38,15 +38,12 @@ public class PriceProcessor extends AbstractElementTagProcessor {
 		final ApplicationContext appCtx = SpringContextUtils.getApplicationContext(context);
 		pricingService = appCtx.getBean(PricingService.class);
 		String valueContent = tag.getAttribute(VALUE).getValue();
-		String storeId = tag.getAttribute(STORE_ID).getValue();
 		final IEngineConfiguration configuration = context.getConfiguration();
 		final IStandardExpressionParser parser = StandardExpressions.getExpressionParser(configuration);
 		final IStandardExpression expression = parser.parseExpression(context, valueContent);
 		final BigDecimal price = (BigDecimal) expression.execute(context);
 
-		final IStandardExpression exp = parser.parseExpression(context, storeId);
-		final MerchantStore store = (MerchantStore) exp.execute(context);
-
+		final MerchantStore store = UserInfoContextHolder.getMerchantStore();
 		String formatedPrice = "error";
 		try {
 			formatedPrice = pricingService.getDisplayAmount(price, store);

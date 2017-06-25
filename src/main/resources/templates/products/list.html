@@ -20,7 +20,7 @@
 						<th>Image</th>
 						<th><a class="sorted" sd:pagination-sort="name">name</a></th>
 						<th><a class="sorted" sd:pagination-sort="category.code">Category</a></th>
-						<th><a class="sorted" sd:pagination-sort="salePrice">Sale Price</a></th>
+						<th><a class="sorted" sd:pagination-sort="standardPrice">Standard Price</a></th>
 						<th>Retail Price</th>
 						<th>Operation</th>
 					</tr>
@@ -31,7 +31,7 @@
 						<th><img th:src="@{/{admin}/attachments/product/{productId}/thumbnail(admin=${admin_url}, productId=${row.id})}" class="img-rounded" height="50"></th>
 						<td th:text="${row.name}">name</td>
 						<td th:text="${row.category?.code}">Category</td>
-						<td th:text="${row.salePrice}">Sale Price</td>
+						<td th:text="${row.standardPrice}">Sale Price</td>
 						<td th:text="${row.retailPrice}">Retail Price</td>
 						<td>
 							<div class="flex-btn-group-container">
