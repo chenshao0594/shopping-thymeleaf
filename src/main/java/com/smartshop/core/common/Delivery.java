@@ -1,5 +1,7 @@
 package com.smartshop.core.common;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
@@ -8,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 @Embeddable
-public class Delivery {
+public class Delivery implements Serializable {
 
 	@Column(name = "DELIVERY_LAST_NAME", length = 64)
 	private String lastName;
@@ -20,7 +22,7 @@ public class Delivery {
 	private String company;
 
 	@Column(name = "DELIVERY_STREET_ADDRESS", length = 256)
-	private String address;
+	private String streetAddress;
 
 	@Column(name = "DELIVERY_CITY", length = 100)
 	private String city;
@@ -56,12 +58,12 @@ public class Delivery {
 		this.company = company;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getStreetAddress() {
+		return streetAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
 	}
 
 	public String getCity() {
@@ -146,10 +148,10 @@ public class Delivery {
 
 	@Override
 	public String toString() {
-		return "Delivery [lastName=" + lastName + ", firstName=" + firstName + ", company=" + company + ", address="
-				+ address + ", city=" + city + ", postalCode=" + postalCode + ", state=" + state + ", telephone="
-				+ telephone + ", country=" + country + ", zone=" + zone + ", latitude=" + latitude + ", longitude="
-				+ longitude + "]";
+		return "Delivery [lastName=" + lastName + ", firstName=" + firstName + ", company=" + company
+				+ ", streetAddress=" + streetAddress + ", city=" + city + ", postalCode=" + postalCode + ", state="
+				+ state + ", telephone=" + telephone + ", country=" + country + ", zone=" + zone + ", latitude="
+				+ latitude + ", longitude=" + longitude + "]";
 	}
 
 }

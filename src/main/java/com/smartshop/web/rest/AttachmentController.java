@@ -3,14 +3,17 @@ package com.smartshop.web.rest;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -192,12 +195,16 @@ public class AttachmentController {
 	}
 
 	private String saveFile(Attachment attachment, byte[] content) {
-		String filePath = AppConstants.BASE_PATH + attachment.getBoName() + "/" + attachment.getBoId() + "/"
-				+ attachment.getName();
+		String filePathStr = AppConstants.BASE_PATH + attachment.getBoName() + AppConstants.SLASH + attachment.getBoId()
+				+ AppConstants.SLASH + attachment.getName();
 		OutputStream os = null;
 		try {
-			Path file = Paths.get(filePath);
-			Files.write(file, content);
+			File file = new File(filePathStr);
+			file.createNewFile();
+			Path path = Paths.get(filePathStr);
+			InputStream isFile = new ByteArrayInputStream(content);
+			Files.copy(isFile, path, StandardCopyOption.REPLACE_EXISTING);
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -207,7 +214,7 @@ public class AttachmentController {
 		} finally {
 			IOUtils.closeWhileHandlingException(os);
 		}
-
-		return filePath;
+		return filePathStr;
 	}
+
 }

@@ -1,6 +1,6 @@
 package com.smartshop.common;
 
-public interface ShopControllerConstants {
+public interface ShoppingControllerConstants {
 	final static String REDIRECT = "redirect:";
 
 	interface ShoppingCart {
@@ -51,8 +51,12 @@ public interface ShopControllerConstants {
 	}
 
 	interface Checkout {
-		final static String checkout = "shop/checkout";
-		final static String confirmation = "shop/confirmation";
+		final static String start = "shop/checkout/checkout_start";
+		final static String address = "shop/checkout/checkout_address";
+	}
+
+	interface Payment {
+		final static String methods = "shop/payment";
 	}
 
 	interface Search {

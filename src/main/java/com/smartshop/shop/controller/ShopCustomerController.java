@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smartshop.common.ShopControllerConstants;
+import com.smartshop.common.ShoppingControllerConstants;
 import com.smartshop.common.service.MessageService;
 import com.smartshop.customer.CustomerRO;
 import com.smartshop.domain.Customer;
@@ -57,7 +57,7 @@ public class ShopCustomerController extends AbstractShoppingController {
 	@Timed
 	@GetMapping(value = "/register")
 	public ModelAndView displayRegistration(ModelAndView model) throws Exception {
-		model.setViewName("shop/register");
+		model.setViewName(ShoppingControllerConstants.Customer.register);
 		return model;
 	}
 
@@ -71,7 +71,7 @@ public class ShopCustomerController extends AbstractShoppingController {
 			LOGGER.error("found validation error {}", bindingResult.getAllErrors());
 			LOGGER.debug("found {} validation error while validating in customer registration ",
 					bindingResult.getErrorCount());
-			StringBuilder template = new StringBuilder().append(ShopControllerConstants.Customer.register);
+			StringBuilder template = new StringBuilder().append(ShoppingControllerConstants.Customer.register);
 			return template.toString();
 		}
 
@@ -88,7 +88,7 @@ public class ShopCustomerController extends AbstractShoppingController {
 			ObjectError error = new ObjectError("registration",
 					messageService.getMessage("registration.failed", Locale.ENGLISH));
 			bindingResult.addError(error);
-			StringBuilder template = new StringBuilder().append(ShopControllerConstants.Customer.register);
+			StringBuilder template = new StringBuilder().append(ShoppingControllerConstants.Customer.register);
 			return template.toString();
 		}
 		try {
@@ -121,7 +121,7 @@ public class ShopCustomerController extends AbstractShoppingController {
 
 	@GetMapping(value = "/orders")
 	public String orders(HttpServletRequest request, HttpServletResponse response) {
-		return ShopControllerConstants.Customer.customerOrders;
+		return ShoppingControllerConstants.Customer.customerOrders;
 	}
 
 }

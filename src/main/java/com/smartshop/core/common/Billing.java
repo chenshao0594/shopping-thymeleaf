@@ -1,5 +1,7 @@
 package com.smartshop.core.common;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
@@ -9,7 +11,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Embeddable
-public class Billing {
+public class Billing implements Serializable {
 
 	@NotEmpty
 	@Column(name = "BILLING_LAST_NAME", length = 64, nullable = false)
@@ -134,6 +136,14 @@ public class Billing {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Billing [lastName=" + lastName + ", firstName=" + firstName + ", company=" + company
+				+ ", streetAddress=" + streetAddress + ", email=" + email + ", city=" + city + ", postalCode="
+				+ postalCode + ", telephone=" + telephone + ", state=" + state + ", country=" + country + ", zone="
+				+ zone + "]";
 	}
 
 }

@@ -1,4 +1,4 @@
-INSERT INTO Country(id,name,iso_code) VALUES 
+INSERT INTO Country(id,name,iso_code) VALUES (1,Afghanistan,AFG);
 240,Åland Islands,ALA
 1,Afghanistan,AFG
 2,Albania,ALB

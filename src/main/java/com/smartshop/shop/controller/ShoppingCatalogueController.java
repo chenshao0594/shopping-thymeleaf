@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smartshop.common.ShopControllerConstants;
+import com.smartshop.common.ShoppingControllerConstants;
 import com.smartshop.core.catalog.Category;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.service.CategoryService;
@@ -42,7 +42,7 @@ public class ShoppingCatalogueController {
 		Page<Product> productPage = this.productService.findAll(pageable);
 		model.addAttribute("categories", page.getContent());
 		model.addAttribute("page", productPage);
-		return ShopControllerConstants.Catalogue.catalogue;
+		return ShoppingControllerConstants.Catalogue.catalogue;
 	}
 
 	@Timed
@@ -67,12 +67,12 @@ public class ShoppingCatalogueController {
 		Category category = categoryService.findBySearchURL(friendlyUrl);
 		if (category == null) {
 			LOGGER.error("No category found for friendlyUrl " + friendlyUrl);
-			return ShopControllerConstants.Catalogue.catalogue;
+			return ShoppingControllerConstants.Catalogue.catalogue;
 		}
 		if (!category.isVisible()) {
-			return ShopControllerConstants.Catalogue.catalogue;
+			return ShoppingControllerConstants.Catalogue.catalogue;
 		}
-		return ShopControllerConstants.Catalogue.catalogue;
+		return ShoppingControllerConstants.Catalogue.catalogue;
 	}
 	// @Timed
 	// @GetMapping(value = "")

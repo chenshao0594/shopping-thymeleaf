@@ -14,6 +14,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -123,7 +124,7 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 	private MerchantStore merchant;
 	// SalesOrderLine
 
-	@OneToMany(mappedBy = "salesOrder")
+	@OneToMany(mappedBy = "salesOrder", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<OrderProductLine> productLines = new HashSet<OrderProductLine>();
 	//
 	// @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
@@ -140,9 +141,6 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 
 	public SalesOrder() {
 	}
-
-	@Column(name = "CUSTOMER_EMAIL_ADDRESS", length = 50, nullable = false)
-	private String customerEmailAddress;
 
 	@Override
 	public Long getId() {
@@ -224,14 +222,6 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
-	}
-
-	public String getCustomerEmailAddress() {
-		return customerEmailAddress;
-	}
-
-	public void setCustomerEmailAddress(String customerEmailAddress) {
-		this.customerEmailAddress = customerEmailAddress;
 	}
 
 	public void setChannel(SalesOrderChannel channel) {

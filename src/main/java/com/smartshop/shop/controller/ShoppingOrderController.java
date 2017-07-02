@@ -33,6 +33,7 @@ public class ShoppingOrderController extends AbstractShoppingController {
 
 	@Inject
 	private SalesOrderService salesOrderService;
+
 	@Inject
 	private ProductService productService;
 
