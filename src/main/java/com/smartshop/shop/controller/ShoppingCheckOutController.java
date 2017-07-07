@@ -3,6 +3,7 @@ package com.smartshop.shop.controller;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +25,8 @@ import com.smartshop.core.cart.CartItem;
 import com.smartshop.core.cart.service.CartService;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.SKU;
+import com.smartshop.core.common.Country;
+import com.smartshop.core.facade.PaymentFacade;
 import com.smartshop.core.facade.PricingFacade;
 import com.smartshop.core.order.OrderProductLine;
 import com.smartshop.core.order.SalesOrder;
@@ -36,6 +38,7 @@ import com.smartshop.service.CountryService;
 import com.smartshop.service.CustomerService;
 import com.smartshop.service.ProductService;
 import com.smartshop.service.SKUService;
+import com.smartshop.shop.model.ShoppingOrderContext;
 import com.smartshop.shop.utils.UserInfoContextHolder;
 
 @Controller("ShopCheckOutController")
@@ -43,6 +46,8 @@ import com.smartshop.shop.utils.UserInfoContextHolder;
 public class ShoppingCheckOutController extends AbstractShoppingController {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCheckOutController.class);
+
+	private final static String ORDER_KEY = "order-session";
 	@Inject
 	private CustomerService customerService;
 
@@ -64,9 +69,41 @@ public class ShoppingCheckOutController extends AbstractShoppingController {
 	@Inject
 	private PricingFacade pricingFacade;
 
+	@Inject
+	private PaymentFacade paymentFacade;
+
 	@Timed
-	@GetMapping()
-	public ModelAndView checkout(ModelAndView model, final HttpServletRequest request) {
+	@PostMapping("address")
+	public ModelAndView address(ModelAndView model, final HttpServletRequest request, ShoppingOrderContext order)
+			throws BusinessException {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UUID uuid = UUID.randomUUID();
+		order.setUuid(uuid.toString());
+		LOGGER.info("principal user {}", principal);
+		if (principal instanceof UserDetails) {
+			String username = ((UserDetails) principal).getUsername();
+			Customer customer = customerService.findCustomerByName(username);
+			Customer userInfo = UserInfoContextHolder.getCustomer();
+			Cart shoppingCart = shoppingCartService.getShoppingCart(userInfo);
+			for (CartItem item : shoppingCart.getLineItems()) {
+				order.getCartItemIds().add(item.getId());
+			}
+			Page<Country> page = this.countryService.findAll(null);
+			model.addObject("countries", page.getContent());
+			model.addObject("customer", customer);
+			model.setViewName(ShoppingControllerConstants.Checkout.address);
+		} else {
+			LOGGER.info(" not UserDetails user {}", principal.getClass());
+			model.setViewName(ShoppingControllerConstants.Checkout.start);
+		}
+		request.getSession().setAttribute(ORDER_KEY, order);
+		return model;
+	}
+
+	@Timed
+	@PostMapping("shipping")
+	public ModelAndView shipping(ModelAndView model, ShoppingOrderContext order, final HttpServletRequest request) {
+		ShoppingOrderContext orderSession = (ShoppingOrderContext) request.getSession().getAttribute(ORDER_KEY);
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		LOGGER.info("principal user {}", principal);
 		if (principal instanceof UserDetails) {
@@ -81,6 +118,7 @@ public class ShoppingCheckOutController extends AbstractShoppingController {
 			LOGGER.info(" not UserDetails user {}", principal.getClass());
 			model.setViewName(ShoppingControllerConstants.Checkout.start);
 		}
+		model.setViewName(ShoppingControllerConstants.Payment.methods);
 		return model;
 	}
 
@@ -120,7 +158,6 @@ public class ShoppingCheckOutController extends AbstractShoppingController {
 			line.setCurrency(UserInfoContextHolder.getMerchantStore().getCurrency());
 			line.setTotal(lineTotal);
 			line.setSalesOrder(order);
-			// line.setTotal(total);
 			productItems.add(line);
 			orderTotal.add(lineTotal);
 		}
@@ -128,6 +165,8 @@ public class ShoppingCheckOutController extends AbstractShoppingController {
 		order.setProductLines(productItems);
 		this.salesOrderService.save(order);
 		this.shoppingCartService.delete(shoppingCart);
+		model.addObject("methods", this.paymentFacade.methods());
+		model.setViewName(ShoppingControllerConstants.Payment.methods);
 		return model;
 	}
 

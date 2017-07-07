@@ -49,7 +49,6 @@ public class ShoppingCatalogueController {
 	@GetMapping("/{friendlyUrl}.html")
 	public String displayCategoryNoReference(@PathVariable final String friendlyUrl, Model model,
 			HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
-
 		return this.displayCategory(friendlyUrl, null, model, request, response, locale);
 	}
 

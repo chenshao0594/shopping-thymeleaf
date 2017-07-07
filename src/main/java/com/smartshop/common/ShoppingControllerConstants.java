@@ -56,7 +56,7 @@ public interface ShoppingControllerConstants {
 	}
 
 	interface Payment {
-		final static String methods = "shop/payment";
+		final static String methods = "shop/payment/payments";
 	}
 
 	interface Search {

@@ -13,6 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
 import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
@@ -22,6 +23,7 @@ import com.smartshop.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterConstants;
 
+@SpringBootApplication
 @ComponentScan(basePackages = { "com.smartshop" })
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ ApplicationProperties.class })
@@ -84,4 +86,5 @@ public class ShoppingApplication {
 				env.getProperty("spring.application.name"), protocol, env.getProperty("server.port"), protocol,
 				InetAddress.getLocalHost().getHostAddress(), env.getProperty("server.port"), env.getActiveProfiles());
 	}
+
 }

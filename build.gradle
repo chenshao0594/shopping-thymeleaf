@@ -40,7 +40,6 @@ defaultTasks 'bootRun'
 
 eclipse {
     classpath {
-       downloadJavadoc = true
        downloadSources=true
     }
 }
