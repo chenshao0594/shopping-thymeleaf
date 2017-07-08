@@ -4,12 +4,14 @@ import java.util.Map;
 
 import com.smartshop.core.enumeration.TransactionType;
 import com.smartshop.core.payment.enumeration.PaymentType;
+import com.smartshop.domain.Currency;
 
 public class Payment {
 	private PaymentType paymentType;
 	private TransactionType transactionType = TransactionType.AUTHORIZECAPTURE;
 	private String moduleName;
 	private Map<String, String> paymentMetaData = null;
+	private Currency currency;
 
 	public void setPaymentType(PaymentType paymentType) {
 		this.paymentType = paymentType;
@@ -41,6 +43,14 @@ public class Payment {
 
 	public void setPaymentMetaData(Map<String, String> paymentMetaData) {
 		this.paymentMetaData = paymentMetaData;
+	}
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
 	}
 
 }

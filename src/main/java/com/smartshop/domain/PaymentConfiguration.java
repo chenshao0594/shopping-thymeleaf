@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.smartshop.core.enumeration.PaymentEnvEnum;
 import com.smartshop.domain.common.BusinessDomain;
 
 @Entity
@@ -57,11 +60,18 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 	@Column(name = "uri", nullable = false)
 	private String uri;
 
-	@Column(name = "env", nullable = false)
-	private String env;
-
 	@Column(name = "config1")
 	private String config1;
+	// paypal checkout
+	private String api;
+	// paypal checkout
+	private String username;
+	// paypal checkout
+	private String signature;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "env_type")
+	private PaymentEnvEnum envType;
 
 	@Override
 	public Long getId() {
@@ -145,12 +155,12 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 		this.uri = uri;
 	}
 
-	public String getEnv() {
-		return env;
+	public PaymentEnvEnum getEnvType() {
+		return envType;
 	}
 
-	public void setEnv(String env) {
-		this.env = env;
+	public void setEnvType(PaymentEnvEnum envType) {
+		this.envType = envType;
 	}
 
 	public String getConfig1() {
@@ -175,6 +185,30 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 
 	public void setVersion(String version) {
 		this.version = version;
+	}
+
+	public String getApi() {
+		return api;
+	}
+
+	public void setApi(String api) {
+		this.api = api;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
 	}
 
 }

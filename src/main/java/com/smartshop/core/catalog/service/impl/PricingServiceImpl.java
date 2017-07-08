@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.smartshop.constants.AppConstants;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.price.FinalPrice;
 import com.smartshop.core.catalog.service.PricingService;
@@ -39,8 +40,16 @@ public class PricingServiceImpl implements PricingService {
 
 	@Override
 	public String getStringAmount(BigDecimal amount, MerchantStore store) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		if (amount == null) {
+			return "";
+		}
+		NumberFormat nf = null;
+		nf = NumberFormat.getInstance(AppConstants.DEFAULT_LOCALE);
+
+		nf.setMaximumFractionDigits(Integer.parseInt(Character.toString(AppConstants.DECIMALCOUNT)));
+		nf.setMinimumFractionDigits(Integer.parseInt(Character.toString(AppConstants.DECIMALCOUNT)));
+
+		return nf.format(amount);
 	}
 
 }

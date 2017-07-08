@@ -31,6 +31,7 @@ import com.smartshop.domain.Customer;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.service.ProductService;
 import com.smartshop.service.SKUService;
+import com.smartshop.shop.model.PaymentInfo;
 import com.smartshop.shop.model.ShoppingOrderContext;
 import com.smartshop.shop.utils.UserInfoContextHolder;
 
@@ -111,6 +112,13 @@ public class ShoppingOrderController extends AbstractShoppingController {
 		model.addObject("methods", this.paymentFacade.methods());
 		model.setViewName(ShoppingControllerConstants.Payment.methods);
 		return model;
+
+	}
+
+	@Timed
+	@PostMapping("payment")
+	public void payment(ModelAndView model, PaymentInfo paymentInfo, final HttpServletRequest request) {
+		SalesOrder order = this.salesOrderService.findOne(paymentInfo.getOrderId());
 
 	}
 

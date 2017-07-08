@@ -1,5 +1,7 @@
 package com.smartshop.constants;
 
+import java.util.Locale;
+
 /**
  * Application constants.
  */
@@ -33,6 +35,11 @@ public final class AppConstants {
 	public final static String CONTINUE_SHOPPING = "CONTINUE_SHOPPING";
 	// temp
 	public final static String LINK_CODE = "LINK_CODE";
+	public final static Locale DEFAULT_LOCALE = Locale.US;
+
+	public final static char DECIMALCOUNT = '2';
+	public final static char DECIMALPOINT = '.';
+	public final static char THOUSANDPOINT = ',';
 
 	private AppConstants() {
 	}
