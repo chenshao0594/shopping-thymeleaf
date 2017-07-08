@@ -5,7 +5,7 @@
 </head>
 <body>
 	<section layout:fragment="content">
-		<form name="form" th:action="@{/checkout/order}" action="checkout/order.html" method="POST">
+		<form name="form" th:action="@{/order}" action="order.html" method="POST">
 		<div class="row">
 			<div class="six columns">
 				<h3>Billing Information</h3>
@@ -58,58 +58,6 @@
 					<div class="six columns">
 						<label for="billing_state">State *</label> <select id="billing_state"
 							name="billing.stateId">
-						</select> <span class="error"></span>
-					</div>
-				</div>
-			</div>
-			<div class="six columns">
-				<h3 class="inline-block">delivery Information</h3>
-				<a href="#" id="copy_billing_to_delivery">Copy Billing Information</a>
-				<div class="row">
-					<div class="six columns">
-						<label for="delivery_firstName">First Name *</label> <input type="text"
-							name="delivery.firstName" id="delivery_firstName"
-							th:value="${customer.delivery?.firstName}" /> <span class="error"></span>
-					</div>
-					<div class="six columns">
-						<label for="delivery_lastName">Last Name *</label> <input type="text"
-							name="delivery.lastName" id="delivery_lastName"
-							th:value="${customer.delivery?.lastName }" /> <span class="error"></span>
-					</div>
-				</div>
-				<div class="row">
-					<div class="twelve columns">
-						<label for="delivery_phone">Phone Number *</label> <input type="text"
-							name="delivery.phone" id="delivery_phone" th:value="${customer.delivery?.phone }" />
-						<span class="error"></span>
-					</div>
-				</div>
-				<label for="delivery_address">Address</label>
-				<textarea name="delivery.streetAddress" id="delivery_address">{customer.delivery?.streetAddress }</textarea>
-				<span class="error"></span>
-				<div class="row">
-					<div class="six columns">
-						<label for="delivery_city">City *</label> <input type="text" name="delivery.city"
-							id="delivery_city" th:value="${customer.delivery?.city }" /> <span class="error"></span>
-					</div>
-					<div class="six columns">
-						<label for="delivery_postalCode">Zip Code *</label> <input type="text"
-							name="delivery.postalCode" id="delivery_postalCode"
-							th:value="${customer.delivery?.postalCode }" /> <span class="error"></span>
-					</div>
-				</div>
-				<div class="row">
-					<div class="six columns">
-						<label for="delivery_country">Country *</label> 						
-						<select id="billing_country"
-							name="delivery.countryId" data-state-selector="#delivery_country">
-							<option th:each="item :${countries}" th:value="${item.id}" th:text="${item.name}"></option>
-						</select>
-						<span class="error"></span>
-					</div>
-					<div class="six columns">
-						<label for="delivery_state">State </label> <select id="delivery_state"
-							name="delivery.stateId" data-ajax-refresh> 
 						</select> <span class="error"></span>
 					</div>
 				</div>

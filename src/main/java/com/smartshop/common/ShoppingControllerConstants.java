@@ -2,6 +2,7 @@ package com.smartshop.common;
 
 public interface ShoppingControllerConstants {
 	final static String REDIRECT = "redirect:";
+	final static String ORDER_KEY = "order-session";
 
 	interface ShoppingCart {
 		final static String shoppingCart = "shop/maincart";
@@ -29,8 +30,7 @@ public interface ShoppingControllerConstants {
 		final static String review = "shop/review";
 		final static String register = "shop/register";
 		final static String changePassword = "shop/customerPassword";
-		final static String customerOrders = "shop/customer/Orders";
-		final static String customerOrder = "shop/customerOrder";
+		final static String customerOrders = "shop/customer/orders";
 		final static String Billing = "shop/customerAddress";
 		final static String EditAddress = "shop/editCustomerAddress";
 		final static String RegistrationPage = "shop/customer/registration.html";

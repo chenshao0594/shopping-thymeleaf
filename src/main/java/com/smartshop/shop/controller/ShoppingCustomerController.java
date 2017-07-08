@@ -1,5 +1,6 @@
 package com.smartshop.shop.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -25,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.codahale.metrics.annotation.Timed;
 import com.smartshop.common.ShoppingControllerConstants;
 import com.smartshop.common.service.MessageService;
+import com.smartshop.core.order.SalesOrder;
+import com.smartshop.core.order.service.SalesOrderService;
 import com.smartshop.customer.CustomerRO;
 import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
@@ -33,12 +36,13 @@ import com.smartshop.service.CustomerFacade;
 import com.smartshop.service.CustomerService;
 import com.smartshop.service.MailService;
 import com.smartshop.service.MerchantStoreService;
+import com.smartshop.shop.utils.UserInfoContextHolder;
 
 @Controller("ShopCustomerController")
 @RequestMapping("/customer")
 
-public class ShopCustomerController extends AbstractShoppingController {
-	private final Logger LOGGER = LoggerFactory.getLogger(ShopCustomerController.class);
+public class ShoppingCustomerController extends AbstractShoppingController {
+	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCustomerController.class);
 
 	@Inject
 	private CustomerService customerService;
@@ -51,8 +55,12 @@ public class ShopCustomerController extends AbstractShoppingController {
 
 	@Inject
 	private MessageService messageService;
+
 	@Inject
 	private MailService emailService;
+
+	@Inject
+	private SalesOrderService orderService;
 
 	@Timed
 	@GetMapping(value = "/register")
@@ -104,8 +112,6 @@ public class ShopCustomerController extends AbstractShoppingController {
 					messageService.getMessage("registration.failed", Locale.ENGLISH));
 			bindingResult.addError(error);
 		}
-		// StringBuilder template = new
-		// StringBuilder().append(ShopControllerConstants.Customer.register);
 		return "/";
 
 	}
@@ -120,7 +126,10 @@ public class ShopCustomerController extends AbstractShoppingController {
 	}
 
 	@GetMapping(value = "/orders")
-	public String orders(HttpServletRequest request, HttpServletResponse response) {
+	public String orders(Model model) {
+		Customer customer = UserInfoContextHolder.getCustomer();
+		List<SalesOrder> orders = this.orderService.findByCustomer(customer);
+		model.addAttribute("orders", orders);
 		return ShoppingControllerConstants.Customer.customerOrders;
 	}
 

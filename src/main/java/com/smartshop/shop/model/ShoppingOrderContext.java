@@ -58,8 +58,8 @@ public class ShoppingOrderContext implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ShoppingOrderContext [uuid=" + uuid + ", cartItemIds=" + cartItemIds + ", billing=" + billing
-				+ ", paymentType=" + paymentType + "]";
+		return "ShoppingOrderContext [uuid=" + uuid + ", userId=" + userId + ", cartItemIds=" + cartItemIds
+				+ ", billing=" + billing + ", paymentType=" + paymentType + "]";
 	}
 
 }
