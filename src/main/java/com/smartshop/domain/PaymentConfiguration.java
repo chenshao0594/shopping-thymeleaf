@@ -72,6 +72,11 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 	@Enumerated(EnumType.STRING)
 	@Column(name = "env_type")
 	private PaymentEnvEnum envType;
+	
+	// beanstream
+	private String password;
+	// beanstream
+	private String merchantId;
 
 	@Override
 	public Long getId() {
@@ -210,5 +215,22 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 	public void setSignature(String signature) {
 		this.signature = signature;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
+	}
+	
 
 }

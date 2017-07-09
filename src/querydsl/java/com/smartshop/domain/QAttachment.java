@@ -25,13 +25,13 @@ public class QAttachment extends EntityPathBase<Attachment> {
 
     public final StringPath boName = createString("boName");
 
-    public final ArrayPath<byte[], Byte> content = createArray("content", byte[].class);
-
     public final StringPath contentType = createString("contentType");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final StringPath name = createString("name");
+
+    public final StringPath path = createString("path");
 
     public final NumberPath<Long> size = createNumber("size", Long.class);
 
