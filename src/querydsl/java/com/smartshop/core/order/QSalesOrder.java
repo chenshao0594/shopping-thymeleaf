@@ -32,8 +32,6 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final BooleanPath customerAgreement = createBoolean("customerAgreement");
 
-    public final StringPath customerEmailAddress = createString("customerEmailAddress");
-
     public final NumberPath<Long> customerId = createNumber("customerId", Long.class);
 
     public final DatePath<java.util.Date> datePurchased = createDate("datePurchased", java.util.Date.class);

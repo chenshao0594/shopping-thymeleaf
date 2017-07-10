@@ -22,8 +22,6 @@ public class QDelivery extends BeanPath<Delivery> {
 
     public static final QDelivery delivery = new QDelivery("delivery");
 
-    public final StringPath address = createString("address");
-
     public final StringPath city = createString("city");
 
     public final StringPath company = createString("company");
@@ -37,6 +35,8 @@ public class QDelivery extends BeanPath<Delivery> {
     public final StringPath postalCode = createString("postalCode");
 
     public final StringPath state = createString("state");
+
+    public final StringPath streetAddress = createString("streetAddress");
 
     public final StringPath telephone = createString("telephone");
 
