@@ -81,7 +81,6 @@ public class AttachmentController {
 		attachment.setSize(file.getSize());
 		attachment.setName(file.getOriginalFilename());
 		attachment.setAttachmentType(AttachmentEnum.valueOf(attachmentType));
-
 		String filePath = this.attachmentClient.save( new AttachmentInfo(file.getBytes(), file.getContentType(), file.getOriginalFilename()));
 		attachment.setPath(filePath);
 		this.attachmentService.save(attachment);

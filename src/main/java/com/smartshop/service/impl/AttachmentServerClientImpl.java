@@ -50,11 +50,9 @@ public class AttachmentServerClientImpl implements  AttachmentServerClient {
 	@Override
 	public String save(AttachmentInfo attachmentInfo) {
 		try {
-			// get new file to save bytes
-			File fileToSave = getFileToSave(attachmentInfo.getContentType());
-			Files.write(fileToSave.toPath(), attachmentInfo.getContent(), StandardOpenOption.CREATE);
-			// return name
-			return fileToSave.getName();
+			File resultFile = buildResultFile(attachmentInfo.getContentType());
+			Files.write(resultFile.toPath(), attachmentInfo.getContent(), StandardOpenOption.CREATE);
+			return resultFile.getName();
 		} catch (IOException ex) {
 			logger.error(ex.getMessage());
 			throw new UploadFailException();
@@ -94,8 +92,8 @@ public class AttachmentServerClientImpl implements  AttachmentServerClient {
 		return info;
 	}
 
-	private File getFileToSave(String contentType){
-		String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8), contentType.replace("image/", ""));
+	private File buildResultFile(String contentType){
+		String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(12), contentType.replace("image/", ""));
 		return new File(realPathtoUploads, name);
 	}
 }
