@@ -3,23 +3,16 @@ package com.smartshop.web.rest;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -51,6 +44,8 @@ import com.smartshop.attachment.common.AttachmentResponse;
 import com.smartshop.attachment.common.PreviewConfig;
 import com.smartshop.constants.AppConstants;
 import com.smartshop.domain.Attachment;
+import com.smartshop.model.AttachmentInfo;
+import com.smartshop.service.AttachmentServerClient;
 import com.smartshop.service.AttachmentService;
 import com.smartshop.utils.AttachmentUtils;
 
@@ -67,6 +62,9 @@ public class AttachmentController {
 	private static final String InitialPreview = "<img src='" + AppConstants.ADMIN_PREFIX
 			+ "/attachments/attachment_id' class='file-preview-image kv-preview-data rotate-1'>";
 	private final AttachmentService attachmentService;
+	
+	@Inject
+	private AttachmentServerClient attachmentClient;
 
 	public AttachmentController(AttachmentService attachmentService) {
 		this.attachmentService = attachmentService;
@@ -84,7 +82,7 @@ public class AttachmentController {
 		attachment.setName(file.getOriginalFilename());
 		attachment.setAttachmentType(AttachmentEnum.valueOf(attachmentType));
 
-		String filePath = this.saveFile(attachment, file.getBytes());
+		String filePath = this.attachmentClient.save( new AttachmentInfo(file.getBytes(), file.getContentType(), file.getOriginalFilename()));
 		attachment.setPath(filePath);
 		this.attachmentService.save(attachment);
 		PreviewConfig previewConfig = new PreviewConfig(attachment.getName());
@@ -130,12 +128,11 @@ public class AttachmentController {
 			ImageIO.write(originalImage, typeArr[1], baos);
 			baos.flush();
 			byte[] imageInByte = baos.toByteArray();
-
-			String thumbnailPath = this.saveFile(thumbnailAttachment, imageInByte);
+			String thumbnailPath =this.attachmentClient.save( new AttachmentInfo(imageInByte, thumbnailAttachment.getContentType(),
+					thumbnailAttachment.getName()));
 			thumbnailAttachment.setPath(thumbnailPath);
 			thumbnailAttachment.setSize((long) imageInByte.length);
 			this.attachmentService.save(thumbnailAttachment);
-			baos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -192,29 +189,6 @@ public class AttachmentController {
 			return new ResponseEntity<byte[]>(null, headers, HttpStatus.OK);
 		}
 		return new ResponseEntity<byte[]>(AttachmentUtils.getAttachmentContent(attachment), headers, HttpStatus.OK);
-	}
-
-	private String saveFile(Attachment attachment, byte[] content) {
-		String filePathStr = AppConstants.BASE_PATH + attachment.getBoName() + AppConstants.SLASH + attachment.getBoId()
-				+ AppConstants.SLASH + attachment.getName();
-		OutputStream os = null;
-		try {
-			File file = new File(filePathStr);
-			file.createNewFile();
-			Path path = Paths.get(filePathStr);
-			InputStream isFile = new ByteArrayInputStream(content);
-			Files.copy(isFile, path, StandardCopyOption.REPLACE_EXISTING);
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			IOUtils.closeWhileHandlingException(os);
-		}
-		return filePathStr;
 	}
 
 }
