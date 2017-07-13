@@ -17,8 +17,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smartshop.common.domain.BusinessDomain;
 import com.smartshop.core.enumeration.SMTPSecurityEnum;
-import com.smartshop.domain.common.BusinessDomain;
 
 /**
  * A EmailSetting.

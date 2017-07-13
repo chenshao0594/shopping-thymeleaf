@@ -17,8 +17,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smartshop.common.domain.BusinessDomain;
 import com.smartshop.core.enumeration.ProductRelationshipEnum;
-import com.smartshop.domain.common.BusinessDomain;
 
 @Entity
 @Table(name = "product_relationship")

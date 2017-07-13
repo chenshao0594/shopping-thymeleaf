@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.smartshop.constants.AppConstants;
 import com.smartshop.core.catalog.SKU;
-import com.smartshop.service.SKUService;
+import com.smartshop.core.catalog.service.SKUService;
 
 /**
  * REST controller for managing ProductOption.

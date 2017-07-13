@@ -8,6 +8,9 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import com.smartshop.core.user.domain.Authority;
+import com.smartshop.core.user.domain.PersistentToken;
+import com.smartshop.core.user.domain.User;
 
 
 /**
@@ -20,7 +23,7 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
-    public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
+    public final com.smartshop.common.domain.QAbstractAuditingEntity _super = new com.smartshop.common.domain.QAbstractAuditingEntity(this);
 
     public final BooleanPath activated = createBoolean("activated");
 

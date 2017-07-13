@@ -22,11 +22,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.smartshop.common.domain.BusinessDomain;
 import com.smartshop.constants.BusinessConstants;
 import com.smartshop.core.common.Country;
 import com.smartshop.core.common.Zone;
 import com.smartshop.core.enumeration.MeasureUnit;
-import com.smartshop.domain.common.BusinessDomain;
 
 /**
  * A MerchantStore.

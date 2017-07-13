@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.smartshop.app.repository.MerchantStoreRepository;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.domain.QMerchantStore;
 import com.smartshop.exception.BusinessException;
-import com.smartshop.repository.MerchantStoreRepository;
 import com.smartshop.service.MerchantStoreService;
 
 /**

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.smartshop.domain.common.BusinessDomainInterface;
+import com.smartshop.common.domain.BusinessDomainInterface;
 
 public interface AbstractDomainService<E extends BusinessDomainInterface, K extends Serializable & Comparable<K>> {
 

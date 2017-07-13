@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.smartshop.domain.common.LiteDomain;
+import com.smartshop.common.domain.LiteDomain;
 
 /**
  * A Country.

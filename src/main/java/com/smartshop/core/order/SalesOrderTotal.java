@@ -19,7 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smartshop.domain.common.BusinessDomain;
+import com.smartshop.common.domain.BusinessDomain;
 
 @Entity
 @Table(name = "SALES_ORDER_total")

@@ -20,14 +20,14 @@ import com.smartshop.core.cart.service.ShoppingCartCalculationService;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.SKU;
 import com.smartshop.core.catalog.service.PricingService;
-import com.smartshop.domain.Customer;
+import com.smartshop.core.catalog.service.ProductService;
+import com.smartshop.core.catalog.service.SKUService;
+import com.smartshop.core.customer.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.exception.ConversionException;
 import com.smartshop.facade.ShoppingCartFacade;
 import com.smartshop.populator.ShoppingCartDataPopulator;
-import com.smartshop.service.ProductService;
-import com.smartshop.service.SKUService;
 import com.smartshop.shop.model.ShoppingCartData;
 import com.smartshop.shop.model.ShoppingCartItem;
 

@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smartshop.attachment.common.AttachmentEnum;
-import com.smartshop.domain.common.BusinessDomain;
+import com.smartshop.common.domain.BusinessDomain;
 
 /**
  * A Attachment.

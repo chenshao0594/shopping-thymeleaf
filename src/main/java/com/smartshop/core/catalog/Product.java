@@ -27,7 +27,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smartshop.domain.common.BusinessDomain;
+import com.smartshop.common.domain.BusinessDomain;
 
 @Entity
 @Table(name = "product")

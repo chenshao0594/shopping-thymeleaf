@@ -21,7 +21,7 @@ import com.smartshop.common.ShoppingControllerConstants;
 import com.smartshop.core.catalog.Category;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.service.CategoryService;
-import com.smartshop.service.ProductService;
+import com.smartshop.core.catalog.service.ProductService;
 
 @Controller("ShopCatalogueController")
 @RequestMapping("/catalogue")

@@ -6,9 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.smartshop.app.repository.PaymentConfigurationRepository;
 import com.smartshop.core.catalog.service.PaymentConfigurationService;
-import com.smartshop.domain.PaymentConfiguration;
-import com.smartshop.repository.PaymentConfigurationRepository;
+import com.smartshop.core.payment.PaymentConfiguration;
 
 /**
  * Service Implementation for managing ProductOption.

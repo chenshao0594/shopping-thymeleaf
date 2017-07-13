@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.smartshop.domain.Customer;
+import com.smartshop.core.customer.Customer;
 import com.smartshop.security.AuthoritiesConstants;
 import com.smartshop.service.CustomerService;
 

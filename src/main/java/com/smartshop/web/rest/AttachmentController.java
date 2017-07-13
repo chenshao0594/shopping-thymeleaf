@@ -43,11 +43,11 @@ import com.smartshop.attachment.common.AttachmentEnum;
 import com.smartshop.attachment.common.AttachmentResponse;
 import com.smartshop.attachment.common.PreviewConfig;
 import com.smartshop.constants.AppConstants;
+import com.smartshop.core.attachment.model.AttachmentInfo;
+import com.smartshop.core.attachment.utils.AttachmentUtils;
 import com.smartshop.domain.Attachment;
-import com.smartshop.model.AttachmentInfo;
 import com.smartshop.service.AttachmentServerClient;
 import com.smartshop.service.AttachmentService;
-import com.smartshop.utils.AttachmentUtils;
 
 import net.coobird.thumbnailator.Thumbnails;
 

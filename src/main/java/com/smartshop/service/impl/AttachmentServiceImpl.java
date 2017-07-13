@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.smartshop.app.repository.AttachmentRepository;
 import com.smartshop.attachment.common.AttachmentEnum;
 import com.smartshop.domain.Attachment;
 import com.smartshop.domain.QAttachment;
-import com.smartshop.repository.AttachmentRepository;
 import com.smartshop.repository.search.AttachmentSearchRepository;
 import com.smartshop.service.AttachmentService;
 

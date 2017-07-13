@@ -17,10 +17,10 @@ import com.google.gson.Gson;
 import com.smartshop.attachment.common.AttachmentEnum;
 import com.smartshop.core.catalog.Product;
 import com.smartshop.core.catalog.SKU;
+import com.smartshop.core.catalog.service.ProductService;
+import com.smartshop.core.catalog.service.SKUService;
 import com.smartshop.domain.Attachment;
 import com.smartshop.service.AttachmentService;
-import com.smartshop.service.ProductService;
-import com.smartshop.service.SKUService;
 import com.smartshop.shop.model.ProductOptionDTO;
 import com.smartshop.shop.model.ProductOptionPricing;
 

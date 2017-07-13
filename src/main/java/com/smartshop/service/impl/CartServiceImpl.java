@@ -12,17 +12,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.smartshop.app.repository.CartRepository;
 import com.smartshop.core.cart.Cart;
 import com.smartshop.core.cart.CartItem;
 import com.smartshop.core.cart.QCart;
 import com.smartshop.core.cart.service.CartService;
 import com.smartshop.core.catalog.Product;
-import com.smartshop.domain.Customer;
+import com.smartshop.core.catalog.service.ProductService;
+import com.smartshop.core.customer.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
-import com.smartshop.repository.CartRepository;
 import com.smartshop.repository.search.ShoppingCartSearchRepository;
-import com.smartshop.service.ProductService;
 import com.smartshop.shop.model.ShoppingCartItem;
 
 /**

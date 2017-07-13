@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smartshop.core.catalog.service.CategoryService;
+import com.smartshop.core.catalog.service.ProductService;
 import com.smartshop.exception.BusinessException;
-import com.smartshop.service.ProductService;
 
 @Controller("ShopHomeController")
 @RequestMapping("")

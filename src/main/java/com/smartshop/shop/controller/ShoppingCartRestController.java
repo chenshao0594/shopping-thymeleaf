@@ -23,7 +23,7 @@ import com.smartshop.core.cart.Cart;
 import com.smartshop.core.cart.CartItem;
 import com.smartshop.core.cart.service.CartItemService;
 import com.smartshop.core.cart.service.CartService;
-import com.smartshop.domain.Customer;
+import com.smartshop.core.customer.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.exception.ConversionException;

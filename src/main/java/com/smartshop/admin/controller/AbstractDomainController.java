@@ -19,8 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codahale.metrics.annotation.Timed;
+import com.smartshop.common.domain.BusinessDomain;
 import com.smartshop.constants.AppConstants;
-import com.smartshop.domain.common.BusinessDomain;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.service.AbstractDomainService;
 

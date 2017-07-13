@@ -1,6 +1,6 @@
 package com.smartshop.shop.utils;
 
-import com.smartshop.domain.Customer;
+import com.smartshop.core.customer.Customer;
 import com.smartshop.domain.MerchantStore;
 
 public class UserInfoContextHolder {

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.smartshop.constants.AppConstants;
 import com.smartshop.core.catalog.Product;
-import com.smartshop.core.catalog.price.FinalPrice;
+import com.smartshop.core.catalog.pricing.FinalPrice;
 import com.smartshop.core.catalog.service.PricingService;
-import com.smartshop.domain.Customer;
+import com.smartshop.core.customer.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 

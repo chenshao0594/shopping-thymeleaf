@@ -28,12 +28,12 @@ import com.smartshop.core.catalog.ProductOption;
 import com.smartshop.core.catalog.SKU;
 import com.smartshop.core.catalog.service.CategoryService;
 import com.smartshop.core.catalog.service.ProductOptionService;
+import com.smartshop.core.catalog.service.ProductRelationshipService;
+import com.smartshop.core.catalog.service.ProductService;
+import com.smartshop.core.catalog.service.SKUService;
 import com.smartshop.domain.Attachment;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.service.AttachmentService;
-import com.smartshop.service.ProductRelationshipService;
-import com.smartshop.service.ProductService;
-import com.smartshop.service.SKUService;
 
 /**
  * REST controller for managing Product.

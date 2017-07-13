@@ -32,14 +32,14 @@ import org.hibernate.annotations.OrderBy;
 import org.hibernate.annotations.Type;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smartshop.common.domain.BusinessDomain;
 import com.smartshop.core.common.Billing;
 import com.smartshop.core.common.Delivery;
 import com.smartshop.core.order.enumeration.SalesOrderChannel;
 import com.smartshop.core.order.enumeration.SalesOrderStatus;
 import com.smartshop.core.order.enumeration.SalesOrderType;
-import com.smartshop.core.payment.enumeration.PaymentType;
+import com.smartshop.core.payment.PaymentType;
 import com.smartshop.domain.MerchantStore;
-import com.smartshop.domain.common.BusinessDomain;
 
 @Entity
 @Table(name = "SALES_ORDER")

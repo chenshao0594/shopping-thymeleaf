@@ -2,8 +2,8 @@ package com.smartshop.service;
 
 import com.smartshop.core.cart.Cart;
 import com.smartshop.core.common.Address;
-import com.smartshop.customer.CustomerRO;
-import com.smartshop.domain.Customer;
+import com.smartshop.core.customer.Customer;
+import com.smartshop.core.customer.model.CustomerRO;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.shop.model.customer.CustomerModel;

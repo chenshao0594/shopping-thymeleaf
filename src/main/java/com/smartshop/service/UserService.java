@@ -16,12 +16,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.smartshop.app.repository.AuthorityRepository;
+import com.smartshop.app.repository.PersistentTokenRepository;
+import com.smartshop.app.repository.UserRepository;
 import com.smartshop.constants.AppConstants;
-import com.smartshop.domain.Authority;
-import com.smartshop.domain.User;
-import com.smartshop.repository.AuthorityRepository;
-import com.smartshop.repository.PersistentTokenRepository;
-import com.smartshop.repository.UserRepository;
+import com.smartshop.core.user.domain.Authority;
+import com.smartshop.core.user.domain.User;
 import com.smartshop.repository.search.UserSearchRepository;
 import com.smartshop.security.AuthoritiesConstants;
 import com.smartshop.security.SecurityUtils;

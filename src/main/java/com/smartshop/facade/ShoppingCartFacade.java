@@ -3,7 +3,7 @@ package com.smartshop.facade;
 import java.util.List;
 
 import com.smartshop.core.cart.Cart;
-import com.smartshop.domain.Customer;
+import com.smartshop.core.customer.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.exception.ConversionException;

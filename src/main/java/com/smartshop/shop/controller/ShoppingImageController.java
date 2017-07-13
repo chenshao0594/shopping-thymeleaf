@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.smartshop.core.attachment.utils.AttachmentUtils;
 import com.smartshop.domain.Attachment;
 import com.smartshop.service.AttachmentService;
-import com.smartshop.utils.AttachmentUtils;
 
 @Controller("ShopImageController")
 @RequestMapping("/images")

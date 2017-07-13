@@ -1,9 +1,9 @@
 package com.smartshop.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.smartshop.app.repository.UserRepository;
 import com.smartshop.constants.AppConstants;
-import com.smartshop.domain.User;
-import com.smartshop.repository.UserRepository;
+import com.smartshop.core.user.domain.User;
 import com.smartshop.repository.search.UserSearchRepository;
 import com.smartshop.security.AuthoritiesConstants;
 import com.smartshop.service.MailService;

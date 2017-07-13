@@ -8,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import com.smartshop.core.payment.Transaction;
 
 
 /**
@@ -30,7 +31,7 @@ public class QTransaction extends EntityPathBase<Transaction> {
 
     public final com.smartshop.core.order.QSalesOrder order;
 
-    public final EnumPath<com.smartshop.core.payment.enumeration.PaymentType> paymentType = createEnum("paymentType", com.smartshop.core.payment.enumeration.PaymentType.class);
+    public final EnumPath<com.smartshop.core.payment.PaymentType> paymentType = createEnum("paymentType", com.smartshop.core.payment.PaymentType.class);
 
     public final DateTimePath<java.util.Date> transactionDate = createDateTime("transactionDate", java.util.Date.class);
 

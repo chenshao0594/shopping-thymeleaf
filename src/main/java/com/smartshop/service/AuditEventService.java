@@ -1,7 +1,7 @@
 package com.smartshop.service;
 
+import com.smartshop.app.repository.PersistenceAuditEventRepository;
 import com.smartshop.config.audit.AuditEventConverter;
-import com.smartshop.repository.PersistenceAuditEventRepository;
 
 import java.time.LocalDateTime;
 import org.springframework.boot.actuate.audit.AuditEvent;

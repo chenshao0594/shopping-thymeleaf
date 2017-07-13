@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.smartshop.constants.AppConstants;
 import com.smartshop.core.catalog.Product;
+import com.smartshop.core.catalog.service.ProductRelationshipService;
+import com.smartshop.core.catalog.service.ProductService;
 import com.smartshop.exception.BusinessException;
-import com.smartshop.service.ProductRelationshipService;
-import com.smartshop.service.ProductService;
 
 @RestController
 @RequestMapping(AppConstants.ADMIN_PREFIX + "/catalogue/")

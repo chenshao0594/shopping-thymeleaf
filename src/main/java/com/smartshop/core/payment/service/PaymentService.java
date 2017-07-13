@@ -3,12 +3,12 @@ package com.smartshop.core.payment.service;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.smartshop.core.customer.Customer;
 import com.smartshop.core.order.SalesOrder;
+import com.smartshop.core.payment.PaymentConfiguration;
+import com.smartshop.core.payment.Transaction;
 import com.smartshop.core.payments.model.Payment;
-import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
-import com.smartshop.domain.PaymentConfiguration;
-import com.smartshop.domain.Transaction;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.shop.model.ShoppingCartItem;
 

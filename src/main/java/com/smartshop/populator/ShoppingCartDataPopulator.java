@@ -15,14 +15,14 @@ import com.smartshop.core.cart.Cart;
 import com.smartshop.core.cart.CartItem;
 import com.smartshop.core.cart.service.ShoppingCartCalculationService;
 import com.smartshop.core.catalog.service.PricingService;
+import com.smartshop.core.catalog.service.ProductService;
+import com.smartshop.core.catalog.service.SKUService;
 import com.smartshop.core.order.model.SalesOrderTotalSummary;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 import com.smartshop.exception.ConversionException;
 import com.smartshop.order.model.OrderTotal;
 import com.smartshop.order.model.SalesOrderSummary;
-import com.smartshop.service.ProductService;
-import com.smartshop.service.SKUService;
 import com.smartshop.shop.model.ShoppingCartData;
 import com.smartshop.shop.model.ShoppingCartItem;
 

@@ -2,9 +2,9 @@ package com.smartshop.core.payments.model;
 
 import java.util.Map;
 
+import com.smartshop.common.reference.Currency;
 import com.smartshop.core.enumeration.TransactionType;
-import com.smartshop.core.payment.enumeration.PaymentType;
-import com.smartshop.domain.Currency;
+import com.smartshop.core.payment.PaymentType;
 
 public class Payment {
 	private PaymentType paymentType;

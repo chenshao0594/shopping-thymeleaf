@@ -54,7 +54,7 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final StringPath paymentCode = createString("paymentCode");
 
-    public final EnumPath<com.smartshop.core.payment.enumeration.PaymentType> paymentType = createEnum("paymentType", com.smartshop.core.payment.enumeration.PaymentType.class);
+    public final EnumPath<com.smartshop.core.payment.PaymentType> paymentType = createEnum("paymentType", com.smartshop.core.payment.PaymentType.class);
 
     public final SetPath<OrderProductLine, QOrderProductLine> productLines = this.<OrderProductLine, QOrderProductLine>createSet("productLines", OrderProductLine.class, QOrderProductLine.class, PathInits.DIRECT2);
 

@@ -9,9 +9,9 @@ import com.smartshop.core.cart.Cart;
 import com.smartshop.core.cart.CartItem;
 import com.smartshop.core.cart.service.CartService;
 import com.smartshop.core.cart.service.ShoppingCartCalculationService;
+import com.smartshop.core.customer.Customer;
 import com.smartshop.core.order.model.SalesOrderTotalSummary;
 import com.smartshop.core.order.service.SalesOrderService;
-import com.smartshop.domain.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 

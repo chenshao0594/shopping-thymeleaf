@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.smartshop.app.repository.CartItemRepository;
 import com.smartshop.core.cart.CartItem;
 import com.smartshop.core.cart.QCartItem;
 import com.smartshop.core.cart.service.CartItemService;
-import com.smartshop.repository.CartItemRepository;
 
 /**
  * Service Implementation for managing Category.

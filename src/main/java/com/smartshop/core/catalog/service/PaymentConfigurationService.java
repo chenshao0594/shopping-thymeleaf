@@ -1,6 +1,6 @@
 package com.smartshop.core.catalog.service;
 
-import com.smartshop.domain.PaymentConfiguration;
+import com.smartshop.core.payment.PaymentConfiguration;
 import com.smartshop.service.AbstractDomainService;
 
 /**

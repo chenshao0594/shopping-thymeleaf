@@ -2,7 +2,7 @@ package com.smartshop.core.facade;
 
 import java.util.List;
 
-import com.smartshop.domain.PaymentConfiguration;
+import com.smartshop.core.payment.PaymentConfiguration;
 
 public interface PaymentFacade {
 

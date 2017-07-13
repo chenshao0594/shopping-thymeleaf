@@ -3,8 +3,8 @@ package com.smartshop.core.catalog.service;
 import java.math.BigDecimal;
 
 import com.smartshop.core.catalog.Product;
-import com.smartshop.core.catalog.price.FinalPrice;
-import com.smartshop.domain.Customer;
+import com.smartshop.core.catalog.pricing.FinalPrice;
+import com.smartshop.core.customer.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 

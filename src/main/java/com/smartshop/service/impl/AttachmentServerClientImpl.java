@@ -17,9 +17,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import com.smartshop.core.attachment.model.AttachmentInfo;
 import com.smartshop.exception.FileNotFoundException;
 import com.smartshop.exception.UploadFailException;
-import com.smartshop.model.AttachmentInfo;
 import com.smartshop.service.AttachmentServerClient;
 
 

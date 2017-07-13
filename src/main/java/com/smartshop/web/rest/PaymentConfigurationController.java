@@ -9,7 +9,7 @@ import com.smartshop.admin.controller.AbstractDomainController;
 import com.smartshop.admin.controller.ProductOptionController;
 import com.smartshop.constants.AppConstants;
 import com.smartshop.core.catalog.service.PaymentConfigurationService;
-import com.smartshop.domain.PaymentConfiguration;
+import com.smartshop.core.payment.PaymentConfiguration;
 
 @Controller
 @RequestMapping(AppConstants.ADMIN_PREFIX + "/" + PaymentConfigurationController.SECTION_KEY)

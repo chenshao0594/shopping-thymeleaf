@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smartshop.domain.PersistentToken;
-import com.smartshop.domain.User;
-import com.smartshop.repository.PersistentTokenRepository;
-import com.smartshop.repository.UserRepository;
+import com.smartshop.app.repository.PersistentTokenRepository;
+import com.smartshop.app.repository.UserRepository;
+import com.smartshop.core.user.domain.PersistentToken;
+import com.smartshop.core.user.domain.User;
 import com.smartshop.security.SecurityUtils;
 import com.smartshop.service.MailService;
 import com.smartshop.service.UserService;

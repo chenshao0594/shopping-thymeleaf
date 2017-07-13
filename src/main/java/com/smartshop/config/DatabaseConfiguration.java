@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 
 @Configuration
-@EnableJpaRepositories("com.smartshop.repository")
+@EnableJpaRepositories("com.smartshop.**.repository")
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
-@EnableElasticsearchRepositories("com.smartshop.repository.search")
+@EnableElasticsearchRepositories("com.smartshop.**.repository.search")
 public class DatabaseConfiguration {
 
 	private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);

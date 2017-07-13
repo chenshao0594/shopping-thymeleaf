@@ -1,6 +1,6 @@
 package com.smartshop.core.payments.model;
 
-import com.smartshop.core.payment.enumeration.PaymentType;
+import com.smartshop.core.payment.PaymentType;
 
 public class PaypalPayment extends Payment {
 

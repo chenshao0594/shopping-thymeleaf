@@ -7,7 +7,7 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
 
-import com.smartshop.domain.common.BusinessDomain;
+import com.smartshop.common.domain.BusinessDomain;
 
 public class ApplicationMapper {
 

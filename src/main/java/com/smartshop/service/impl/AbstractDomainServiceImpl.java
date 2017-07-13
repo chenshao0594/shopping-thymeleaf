@@ -12,7 +12,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.smartshop.domain.common.BusinessDomainInterface;
+import com.smartshop.common.domain.BusinessDomainInterface;
 import com.smartshop.service.AbstractDomainService;
 
 public abstract class AbstractDomainServiceImpl<E extends BusinessDomainInterface, K extends Serializable & Comparable<K>>

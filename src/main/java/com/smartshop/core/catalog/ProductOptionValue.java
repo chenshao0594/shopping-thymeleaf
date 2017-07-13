@@ -14,8 +14,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smartshop.domain.common.BusinessDomain;
-import com.smartshop.domain.common.BusinessDomainInterface;
+import com.smartshop.common.domain.BusinessDomain;
+import com.smartshop.common.domain.BusinessDomainInterface;
 
 /**
  * A ProductOptionValue.

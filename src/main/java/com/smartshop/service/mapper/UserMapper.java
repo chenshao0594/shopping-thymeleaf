@@ -1,7 +1,7 @@
 package com.smartshop.service.mapper;
 
-import com.smartshop.domain.Authority;
-import com.smartshop.domain.User;
+import com.smartshop.core.user.domain.Authority;
+import com.smartshop.core.user.domain.User;
 import com.smartshop.service.dto.UserDTO;
 
 import org.mapstruct.*;

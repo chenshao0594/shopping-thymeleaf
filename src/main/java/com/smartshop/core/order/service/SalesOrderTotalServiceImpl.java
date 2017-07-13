@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.smartshop.service.ProductService;
+import com.smartshop.core.catalog.service.ProductService;
 
 @Service("salesOrderTotalService")
 public class SalesOrderTotalServiceImpl implements SalesOrderTotalService {

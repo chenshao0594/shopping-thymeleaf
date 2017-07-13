@@ -1,8 +1,8 @@
 package com.smartshop.security;
 
-import com.smartshop.domain.PersistentToken;
-import com.smartshop.repository.PersistentTokenRepository;
-import com.smartshop.repository.UserRepository;
+import com.smartshop.app.repository.PersistentTokenRepository;
+import com.smartshop.app.repository.UserRepository;
+import com.smartshop.core.user.domain.PersistentToken;
 import com.smartshop.service.util.RandomUtil;
 
 import io.github.jhipster.config.JHipsterProperties;

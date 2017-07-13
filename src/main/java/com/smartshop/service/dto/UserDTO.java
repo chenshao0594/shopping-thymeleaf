@@ -1,8 +1,8 @@
 package com.smartshop.service.dto;
 
 import com.smartshop.constants.AppConstants;
-import com.smartshop.domain.Authority;
-import com.smartshop.domain.User;
+import com.smartshop.core.user.domain.Authority;
+import com.smartshop.core.user.domain.User;
 
 import org.hibernate.validator.constraints.Email;
 

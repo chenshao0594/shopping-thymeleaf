@@ -1,7 +1,7 @@
 package com.smartshop.service;
 
 import com.smartshop.core.common.Address;
-import com.smartshop.domain.Customer;
+import com.smartshop.core.customer.Customer;
 import com.smartshop.domain.MerchantStore;
 import com.smartshop.exception.BusinessException;
 

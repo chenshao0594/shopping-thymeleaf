@@ -15,8 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.smartshop.domain.User;
-import com.smartshop.repository.UserRepository;
+import com.smartshop.app.repository.UserRepository;
+import com.smartshop.core.user.domain.User;
 
 /**
  * Authenticate a user from the database.

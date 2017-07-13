@@ -22,9 +22,9 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smartshop.common.domain.BusinessDomain;
 import com.smartshop.core.enumeration.ProductOptionEnum;
 import com.smartshop.domain.MerchantStore;
-import com.smartshop.domain.common.BusinessDomain;
 
 /**
  * A ProductOption.
