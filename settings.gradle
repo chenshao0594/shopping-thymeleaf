@@ -1,2 +1,4 @@
 include 'common'
+include 'client'
 include 'core'
+include 'catalog'

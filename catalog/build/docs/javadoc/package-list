@@ -1,0 +1,8 @@
+com.shoppay.core.catalog
+com.shoppay.core.catalog.model
+com.shoppay.core.catalog.pricing
+com.shoppay.core.catalog.repository
+com.shoppay.core.catalog.repository.search
+com.shoppay.core.catalog.service
+com.shoppay.core.catalog.service.impl
+com.shoppay.core.catalog.utils

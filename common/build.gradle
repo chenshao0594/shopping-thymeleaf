@@ -25,6 +25,7 @@ dependencies {
     compile "org.springframework.security:spring-security-web:${spring_security_version}"
     compile "org.springframework.security:spring-security-messaging:${spring_security_version}"
     compile 'org.springframework.data:spring-data-jpa:1.11.4.RELEASE'
+    compile "org.springframework.boot:spring-boot-starter-data-elasticsearch:${spring_boot_version}"
     compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.9.RELEASE'
     compile group: 'io.github.jpenren', name: 'thymeleaf-spring-data-dialect', version: '3.3.0'
     
@@ -54,4 +55,5 @@ dependencies {
     compile "com.ryantenney.metrics:metrics-spring:${metrics_spring_version}"
     compile "commons-validator:commons-validator:${commons_validator_version}"
     compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1'
+    compile "org.hibernate:hibernate-validator:5.4.1.Final"
 }
