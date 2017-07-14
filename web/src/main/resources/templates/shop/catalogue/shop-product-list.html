@@ -1,0 +1,17 @@
+{{ open_form() }}
+  {% paginate products by 48 %}
+
+<ul class="clearfix">  
+  {% for product in pagination.items %}
+    {{ partial('shop-product-grid-item', {'product':product}) }}
+  {% endfor %}
+</ul>
+  
+<div class="pagination-centered">
+  <div class="pagination">
+    {% navigation %}
+  </div>
+</div>
+
+  {% endpaginate %}
+{{ close_form() }}

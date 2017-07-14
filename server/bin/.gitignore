@@ -1,0 +1,12 @@
+/banner.txt
+/config/
+/flows/
+/i18n/
+/logback-spring.xml
+/mails/
+/reference/
+/sql/
+/static/
+/com/
+/templates/
+/CurrencyTest.class

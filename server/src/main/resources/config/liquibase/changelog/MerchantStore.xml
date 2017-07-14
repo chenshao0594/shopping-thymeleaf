@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<property name="now" value="now()" dbms="h2" />
+
+	<property name="now" value="now()" dbms="mysql" />
+	<property name="autoIncrement" value="true" />
+
+	<property name="floatType" value="float4" dbms="postgresql, h2" />
+	<property name="floatType" value="float" dbms="mysql, oracle, mssql" />
+
+	<!-- Added the entity MerchantStore. -->
+	<changeSet id="20170415184137-1" author="jhipster">
+		<createTable tableName="merchant_store">
+			<column name="id" type="bigint" autoIncrement="${autoIncrement}">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="address" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="CODE" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="EMAIL_ADDRESS" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+
+
+			<column name="phone" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="WEIGHT_UNIT" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="domain_name" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="invoice_template" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="logo" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="POSTAL_CODE" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="SIZE_UNIT" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="STATE_PROVINCE" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="CONTINUE_SHOPPING_URL" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="city" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="created_by" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="created_date" type="timestamp" defaultValueDate="${now}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="last_modified_by" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="last_modified_date" type="timestamp" defaultValueDate="${now}">
+				<constraints nullable="false" />
+			</column>
+
+
+			<column name="zone_id" type="bigint">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="country_id" type="bigint">
+				<constraints nullable="true" />
+			</column>
+
+			<!-- jhipster-needle-liquibase-add-column - JHipster will add columns 
+				here, do not remove -->
+		</createTable>
+		<createTable tableName="MERCHANT_LANGUAGE">
+			<column name="stores_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="languages_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addPrimaryKey columnNames="languages_id, stores_id"
+			tableName="MERCHANT_LANGUAGE" />
+		<loadData encoding="UTF-8" file="config/liquibase/init/merchant_store.csv"
+			separator="," tableName="merchant_store">
+		</loadData>
+
+	</changeSet>
+</databaseChangeLog>

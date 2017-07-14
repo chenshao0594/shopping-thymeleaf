@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+	layout:decorate="~{layouts/layout}">
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="page-title">
+			<h3>
+				PaymentConfiguration <a th:href="@{/{admin}/paymentConfigurations/new(admin=${admin_url})}" class="btn btn-success pull-right"><span
+					class="fa fa-plus"></span>Add Payment Configuration</a>
+			</h3>
+		</div>
+		<div class="row">
+			<table class="table">
+				<thead class="thead-default">
+					<tr>
+						<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
+						<th>Image</th>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="row : ${page}">
+						<th scope="row" th:text="${row.id}">1</th>
+						<td th:text="${row.image}">Image</td>
+						<td th:text="${row.name}">name</td>
+						<td th:text="${row.type}">type</td>
+						<td>
+							<div class="flex-btn-group-container">
+								<a class="btn btn-success btn-sm" th:href="@{/{admin}/paymentConfigurations/{itemId}(admin=${admin_url}, itemId=${row.id})}"> <span
+									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/paymentConfigurations/{itemId}/edit(admin=${admin_url}, itemId=${row.id})}">
+									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<div sd:pagination-summary="">info</div>
+			</div>
+			<div class="col-6">
+				<nav class="pull-right">
+					<ul class="pagination" sd:pagination="full">
+						<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+						<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

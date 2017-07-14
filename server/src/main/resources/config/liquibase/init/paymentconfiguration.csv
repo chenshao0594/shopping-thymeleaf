@@ -1,0 +1,7 @@
+ID,name,type,version,image,env,schema,host,port,uri,config1,created_by,last_modified_by
+1,paypal-express-checkout,paypal,104,img/payment/icon-paypal.png,TEST,,,,,https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=,system,system
+2,paypal-express-checkout,paypal,104,img/payment/icon-paypal.png,PROD,,,,,https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=,system,system
+3,beanstream,creditcard,,img/payment/beanstream.gif,TEST,https,www.beanstream.com,443,/scripts/process_transaction.asp,,system,system
+4,beanstream,creditcard,,img/payment/beanstream.gif,PROD,https,www.beanstream.com,443,/scripts/process_transaction.asp,,system,system
+5,stripe,creditcard,,img/payment/stripe.png,TEST,https,www.stripe.com,443,/,,system,system
+6,stripe,creditcard,,img/payment/stripe.png,PROD,https,www.stripe.com,443,/,,system,system
