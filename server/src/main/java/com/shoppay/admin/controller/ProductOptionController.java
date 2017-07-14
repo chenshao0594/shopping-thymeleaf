@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codahale.metrics.annotation.Timed;
+import com.shoppay.common.constants.AppConstants;
 import com.shoppay.common.exception.BusinessException;
-import com.shoppay.constants.AppConstants;
 import com.shoppay.core.catalog.ProductOption;
 import com.shoppay.core.catalog.ProductOptionValue;
 import com.shoppay.core.catalog.service.ProductOptionService;

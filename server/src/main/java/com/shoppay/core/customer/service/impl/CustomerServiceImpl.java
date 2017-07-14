@@ -6,9 +6,9 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shoppay.app.repository.CustomerRepository;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
+import com.shoppay.common.repository.CustomerRepository;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.common.utils.GeoLocationUtils;
 import com.shoppay.core.common.Address;

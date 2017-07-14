@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.attachment.common.AttachmentEnum;
-import com.shoppay.attachment.common.PreviewConfig;
+import com.shoppay.common.attachment.AttachmentEnum;
+import com.shoppay.common.attachment.PreviewConfig;
+import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.domain.Attachment;
 import com.shoppay.common.exception.BusinessException;
-import com.shoppay.constants.AppConstants;
+import com.shoppay.common.service.AttachmentService;
 import com.shoppay.core.catalog.Product;
 import com.shoppay.core.catalog.ProductOption;
 import com.shoppay.core.catalog.SKU;
@@ -32,8 +34,6 @@ import com.shoppay.core.catalog.service.ProductOptionService;
 import com.shoppay.core.catalog.service.ProductRelationshipService;
 import com.shoppay.core.catalog.service.ProductService;
 import com.shoppay.core.catalog.service.SKUService;
-import com.shoppay.domain.Attachment;
-import com.shoppay.service.AttachmentService;
 
 /**
  * REST controller for managing Product.

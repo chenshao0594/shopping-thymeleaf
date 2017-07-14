@@ -5,7 +5,7 @@ import java.util.Set;
 
 import javax.validation.constraints.Size;
 
-import com.shoppay.service.dto.UserDTO;
+import com.shoppay.common.model.UserDTO;
 
 /**
  * View Model extending the UserDTO, which is meant to be used in the user management UI.

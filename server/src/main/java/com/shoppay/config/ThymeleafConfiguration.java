@@ -10,7 +10,7 @@ import org.thymeleaf.dialect.springdata.SpringDataDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-import com.shoppay.thymeleaf.ShopDialect;
+import com.shoppay.thymeleaf.ShoppayDialect;
 
 @Configuration
 public class ThymeleafConfiguration {
@@ -42,8 +42,8 @@ public class ThymeleafConfiguration {
 	}
 
 	@Bean
-	public ShopDialect shopDialect() {
-		return new ShopDialect();
+	public ShoppayDialect shopDialect() {
+		return new ShoppayDialect();
 	}
 
 	/*

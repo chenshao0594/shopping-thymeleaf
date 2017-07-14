@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" layout:decorate="~{layouts/layout}">
+<head>
+<body>
+	<section layout:fragment="content" th:remove="tag">
+		<div class="page-title">
+			<h2>Merchant Store</h2>
+		</div>
+		<form name="form" th:action="@{/{admin}/merchantStores/{id}/edit(admin=${admin_url}, id=${item.id})}"
+			action="merchantStores/edit.html" method="POST">
+			<div class="row form-group">
+				<label for="codeInput" class="col-2 col-form-label text-right">Code</label> 
+				<input type="text" th:value="${item.code}" class="form-control col-4" id="codeInput" name="code"
+					placeholder="Code" /> 
+				<label class="col-2 col-form-label text-right">Name</label> 
+				<input type="text" th:value="${item.name}" name="sortOrder" class="form-control col-4" /> 
+				<label class="col-2 col-form-label text-right">Phone</label> 
+				<input type="text" th:value="${item.phone}" name="phone" class="form-control col-4" /> 
+				<label class="col-2 col-form-label text-right">address</label> 
+				<input type="text" th:value="${item.address}" name="address" class="form-control col-4" /> 
+				<label class="col-2 col-form-label text-right">stateProvince</label> 
+				<input type="text" th:value="${item.stateProvince}" name="stateProvince" class="form-control col-4" /> 
+				<label class="col-2 col-form-label text-right">zone</label> 
+				<input type="text" th:value="${item.zone}" name="zone" class="form-control col-4" /> 
+				<label class="col-2 col-form-label text-right">Postal Code</label> 
+				<input type="text" th:value="${item.postalcode}" name="postalcode" class="form-control col-4" /> 
+				<label  class="col-2 col-form-label text-right" th:text="#{label.generic.weightunit}"></label>
+				<select class="col-4  form-control" name="weightUnit">
+							<option value="KG">KG</option>
+							<option value="LB">LB</option>
+							<option value="CM">CM</option>
+							<option value="IN">IN</option>
+				</select> 
+					
+				<label  class="col-2 col-form-label text-right" th:text="#{label.generic.sizeunit}"></label>
+				<select class="form-control col-4 "  name="sizeUnit">
+							<option value="KG" th:selected="${item.sizeUnit=='KG'}">KG</option>
+							<option value="LB" th:selected="${item.sizeUnit=='LB'}">LB</option>
+							<option value="CM" th:selected="${item.sizeUnit=='CM'}">CM</option>
+							<option value="IN" th:selected="${item.sizeUnit=='IN'}">IN</option>
+				</select> 
+				
+				<label class="col-2 col-form-label text-right">Country</label> <select
+					class="form-control col-4" name="country.id">
+					<option th:each="item : ${countries}" th:value="${item.id}" th:text="${item.code}"></option>
+				</select>
+			</div>
+			<div class="form-actions">
+				<div class="row">
+					<div class="offset-9">
+						<button type="button" class="btn btn-default" th:onclick="${'goBack();'}">
+							<span class="fa fa-ban"></span>&nbsp;Cancel
+						</button>
+						<button type="submit" class="btn btn-primary">
+							<span class="fa fa-save"></span>&nbsp;Save
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

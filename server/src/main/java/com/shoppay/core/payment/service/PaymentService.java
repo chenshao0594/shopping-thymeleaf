@@ -13,6 +13,7 @@ import com.shoppay.core.payments.model.Payment;
 import com.shoppay.shop.model.ShoppingCartItem;
 
 public interface PaymentService {
+	
 	public void validatePaymentConfiguration(PaymentConfiguration integrationConfiguration, MerchantStore store)
 			throws BusinessException;
 

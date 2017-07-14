@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shoppay.service.AuditEventService;
+import com.shoppay.common.service.AuditEventService;
 import com.shoppay.web.rest.util.PaginationUtil;
 
 import io.github.jhipster.web.util.ResponseUtil;

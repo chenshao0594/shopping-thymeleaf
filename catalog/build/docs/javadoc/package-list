@@ -1,4 +1,5 @@
 com.shoppay.core.catalog
+com.shoppay.core.catalog.facade
 com.shoppay.core.catalog.model
 com.shoppay.core.catalog.pricing
 com.shoppay.core.catalog.repository

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" layout:decorate="~{layouts/layout}">
+<head>
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css"
+	th:href="@{/vendor/summernote/summernote.css}" rel="stylesheet">
+<link href="/css/fileinput.min.css" th:href="@{/css/fileinput.min.css}" media="all" rel="stylesheet"
+	type="text/css" />
+<script src="/vendor/jquery.ui.widget.js" th:src="@{/vendor/jquery.ui.widget.js}"></script>
+<script src="/vendor/fileinput/fileinput.min.js" th:src="@{/vendor/fileinput/fileinput.min.js}"></script>
+<script src="/vendor/fileinput/themes/fa/theme.js" th:src="@{/vendor/fileinput/themes/fa/theme.js}"></script>
+</head>
+<body>
+	<section layout:fragment="content" th:remove="tag">
+		<div class="page-title">
+			<div class="row justify-content-between">
+				<h3 class="">Product</h3>
+				<div th:if="${item.id}" class="btn-group" role="group">
+					<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="fa fa-pencil"></span>&nbsp;Edit Others&nbsp;
+					</button>
+					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						<a class="dropdown-item"
+							th:href="@{/{admin}/products/{productId}/skus(admin=${admin_url}, productId=${item.id})}">Edit
+							SKUs</a> <a class="dropdown-item"
+							th:href="@{/{admin}/products/{productId}/images(admin=${admin_url}, productId=${item.id})}">Edit
+							Images</a>
+							 <a class="dropdown-item"
+							th:href="@{/{admin}/products/{productId}/relations(admin=${admin_url}, productId=${item.id})}">Edit
+							Relations</a>
+							 <a class="dropdown-item"
+							href="#">Product Description</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<form name="form"
+			th:action="@{(${item.id} ? '/'+${admin_url}+'/products/'+${item.id}+'/edit' : '/'+${admin_url}+'/products')}"
+			action="products/edit.html" method="POST">
+			<fieldset>
+				<legend class="section">Basic Info</legend>
+				<div class="row">
+					<label for="name_input" class="col-2 col-form-label text-right">Name</label> <input type="text"
+						th:value="${item.name}" class="form-control col-4" id="name_input" name="name" /> <label
+						for="category" class="col-2 col-form-label text-right"> Category</label> <select
+						class="form-control col-4" name="category.id">
+						<option th:each="category : ${categories}" th:value="${category.id}"
+							th:selected="${category.id==item.category?.id}" th:text="${category.code}"></option>
+					</select> <label for="salePrice_input" class="col-2 col-form-label text-right">Sale Price</label>
+					<div class="input-group  col-4">
+						<span class="input-group-addon">$</span> <input type="number" th:value="${item.standardPrice}"
+							class="form-control" id="salePrice_input" name="standardPrice" />
+					</div>
+					<label for="retailPrice_input" class="col-2 col-form-label text-right">Retail Price</label>
+					<div class="input-group  col-4">
+						<span class="input-group-addon">$</span> <input type="number" th:value="${item.retailPrice}"
+							class="form-control" id="retailPrice_input" name="retailPrice" />
+					</div>
+				</div>
+				<div class="row">
+					<label for="name_input" class="col-2 col-form-label text-right">Remark</label>
+					<textarea rows="4" cols="50" th:value="${item.remark}" class="col-4" id="remark_input"
+						name="remark">
+					
+					</textarea>
+					<!-- <label for="briefDescription_input" class="col-2 col-form-label text-right">Brief Description</label> 
+					<textarea rows="4" cols="50" th:value="${item.briefDescription}" class="col-10" id="briefDescription_input" name="briefDescription">
+					
+					</textarea>
+					 -->
+				</div>
+				<!-- <br />
+				<div class="row offset-2 col-10">
+					<div id="summernote">
+						<p>Hello Summernote</p>
+					</div>
+				</div> -->
+			</fieldset>
+			<fieldset>
+				<legend class="section">Shipping Info</legend>
+				<div class="row">
+					<label for="name_width" class="col-2 col-form-label text-right">Width</label> <input
+						type="number" th:value="${item.width}" class="form-control col-4" id="width_input"
+						name="width" /> <label for="name_length" class="col-2 col-form-label text-right">Length</label>
+					<input type="number" th:value="${item.length}" class="form-control col-4" id="length_input"
+						name="length" /> <label for="name_productWeight" class="col-2 col-form-label text-right">Weight</label>
+					<input type="number" th:value="${item.productWeight}" class="form-control col-4"
+						id="productWeight_input" name="productWeight" /> <label for="name_productwidth"
+						class="col-2 col-form-label text-right">Height</label> <input type="number"
+						th:value="${item.productHeight}" class="form-control col-4" id="productHeight_input"
+						name="productHeight" />
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend class="section">SEO Info</legend>
+				<div class="row">
+					<label for="title_input" class="col-2 col-form-label text-right">Title</label> <input
+						type="text" th:value="${item.metatagTitle}" class="form-control col-4" id="name_input"
+						name="metatagTitle" /> <label for="metatagDescription_input"
+						class="col-2 col-form-label text-right">Description</label> <input type="text"
+						th:value="${item.metatagDescription}" class="form-control col-4" id="name_input"
+						name="metatagDescription" /> <label for="searchurl_input"
+						class="col-2 col-form-label text-right">url</label> <input type="text"
+						th:value="${item.searchUrl}" class="form-control col-4" id="name_input" name="searchurl" /> <label
+						for="keywords_input" class="col-2 col-form-label text-right">Keywords</label> <input
+						type="text" th:value="${item.metatagKeywords}" class="form-control col-4" id="name_input"
+						name="metatagKeywords" />
+				</div>
+			</fieldset>
+			<div class="form-actions">
+				<div class="row justify-content-end">
+					<button type="button" class="btn btn-default" th:onclick="${'goBack();'}">
+						<span class="fa fa-ban"></span>&nbsp;Cancel
+					</button>
+					&nbsp;
+					<button type="submit" class="btn btn-primary">
+						<span class="fa fa-save"></span>&nbsp;Save
+					</button>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+<section layout:fragment="footer-script"></section>
+</html>

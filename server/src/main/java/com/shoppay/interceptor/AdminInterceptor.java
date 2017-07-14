@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.shoppay.constants.AppConstants;
+import com.shoppay.common.constants.AppConstants;
 
 public class AdminInterceptor extends HandlerInterceptorAdapter {
 	private Logger logger = LoggerFactory.getLogger(AdminInterceptor.class);

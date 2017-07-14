@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.shoppay.constants.AppConstants;
+import com.shoppay.common.constants.AppConstants;
 import com.shoppay.core.catalog.Category;
 import com.shoppay.core.catalog.service.CategoryService;
 

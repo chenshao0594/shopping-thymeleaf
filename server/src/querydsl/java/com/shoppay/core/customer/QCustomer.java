@@ -24,7 +24,7 @@ public class QCustomer extends EntityPathBase<Customer> {
 
     public final BooleanPath anonymous = createBoolean("anonymous");
 
-    public final com.shoppay.core.user.QAuthority authority;
+    public final com.shoppay.common.user.QAuthority authority;
 
     public final com.shoppay.core.common.QBilling billing;
 
@@ -74,7 +74,7 @@ public class QCustomer extends EntityPathBase<Customer> {
 
     public QCustomer(Class<? extends Customer> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.authority = inits.isInitialized("authority") ? new com.shoppay.core.user.QAuthority(forProperty("authority")) : null;
+        this.authority = inits.isInitialized("authority") ? new com.shoppay.common.user.QAuthority(forProperty("authority")) : null;
         this.billing = inits.isInitialized("billing") ? new com.shoppay.core.common.QBilling(forProperty("billing")) : null;
         this.delivery = inits.isInitialized("delivery") ? new com.shoppay.core.common.QDelivery(forProperty("delivery")) : null;
         this.merchantStore = inits.isInitialized("merchantStore") ? new com.shoppay.common.domain.QMerchantStore(forProperty("merchantStore")) : null;

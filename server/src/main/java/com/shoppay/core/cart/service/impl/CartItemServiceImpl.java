@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.shoppay.app.repository.CartItemRepository;
+import com.shoppay.common.repository.CartItemRepository;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.core.cart.CartItem;
 import com.shoppay.core.cart.QCartItem;

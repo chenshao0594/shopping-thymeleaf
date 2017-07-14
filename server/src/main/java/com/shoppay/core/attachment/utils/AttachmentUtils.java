@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 
-import com.shoppay.domain.Attachment;
+import com.shoppay.common.domain.Attachment;
 
 public final class AttachmentUtils {
 

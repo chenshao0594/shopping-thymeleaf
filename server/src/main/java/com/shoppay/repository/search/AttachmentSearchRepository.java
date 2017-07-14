@@ -2,7 +2,7 @@ package com.shoppay.repository.search;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-import com.shoppay.domain.Attachment;
+import com.shoppay.common.domain.Attachment;
 
 /**
  * Spring Data Elasticsearch repository for the Attachment entity.

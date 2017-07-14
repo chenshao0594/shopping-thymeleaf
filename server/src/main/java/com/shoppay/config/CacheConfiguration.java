@@ -14,6 +14,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.shoppay.common.domain.Attachment;
 import com.shoppay.common.domain.MerchantStore;
 
 import io.github.jhipster.config.JHipsterProperties;
@@ -40,14 +41,14 @@ public class CacheConfiguration {
 	@Bean
 	public JCacheManagerCustomizer cacheManagerCustomizer() {
 		return cm -> {
-			cm.createCache(com.shoppay.core.user.User.class.getName(), jcacheConfiguration);
-			cm.createCache(com.shoppay.core.user.Authority.class.getName(), jcacheConfiguration);
-			cm.createCache(com.shoppay.core.user.User.class.getName() + ".authorities", jcacheConfiguration);
-			cm.createCache(com.shoppay.core.user.PersistentToken.class.getName(), jcacheConfiguration);
-			cm.createCache(com.shoppay.core.user.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+			cm.createCache(com.shoppay.common.user.User.class.getName(), jcacheConfiguration);
+			cm.createCache(com.shoppay.common.user.Authority.class.getName(), jcacheConfiguration);
+			cm.createCache(com.shoppay.common.user.User.class.getName() + ".authorities", jcacheConfiguration);
+			cm.createCache(com.shoppay.common.user.PersistentToken.class.getName(), jcacheConfiguration);
+			cm.createCache(com.shoppay.common.user.User.class.getName() + ".persistentTokens", jcacheConfiguration);
 			cm.createCache(com.shoppay.core.catalog.Category.class.getName(), jcacheConfiguration);
 			cm.createCache(com.shoppay.core.catalog.Category.class.getName() + ".categories", jcacheConfiguration);
-			cm.createCache(com.shoppay.domain.Attachment.class.getName(), jcacheConfiguration);
+			cm.createCache(Attachment.class.getName(), jcacheConfiguration);
 			cm.createCache(com.shoppay.domain.EmailSetting.class.getName(), jcacheConfiguration);
 			cm.createCache(MerchantStore.class.getName(), jcacheConfiguration);
 			cm.createCache(com.shoppay.core.catalog.Product.class.getName(), jcacheConfiguration);

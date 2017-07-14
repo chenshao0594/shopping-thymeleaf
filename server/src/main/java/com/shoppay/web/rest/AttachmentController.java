@@ -39,15 +39,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.attachment.common.AttachmentEnum;
-import com.shoppay.attachment.common.AttachmentResponse;
-import com.shoppay.attachment.common.PreviewConfig;
-import com.shoppay.constants.AppConstants;
+import com.shoppay.common.attachment.AttachmentEnum;
+import com.shoppay.common.attachment.AttachmentResponse;
+import com.shoppay.common.attachment.PreviewConfig;
+import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.domain.Attachment;
+import com.shoppay.common.service.AttachmentServerClient;
+import com.shoppay.common.service.AttachmentService;
 import com.shoppay.core.attachment.model.AttachmentInfo;
 import com.shoppay.core.attachment.utils.AttachmentUtils;
-import com.shoppay.domain.Attachment;
-import com.shoppay.service.AttachmentServerClient;
-import com.shoppay.service.AttachmentService;
 
 import net.coobird.thumbnailator.Thumbnails;
 

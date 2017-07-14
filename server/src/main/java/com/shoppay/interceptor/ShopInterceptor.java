@@ -15,13 +15,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.shoppay.common.constants.AppConstants;
 import com.shoppay.common.domain.MerchantStore;
-import com.shoppay.constants.AppConstants;
+import com.shoppay.common.service.MerchantStoreService;
 import com.shoppay.core.common.Address;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.security.AuthoritiesConstants;
-import com.shoppay.service.MerchantStoreService;
 import com.shoppay.shop.model.customer.AnonymousCustomer;
 import com.shoppay.shop.utils.UserInfoContextHolder;
 import com.shoppay.shop.utils.UserInfoContextHolder.UserInfo;

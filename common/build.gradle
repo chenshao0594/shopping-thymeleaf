@@ -26,6 +26,7 @@ dependencies {
     compile "org.springframework.security:spring-security-messaging:${spring_security_version}"
     compile 'org.springframework.data:spring-data-jpa:1.11.4.RELEASE'
     compile "org.springframework.boot:spring-boot-starter-data-elasticsearch:${spring_boot_version}"
+    compile "org.springframework.boot:spring-boot-starter-actuator:${spring_boot_version}"
     compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.9.RELEASE'
     compile group: 'io.github.jpenren', name: 'thymeleaf-spring-data-dialect', version: '3.3.0'
     

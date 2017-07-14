@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shoppay.admin.controller.AbstractDomainController;
 import com.shoppay.admin.controller.ProductOptionController;
-import com.shoppay.constants.AppConstants;
+import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.service.ShippingConfigurationService;
 import com.shoppay.domain.ShippingConfiguration;
-import com.shoppay.service.ShippingConfigurationService;
 
 @Controller
 @RequestMapping(AppConstants.ADMIN_PREFIX + "/" + ShippingConfigurationController.SECTION_KEY)

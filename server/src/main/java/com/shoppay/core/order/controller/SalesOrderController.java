@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shoppay.admin.controller.AbstractDomainController;
-import com.shoppay.constants.AppConstants;
+import com.shoppay.common.constants.AppConstants;
 import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.order.service.SalesOrderService;
 

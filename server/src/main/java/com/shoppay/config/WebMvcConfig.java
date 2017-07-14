@@ -22,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.shoppay.constants.AppConstants;
+import com.shoppay.common.constants.AppConstants;
 import com.shoppay.interceptor.AdminInterceptor;
 import com.shoppay.interceptor.ShopInterceptor;
 

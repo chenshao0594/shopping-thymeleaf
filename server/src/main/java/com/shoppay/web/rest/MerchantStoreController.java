@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shoppay.admin.controller.AbstractDomainController;
+import com.shoppay.common.constants.AppConstants;
 import com.shoppay.common.domain.MerchantStore;
-import com.shoppay.constants.AppConstants;
-import com.shoppay.service.MerchantStoreService;
+import com.shoppay.common.service.MerchantStoreService;
 
 /**
  * REST controller for managing MerchantStore.

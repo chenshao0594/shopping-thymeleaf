@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" layout:decorate="~{layouts/layout}">
+<head>
+<body>
+	<section layout:fragment="content">
+		<div class="page-title">
+			<h2>Category</h2>
+		</div>
+		<div role="alert" th:if="${statusMessage}"
+			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
+		<form name="form" th:action="@{(${item.id} ? '/categories/'+${item.id}+'/edit': '/categories')}"
+			action="category/edit.html" method="POST">
+			<div class="row form-group">
+				<label for="codeInput" class="col-2 col-form-label text-right">Code</label> <input type="text"
+					th:value="${item.code}" class="form-control col-4" id="codeInput" name="code"
+					placeholder="Code" /> <label for="sortOrder" class="col-2 col-form-label text-right">Sort
+					Order</label> <input type="number" value="${item.sortOrder}" name="sortOrder"
+					class="form-control col-4" placeholder="Sort Order" /> <label for="parent"
+					class="col-2 col-form-label text-right">Parent Category</label> <select
+					class="form-control col-4" name="parent.id">
+					<option th:each="item : ${categories}" th:value="${item.id}" th:text="${item.code}"></option>
+				</select>
+			</div>
+			<div class="form-actions">
+				<div class="row">
+					<div class="offset-9">
+						<button type="button" class="btn btn-default" th:onclick="${'goBack();'}">
+							<span class="fa fa-ban"></span>&nbsp;Cancel
+						</button>
+						<button type="submit" class="btn btn-primary">
+							<span class="fa fa-save"></span>&nbsp;Save
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

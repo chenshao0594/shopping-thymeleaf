@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" layout:decorate="~{layouts/layout}">
+</head>
+<body>
+	<section layout:fragment="content" th:remove="tag">
+		<div class="page-title">
+			<h2>
+				Category <small class="text-muted" th:text="${item.id}"></small>
+				<button type="button" class="btn btn-secondary pull-right" th:onclick="${'goBack();'}">
+					<span class="fa fa-arrow-left"></span>Back
+				</button>
+			</h2>
+		</div>
+		<div role="alert" th:if="${statusMessage}"
+			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
+		<fieldset>
+			<legend class="section">Basic Info</legend>
+			<dl class="row justify-content-md-center">
+				<dt class="col-md-2 text-right">Code</dt>
+				<dd class="col-md-4 text-left" th:text="${item.code}">Code</dd>
+				<dt class="col-md-2 text-right">Name</dt>
+				<dd class="col-md-4 text-left" th:text="${item.name}">Name</dd>
+				<dt class="col-md-2 text-right">Domain Name</dt>
+				<dd class="col-md-4 text-left" th:text="${item.domainName}">Name</dd>
+				<dt class="col-md-2 text-right">phone</dt>
+				<dd class="col-md-4 text-left" th:text="${item.phone}">Phone</dd>
+				<dt class="col-md-2 text-right">Address</dt>
+				<dd class="col-md-4 text-left" th:text="${item.address}">Address</dd>
+				<dt class="col-md-2 text-right">City</dt>
+				<dd class="col-md-4 text-left" th:text="${item.city}">Parent</dd>
+				<dt class="col-md-2 text-right">Postal Code</dt>
+				<dd class="col-md-4 text-left" th:text="${item.postalcode}">Postal Code</dd>
+				<dt class="col-md-2 text-right">STATE PROVINCE</dt>
+				<dd class="col-md-4 text-left" th:text="${item.stateProvince}">STATE PROVINCE</dd>
+				<dt class="col-md-2 text-right">SIZE UNIT</dt>
+				<dd class="col-md-4 text-left" th:text="${item.sizeUnit}">SIZE_UNIT</dd>
+				<dt class="col-md-2 text-right">WEIGHT UNIT</dt>
+				<dd class="col-md-4 text-left" th:text="${item.weightUnit}">WEIGHT_UNIT</dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend class="section">Audit Info</legend>
+			<dl class="row justify-content-md-center">
+				<dt class="col-md-2 text-right">Created By</dt>
+				<dd class="col-md-4 text-left" th:text="${item.createdBy}">Code</dd>
+				<dt class="col-md-2 text-right">createdDate</dt>
+				<dd class="col-md-4 text-left" th:text="${item.createdDate}">createdDate</dd>
+				<dt class="col-md-2 text-right">Last Modified By</dt>
+				<dd class="col-md-4 text-left" th:text="${item.lastModifiedBy}">Code</dd>
+				<dt class="col-md-2 text-right">lastModifiedDate</dt>
+				<dd class="col-md-4 text-left" th:text="${item.lastModifiedDate}">LastModifiedDate</dd>
+			</dl>
+		</fieldset>
+	</section>
+</body>
+</html>

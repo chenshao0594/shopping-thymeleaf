@@ -1,0 +1,2 @@
+id,name,code,phone,address,city,POSTAL_CODE,EMAIL_ADDRESS,COUNTRY_ID,state_Province,domain_Name,created_by,last_modified_by, created_date,last_modified_date
+1,DEFAULT,DEFAULT,99,chenghui road, shanghai,201204,shane@sap.com,1,shanghai,localhost,system,system, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP

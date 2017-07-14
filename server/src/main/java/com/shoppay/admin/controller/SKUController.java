@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.shoppay.constants.AppConstants;
+import com.shoppay.common.constants.AppConstants;
 import com.shoppay.core.catalog.SKU;
 import com.shoppay.core.catalog.service.SKUService;
 

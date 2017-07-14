@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+	layout:decorate="~{layouts/layout}">
+</head>
+<body>
+	<section layout:fragment="content" th:remove="tag">
+		<div>
+			<h1>Page Not Found</h1>
+			<p>Sorry, but the page you were trying to view does not exist.</p>
+		</div>
+	</section>
+</body>
+</html>
+<!-- IE needs 512+ bytes: http://blogs.msdn.com/b/ieinternals/archive/2010/08/19/http-error-pages-in-internet-explorer.aspx -->

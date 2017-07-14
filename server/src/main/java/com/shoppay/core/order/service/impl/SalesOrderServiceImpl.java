@@ -13,10 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shoppay.app.repository.SalesOrderRepository;
 import com.shoppay.common.constants.BusinessConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
+import com.shoppay.common.repository.SalesOrderRepository;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.CartItem;

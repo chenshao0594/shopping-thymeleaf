@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.shoppay.admin.controller.AbstractDomainController;
+import com.shoppay.common.constants.AppConstants;
 import com.shoppay.common.exception.BusinessException;
-import com.shoppay.constants.AppConstants;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.model.CustomerRO;
 import com.shoppay.core.customer.service.CustomerService;

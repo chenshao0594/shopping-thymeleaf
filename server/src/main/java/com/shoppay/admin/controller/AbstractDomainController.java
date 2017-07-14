@@ -19,10 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codahale.metrics.annotation.Timed;
+import com.shoppay.common.constants.AppConstants;
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.service.AbstractDomainService;
-import com.shoppay.constants.AppConstants;
 
 @Controller("BasicEntityController")
 @RequestMapping(AppConstants.ADMIN_PREFIX + "/{sectionKey:.+}")

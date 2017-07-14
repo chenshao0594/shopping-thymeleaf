@@ -92,7 +92,7 @@ server:
 # Full reference is available at: https://jhipster.github.io/common-application-properties/
 # ===================================================================
 
-jhipster:
+application:
     http:
         version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
     cache: # Cache configuration
@@ -133,17 +133,3 @@ jhipster:
             host: localhost
             port: 5000
             queue-size: 512
-
-# ===================================================================
-# Application specific properties
-# Add your own application properties here, see the ApplicationProperties class
-# to have type-safe configuration, like in the JHipsterProperties above
-#
-# More documentation is available at:
-# https://jhipster.github.io/common-application-properties/
-# ===================================================================
-# ===============================
-# = data.sql file will be executed?
-# ===============================
-  ###spring.datasource.initialize=true
-application:

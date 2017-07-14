@@ -18,7 +18,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
-import com.shoppay.config.ApplicationProperties;
+import com.shoppay.common.cofig.ApplicationProperties;
 import com.shoppay.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterConstants;

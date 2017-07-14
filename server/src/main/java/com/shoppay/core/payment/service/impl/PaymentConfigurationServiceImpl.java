@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shoppay.app.repository.PaymentConfigurationRepository;
+import com.shoppay.common.repository.PaymentConfigurationRepository;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.core.payment.PaymentConfiguration;
 import com.shoppay.core.payment.service.PaymentConfigurationService;
