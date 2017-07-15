@@ -6,4 +6,9 @@ target/
 .settings/
 .classpath
 /.apt_generated/
-server/bin/
+/*/bin/
+/*/build/
+/*/.project
+/*/.gradle/
+/*/.settings/
+/*/.apt_generated/
