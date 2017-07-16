@@ -71,7 +71,7 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "env_type")
-	private PaymentEnvEnum envType;
+	private PaymentEnvEnum env;
 	
 	// beanstream
 	private String password;
@@ -160,12 +160,12 @@ public class PaymentConfiguration extends BusinessDomain<Long, PaymentConfigurat
 		this.uri = uri;
 	}
 
-	public PaymentEnvEnum getEnvType() {
-		return envType;
+	public PaymentEnvEnum getEnv() {
+		return env;
 	}
 
 	public void setEnvType(PaymentEnvEnum envType) {
-		this.envType = envType;
+		this.env = envType;
 	}
 
 	public String getConfig1() {

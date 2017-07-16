@@ -114,7 +114,7 @@ public final class PayPalExpressCheckoutPaymentService implements PaymentService
 			throws BusinessException {
 		try {
 			String mode = "sandbox";
-			PaymentEnvEnum env = configuration.getEnvType();
+			PaymentEnvEnum env = configuration.getEnv();
 			if (env == PaymentEnvEnum.PRODUCTION) {
 				mode = "production";
 			}
