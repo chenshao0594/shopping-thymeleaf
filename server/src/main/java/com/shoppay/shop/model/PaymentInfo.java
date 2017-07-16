@@ -1,6 +1,6 @@
 package com.shoppay.shop.model;
 
-import com.shoppay.core.payment.PaymentType;
+import com.shoppay.core.payment.enumeration.PaymentType;
 
 public class PaymentInfo {
 	private long orderId;

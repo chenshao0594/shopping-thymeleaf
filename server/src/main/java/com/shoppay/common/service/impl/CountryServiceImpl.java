@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.shoppay.common.reference.Country;
 import com.shoppay.common.repository.CountryRepository;
 import com.shoppay.common.service.CountryService;
 import com.shoppay.core.catalog.service.impl.ProductOptionServiceImpl;
-import com.shoppay.core.common.Country;
 
 @Service
 @Transactional

@@ -3,7 +3,7 @@ package com.shoppay.core.shipping.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import com.shoppay.core.common.Delivery;
+import com.shoppay.common.reference.Delivery;
 
 public class ShippingSummary implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -17,8 +17,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.shoppay.common.constants.AppConstants;
 import com.shoppay.common.domain.MerchantStore;
+import com.shoppay.common.reference.Address;
 import com.shoppay.common.service.MerchantStoreService;
-import com.shoppay.core.common.Address;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.security.AuthoritiesConstants;

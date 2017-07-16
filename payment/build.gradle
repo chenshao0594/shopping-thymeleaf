@@ -3,4 +3,5 @@ apply plugin: 'maven'
 
 dependencies {
     compile project(':common')
+    compile group: 'com.paypal.sdk', name: 'merchantsdk', version: '2.15.122'
 }

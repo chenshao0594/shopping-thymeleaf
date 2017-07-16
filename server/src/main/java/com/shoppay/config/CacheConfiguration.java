@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.shoppay.common.domain.Attachment;
 import com.shoppay.common.domain.MerchantStore;
+import com.shoppay.common.reference.Currency;
 
 import io.github.jhipster.config.JHipsterProperties;
 
@@ -76,10 +77,10 @@ public class CacheConfiguration {
 			// order
 			cm.createCache(com.shoppay.core.order.SalesOrderTotal.class.getName(), jcacheConfiguration);
 			cm.createCache(com.shoppay.core.order.OrderProductLine.class.getName(), jcacheConfiguration);
-			cm.createCache(com.shoppay.core.payment.Transaction.class.getName(), jcacheConfiguration);
+			cm.createCache(com.shoppay.core.transaction.Transaction.class.getName(), jcacheConfiguration);
 
-			cm.createCache(com.shoppay.common.reference.Currency.class.getName(), jcacheConfiguration);
-			cm.createCache(com.shoppay.core.common.Zone.class.getName(), jcacheConfiguration);
+			cm.createCache(Currency.class.getName(), jcacheConfiguration);
+			cm.createCache(com.shoppay.common.reference.Zone.class.getName(), jcacheConfiguration);
 
 			//
 			// jhipster-needle-ehcache-add-entry

@@ -8,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+import com.shoppay.core.transaction.Transaction;
 
 
 /**
@@ -30,7 +31,7 @@ public class QTransaction extends EntityPathBase<Transaction> {
 
     public final com.shoppay.core.order.QSalesOrder order;
 
-    public final EnumPath<PaymentType> paymentType = createEnum("paymentType", PaymentType.class);
+    public final EnumPath<com.shoppay.core.payment.enumeration.PaymentType> paymentType = createEnum("paymentType", com.shoppay.core.payment.enumeration.PaymentType.class);
 
     public final DateTimePath<java.util.Date> transactionDate = createDateTime("transactionDate", java.util.Date.class);
 

@@ -30,7 +30,7 @@ public class QMerchantStore extends EntityPathBase<MerchantStore> {
 
     public final StringPath continueShoppingURL = createString("continueShoppingURL");
 
-    public final com.shoppay.core.common.QCountry country;
+    public final com.shoppay.common.reference.QCountry country;
 
     public final StringPath domainName = createString("domainName");
 
@@ -54,7 +54,7 @@ public class QMerchantStore extends EntityPathBase<MerchantStore> {
 
     public final EnumPath<com.shoppay.common.enumeration.MeasureUnit> weightUnit = createEnum("weightUnit", com.shoppay.common.enumeration.MeasureUnit.class);
 
-    public final com.shoppay.core.common.QZone zone;
+    public final com.shoppay.common.reference.QZone zone;
 
     public QMerchantStore(String variable) {
         this(MerchantStore.class, forVariable(variable), INITS);
@@ -74,8 +74,8 @@ public class QMerchantStore extends EntityPathBase<MerchantStore> {
 
     public QMerchantStore(Class<? extends MerchantStore> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.country = inits.isInitialized("country") ? new com.shoppay.core.common.QCountry(forProperty("country")) : null;
-        this.zone = inits.isInitialized("zone") ? new com.shoppay.core.common.QZone(forProperty("zone"), inits.get("zone")) : null;
+        this.country = inits.isInitialized("country") ? new com.shoppay.common.reference.QCountry(forProperty("country")) : null;
+        this.zone = inits.isInitialized("zone") ? new com.shoppay.common.reference.QZone(forProperty("zone"), inits.get("zone")) : null;
     }
 
 }

@@ -22,7 +22,7 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public static final QSalesOrder salesOrder = new QSalesOrder("salesOrder");
 
-    public final com.shoppay.core.common.QBilling billing;
+    public final com.shoppay.common.reference.QBilling billing;
 
     public final EnumPath<com.shoppay.core.order.enumeration.SalesOrderChannel> channel = createEnum("channel", com.shoppay.core.order.enumeration.SalesOrderChannel.class);
 
@@ -36,7 +36,7 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final DatePath<java.util.Date> datePurchased = createDate("datePurchased", java.util.Date.class);
 
-    public final com.shoppay.core.common.QDelivery delivery;
+    public final com.shoppay.common.reference.QDelivery delivery;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -54,7 +54,7 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final StringPath paymentCode = createString("paymentCode");
 
-    public final EnumPath<com.shoppay.core.payment.PaymentType> paymentType = createEnum("paymentType", com.shoppay.core.payment.PaymentType.class);
+    public final EnumPath<com.shoppay.core.payment.enumeration.PaymentType> paymentType = createEnum("paymentType", com.shoppay.core.payment.enumeration.PaymentType.class);
 
     public final SetPath<OrderProductLine, QOrderProductLine> productLines = this.<OrderProductLine, QOrderProductLine>createSet("productLines", OrderProductLine.class, QOrderProductLine.class, PathInits.DIRECT2);
 
@@ -82,8 +82,8 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public QSalesOrder(Class<? extends SalesOrder> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.billing = inits.isInitialized("billing") ? new com.shoppay.core.common.QBilling(forProperty("billing")) : null;
-        this.delivery = inits.isInitialized("delivery") ? new com.shoppay.core.common.QDelivery(forProperty("delivery")) : null;
+        this.billing = inits.isInitialized("billing") ? new com.shoppay.common.reference.QBilling(forProperty("billing")) : null;
+        this.delivery = inits.isInitialized("delivery") ? new com.shoppay.common.reference.QDelivery(forProperty("delivery")) : null;
         this.merchant = inits.isInitialized("merchant") ? new com.shoppay.common.domain.QMerchantStore(forProperty("merchant")) : null;
     }
 

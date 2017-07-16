@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
+import com.shoppay.common.utils.MoneyFormatUtils;
 import com.shoppay.core.catalog.Category;
 import com.shoppay.core.catalog.Product;
 import com.shoppay.core.catalog.ProductOption;
@@ -38,7 +39,6 @@ import com.shoppay.core.catalog.service.ProductOptionValueService;
 import com.shoppay.core.catalog.service.ProductRelationshipService;
 import com.shoppay.core.catalog.service.ProductService;
 import com.shoppay.core.catalog.service.SKUService;
-import com.shoppay.core.common.MoneyFormatUtils;
 
 /**
  * Service Implementation for managing Product.

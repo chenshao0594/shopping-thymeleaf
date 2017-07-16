@@ -8,8 +8,8 @@ import com.shoppay.common.exception.BusinessException;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.payment.PaymentConfiguration;
-import com.shoppay.core.payment.Transaction;
-import com.shoppay.core.payments.model.Payment;
+import com.shoppay.core.payment.model.Payment;
+import com.shoppay.core.transaction.Transaction;
 import com.shoppay.shop.model.ShoppingCartItem;
 
 public interface PaymentService {

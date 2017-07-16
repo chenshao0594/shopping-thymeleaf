@@ -11,7 +11,7 @@ import org.thymeleaf.standard.expression.IStandardExpressionParser;
 import org.thymeleaf.standard.expression.StandardExpressions;
 import org.thymeleaf.templatemode.TemplateMode;
 
-import com.shoppay.core.common.Address;
+import com.shoppay.common.reference.Address;
 
 public class AddressProcessor extends AbstractElementTagProcessor {
 	public static final int PRECEDENCE = 100000;

@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.shoppay.core.common.Address;
+import com.shoppay.common.reference.Address;
 
 public class CustomerBasic implements Serializable {
 

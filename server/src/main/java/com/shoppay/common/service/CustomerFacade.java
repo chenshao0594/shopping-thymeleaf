@@ -2,8 +2,8 @@ package com.shoppay.common.service;
 
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
+import com.shoppay.common.reference.Address;
 import com.shoppay.core.cart.Cart;
-import com.shoppay.core.common.Address;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.model.CustomerRO;
 import com.shoppay.shop.model.customer.CustomerModel;

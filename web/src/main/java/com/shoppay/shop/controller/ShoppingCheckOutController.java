@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.shoppay.common.exception.BusinessException;
+import com.shoppay.common.reference.Country;
 import com.shoppay.common.service.CountryService;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.CartItem;
@@ -29,7 +30,6 @@ import com.shoppay.core.catalog.SKU;
 import com.shoppay.core.catalog.facade.PricingFacade;
 import com.shoppay.core.catalog.service.ProductService;
 import com.shoppay.core.catalog.service.SKUService;
-import com.shoppay.core.common.Country;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.facade.PaymentFacade;

@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
+import com.shoppay.common.reference.Address;
 import com.shoppay.common.repository.CustomerRepository;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.common.utils.GeoLocationUtils;
-import com.shoppay.core.common.Address;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.repository.search.CustomerSearchRepository;

@@ -26,9 +26,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.enumeration.Gender;
+import com.shoppay.common.reference.Billing;
+import com.shoppay.common.reference.Delivery;
 import com.shoppay.common.user.Authority;
-import com.shoppay.core.common.Billing;
-import com.shoppay.core.common.Delivery;
 
 /**
  * A Customer.

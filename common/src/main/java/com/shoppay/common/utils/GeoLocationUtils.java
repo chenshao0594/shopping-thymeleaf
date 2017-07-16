@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.model.CityResponse;
-import com.shoppay.core.common.Address;
+import com.shoppay.common.reference.Address;
 
 public class GeoLocationUtils {
 

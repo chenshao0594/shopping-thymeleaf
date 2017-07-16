@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.shoppay.core.common.Billing;
+import com.shoppay.common.reference.Billing;
 
 public class ShoppingOrderContext implements Serializable {
 

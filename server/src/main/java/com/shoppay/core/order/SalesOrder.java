@@ -34,12 +34,12 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.common.domain.MerchantStore;
-import com.shoppay.core.common.Billing;
-import com.shoppay.core.common.Delivery;
+import com.shoppay.common.reference.Billing;
+import com.shoppay.common.reference.Delivery;
 import com.shoppay.core.order.enumeration.SalesOrderChannel;
 import com.shoppay.core.order.enumeration.SalesOrderStatus;
 import com.shoppay.core.order.enumeration.SalesOrderType;
-import com.shoppay.core.payment.PaymentType;
+import com.shoppay.core.payment.enumeration.PaymentType;
 
 @Entity
 @Table(name = "SALES_ORDER")

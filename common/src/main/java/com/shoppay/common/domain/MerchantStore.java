@@ -24,8 +24,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.shoppay.common.constants.BusinessConstants;
 import com.shoppay.common.enumeration.MeasureUnit;
-import com.shoppay.core.common.Country;
-import com.shoppay.core.common.Zone;
+import com.shoppay.common.reference.Country;
+import com.shoppay.common.reference.Zone;
 
 /**
  * A MerchantStore.

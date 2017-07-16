@@ -26,13 +26,13 @@ public class QCustomer extends EntityPathBase<Customer> {
 
     public final com.shoppay.common.user.QAuthority authority;
 
-    public final com.shoppay.core.common.QBilling billing;
+    public final com.shoppay.common.reference.QBilling billing;
 
     public final StringPath company = createString("company");
 
     public final DatePath<java.time.LocalDate> dateOfBirth = createDate("dateOfBirth", java.time.LocalDate.class);
 
-    public final com.shoppay.core.common.QDelivery delivery;
+    public final com.shoppay.common.reference.QDelivery delivery;
 
     public final StringPath emailAddress = createString("emailAddress");
 
@@ -75,8 +75,8 @@ public class QCustomer extends EntityPathBase<Customer> {
     public QCustomer(Class<? extends Customer> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.authority = inits.isInitialized("authority") ? new com.shoppay.common.user.QAuthority(forProperty("authority")) : null;
-        this.billing = inits.isInitialized("billing") ? new com.shoppay.core.common.QBilling(forProperty("billing")) : null;
-        this.delivery = inits.isInitialized("delivery") ? new com.shoppay.core.common.QDelivery(forProperty("delivery")) : null;
+        this.billing = inits.isInitialized("billing") ? new com.shoppay.common.reference.QBilling(forProperty("billing")) : null;
+        this.delivery = inits.isInitialized("delivery") ? new com.shoppay.common.reference.QDelivery(forProperty("delivery")) : null;
         this.merchantStore = inits.isInitialized("merchantStore") ? new com.shoppay.common.domain.QMerchantStore(forProperty("merchantStore")) : null;
     }
 
