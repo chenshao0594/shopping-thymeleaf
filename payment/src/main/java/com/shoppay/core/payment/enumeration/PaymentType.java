@@ -1,8 +1,8 @@
 package com.shoppay.core.payment.enumeration;
 
 public enum PaymentType {
-	CREDITCARD("creditcard"), FREE("free"), COD("cod"), MONEYORDER("moneyorder"), PAYPAL("paypal"), STRIPE(
-			"strip"), WEPAY("wepay");
+	CREDITCARD("creditcard"), FREE("free"), COD("cod"), MONEYORDER("moneyorder"), 
+	PAYPAL("paypal"), STRIPE("strip"), WEPAY("wepay");
 
 	private String paymentType;
 

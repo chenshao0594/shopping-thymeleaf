@@ -3,5 +3,11 @@ apply plugin: 'maven'
 
 dependencies {
     compile project(':common')
-    compile group: 'com.paypal.sdk', name: 'merchantsdk', version: '2.15.122'
+   // compile group: 'com.paypal.sdk', name: 'merchantsdk', version: '2.15.122'
+	compile group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.13.1'
+	compile group: 'com.stripe', name: 'stripe-java', version: '5.7.1'
+
+	
+
+    
 }
