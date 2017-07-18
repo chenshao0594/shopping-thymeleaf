@@ -18,7 +18,7 @@ import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.customer.Customer;
-import com.shoppay.facade.ShoppingCartFacade;
+import com.shoppay.core.facade.ShoppingCartFacade;
 import com.shoppay.shop.model.ShoppingCartData;
 import com.shoppay.shop.utils.UserInfoContextHolder;
 

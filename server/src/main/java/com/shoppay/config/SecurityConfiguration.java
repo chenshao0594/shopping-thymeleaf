@@ -38,19 +38,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private final UserDetailsService userDetailsService;
 
-	private final JHipsterProperties jHipsterProperties;
+	private final JHipsterProperties applicationProperties;
 
 	private final RememberMeServices rememberMeServices;
 
 	private final CorsFilter corsFilter;
 
 	public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder,
-			UserDetailsService userDetailsService, JHipsterProperties jHipsterProperties,
+			UserDetailsService userDetailsService, JHipsterProperties applicationProperties,
 			RememberMeServices rememberMeServices, CorsFilter corsFilter) {
 
 		this.authenticationManagerBuilder = authenticationManagerBuilder;
 		this.userDetailsService = userDetailsService;
-		this.jHipsterProperties = jHipsterProperties;
+		this.applicationProperties = applicationProperties;
 		this.rememberMeServices = rememberMeServices;
 		this.corsFilter = corsFilter;
 	}
@@ -84,7 +84,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logoutUrl(AppConstants.ADMIN_PREFIX + "/logout").permitAll().and().headers().frameOptions().disable()
 				.and().exceptionHandling().accessDeniedPage(AppConstants.ADMIN_PREFIX + "/access?error").and()
 				.rememberMe().rememberMeServices(rememberMeServices).rememberMeParameter("remember-me")
-				.key(jHipsterProperties.getSecurity().getRememberMe().getKey()).and().logout()
+				.key(applicationProperties.getSecurity().getRememberMe().getKey()).and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher(AppConstants.ADMIN_PREFIX + "/logout"))
 				.logoutSuccessUrl(AppConstants.ADMIN_PREFIX + "/?logout").and().sessionManagement().maximumSessions(1)
 				.expiredUrl(AppConstants.ADMIN_PREFIX + "/login?expired");

@@ -1,6 +1,7 @@
 /.gradle/
 /build/
 /bin/
+/.settings/
 target/
 .project
 .settings/

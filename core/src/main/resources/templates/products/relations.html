@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+	layout:decorate="~{layouts/layout}">
+<head>
+<script src="js/hogan-3.0.2.min.js" th:src="@{/js/hogan-3.0.2.min.js}" type="text/javascript"></script>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="page-title">
+			<h2>
+				Relationships
+				<button type="button" class="btn btn-secondary pull-right" th:onclick="${'goBack();'}">
+					<span class="fa fa-arrow-left"></span>Back
+				</button>
+			</h2>
+		</div>
+		<div th:if="${statusMessage}" class="row">
+			<div role="alert" th:class="'alert ' + ${statusMessageClass}?: 'alert-info'"
+				th:text="${statusMessage}"></div>
+		</div>
+		<fieldset>
+			<legend class="section">
+				Relationships
+				<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal"
+					data-target="#relationModal">
+					<span class="fa fa-plus"> Add Relationships </span>
+				</button>
+			</legend>
+			<div id="relations-block">
+				<table class="table table-striped">
+					<thead class="thead-default">
+						<tr>
+							<th><a class="sorted">Id</a></th>
+							<th>image</th>
+							<th>name</th>
+							<th>Attributes</th>
+							<th>Sale Price</th>
+							<th>Retail Price</th>
+							<th>Operation</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="row: ${relations}" th:id="'relation-'+${row.id}">
+							<th scope="row" th:text="${row.id}">1</th>
+							<th><img
+								th:src="@{/{admin}/attachments/product/{productId}/thumbnail(admin=${admin_url}, productId=${row.id})}"
+								class="img-rounded" height="50"></th>
+							<td th:text="${row.name}">name</td>
+							<td th:text="${row.category?.code}">Category</td>
+							<td th:text="${row.standardPrice}">Sale Price</td>
+							<td th:text="${row.retailPrice}">Retail Price</td>
+							<td>
+								<div class="flex-btn-group-container">
+									<a class="btn btn-success btn-sm" th:href="@{/{admin}/products/{itemId}(admin=${admin_url}, itemId=${row.id})}"> <span
+										class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
+									</a>
+									&nbsp; <button type="button" class="btn btn-primary btn-sm"
+										th:onclick="'deleteRelation('+${row.id}+')'"> <span class="hidden-md-down">Delete</span>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</fieldset>
+		<div class="modal fade" id="relationModal" tabindex="-1" role="dialog"
+			aria-labelledby="relationModal" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Add Relationship Product</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<section id="relationSection"></section>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary" onclick="addRelation();">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+<section layout:fragment="footer-script">
+	<script type="text/html" id="others">
+			<table class="table table-striped">
+							<thead class="thead-default">
+								<tr>
+									<th>Id</th>
+									<th>Category</th>
+									<th>name</th>
+									<th>Category</th>
+									<th>Operation</th>
+								</tr>
+							</thead>
+							<tbody>
+	
+			{{#products}}
+			<tr>
+				<td>{{name}}</td>
+				<td>{{category.code}}</td>
+				<td>{{standardPrice}}</td>
+				<td>{{retailPrice}}</td>
+				<td><input type="checkbox" name="relation" value={{id}}></input></td>				
+			</tr>
+			{{/products}}
+			</tbody>
+		</table>
+	</script>
+	<script>
+		var othersTemplate = Hogan.compile(document.getElementById("others").innerHTML);
+		
+		$('#relationModal').on('show.bs.modal', function (e) {
+			 jQuery.ajax({url:"/[[${admin_url}]]/catalogue/product/[[${productId}]]/others",
+			 			  success:function(data){
+						 		var items = {"products" : data};
+						 		var out = othersTemplate.render(items);
+						 		$('#relationSection').html(out);
+					 },
+					 async: false
+			 });
+		});
+	
+		function addRelation() {
+			var options=document.querySelectorAll('[name="relation"]:checked');
+			var selected = [];
+			for (var i=0; i<options.length; i++) {
+		    	if (options[i].checked) {
+		        	selected.push(options[i].value);
+		    	}
+			}	
+			if(selected.length==0){
+				$("#relationModal").modal('toggle');
+				return;
+			}
+			$.post("/[[${admin_url}]]/products/[[${productId}]]/relations", 
+					{	relationIds : selected,
+				 		[[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
+					}, 
+					function(data, textStatus, req) {
+						$("#relationModal").modal('toggle');
+						$("#relations-block").replaceWith(data);
+					});
+		};
+		function deleteRelation(relationId){
+			$.ajax({url: "/[[${admin_url}]]/catalogue/product/[[${productId}]]/relations/"+relationId,
+				   data:{
+						[[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
+				   },
+				   type: 'DELETE',
+				   success:	function(data){
+						$('relation-'+relationId).remove();
+					}
+				   });
+		};
+	</script>
+</section>
+</html>
