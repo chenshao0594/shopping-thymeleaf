@@ -27,7 +27,7 @@ public class QPaymentConfiguration extends EntityPathBase<PaymentConfiguration> 
 
     public final StringPath configuration = createString("configuration");
 
-    public final EnumPath<com.shoppay.core.payment.enumeration.PaymentEnvEnum> envType = createEnum("envType", com.shoppay.core.payment.enumeration.PaymentEnvEnum.class);
+    public final EnumPath<com.shoppay.core.payment.enumeration.PaymentEnvEnum> env = createEnum("env", com.shoppay.core.payment.enumeration.PaymentEnvEnum.class);
 
     public final StringPath host = createString("host");
 
