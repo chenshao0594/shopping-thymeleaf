@@ -21,8 +21,6 @@ public class PaypalPaymentService  implements PaymentGetawayService{
 
 	@Override
 	public void payment() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Autowired

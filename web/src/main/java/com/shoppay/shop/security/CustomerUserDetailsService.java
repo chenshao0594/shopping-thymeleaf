@@ -12,30 +12,31 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.security.AuthoritiesConstants;
 
-public class CustomerUserServiceImpl {
+public class CustomerUserDetailsService implements UserDetailsService {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(CustomerUserServiceImpl.class);
+	private final Logger LOGGER = LoggerFactory.getLogger(CustomerUserDetailsService.class);
 
 	@Inject
 	private CustomerService customerService;
 
+	
+	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String customerName) throws UsernameNotFoundException, DataAccessException {
-		System.out.println("cusotmer user service ...");
-
 		Customer user = null;
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		user = customerService.findCustomerByName(customerName);
 		GrantedAuthority role = new SimpleGrantedAuthority(AuthoritiesConstants.CUSTOMER);
 		authorities.add(role);
-		User authUser = new User(customerName, user.getPassword(), true, true, true, true, authorities);
+		User authUser = new User(customerName, user.getPassword(), authorities);
 		return authUser;
-
 	}
-
 }

@@ -38,7 +38,7 @@ public class CustomerServiceImpl extends AbstractDomainServiceImpl<Customer, Lon
 	public Customer findCustomerByEmailAddress(String emailAddress) {
 		Customer customer = new Customer();
 		customer.setEmailAddress(emailAddress);
-		Example example = Example.of(customer);
+		Example<Customer> example = Example.of(customer);
 		return this.customerRepository.findOne(example);
 	}
 
@@ -56,7 +56,7 @@ public class CustomerServiceImpl extends AbstractDomainServiceImpl<Customer, Lon
 	public Customer findCustomerByName(String name) {
 		Customer customer = new Customer();
 		customer.setName(name);
-		Example example = Example.of(customer);
+		Example<Customer> example = Example.of(customer);
 		return this.customerRepository.findOne(example);
 	}
 
