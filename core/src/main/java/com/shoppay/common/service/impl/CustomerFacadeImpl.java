@@ -31,11 +31,11 @@ import com.shoppay.common.user.User;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.customer.Customer;
+import com.shoppay.core.customer.model.CustomerModel;
 import com.shoppay.core.customer.model.CustomerRO;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.facade.CustomerFacade;
 import com.shoppay.core.security.AuthoritiesConstants;
-import com.shoppay.shop.model.customer.CustomerModel;
 
 @Service("customerFacade")
 public class CustomerFacadeImpl implements CustomerFacade {

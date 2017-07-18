@@ -105,7 +105,7 @@ configurations {
 }
 
 dependencies {
-	compile project(':server')
+	compile project(':core')
 }
 
 clean {

@@ -15,16 +15,14 @@
  */
 package com.shoppay.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.shoppay.admin.interceptor.AdminInterceptor;
 import com.shoppay.common.constants.AppConstants;
-import com.shoppay.interceptor.AdminInterceptor;
-import com.shoppay.interceptor.ShopInterceptor;
 
 /**
  * Configures View-related items.
@@ -45,12 +43,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new AdminInterceptor()).addPathPatterns(AppConstants.ADMIN_PREFIX + "/**");
-		registry.addInterceptor(shopInterceptor()).excludePathPatterns(AppConstants.ADMIN_PREFIX + "/**");
-	}
-
-	@Bean
-	public ShopInterceptor shopInterceptor() {
-		return new ShopInterceptor();
 	}
 
 	/*

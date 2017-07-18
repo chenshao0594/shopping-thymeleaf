@@ -20,9 +20,9 @@ import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.reference.Address;
 import com.shoppay.common.service.MerchantStoreService;
 import com.shoppay.core.customer.Customer;
+import com.shoppay.core.customer.model.AnonymousCustomer;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.security.AuthoritiesConstants;
-import com.shoppay.shop.model.customer.AnonymousCustomer;
 import com.shoppay.shop.utils.UserInfoContextHolder;
 import com.shoppay.shop.utils.UserInfoContextHolder.UserInfo;
 
