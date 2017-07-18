@@ -42,9 +42,9 @@ import com.shoppay.web.rest.vm.ManagedUserVM;
  */
 @Controller
 @RequestMapping("")
-public class AccountResource {
+public class AccountController {
 
-    private final Logger log = LoggerFactory.getLogger(AccountResource.class);
+    private final Logger log = LoggerFactory.getLogger(AccountController.class);
 
     private final UserRepository userRepository;
 
@@ -54,7 +54,7 @@ public class AccountResource {
 
     private final PersistentTokenRepository persistentTokenRepository;
 
-    public AccountResource(UserRepository userRepository, UserService userService,
+    public AccountController(UserRepository userRepository, UserService userService,
             MailService mailService, PersistentTokenRepository persistentTokenRepository) {
 
         this.userRepository = userRepository;

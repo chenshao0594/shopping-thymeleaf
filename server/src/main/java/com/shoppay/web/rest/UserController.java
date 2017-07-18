@@ -68,9 +68,9 @@ import io.swagger.annotations.ApiParam;
  */
 @RestController
 @RequestMapping("/api")
-public class UserResource {
+public class UserController {
 
-    private final Logger log = LoggerFactory.getLogger(UserResource.class);
+    private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private static final String ENTITY_NAME = "userManagement";
 
@@ -82,7 +82,7 @@ public class UserResource {
 
     private final UserSearchRepository userSearchRepository;
 
-    public UserResource(UserRepository userRepository, MailService mailService,
+    public UserController(UserRepository userRepository, MailService mailService,
             UserService userService, UserSearchRepository userSearchRepository) {
 
         this.userRepository = userRepository;
