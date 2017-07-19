@@ -45,6 +45,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(new AdminInterceptor()).addPathPatterns(AppConstants.ADMIN_PREFIX + "/**");
 	}
 
+	
 	/*
 	 * @Bean public CommonsMultipartResolver multipartResolver() { final
 	 * CommonsMultipartResolver commonsMultipartResolver = new
