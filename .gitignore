@@ -13,3 +13,4 @@ target/
 /*/.gradle/
 /*/.settings/
 /*/.apt_generated/
+/*/data/
