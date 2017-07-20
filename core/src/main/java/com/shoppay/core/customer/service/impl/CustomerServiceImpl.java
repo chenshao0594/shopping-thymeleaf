@@ -36,10 +36,7 @@ public class CustomerServiceImpl extends AbstractDomainServiceImpl<Customer, Lon
 
 	@Override
 	public Customer findCustomerByEmailAddress(String emailAddress) {
-		Customer customer = new Customer();
-		customer.setEmailAddress(emailAddress);
-		Example<Customer> example = Example.of(customer);
-		return this.customerRepository.findOne(example);
+		return this.customerRepository.findByEmailAddress(emailAddress);
 	}
 
 	@Override
@@ -54,10 +51,7 @@ public class CustomerServiceImpl extends AbstractDomainServiceImpl<Customer, Lon
 
 	@Override
 	public Customer findCustomerByName(String name) {
-		Customer customer = new Customer();
-		customer.setName(name);
-		Example<Customer> example = Example.of(customer);
-		return this.customerRepository.findOne(example);
+		return this.customerRepository.findByName(name);
 	}
 
 }

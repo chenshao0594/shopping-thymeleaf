@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -40,7 +41,6 @@ import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopCustomerController")
 @RequestMapping("/customer")
-
 public class ShoppingCustomerController extends AbstractShoppingController {
 	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCustomerController.class);
 
@@ -70,15 +70,13 @@ public class ShoppingCustomerController extends AbstractShoppingController {
 	}
 
 	@Timed
+	@Transactional
 	@PostMapping(value = "/register")
 	public String registerCustomer(@Valid CustomerRO customer, BindingResult bindingResult, Model model)
 			throws Exception {
 		MerchantStore merchantStore = this.merchantStoreService.findOne(1L);
-
 		if (bindingResult.hasErrors()) {
 			LOGGER.error("found validation error {}", bindingResult.getAllErrors());
-			LOGGER.debug("found {} validation error while validating in customer registration ",
-					bindingResult.getErrorCount());
 			StringBuilder template = new StringBuilder().append(ShoppingControllerConstants.Customer.register);
 			return template.toString();
 		}
@@ -86,7 +84,7 @@ public class ShoppingCustomerController extends AbstractShoppingController {
 		if (customerFacade.checkIfUserExists(customer.getEmailAddress(), merchantStore)) {
 			LOGGER.debug("Customer with email  {} already exists for this store ", customer.getEmailAddress());
 			FieldError error = new FieldError("userName", "userName",
-					messageService.getMessage("registration.username.already.exists", Locale.ENGLISH));
+					messageService.getMessage("registration.username.already.exists", null, Locale.ENGLISH));
 			bindingResult.addError(error);
 		}
 		try {
@@ -94,7 +92,7 @@ public class ShoppingCustomerController extends AbstractShoppingController {
 		} catch (BusinessException e) {
 			LOGGER.error("Error while registering customer.. ", e);
 			ObjectError error = new ObjectError("registration",
-					messageService.getMessage("registration.failed", Locale.ENGLISH));
+					messageService.getMessage("registration.failed", null, Locale.ENGLISH));
 			bindingResult.addError(error);
 			StringBuilder template = new StringBuilder().append(ShoppingControllerConstants.Customer.register);
 			return template.toString();

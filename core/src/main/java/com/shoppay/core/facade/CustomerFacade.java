@@ -13,7 +13,6 @@ public interface CustomerFacade {
 	public CustomerModel getCustomerDataByUserName(final String userName, final MerchantStore store)
 			throws BusinessException;
 
-	public CustomerModel getCustomerById(final Long id, final MerchantStore merchantStore) throws BusinessException;
 
 	public Customer getCustomerByUserName(final String userName, final MerchantStore store) throws BusinessException;
 

@@ -1,9 +1,14 @@
 package com.shoppay.common.exception;
 
+import java.util.Locale;
+
+import com.shoppay.common.service.MessageService;
+
 public final class BusinessException extends Exception {
 
 	private static final long serialVersionUID = -6854945379036729034L;
 	private int exceptionType = 0;// regular error
+	private Object[] args = new Object[] { };
 
 	public final static int EXCEPTION_VALIDATION = 99;
 	public final static int EXCEPTION_PAYMENT_DECLINED = 100;
@@ -24,10 +29,10 @@ public final class BusinessException extends Exception {
 		this.messageCode = messageCode;
 	}
 
-	public BusinessException(String message, Throwable cause) {
-		super(message, cause);
+	public BusinessException(String messageCode, Object... args) {
+		this.messageCode = messageCode;
+		this.args = args;
 	}
-
 	public BusinessException(Throwable cause) {
 		super(cause);
 	}
@@ -58,5 +63,12 @@ public final class BusinessException extends Exception {
 
 	public String getMessageCode() {
 		return messageCode;
+	}
+
+
+	@Override
+	public String getMessage() {
+		return MessageService.getInstance().getMessage(this.messageCode, this.args, Locale.ENGLISH);
+
 	}
 }

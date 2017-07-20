@@ -19,7 +19,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.shoppay.common.constants.AppConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.reference.Address;
@@ -27,7 +26,6 @@ import com.shoppay.common.repository.AuthorityRepository;
 import com.shoppay.common.service.MailService;
 import com.shoppay.common.service.UserService;
 import com.shoppay.common.user.Authority;
-import com.shoppay.common.user.User;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.customer.Customer;
@@ -67,11 +65,6 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		return null;
 	}
 
-	@Override
-	public CustomerModel getCustomerById(Long id, MerchantStore merchantStore) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Customer getCustomerByUserName(String userName, MerchantStore store) throws BusinessException {
@@ -102,25 +95,10 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		customer.setName(customerInfo.getEmailAddress());
 		Authority authority = authorityRepository.findOne(AuthoritiesConstants.CUSTOMER);
 		customer.setAuthority(authority);
-		User customerUser = userService.createCustomerUser(customer.getName(), customerInfo.getPassword(),
-				customerInfo.getFirstName(), customerInfo.getLastName(), customerInfo.getEmailAddress().toLowerCase(),
-				customerInfo.getImage(), AppConstants.LANG);
-		customer.setUserId(customerUser.getId());
 		this.customerService.save(customer);
 		return customerInfo;
 	}
 
-	@Override
-	public Address getAddress(Long userId, MerchantStore merchantStore, boolean isBillingAddress) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setCustomerModelDefaultProperties(Customer customer, MerchantStore store) throws BusinessException {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void authenticate(Customer customer, String userName, String password) throws BusinessException {
@@ -133,18 +111,6 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
-	@Override
-	public Customer getCustomerModel(CustomerModel customer, MerchantStore merchantStore) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Customer populateCustomerModel(Customer customerModel, CustomerModel customer, MerchantStore merchantStore)
-			throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Cart mergeCart(final Customer customer, final String sessionShoppingCartId, final MerchantStore store)
@@ -214,5 +180,30 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		LOGGER.info("Seems some issue with system, unable to find any customer after successful authentication");
 		return null;
 
+	}
+
+	@Override
+	public Address getAddress(Long userId, MerchantStore merchantStore, boolean isBillingAddress) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCustomerModelDefaultProperties(Customer customer, MerchantStore store) throws BusinessException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Customer getCustomerModel(CustomerModel customer, MerchantStore merchantStore) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Customer populateCustomerModel(Customer customerModel, CustomerModel customer, MerchantStore merchantStore)
+			throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

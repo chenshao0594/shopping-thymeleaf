@@ -22,7 +22,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 
-import com.shoppay.common.constants.AppConstants;
 import com.shoppay.core.security.AdminUserAuthenticationSuccessHandler;
 import com.shoppay.core.security.AuthoritiesConstants;
 
@@ -78,16 +77,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
-				.antMatchers(AppConstants.ADMIN_PREFIX + "/**").hasAuthority(AuthoritiesConstants.ADMIN).and()
-				.formLogin().loginPage(AppConstants.ADMIN_PREFIX + "/login").permitAll()
+				.antMatchers("/customer").hasAuthority(AuthoritiesConstants.CUSTOMER).and()
+				.formLogin().loginPage("/login").permitAll()
 				.successHandler(new AdminUserAuthenticationSuccessHandler()).and().logout()
-				.logoutUrl(AppConstants.ADMIN_PREFIX + "/logout").permitAll().and().headers().frameOptions().disable()
-				.and().exceptionHandling().accessDeniedPage(AppConstants.ADMIN_PREFIX + "/access?error").and()
+				.logoutUrl("/logout").permitAll().and().headers().frameOptions().disable()
+				.and().exceptionHandling().accessDeniedPage("/access?error").and()
 				.rememberMe().rememberMeServices(rememberMeServices).rememberMeParameter("remember-me")
 				.key(applicationProperties.getSecurity().getRememberMe().getKey()).and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher(AppConstants.ADMIN_PREFIX + "/logout"))
-				.logoutSuccessUrl(AppConstants.ADMIN_PREFIX + "/?logout").and().sessionManagement().maximumSessions(1)
-				.expiredUrl(AppConstants.ADMIN_PREFIX + "/login?expired");
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/?logout").and().sessionManagement().maximumSessions(1)
+				.expiredUrl("/login?expired");
 	}
 
 	@Bean

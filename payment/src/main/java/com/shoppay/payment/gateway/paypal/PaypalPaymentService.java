@@ -14,6 +14,7 @@ import com.paypal.api.payments.RedirectUrls;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import com.shoppay.core.payment.model.PaymentContext;
 import com.shoppay.core.payment.provider.PaymentGetawayService;
 
 @Service("PaypalProviderService")
@@ -26,34 +27,26 @@ public class PaypalPaymentService  implements PaymentGetawayService{
 	@Autowired
 	private APIContext apiContext;
 	
-	public Payment createPayment(
-			Double total, 
-			String currency, 
-			PaypalPaymentMethod method, 
-			PaypalPaymentIntent intent, 
-			String description, 
-			String cancelUrl, 
-			String successUrl) throws PayPalRESTException{
+	public Payment createPayment(PaymentContext paymentContext) throws PayPalRESTException{
 		Amount amount = new Amount();
-		amount.setCurrency(currency);
-		amount.setTotal(String.format("%.2f", total));
+		amount.setCurrency(paymentContext.getCurrency());
+		amount.setTotal(String.format("%.2f", paymentContext.getTotal()));
 		Transaction transaction = new Transaction();
-		transaction.setDescription(description);
+		transaction.setDescription(paymentContext.getDescription());
 		transaction.setAmount(amount);
 
 		List<Transaction> transactions = new ArrayList<>();
 		transactions.add(transaction);
 
 		Payer payer = new Payer();
-		payer.setPaymentMethod(method.toString());
-
+		payer.setPaymentMethod(paymentContext.getMethod().toString());
 		Payment payment = new Payment();
-		payment.setIntent(intent.toString());
+		payment.setIntent(paymentContext.getIntent().toString());
 		payment.setPayer(payer);
 		payment.setTransactions(transactions);
 		RedirectUrls redirectUrls = new RedirectUrls();
-		redirectUrls.setCancelUrl(cancelUrl);
-		redirectUrls.setReturnUrl(successUrl);
+		redirectUrls.setCancelUrl(paymentContext.getCancelUrl());
+		redirectUrls.setReturnUrl(paymentContext.getSuccessUrl());
 		payment.setRedirectUrls(redirectUrls);
 		return payment.create(apiContext);
 	}
@@ -65,5 +58,7 @@ public class PaypalPaymentService  implements PaymentGetawayService{
 		paymentExecute.setPayerId(payerId);
 		return payment.execute(apiContext, paymentExecute);
 	}
-
+	public void refund(){
+		
+	}
 }

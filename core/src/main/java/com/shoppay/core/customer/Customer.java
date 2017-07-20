@@ -103,9 +103,6 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 	@Transient
 	private String showDeliveryStateList;
 
-	@Column(updatable = false, nullable = false)
-	private Long userId;
-
 	private boolean isActivity = true;
 
 	@Override
@@ -288,14 +285,6 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 		this.name = name;
 	}
 
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
 	public boolean isActivity() {
 		return isActivity;
 	}
@@ -312,7 +301,7 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 				+ ", merchantStore=" + merchantStore + ", authority=" + authority + ", billing=" + billing
 				+ ", delivery=" + delivery + ", showCustomerStateList=" + showCustomerStateList
 				+ ", showBillingStateList=" + showBillingStateList + ", showDeliveryStateList=" + showDeliveryStateList
-				+ ", userId=" + userId + "]";
+				+"]";
 	}
 
 }

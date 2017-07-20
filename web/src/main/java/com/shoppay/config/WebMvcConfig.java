@@ -46,10 +46,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public WebInterceptor webInterceptor() {
-	    return new WebInterceptor();
+	public WebInterceptor webInterceptor(){
+	 return	new WebInterceptor();
 	}
-
+	
 	/*
 	 * @Bean public CommonsMultipartResolver multipartResolver() { final
 	 * CommonsMultipartResolver commonsMultipartResolver = new

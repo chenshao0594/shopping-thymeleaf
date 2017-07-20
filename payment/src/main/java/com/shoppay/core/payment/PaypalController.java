@@ -15,16 +15,17 @@ import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import com.shoppay.common.utils.URLUtils;
+import com.shoppay.core.payment.model.PaymentContext;
 import com.shoppay.payment.gateway.paypal.PaypalPaymentIntent;
 import com.shoppay.payment.gateway.paypal.PaypalPaymentMethod;
 import com.shoppay.payment.gateway.paypal.PaypalPaymentService;
 
 public class PaypalController {
 	
-	public static final String PAYPAL_SUCCESS_URL = "pay/success";
-	public static final String PAYPAL_CANCEL_URL = "pay/cancel";
+	public static final String PAYPAL_SUCCESS_URL = "paypal/success";
+	public static final String PAYPAL_CANCEL_URL = "paypal/cancel";
 	
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private Logger LOGGER = LoggerFactory.getLogger(PaypalController.class);
 	
 	@Autowired
 	private PaypalPaymentService paypalService;
@@ -38,27 +39,24 @@ public class PaypalController {
 	public String pay(HttpServletRequest request){
 		String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL;
 		String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_URL;
+		PaymentContext paymentContext = new PaymentContext.Builder(4.00, "USD").method(PaypalPaymentMethod.paypal)
+				.intent(PaypalPaymentIntent.sale).description("paymentDescription")
+				.cancelUrl(cancelUrl).successUrl(successUrl).build();
+		
 		try {
-			Payment payment = paypalService.createPayment(
-					4.00, 
-					"USD", 
-					PaypalPaymentMethod.paypal, 
-					PaypalPaymentIntent.sale,
-					"payment description", 
-					cancelUrl, 
-					successUrl);
+			Payment payment = paypalService.createPayment(paymentContext);
 			for(Links links : payment.getLinks()){
 				if(links.getRel().equals("approval_url")){
 					return "redirect:" + links.getHref();
 				}
 			}
 		} catch (PayPalRESTException e) {
-			log.error(e.getMessage());
+			LOGGER.error(e.getMessage());
 		}
 		return "redirect:/";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_URL)
+	@GetMapping(value = PAYPAL_CANCEL_URL)
 	public String cancelPay(){
 		return "cancel";
 	}
@@ -71,7 +69,7 @@ public class PaypalController {
 				return "success";
 			}
 		} catch (PayPalRESTException e) {
-			log.error(e.getMessage());
+			LOGGER.error(e.getMessage());
 		}
 		return "redirect:/";
 	}

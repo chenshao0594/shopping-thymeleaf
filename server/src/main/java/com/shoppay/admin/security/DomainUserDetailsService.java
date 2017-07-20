@@ -1,4 +1,4 @@
-package com.shoppay.core.security;
+package com.shoppay.admin.security;
 
 import java.util.List;
 import java.util.Locale;
@@ -12,17 +12,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shoppay.common.exception.UserNotActivatedException;
 import com.shoppay.common.repository.UserRepository;
 import com.shoppay.common.user.User;
 
-/**
- * Authenticate a user from the database.
- */
-@Component("domainuserDetailsService")
+
+@Service
 public class DomainUserDetailsService implements UserDetailsService {
 
 	private final Logger log = LoggerFactory.getLogger(DomainUserDetailsService.class);
