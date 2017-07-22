@@ -16,6 +16,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.core.catalog.service.CategoryService;
 import com.shoppay.core.catalog.service.ProductService;
+import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopHomeController")
 @RequestMapping("")
@@ -36,7 +37,7 @@ public class ShoppingHomeController {
 		LOGGER.info("counts map {}", counts);
 		model.addObject("products", this.productService.findAll(new PageRequest(0, 20)));
 		model.addObject("categoryinfo", counts);
-		model.setViewName("shop/home");
+		model.setViewName(ShoppingControllerConstants.HOME);
 		return model;
 	}
 }

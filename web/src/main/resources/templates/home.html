@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
-	layout:decorate="~{shop/layouts/layout}">
+	layout:decorate="~{layouts/layout}">
 <body>
 	<section layout:fragment="content">
 	
@@ -14,7 +14,7 @@
       </div>
     </div>
 	<div class="row product-list">
-		<div th:include="shop/product/product-list" th:remove="tag">REPLACE BEFORE COMMITTING</div>
+		<div th:include="product/product-list" th:remove="tag">REPLACE BEFORE COMMITTING</div>
 	</div>
 		<!-- <div class="carousel-holder">
 			<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">

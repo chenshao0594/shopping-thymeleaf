@@ -23,6 +23,7 @@ import com.shoppay.core.catalog.model.ProductOptionDTO;
 import com.shoppay.core.catalog.model.ProductOptionPricing;
 import com.shoppay.core.catalog.service.ProductService;
 import com.shoppay.core.catalog.service.SKUService;
+import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopProductController")
 @RequestMapping("/product")
@@ -53,7 +54,7 @@ public class ShoppingProductController {
 		model.addObject("images", images);
 		model.addObject("skuPricing", skuPricingJson);
 		model.addObject("allProductOptions", allProductOptionsJson);
-		model.setViewName("shop/product/detail");
+		model.setViewName(ShoppingControllerConstants.Product.detail);
 		return model;
 	}
 

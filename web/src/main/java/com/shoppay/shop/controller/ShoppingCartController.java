@@ -21,6 +21,7 @@ import com.shoppay.core.customer.Customer;
 import com.shoppay.core.facade.ShoppingCartFacade;
 import com.shoppay.shop.model.ShoppingCartData;
 import com.shoppay.shop.utils.UserInfoContextHolder;
+import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopCartController")
 @RequestMapping("/shoppingcart")
@@ -56,7 +57,7 @@ public class ShoppingCartController extends AbstractShoppingController {
 		boolean isEmpty = CollectionUtils.isEmpty(shoppingCartData.getShoppingCartItems());
 		model.addObject("shoppingcart", shoppingCartData);
 		model.addObject("isEmpty", isEmpty);
-		model.setViewName("shop/cart/detail");
+		model.setViewName(ShoppingControllerConstants.ShoppingCart.detail);
 		return model;
 	}
 

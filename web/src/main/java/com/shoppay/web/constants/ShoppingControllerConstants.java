@@ -1,71 +1,73 @@
 package com.shoppay.web.constants;
 
 public interface ShoppingControllerConstants {
-	final static String REDIRECT = "redirect:";
-	final static String ORDER_KEY = "order-session";
+	public static final String REDIRECT = "redirect:";
+	public static final String ORDER_KEY = "order-session";
+	public static final String HOME="home";
 
 	interface ShoppingCart {
-		final static String shoppingCart = "shop/maincart";
+		final static String shoppingCart = "maincart";
+		final static String detail = "cart/detail";
 	}
 
 	interface Category {
-		final static String category = "shop/category";
+		final static String category = "category";
 	}
 
-	interface Catalogue {
-		final static String catalogue = "shop/catalogue/catalogue";
+	interface Catalog {
+		final static String catalogue = "catalog/catalogue";
 	}
 
 	interface Product {
-		final static String product = "shop/product";
+		final static String product = "product";
+		final static String detail = "product/detail";
 	}
 
 	interface Items {
-		final static String items_manufacturer = "shop/items/manufacturer";
+		final static String items_manufacturer = "items/manufacturer";
 	}
 
 	interface Customer {
-		final static String customer = "shop/customer";
-		final static String customerLogon = "shop/customerLogon";
-		final static String review = "shop/review";
-		final static String register = "shop/register";
-		final static String changePassword = "shop/customerPassword";
-		final static String customerOrders = "shop/customer/orders";
-		final static String Billing = "shop/customerAddress";
-		final static String EditAddress = "shop/editCustomerAddress";
-		final static String RegistrationPage = "shop/customer/registration.html";
+		final static String customerLogon = "customerLogon";
+		final static String review = "review";
+		final static String register = "register";
+		final static String changePassword = "customerPassword";
+		final static String customerOrders = "customer/orders";
+		final static String Billing = "customerAddress";
+		final static String EditAddress = "editCustomerAddress";
+		final static String RegistrationPage = "customer/registration.html";
 	}
 
 	interface Content {
-		final static String content = "shop/content";
-		final static String contactus = "shop/contactus";
+		final static String content = "content";
+		final static String contactus = "contactus";
 	}
 
 	interface Pages {
-		final static String notFound = "shop/404";
-		final static String timeout = "shop/timeout";
+		final static String notFound = "404";
+		final static String timeout = "timeout";
 	}
 
 	interface Merchant {
-		final static String contactUs = "shop/contactus";
+		final static String contactUs = "contactus";
 	}
 
 	interface Checkout {
-		final static String start = "shop/checkout/checkout_start";
-		final static String address = "shop/checkout/checkout_address";
+		final static String start = "checkout/checkout_start";
+		final static String address = "checkout/checkout_address";
 	}
 
 	interface Payment {
-		final static String methods = "shop/payment/payments";
+		final static String methods = "payment/payments";
 	}
 
 	interface Search {
-		final static String search = "shop/search";
+		final static String search = "search";
 	}
 
 	interface Error {
-		final static String accessDenied = "shop/accessDenied";
-		final static String error = "shop/error";
+		final static String accessDenied = "accessDenied";
+		final static String error = "error";
 	}
 
 }

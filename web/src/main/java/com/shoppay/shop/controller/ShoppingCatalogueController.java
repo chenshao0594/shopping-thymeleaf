@@ -42,7 +42,7 @@ public class ShoppingCatalogueController {
 		Page<Product> productPage = this.productService.findAll(pageable);
 		model.addAttribute("categories", page.getContent());
 		model.addAttribute("page", productPage);
-		return ShoppingControllerConstants.Catalogue.catalogue;
+		return ShoppingControllerConstants.Catalog.catalogue;
 	}
 
 	@Timed
@@ -66,12 +66,12 @@ public class ShoppingCatalogueController {
 		Category category = categoryService.findBySearchURL(friendlyUrl);
 		if (category == null) {
 			LOGGER.error("No category found for friendlyUrl " + friendlyUrl);
-			return ShoppingControllerConstants.Catalogue.catalogue;
+			return ShoppingControllerConstants.Catalog.catalogue;
 		}
 		if (!category.isVisible()) {
-			return ShoppingControllerConstants.Catalogue.catalogue;
+			return ShoppingControllerConstants.Catalog.catalogue;
 		}
-		return ShoppingControllerConstants.Catalogue.catalogue;
+		return ShoppingControllerConstants.Catalog.catalogue;
 	}
 	// @Timed
 	// @GetMapping(value = "")

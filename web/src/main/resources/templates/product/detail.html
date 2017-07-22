@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
-	layout:decorate="~{shop/layouts/layout}">
+	layout:decorate="~{layouts/layout}">
 <head>
 <link rel="stylesheet" type="text/css" href="shop/css/foundation.min.css"
 	th:href="@{/shop/css/productOption.css}">
@@ -37,7 +37,7 @@
 				<h3>Product Options</h3>
 				<div class="clearfix">
 					<div class="option">
-						<div th:include="shop/product/partials/productOptions" th:remove="tag">Product Option</div>
+						<div th:include="product/partials/productOptions" th:remove="tag">Product Option</div>
 					</div>
 				</div>
 				<label class="title" for="customDropdown">Quantity</label>

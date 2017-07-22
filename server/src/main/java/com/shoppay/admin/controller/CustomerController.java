@@ -33,13 +33,6 @@ public class CustomerController extends AbstractDomainController<Customer, Long>
 		this.customerService = customerService;
 	}
 
-	@Timed
-	@GetMapping("/register")
-	public ModelAndView registerInit(@Valid CustomerRO customerInfo, ModelAndView model) throws BusinessException {
-		// model.setViewName(this.getSectionKey() + "/skus");
-		return model;
-	}
-
 	@Override
 	protected String getSectionKey() {
 		return SECTION_KEY;
