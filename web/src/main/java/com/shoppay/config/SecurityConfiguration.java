@@ -37,21 +37,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private final UserDetailsService userDetailsService;
 
-	private final JHipsterProperties applicationProperties;
-
-	private final RememberMeServices rememberMeServices;
-
-	private final CorsFilter corsFilter;
-
 	public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder,
 			UserDetailsService userDetailsService, JHipsterProperties applicationProperties,
 			RememberMeServices rememberMeServices, CorsFilter corsFilter) {
 
 		this.authenticationManagerBuilder = authenticationManagerBuilder;
 		this.userDetailsService = userDetailsService;
-		this.applicationProperties = applicationProperties;
-		this.rememberMeServices = rememberMeServices;
-		this.corsFilter = corsFilter;
 	}
 
 	@PostConstruct
@@ -76,14 +67,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //successHandler
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
-				.antMatchers("/customer/*").hasAuthority(AuthoritiesConstants.CUSTOMER)
+		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+				.and().authorizeRequests().antMatchers("/customer/*").hasAuthority(AuthoritiesConstants.CUSTOMER)
 				.and().formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
 				.and().logout().logoutUrl("/logout").permitAll()
-				.and()
-				.rememberMe().tokenValiditySeconds(60 * 60 * 24 * 7)
-				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/?logout").and().sessionManagement().maximumSessions(1)
+				.and().rememberMe().tokenValiditySeconds(60 * 60 * 24 * 7)
+				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/?logout")
+				.and().sessionManagement().maximumSessions(1)
 				.expiredUrl("/login?expired");
 	}
 
