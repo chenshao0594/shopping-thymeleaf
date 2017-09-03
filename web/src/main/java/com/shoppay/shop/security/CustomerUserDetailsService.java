@@ -29,17 +29,19 @@ public class CustomerUserDetailsService implements UserDetailsService {
 
 	@Inject
 	private CustomerService customerService;
-
 	
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String customerName) throws UsernameNotFoundException, DataAccessException {
-		Customer user = null;
+		Customer customer = null;
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		user = customerService.findCustomerByName(customerName);
+		customer = customerService.findCustomerByName(customerName);
+		if(customer==null) {
+			  throw new UsernameNotFoundException("user not existed");
+		}
 		GrantedAuthority role = new SimpleGrantedAuthority(AuthoritiesConstants.CUSTOMER);
 		authorities.add(role);
-		User authUser = new User(customerName, user.getPassword(), authorities);
+		User authUser = new User(customerName, customer.getPassword(), authorities);
 		return authUser;
 	}
 }

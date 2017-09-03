@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,9 +33,6 @@ import com.shoppay.shop.utils.UserInfoContextHolder;
 @RequestMapping("/customer")
 public class ShoppingCustomerRestController extends AbstractShoppingController {
 	private final Logger LOGGER = LoggerFactory.getLogger(ShoppingCustomerRestController.class);
-
-	@Inject
-	private AuthenticationManager customerAuthenticationManager;
 
 	@Inject
 	private CustomerFacade customerFacade;

@@ -2,8 +2,10 @@
 	<div class="content twelve columns">
 		<div class="row">
 			<div class="five columns">
+			 <p th:if="${param.logout}" class="bg-warning">已注销</p>
+        		 <p th:if="${param.error}" class="bg-danger">有错误，请重试</p>
 				<h3>Login</h3>
-				<form name="form" th:action="@{/customer/login}" action="customer/login.html" method="POST">
+				<form name="form" th:action="@{/login}" action="/login.html" method="POST">
 					<div class="row">
 						<div class="twelve columns">
 							<label for="login_email">E-mail Address *</label> <input type="text" id="login_email"

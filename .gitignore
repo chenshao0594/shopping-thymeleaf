@@ -14,3 +14,4 @@ target/
 /*/.settings/
 /*/.apt_generated/
 /*/data/
+*.class

@@ -73,18 +73,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**").antMatchers("/app/**/*.{js,html}").antMatchers("/i18n/**")
 				.antMatchers("/content/**");
 	}
-
+//successHandler
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
-				.antMatchers("/customer").hasAuthority(AuthoritiesConstants.CUSTOMER).and()
-				.formLogin().loginPage("/login").permitAll()
-				.successHandler(new AdminUserAuthenticationSuccessHandler()).and().logout()
-				.logoutUrl("/logout").permitAll().and().headers().frameOptions().disable()
-				.and().exceptionHandling().accessDeniedPage("/access?error").and()
-				.rememberMe().rememberMeServices(rememberMeServices).rememberMeParameter("remember-me")
-				.key(applicationProperties.getSecurity().getRememberMe().getKey()).and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.antMatchers("/customer/*").hasAuthority(AuthoritiesConstants.CUSTOMER)
+				.and().formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
+				.and().logout().logoutUrl("/logout").permitAll()
+				.and()
+				.rememberMe().tokenValiditySeconds(60 * 60 * 24 * 7)
+				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/?logout").and().sessionManagement().maximumSessions(1)
 				.expiredUrl("/login?expired");
 	}
