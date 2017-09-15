@@ -31,13 +31,13 @@ import io.github.jhipster.config.JHipsterConstants;
 @Import(PaypalConfiguration.class)
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ ApplicationProperties.class })
-public class ShoppingApplication {
+public class AdminApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(ShoppingApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(AdminApplication.class);
 
 	private final Environment env;
 
-	public ShoppingApplication(Environment env) {
+	public AdminApplication(Environment env) {
 		this.env = env;
 	}
 
@@ -57,7 +57,7 @@ public class ShoppingApplication {
 	}
 
 	public static void main(String[] args) throws UnknownHostException {
-		SpringApplication app = new SpringApplication(ShoppingApplication.class);
+		SpringApplication app = new SpringApplication(AdminApplication.class);
 		DefaultProfileUtil.addDefaultProfile(app);
 		Environment env = app.run(args).getEnvironment();
 		String protocol = "http";

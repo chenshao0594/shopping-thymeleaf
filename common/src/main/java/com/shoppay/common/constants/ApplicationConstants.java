@@ -7,7 +7,7 @@ public final class ApplicationConstants {
 	// application base package
 	public static final String BASE_PACKAGE="com.shoppay";
 	
-	 // Spring profiles for development, test and production, see http://jhipster.github.io/profiles/
+	// Spring profiles for development, test and production, see http://jhipster.github.io/profiles/
     public static final String SPRING_PROFILE_DEVELOPMENT = "dev";
     public static final String SPRING_PROFILE_TEST = "test";
     public static final String SPRING_PROFILE_PRODUCTION = "prod";
@@ -35,10 +35,8 @@ public final class ApplicationConstants {
 	public final static String SHOPPING_CART = "SHOPPING-CART";
 	public final static String STORE_CODE = "STRORE-CODE";
 	public final static String COOKIE_NAME_CART = "cart";
-
 	public final static String CART_TOTAL = "CART_TOTAL";
 	public final static String CARTITEMS_TOTAL = "CARTITEMS_TOTAL";
-
 	public final static String CONTINUE_SHOPPING = "CONTINUE_SHOPPING";
 	// temp
 	public final static String LINK_CODE = "LINK_CODE";

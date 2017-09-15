@@ -22,8 +22,6 @@ plugins {
 }
 
 apply plugin: 'java'
-sourceCompatibility=1.8
-targetCompatibility=1.8
 apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
@@ -41,7 +39,7 @@ eclipse {
 }
 
 bootRepackage {
-   mainClass = 'com.shoppay.ShoppingApplication'
+   mainClass = 'com.shoppay.AdminApplication'
 }
 
 war {
@@ -49,7 +47,7 @@ war {
 }
 
 springBoot {
-    mainClass = 'com.shoppay.ShoppingApplication'
+    mainClass = 'com.shoppay.AdminApplication'
     executable = true
     buildInfo()
 }

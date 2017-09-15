@@ -19,8 +19,6 @@ buildscript {
 }
 
 apply plugin: 'java'
-sourceCompatibility=1.8
-targetCompatibility=1.8
 apply plugin: 'maven'
 apply plugin: 'propdeps'
 apply plugin: 'io.spring.dependency-management'
