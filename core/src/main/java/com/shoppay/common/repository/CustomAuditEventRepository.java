@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shoppay.common.audit.AuditEventConverter;
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.PersistentAuditEvent;
 
 /**
@@ -67,7 +67,7 @@ public class CustomAuditEventRepository implements AuditEventRepository {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void add(AuditEvent event) {
         if (!AUTHORIZATION_FAILURE.equals(event.getType()) &&
-            !AppConstants.ANONYMOUS_USER.equals(event.getPrincipal())) {
+            !ApplicationConstants.ANONYMOUS_USER.equals(event.getPrincipal())) {
 
             PersistentAuditEvent persistentAuditEvent = new PersistentAuditEvent();
             persistentAuditEvent.setPrincipal(event.getPrincipal());

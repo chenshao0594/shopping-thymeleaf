@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.model.CustomerRO;
@@ -20,7 +20,7 @@ import com.shoppay.core.customer.service.CustomerService;
  * REST controller for managing Customer.
  */
 @Controller
-@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + CustomerController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + CustomerController.SECTION_KEY)
 public class CustomerController extends AbstractDomainController<Customer, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(CustomerController.class);

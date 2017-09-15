@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.exception.ConversionException;
@@ -56,11 +56,11 @@ public class ShoppingCartRestController extends AbstractShoppingController {
 		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
 		MerchantStore store = UserInfoContextHolder.getMerchantStore();
-		Customer customer = getSessionAttribute(AppConstants.CUSTOMER, request);
+		Customer customer = getSessionAttribute(ApplicationConstants.CUSTOMER, request);
 		if (customer != null) {
 			shoppingCart = shoppingCartService.getShoppingCart(customer);
 		}
-		String cartCode = (String) request.getSession().getAttribute(AppConstants.SHOPPING_CART);
+		String cartCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
 		if (!StringUtils.isBlank(cartCode)) {
 			shoppingCart = shoppingCartService.getShoppingCartByCode(cartCode);
 		}
@@ -69,7 +69,7 @@ public class ShoppingCartRestController extends AbstractShoppingController {
 		}
 		shoppingCart = shoppingCartFacade.addItemsToShoppingCart(shoppingCart, item, store, customer);
 		shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart, store);
-		request.getSession().setAttribute(AppConstants.SHOPPING_CART, shoppingCart.getCode());
+		request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCart.getCode());
 		LOGGER.info("shopping cart", shoppingCart);
 		return ResponseEntity.ok().body(shoppingCartData);
 	}
@@ -104,13 +104,13 @@ public class ShoppingCartRestController extends AbstractShoppingController {
 	public ResponseEntity<ShoppingCartData> getMiniCart(final String cartCode, HttpServletRequest request) {
 		try {
 			MerchantStore store = UserInfoContextHolder.getMerchantStore();
-			Customer customer = getSessionAttribute(AppConstants.CUSTOMER, request);
+			Customer customer = getSessionAttribute(ApplicationConstants.CUSTOMER, request);
 			ShoppingCartData cart = shoppingCartFacade.getShoppingCartData(customer, store, cartCode);
 			if (cart != null) {
-				request.getSession().setAttribute(AppConstants.SHOPPING_CART, cart.getCode());
+				request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, cart.getCode());
 			}
 			if (cart == null) {
-				request.getSession().removeAttribute(AppConstants.SHOPPING_CART);
+				request.getSession().removeAttribute(ApplicationConstants.SHOPPING_CART);
 				cart = new ShoppingCartData();// create an empty cart
 			}
 			return ResponseEntity.ok().body(cart);

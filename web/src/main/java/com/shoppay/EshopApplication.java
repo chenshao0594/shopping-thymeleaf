@@ -20,13 +20,14 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 
 import com.shoppay.common.cofig.ApplicationProperties;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.config.DefaultProfileUtil;
 import com.shoppay.payment.gateway.paypal.PaypalConfiguration;
 
 import io.github.jhipster.config.JHipsterConstants;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.shoppay" })
+@ComponentScan(basePackages = { ApplicationConstants.BASE_PACKAGE })
 @Import(PaypalConfiguration.class)
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ ApplicationProperties.class })

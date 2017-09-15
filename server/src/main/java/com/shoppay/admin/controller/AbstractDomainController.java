@@ -19,13 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.service.AbstractDomainService;
 
 @Controller("BasicEntityController")
-@RequestMapping(AppConstants.ADMIN_PREFIX + "/{sectionKey:.+}")
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/{sectionKey:.+}")
 public abstract class AbstractDomainController<E extends BusinessDomain, K extends Serializable & Comparable<K>> {
 
 	private final Logger log = LoggerFactory.getLogger(AbstractDomainController.class);
@@ -104,7 +104,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			this.service.save(entity);
 			redirect.addFlashAttribute("statusMessage", "Successfully created!");
 			return new ModelAndView(
-					"redirect:" + AppConstants.ADMIN_PREFIX + "/" + this.getSectionKey() + "/{entity.id}", "entity.id",
+					"redirect:" + ApplicationConstants.ADMIN_PREFIX + "/" + this.getSectionKey() + "/{entity.id}", "entity.id",
 					entity.getId());
 		}
 	}
@@ -134,7 +134,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			this.service.save(entity);
 			model.addAttribute("item", entity);
 			redirect.addFlashAttribute("statusMessage", "Update Successfully !");
-			return "redirect:" + AppConstants.ADMIN_PREFIX + "/" + this.getSectionKey() + "/" + id + "/edit";
+			return "redirect:" + ApplicationConstants.ADMIN_PREFIX + "/" + this.getSectionKey() + "/" + id + "/edit";
 		}
 	}
 

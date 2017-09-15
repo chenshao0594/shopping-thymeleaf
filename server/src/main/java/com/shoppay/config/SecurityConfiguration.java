@@ -22,7 +22,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.core.security.AdminUserAuthenticationSuccessHandler;
 import com.shoppay.core.security.AuthoritiesConstants;
 
@@ -78,16 +78,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
-				.antMatchers(AppConstants.ADMIN_PREFIX + "/**").hasAuthority(AuthoritiesConstants.ADMIN).and()
-				.formLogin().loginPage(AppConstants.ADMIN_PREFIX + "/login").permitAll()
+				.antMatchers(ApplicationConstants.ADMIN_PREFIX + "/**").hasAuthority(AuthoritiesConstants.ADMIN).and()
+				.formLogin().loginPage(ApplicationConstants.ADMIN_PREFIX + "/login").permitAll()
 				.successHandler(new AdminUserAuthenticationSuccessHandler()).and().logout()
-				.logoutUrl(AppConstants.ADMIN_PREFIX + "/logout").permitAll().and().headers().frameOptions().disable()
-				.and().exceptionHandling().accessDeniedPage(AppConstants.ADMIN_PREFIX + "/access?error").and()
+				.logoutUrl(ApplicationConstants.ADMIN_PREFIX + "/logout").permitAll().and().headers().frameOptions().disable()
+				.and().exceptionHandling().accessDeniedPage(ApplicationConstants.ADMIN_PREFIX + "/access?error").and()
 				.rememberMe().rememberMeServices(rememberMeServices).rememberMeParameter("remember-me")
 				.key(applicationProperties.getSecurity().getRememberMe().getKey()).and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher(AppConstants.ADMIN_PREFIX + "/logout"))
-				.logoutSuccessUrl(AppConstants.ADMIN_PREFIX + "/?logout").and().sessionManagement().maximumSessions(1)
-				.expiredUrl(AppConstants.ADMIN_PREFIX + "/login?expired");
+				.logoutRequestMatcher(new AntPathRequestMatcher(ApplicationConstants.ADMIN_PREFIX + "/logout"))
+				.logoutSuccessUrl(ApplicationConstants.ADMIN_PREFIX + "/?logout").and().sessionManagement().maximumSessions(1)
+				.expiredUrl(ApplicationConstants.ADMIN_PREFIX + "/login?expired");
 	}
 
 	@Bean

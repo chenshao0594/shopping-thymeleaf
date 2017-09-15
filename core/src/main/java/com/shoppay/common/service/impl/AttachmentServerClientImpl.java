@@ -6,13 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -30,19 +28,15 @@ public class AttachmentServerClientImpl implements  AttachmentServerClient {
 
 	private static Logger logger = LoggerFactory.getLogger(AttachmentServerClientImpl.class);
 
-	@Autowired
-	private HttpServletRequest request;
-
-	private final String folderProducts="/static/images/products";
-	private String realPathtoUploads;
+	private static String realPathToUpload=System.getProperty("user.home")+"/application-attachments";
 
 	@PostConstruct
 	public void init() {
 		logger.info("init UploadProductsImagesStrategy bean");
-		realPathtoUploads = request.getServletContext().getRealPath(folderProducts);
-		if (!new File(realPathtoUploads).exists()) {
+		if (!new File(realPathToUpload).exists()) {
 			logger.info("create path to products images");
-			new File(realPathtoUploads).mkdirs();
+			new File(realPathToUpload).mkdirs();
+			System.out.println("realPathToUpload is " +realPathToUpload);
 		}
 	}
 
@@ -52,7 +46,7 @@ public class AttachmentServerClientImpl implements  AttachmentServerClient {
 		try {
 			File resultFile = buildResultFile(attachmentInfo.getContentType());
 			Files.write(resultFile.toPath(), attachmentInfo.getContent(), StandardOpenOption.CREATE);
-			return resultFile.getName();
+			return resultFile.getAbsolutePath();
 		} catch (IOException ex) {
 			logger.error(ex.getMessage());
 			throw new UploadFailException();
@@ -60,14 +54,14 @@ public class AttachmentServerClientImpl implements  AttachmentServerClient {
 	}
 
 	@Override
-	public void delete(String key) {
-		if(StringUtils.isBlank(key)) {
+	public void delete(String path) {
+		if(StringUtils.isBlank(path)) {
 			return;
 		}
-		File file = new File(realPathtoUploads, key);
-		if(file.exists() && file.canWrite())
+		File file = new File(path);
+		if(file.exists() && file.canWrite()) {
 			file.delete();
-
+		}
 	}
 
 	@Override
@@ -77,7 +71,7 @@ public class AttachmentServerClientImpl implements  AttachmentServerClient {
 			return info;
 		}
 		try {
-			File file = new File(realPathtoUploads, key);
+			File file = new File(realPathToUpload, key);
 			if(file.exists() && file.canRead()){
 				String contentType = Files.probeContentType(file.toPath());
 				byte[] content = Files.readAllBytes(file.toPath());
@@ -94,6 +88,6 @@ public class AttachmentServerClientImpl implements  AttachmentServerClient {
 
 	private File buildResultFile(String contentType){
 		String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(12), contentType.replace("image/", ""));
-		return new File(realPathtoUploads, name);
+		return new File(realPathToUpload, name);
 	}
 }

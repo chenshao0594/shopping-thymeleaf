@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.model.UserDTO;
 import com.shoppay.common.repository.AuthorityRepository;
 import com.shoppay.common.repository.PersistentTokenRepository;
@@ -215,7 +215,7 @@ public class UserService {
 
 	@Transactional(readOnly = true)
 	public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
-		return userRepository.findAllByLoginNot(pageable, AppConstants.ANONYMOUS_USER).map(UserDTO::new);
+		return userRepository.findAllByLoginNot(pageable, ApplicationConstants.ANONYMOUS_USER).map(UserDTO::new);
 	}
 
 	@Transactional(readOnly = true)

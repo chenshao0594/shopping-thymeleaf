@@ -5,12 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.core.payment.PaymentConfiguration;
 import com.shoppay.core.payment.service.PaymentConfigurationService;
 
 @Controller
-@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + PaymentConfigurationController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + PaymentConfigurationController.SECTION_KEY)
 public class PaymentConfigurationController extends AbstractDomainController<PaymentConfiguration, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);

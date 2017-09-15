@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 @Aspect
 public class LoggingAspect {
 
@@ -43,7 +43,7 @@ public class LoggingAspect {
 	 */
 	@AfterThrowing(pointcut = "loggingPointcut()", throwing = "e")
 	public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-		if (env.acceptsProfiles(AppConstants.SPRING_PROFILE_DEVELOPMENT)) {
+		if (env.acceptsProfiles(ApplicationConstants.SPRING_PROFILE_DEVELOPMENT)) {
 			log.error("Exception in {}.{}() with cause = \'{}\' and exception = \'{}\'",
 					joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName(),
 					e.getCause() != null ? e.getCause() : "NULL", e.getMessage(), e);

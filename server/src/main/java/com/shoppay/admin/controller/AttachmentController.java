@@ -42,7 +42,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.shoppay.common.attachment.AttachmentEnum;
 import com.shoppay.common.attachment.AttachmentResponse;
 import com.shoppay.common.attachment.PreviewConfig;
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.Attachment;
 import com.shoppay.common.service.AttachmentServerClient;
 import com.shoppay.common.service.AttachmentService;
@@ -52,14 +52,14 @@ import com.shoppay.core.attachment.utils.AttachmentUtils;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
-@RequestMapping(AppConstants.ADMIN_PREFIX + "/attachments")
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/attachments")
 public class AttachmentController {
 
 	private final Logger log = LoggerFactory.getLogger(AttachmentController.class);
 
 	private static final String ENTITY_NAME = "attachment";
 
-	private static final String InitialPreview = "<img src='" + AppConstants.ADMIN_PREFIX
+	private static final String InitialPreview = "<img src='" + ApplicationConstants.ADMIN_PREFIX
 			+ "/attachments/attachment_id' class='file-preview-image kv-preview-data rotate-1'>";
 	private final AttachmentService attachmentService;
 	
@@ -87,7 +87,7 @@ public class AttachmentController {
 		PreviewConfig previewConfig = new PreviewConfig(attachment.getName());
 		previewConfig.setKey(Long.toString(attachment.getId()));
 		previewConfig.addSize(attachment.getSize());
-		previewConfig.addUrl(AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
+		previewConfig.addUrl(ApplicationConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
 		previewConfig.addWidth("180px");
 		AttachmentResponse body = new AttachmentResponse();
 		body.getInitialPreviewConfig().add(previewConfig);
@@ -101,8 +101,8 @@ public class AttachmentController {
 		default:
 
 		}
-		body.getInitialPreview().add(AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
-		return ResponseEntity.created(new URI(AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId()))
+		body.getInitialPreview().add(ApplicationConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
+		return ResponseEntity.created(new URI(ApplicationConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId()))
 				.body(body);
 	}
 
@@ -144,6 +144,8 @@ public class AttachmentController {
 	@Timed
 	@DeleteMapping("/{id}")
 	public @ResponseBody ResponseEntity<Map> deleteImage(@PathVariable("id") Long id) throws IOException {
+		Attachment attachment = this.attachmentService.findOne(id);
+		this.attachmentClient.delete(attachment.getPath());
 		this.attachmentService.delete(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("deleteThumb", "file delete");
@@ -160,7 +162,7 @@ public class AttachmentController {
 			PreviewConfig config = new PreviewConfig(attachment.getName());
 			config.addKey(Long.toString(attachment.getId()));
 			config.addSize(attachment.getSize());
-			config.addUrl(AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
+			config.addUrl(ApplicationConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
 			inititalPreviewConfigs.add(config);
 		}
 		model.addAttribute("priviewConfig", inititalPreviewConfigs);

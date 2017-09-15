@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.codahale.metrics.annotation.Timed;
 import com.shoppay.common.attachment.AttachmentEnum;
 import com.shoppay.common.attachment.PreviewConfig;
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.Attachment;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.service.AttachmentService;
@@ -40,7 +40,7 @@ import com.shoppay.core.catalog.service.SKUService;
  */
 @Transactional
 @Controller("AdminProductController")
-@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + ProductController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + ProductController.SECTION_KEY)
 public class ProductController extends AbstractDomainController<Product, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
@@ -119,7 +119,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		}
 		this.productService.save(product);
 		model.setViewName(this.getSectionKey() + "/skus");
-		model.setViewName("redirect:" + AppConstants.ADMIN_PREFIX + "/" + SECTION_KEY + "/" + productId + "/skus");
+		model.setViewName("redirect:" + ApplicationConstants.ADMIN_PREFIX + "/" + SECTION_KEY + "/" + productId + "/skus");
 		return model;
 	}
 
@@ -133,7 +133,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 			PreviewConfig config = new PreviewConfig(attachment.getName());
 			config.addKey(Long.toString(attachment.getId()));
 			config.addSize(attachment.getSize());
-			config.addUrl(AppConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
+			config.addUrl(ApplicationConstants.ADMIN_PREFIX + "/attachments/" + attachment.getId());
 			inititalPreviewConfigs.add(config);
 		}
 		model.addAttribute("priviewConfig", inititalPreviewConfigs);

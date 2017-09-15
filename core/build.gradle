@@ -41,24 +41,16 @@ dependencies {
     compile ("net.logstash.logback:logstash-logback-encoder:${logstash_logback_encoder_version}") {
         exclude(group: 'ch.qos.logback')
     }
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-json-org"
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-hppc"
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5"
-    compile "com.fasterxml.jackson.core:jackson-annotations"
-    compile "com.fasterxml.jackson.core:jackson-databind"
     compile ("com.ryantenney.metrics:metrics-spring:${metrics_spring_version}")
-    compile "javax.cache:cache-api"
     compile "org.hibernate:hibernate-core:${hibernate_version}"
     compile ("com.zaxxer:HikariCP:${hikaricp_version}")
     compile "org.apache.commons:commons-lang3:${commons_lang_version}"
     compile "commons-io:commons-io:${commons_io_version}"
     compile "commons-validator:commons-validator:${commons_validator_version}"
     compile "javax.transaction:javax.transaction-api"
-    compile "org.ehcache:ehcache"
     compile "org.hibernate:hibernate-jcache:${hibernate_version}"
-    compile "org.hibernate:hibernate-envers"
-    compile "org.hibernate:hibernate-validator"
+    compile "org.hibernate:hibernate-envers:${hibernate_version}"
+    compile "org.hibernate:hibernate-validator:6.0.2.Final"
     compile "org.springframework.boot:spring-boot-actuator:${spring_boot_version}"
     compile "org.springframework.boot:spring-boot-autoconfigure:${spring_boot_version}"
     compile "org.springframework.boot:spring-boot-loader-tools:${spring_boot_version}"
@@ -66,10 +58,8 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-logging:${spring_boot_version}"
     compile "org.springframework.boot:spring-boot-starter-aop:${spring_boot_version}"
     compile "org.springframework.boot:spring-boot-starter-data-jpa:${spring_boot_version}"
-   
-    compile "net.java.dev.jna:jna"
-    compile "org.springframework.boot:spring-boot-starter-security"
-    compile ("org.springframework.boot:spring-boot-starter-web") {
+    compile "org.springframework.boot:spring-boot-starter-security:${spring_boot_version}"
+    compile ("org.springframework.boot:spring-boot-starter-web:${spring_boot_version}") {
         exclude module: 'spring-boot-starter-tomcat'
     }
     compile "org.springframework.boot:spring-boot-starter-undertow:${spring_boot_version}"
@@ -85,10 +75,6 @@ dependencies {
     compile "mysql:mysql-connector-java:6.0.6"
     compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
     compile "org.apache.httpcomponents:httpclient:4.5.3"
-    compile "org.springframework.social:spring-social-security"
-    compile "org.springframework.social:spring-social-google:${spring_social_google_version}"
-    compile "org.springframework.social:spring-social-facebook"
-    compile "org.springframework.social:spring-social-twitter"
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-conditionalcomments', version: '2.1.2.RELEASE'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'

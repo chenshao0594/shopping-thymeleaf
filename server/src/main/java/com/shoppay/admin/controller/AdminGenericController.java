@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 
 @Controller
 @ControllerAdvice
-@RequestMapping(AppConstants.ADMIN_PREFIX)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX)
 public class AdminGenericController {
 	@GetMapping("/login")
 	public String index() {
@@ -50,7 +50,7 @@ public class AdminGenericController {
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "redirect:" + AppConstants.ADMIN_PREFIX + "?logout";
+		return "redirect:" + ApplicationConstants.ADMIN_PREFIX + "?logout";
 	}
 
 }

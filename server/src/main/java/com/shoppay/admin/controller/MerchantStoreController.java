@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.service.MerchantStoreService;
 
@@ -14,7 +14,7 @@ import com.shoppay.common.service.MerchantStoreService;
  * REST controller for managing MerchantStore.
  */
 @Controller
-@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + MerchantStoreController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + MerchantStoreController.SECTION_KEY)
 public class MerchantStoreController extends AbstractDomainController<MerchantStore, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(MerchantStoreController.class);

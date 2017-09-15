@@ -3,13 +3,13 @@
 		<div class="row">
 			<div class="five columns">
 			 <p th:if="${param.logout}" class="bg-warning">已注销</p>
-        		 <p th:if="${param.error}" class="bg-danger">有错误，请重试</p>
+        		 <p th:if="${param.error}" class="bg-danger">有错误，请重试<p th:text="${param.error}"></p></p>
 				<h3>Login</h3>
 				<form name="form" th:action="@{/login}" action="/login.html" method="POST">
 					<div class="row">
 						<div class="twelve columns">
 							<label for="login_email">E-mail Address *</label> <input type="text" id="login_email"
-								name="name" /> <span class="error">
+								name="username" /> <span class="error">
 						</div>
 					</div>
 					<div class="row">
@@ -25,7 +25,7 @@
 			</div>
 			<div class="six columns">
 				<h3>Register</h3>
-				<form name="form" th:action="@{/register}" action="customer/register.html"
+				<form name="form" th:action="@{/register}" action="/register.html"
 					method="POST">
 					<div class="row">
 						<div class="six columns">

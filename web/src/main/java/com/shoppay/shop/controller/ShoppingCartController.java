@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.service.CartService;
@@ -41,11 +41,11 @@ public class ShoppingCartController extends AbstractShoppingController {
 		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
 		MerchantStore store = UserInfoContextHolder.getMerchantStore();
-		Customer customer = getSessionAttribute(AppConstants.CUSTOMER, request);
+		Customer customer = getSessionAttribute(ApplicationConstants.CUSTOMER, request);
 		if (customer != null) {
 			shoppingCart = shoppingCartService.getShoppingCart(customer);
 		}
-		String cartCode = (String) request.getSession().getAttribute(AppConstants.SHOPPING_CART);
+		String cartCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
 		if (!StringUtils.isBlank(cartCode)) {
 			shoppingCart = shoppingCartService.getShoppingCartByCode(cartCode);
 		}
@@ -53,7 +53,7 @@ public class ShoppingCartController extends AbstractShoppingController {
 			shoppingCart = shoppingCartService.createEmptyCart(customer);
 		}
 		shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart, store);
-		request.getSession().setAttribute(AppConstants.SHOPPING_CART, shoppingCart.getCode());
+		request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCart.getCode());
 		boolean isEmpty = CollectionUtils.isEmpty(shoppingCartData.getShoppingCartItems());
 		model.addObject("shoppingcart", shoppingCartData);
 		model.addObject("isEmpty", isEmpty);

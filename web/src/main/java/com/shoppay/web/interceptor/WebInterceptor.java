@@ -15,7 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.reference.Address;
 import com.shoppay.common.service.MerchantStoreService;
@@ -46,7 +46,7 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 		request.setCharacterEncoding("UTF-8");
 		try {
 			/** merchant store **/
-			MerchantStore store = (MerchantStore) request.getSession().getAttribute(AppConstants.MERCHANT_STORE);
+			MerchantStore store = (MerchantStore) request.getSession().getAttribute(ApplicationConstants.MERCHANT_STORE);
 			String storeCode = request.getParameter(STORE_REQUEST_PARAMETER);
 			if (!StringUtils.isBlank(storeCode)) {
 				if (store != null) {
@@ -61,17 +61,17 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 				store = setMerchantStoreInSession(request, MerchantStore.DEFAULT_STORE);
 			}
 			userInfo.setMerchantStore(store);
-			request.setAttribute(AppConstants.MERCHANT_STORE, store);
+			request.setAttribute(ApplicationConstants.MERCHANT_STORE, store);
 			/** customer **/
-			Customer customer = (Customer) request.getSession().getAttribute(AppConstants.CUSTOMER);
+			Customer customer = (Customer) request.getSession().getAttribute(ApplicationConstants.CUSTOMER);
 			if (customer != null) {
 				if (!customer.isAnonymous()) {
 					if (!request.isUserInRole(AuthoritiesConstants.CUSTOMER)) {
-						request.removeAttribute(AppConstants.CUSTOMER);
+						request.removeAttribute(ApplicationConstants.CUSTOMER);
 					}
 				}
 
-				request.setAttribute(AppConstants.CUSTOMER, customer);
+				request.setAttribute(ApplicationConstants.CUSTOMER, customer);
 			}
 
 			if (customer == null) {
@@ -79,13 +79,13 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 				if (auth != null && request.isUserInRole("AUTH_CUSTOMER")) {
 					customer = customerService.findCustomerByEmailAddress(auth.getName());
 					if (customer != null) {
-						request.setAttribute(AppConstants.CUSTOMER, customer);
+						request.setAttribute(ApplicationConstants.CUSTOMER, customer);
 					}
 				}
 			}
 			userInfo.setCustomer(customer);
 			AnonymousCustomer anonymousCustomer = (AnonymousCustomer) request.getSession()
-					.getAttribute(AppConstants.ANONYMOUS_CUSTOMER);
+					.getAttribute(ApplicationConstants.ANONYMOUS_CUSTOMER);
 			if (anonymousCustomer == null) {
 				Address address = null;
 				try {
@@ -113,9 +113,9 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 				}
 				anonymousCustomer = new AnonymousCustomer();
 				anonymousCustomer.setBilling(address);
-				request.getSession().setAttribute(AppConstants.ANONYMOUS_CUSTOMER, anonymousCustomer);
+				request.getSession().setAttribute(ApplicationConstants.ANONYMOUS_CUSTOMER, anonymousCustomer);
 			} else {
-				request.setAttribute(AppConstants.ANONYMOUS_CUSTOMER, anonymousCustomer);
+				request.setAttribute(ApplicationConstants.ANONYMOUS_CUSTOMER, anonymousCustomer);
 			}
 
 			/** language & locale **/
@@ -156,9 +156,9 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 
 			/******* Shopping Cart *********/
 
-			String shoppingCarCode = (String) request.getSession().getAttribute(AppConstants.SHOPPING_CART);
+			String shoppingCarCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
 			if (shoppingCarCode != null) {
-				request.setAttribute(AppConstants.SHOPPING_CART, shoppingCarCode);
+				request.setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCarCode);
 			}
 
 		} catch (Exception e) {
@@ -175,8 +175,8 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 		if (modelAndView != null) {
 			modelAndView.addObject("continueShopping",
 					UserInfoContextHolder.getMerchantStore().getContinueShoppingURL());
-			modelAndView.addObject("cartTotal", request.getSession().getAttribute(AppConstants.CART_TOTAL));
-			modelAndView.addObject("cartItemsTotal", request.getSession().getAttribute(AppConstants.CARTITEMS_TOTAL));
+			modelAndView.addObject("cartTotal", request.getSession().getAttribute(ApplicationConstants.CART_TOTAL));
+			modelAndView.addObject("cartItemsTotal", request.getSession().getAttribute(ApplicationConstants.CARTITEMS_TOTAL));
 		}
 
 		UserInfoContextHolder.clear();
@@ -187,8 +187,8 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 			return null;
 		MerchantStore store = merchantService.getByCode(storeCode);
 		if (store != null) {
-			request.getSession().setAttribute(AppConstants.MERCHANT_STORE, store);
-			request.getSession().setAttribute(AppConstants.CONTINUE_SHOPPING, store.getContinueShoppingURL());
+			request.getSession().setAttribute(ApplicationConstants.MERCHANT_STORE, store);
+			request.getSession().setAttribute(ApplicationConstants.CONTINUE_SHOPPING, store.getContinueShoppingURL());
 		}
 		return store;
 	}

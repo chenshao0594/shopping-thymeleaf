@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.user.Authority;
 import com.shoppay.common.user.User;
 
@@ -20,7 +20,7 @@ public class UserDTO {
 
     private Long id;
 
-    @Pattern(regexp = AppConstants.LOGIN_REGEX)
+    @Pattern(regexp = ApplicationConstants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     private String login;
 

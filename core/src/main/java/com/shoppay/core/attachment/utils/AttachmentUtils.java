@@ -1,5 +1,7 @@
 package com.shoppay.core.attachment.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -13,7 +15,8 @@ public final class AttachmentUtils {
 		byte[] content = null;
 		InputStream attachmentStream = null;
 		try {
-			attachmentStream = AttachmentUtils.class.getResourceAsStream(attachment.getPath());
+			File file = new File(attachment.getPath());
+			attachmentStream = new FileInputStream(file);
 			content = IOUtils.toByteArray(attachmentStream);
 		} catch (IOException e) {
 			e.printStackTrace();

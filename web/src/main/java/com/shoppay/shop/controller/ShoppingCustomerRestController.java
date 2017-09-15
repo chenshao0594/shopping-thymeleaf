@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.exception.ConversionException;
@@ -57,28 +57,28 @@ public class ShoppingCustomerRestController extends AbstractShoppingController {
 				throw new BusinessException("customer not exist");
 			}
 			customerFacade.authenticate(customerModel, customerInfo.getName(), customerInfo.getPassword());
-			super.setSessionAttribute(AppConstants.CUSTOMER, customerModel, request);
-			String sessionShoppingCartCode = (String) request.getSession().getAttribute(AppConstants.SHOPPING_CART);
+			super.setSessionAttribute(ApplicationConstants.CUSTOMER, customerModel, request);
+			String sessionShoppingCartCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
 			if (!StringUtils.isBlank(sessionShoppingCartCode)) {
 				Cart shoppingCart = customerFacade.mergeCart(customerModel, sessionShoppingCartCode, store);
 				ShoppingCartData shoppingCartData = this.populateShoppingCartData(shoppingCart, store);
 				if (shoppingCartData != null) {
-					request.getSession().setAttribute(AppConstants.SHOPPING_CART, shoppingCartData.getCode());
+					request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCartData.getCode());
 				} else {
 					// DELETE COOKIE
-					Cookie c = new Cookie(AppConstants.COOKIE_NAME_CART, "");
+					Cookie c = new Cookie(ApplicationConstants.COOKIE_NAME_CART, "");
 					c.setMaxAge(0);
-					c.setPath(AppConstants.SLASH);
+					c.setPath(ApplicationConstants.SLASH);
 					response.addCookie(c);
 				}
 
 			} else {
 				Cart cartModel = shoppingCartService.getShoppingCartByCustomer(customerModel);
 				if (cartModel != null) {
-					request.getSession().setAttribute(AppConstants.SHOPPING_CART, cartModel.getCode());
-					Cookie c = new Cookie(AppConstants.COOKIE_NAME_CART, cartModel.getCode());
+					request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, cartModel.getCode());
+					Cookie c = new Cookie(ApplicationConstants.COOKIE_NAME_CART, cartModel.getCode());
 					c.setMaxAge(60 * 24 * 3600);
-					c.setPath(AppConstants.SLASH);
+					c.setPath(ApplicationConstants.SLASH);
 					response.addCookie(c);
 				}
 

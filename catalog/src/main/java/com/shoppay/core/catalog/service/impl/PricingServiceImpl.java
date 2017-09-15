@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.core.catalog.Product;
@@ -38,10 +38,10 @@ public class PricingServiceImpl implements PricingService {
 			return "";
 		}
 		NumberFormat nf = null;
-		nf = NumberFormat.getInstance(AppConstants.DEFAULT_LOCALE);
+		nf = NumberFormat.getInstance(ApplicationConstants.DEFAULT_LOCALE);
 
-		nf.setMaximumFractionDigits(Integer.parseInt(Character.toString(AppConstants.DECIMALCOUNT)));
-		nf.setMinimumFractionDigits(Integer.parseInt(Character.toString(AppConstants.DECIMALCOUNT)));
+		nf.setMaximumFractionDigits(Integer.parseInt(Character.toString(ApplicationConstants.DECIMALCOUNT)));
+		nf.setMinimumFractionDigits(Integer.parseInt(Character.toString(ApplicationConstants.DECIMALCOUNT)));
 
 		return nf.format(amount);
 	}

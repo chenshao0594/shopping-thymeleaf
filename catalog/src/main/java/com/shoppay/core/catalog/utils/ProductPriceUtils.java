@@ -3,7 +3,7 @@ package com.shoppay.core.catalog.utils;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
 
 public class ProductPriceUtils {
@@ -17,7 +17,7 @@ public class ProductPriceUtils {
 			return "";
 		}
 		NumberFormat nf = null;
-		nf = NumberFormat.getInstance(AppConstants.DEFAULT_LOCALE);
+		nf = NumberFormat.getInstance(ApplicationConstants.DEFAULT_LOCALE);
 		nf.setMaximumFractionDigits(Integer.parseInt(DECIMALCOUNT));
 		nf.setMinimumFractionDigits(Integer.parseInt(DECIMALCOUNT));
 		return nf.format(amount);

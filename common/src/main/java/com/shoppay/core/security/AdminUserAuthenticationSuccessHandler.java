@@ -12,7 +12,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 
 public class AdminUserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
@@ -23,7 +23,7 @@ public class AdminUserAuthenticationSuccessHandler extends SimpleUrlAuthenticati
 	@Override
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException {
-		String targetUrl = AppConstants.ADMIN_PREFIX + "/home";
+		String targetUrl = ApplicationConstants.ADMIN_PREFIX + "/home";
 
 		if (response.isCommitted()) {
 			System.out.println("Can't redirect");

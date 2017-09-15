@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 
 public class AdminInterceptor extends HandlerInterceptorAdapter {
 	private Logger logger = LoggerFactory.getLogger(AdminInterceptor.class);
@@ -26,7 +26,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		if (modelAndView != null) {
-			modelAndView.addObject("admin_url", AppConstants.ADMIN_PREFIX.substring(1));
+			modelAndView.addObject("admin_url", ApplicationConstants.ADMIN_PREFIX.substring(1));
 		}
 
 	}

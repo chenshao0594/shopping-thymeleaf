@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.model.UserDTO;
 import com.shoppay.common.repository.UserRepository;
 import com.shoppay.common.repository.search.UserSearchRepository;
@@ -178,7 +178,7 @@ public class UserController {
      * @param login the login of the user to find
      * @return the ResponseEntity with status 200 (OK) and with body the "login" user, or with status 404 (Not Found)
      */
-    @GetMapping("/users/{login:" + AppConstants.LOGIN_REGEX + "}")
+    @GetMapping("/users/{login:" + ApplicationConstants.LOGIN_REGEX + "}")
     @Timed
     public ResponseEntity<UserDTO> getUser(@PathVariable String login) {
         log.debug("REST request to get User : {}", login);
@@ -193,7 +193,7 @@ public class UserController {
      * @param login the login of the user to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/users/{login:" + AppConstants.LOGIN_REGEX + "}")
+    @DeleteMapping("/users/{login:" + ApplicationConstants.LOGIN_REGEX + "}")
     @Timed
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {

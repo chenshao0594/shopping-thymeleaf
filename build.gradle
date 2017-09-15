@@ -35,8 +35,10 @@ subprojects {
     	maven { url 'http://repo.maven.apache.org/maven2' }
 	}
     dependencies {
-    	compile 'com.querydsl:querydsl-jpa:4.1.4'
+    		compile 'com.querydsl:querydsl-jpa:4.1.4'
+    		
     }
+    
     
     querydsl {
   		library "com.querydsl:querydsl-apt:4.1.4"

@@ -8,12 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.shoppay.common.constants.AppConstants;
+import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.core.catalog.Category;
 import com.shoppay.core.catalog.service.CategoryService;
 
 @Controller
-@RequestMapping(AppConstants.ADMIN_PREFIX + "/" + CategoryController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + CategoryController.SECTION_KEY)
 public class CategoryController extends AbstractDomainController<Category, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(CategoryController.class);
