@@ -15,10 +15,10 @@ import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 import com.shoppay.core.payment.model.PaymentContext;
-import com.shoppay.core.payment.provider.PaymentGetawayService;
+import com.shoppay.core.payment.provider.PaymentGetewayService;
 
 @Service("PaypalProviderService")
-public class PaypalPaymentService  implements PaymentGetawayService{
+public class PaypalPaymentService  implements PaymentGetewayService{
 
 	@Override
 	public void payment() {

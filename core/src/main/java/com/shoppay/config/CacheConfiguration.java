@@ -78,12 +78,8 @@ public class CacheConfiguration {
 			cm.createCache(com.shoppay.core.order.SalesOrderTotal.class.getName(), jcacheConfiguration);
 			cm.createCache(com.shoppay.core.order.OrderProductLine.class.getName(), jcacheConfiguration);
 			cm.createCache(com.shoppay.core.transaction.Transaction.class.getName(), jcacheConfiguration);
-
 			cm.createCache(Currency.class.getName(), jcacheConfiguration);
 			cm.createCache(com.shoppay.common.reference.Zone.class.getName(), jcacheConfiguration);
-
-			//
-			// jhipster-needle-ehcache-add-entry
 		};
 	}
 }

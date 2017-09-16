@@ -1,6 +1,6 @@
 package com.shoppay.core.payment.provider;
 
-public interface PaymentGetawayService {
+public interface PaymentGetewayService {
 	public void payment();
 
 }
