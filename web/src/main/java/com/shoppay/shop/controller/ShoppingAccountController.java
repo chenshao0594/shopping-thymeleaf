@@ -104,7 +104,7 @@ public class ShoppingAccountController extends AbstractShoppingController {
 			Customer c = customerFacade.getCustomerByUserName(customerRO.getEmailAddress(), merchantStore);
 			// authenticate
 			customerFacade.authenticate(c, c.getEmailAddress(), customerRO.getPassword());
-			return "redirect:/"+ShoppingControllerConstants.HOME;
+			return "redirect:/";
 
 		} catch (BusinessException e) {
 			LOGGER.error("Cannot authenticate user ", e);
