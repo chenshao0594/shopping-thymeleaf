@@ -1,7 +1,6 @@
 package com.shoppay.web.interceptor;
 
 import java.util.Locale;
-import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -93,7 +92,6 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 		} catch (Exception e) {
 			LOGGER.error("Error in StoreFilter", e);
 		}
-		System.out.println("customer info is : " + userInfo);
 		CustomerInfoContextHolder.setUserInfo(userInfo);
 		return true;
 	}

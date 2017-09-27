@@ -22,7 +22,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 
-import com.shoppay.core.security.AdminUserAuthenticationSuccessHandler;
 import com.shoppay.core.security.AuthoritiesConstants;
 
 import io.github.jhipster.config.JHipsterProperties;

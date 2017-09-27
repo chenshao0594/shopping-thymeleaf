@@ -129,6 +129,8 @@ public class ShoppingAccountController extends AbstractShoppingController {
 				throw new BusinessException("customer not exist");
 			}
 			customerFacade.authenticate(customerModel, customerInfo.getName(), customerInfo.getPassword());
+			
+			
 			//super.setSessionAttribute(ApplicationConstants.CUSTOMER, customerModel, request);
 			String sessionShoppingCartCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
 			if (!StringUtils.isBlank(sessionShoppingCartCode)) {

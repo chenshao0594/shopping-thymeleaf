@@ -56,13 +56,17 @@ public class ShoppingCartRestController extends AbstractShoppingController {
 		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
 		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
+		String cartCodeInSession = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
+		boolean isAnony = CustomerInfoContextHolder.isAnony();
+		if(isAnony){
+			
+		}
 		Customer customer = CustomerInfoContextHolder.getCustomer();
 		if (customer != null) {
 			shoppingCart = shoppingCartService.getShoppingCart(customer);
 		}
-		String cartCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
-		if (!StringUtils.isBlank(cartCode)) {
-			shoppingCart = shoppingCartService.getShoppingCartByCode(cartCode);
+		if (!StringUtils.isBlank(cartCodeInSession)) {
+			shoppingCart = shoppingCartService.getShoppingCartByCode(cartCodeInSession);
 		}
 		if (shoppingCart == null) {
 			shoppingCart = shoppingCartService.createEmptyCart(customer);
@@ -117,9 +121,6 @@ public class ShoppingCartRestController extends AbstractShoppingController {
 		} catch (Exception e) {
 			LOGGER.error("Error while getting the shopping cart", e);
 		}
-
 		return null;
-
 	}
-
 }

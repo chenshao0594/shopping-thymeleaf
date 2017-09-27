@@ -1,19 +1,12 @@
 package com.shoppay.admin.controller;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.codahale.metrics.annotation.Timed;
 import com.shoppay.common.constants.ApplicationConstants;
-import com.shoppay.common.exception.BusinessException;
 import com.shoppay.core.customer.Customer;
-import com.shoppay.core.customer.model.CustomerRO;
 import com.shoppay.core.customer.service.CustomerService;
 
 /**
