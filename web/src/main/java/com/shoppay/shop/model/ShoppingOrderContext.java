@@ -8,6 +8,12 @@ import com.shoppay.common.reference.Billing;
 
 public class ShoppingOrderContext implements Serializable {
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5084323131678028961L;
+
 	private String uuid;
 
 	private long userId;

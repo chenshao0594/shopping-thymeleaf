@@ -22,7 +22,7 @@ import org.springframework.core.env.Environment;
 import com.shoppay.common.cofig.ApplicationProperties;
 import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.config.DefaultProfileUtil;
-import com.shoppay.payment.gateway.paypal.PaypalConfiguration;
+import com.shoppay.core.payment.gateway.paypal.PaypalConfiguration;
 
 import io.github.jhipster.config.JHipsterConstants;
 

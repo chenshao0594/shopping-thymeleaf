@@ -30,7 +30,7 @@ import com.shoppay.core.customer.Customer;
 import com.shoppay.core.facade.ShoppingCartFacade;
 import com.shoppay.shop.model.ShoppingCartData;
 import com.shoppay.shop.model.ShoppingCartItem;
-import com.shoppay.shop.utils.UserInfoContextHolder;
+import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.rest.util.HeaderUtil;
 
 @RestController("ShopCartRestController")
@@ -55,8 +55,8 @@ public class ShoppingCartRestController extends AbstractShoppingController {
 		LOGGER.info("shopping cart item  {}", item);
 		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
-		MerchantStore store = UserInfoContextHolder.getMerchantStore();
-		Customer customer = getSessionAttribute(ApplicationConstants.CUSTOMER, request);
+		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
+		Customer customer = CustomerInfoContextHolder.getCustomer();
 		if (customer != null) {
 			shoppingCart = shoppingCartService.getShoppingCart(customer);
 		}
@@ -103,8 +103,8 @@ public class ShoppingCartRestController extends AbstractShoppingController {
 	@GetMapping("/miniCart")
 	public ResponseEntity<ShoppingCartData> getMiniCart(final String cartCode, HttpServletRequest request) {
 		try {
-			MerchantStore store = UserInfoContextHolder.getMerchantStore();
-			Customer customer = getSessionAttribute(ApplicationConstants.CUSTOMER, request);
+			MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
+			Customer customer = CustomerInfoContextHolder.getCustomer();
 			ShoppingCartData cart = shoppingCartFacade.getShoppingCartData(customer, store, cartCode);
 			if (cart != null) {
 				request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, cart.getCode());

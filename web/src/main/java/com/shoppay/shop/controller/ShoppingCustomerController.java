@@ -21,7 +21,7 @@ import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.facade.CustomerFacade;
 import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.order.service.SalesOrderService;
-import com.shoppay.shop.utils.UserInfoContextHolder;
+import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopCustomerController")
@@ -59,7 +59,7 @@ public class ShoppingCustomerController extends AbstractShoppingController {
 
 	@GetMapping(value = "/orders")
 	public String orders(Model model) {
-		Customer customer = UserInfoContextHolder.getCustomer();
+		Customer customer = CustomerInfoContextHolder.getCustomer();
 		List<SalesOrder> orders = this.orderService.findByCustomer(customer);
 		model.addAttribute("orders", orders);
 		return ShoppingControllerConstants.Customer.customerOrders;

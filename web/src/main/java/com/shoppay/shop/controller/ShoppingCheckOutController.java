@@ -38,7 +38,7 @@ import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.order.enumeration.SalesOrderStatus;
 import com.shoppay.core.order.service.SalesOrderService;
 import com.shoppay.shop.model.ShoppingOrderContext;
-import com.shoppay.shop.utils.UserInfoContextHolder;
+import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopCheckOutController")
@@ -82,12 +82,12 @@ public class ShoppingCheckOutController extends AbstractShoppingController {
 		if (principal instanceof UserDetails) {
 			String username = ((UserDetails) principal).getUsername();
 			Customer customer = customerService.findCustomerByName(username);
-			Customer userInfo = UserInfoContextHolder.getCustomer();
-			Cart shoppingCart = shoppingCartService.getShoppingCart(userInfo);
+			//Customer userInfo = UserInfoContextHolder.getCustomer();
+			Cart shoppingCart = shoppingCartService.getShoppingCart(customer);
 			for (CartItem item : shoppingCart.getLineItems()) {
 				order.getCartItemIds().add(item.getId());
 			}
-			order.setUserId(userInfo.getId());
+			order.setUserId(customer.getId());
 			Page<Country> page = this.countryService.findAll(null);
 			model.addObject("countries", page.getContent());
 			model.addObject("customer", customer);
@@ -126,7 +126,7 @@ public class ShoppingCheckOutController extends AbstractShoppingController {
 	@Timed
 	// @PostMapping("order")
 	public ModelAndView order(ModelAndView model, final Customer customer) throws BusinessException {
-		Customer userInfo = UserInfoContextHolder.getCustomer();
+		Customer userInfo = CustomerInfoContextHolder.getCustomer();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Cart shoppingCart = shoppingCartService.getShoppingCart(userInfo);
 		Set<CartItem> items = shoppingCart.getLineItems();
@@ -135,7 +135,7 @@ public class ShoppingCheckOutController extends AbstractShoppingController {
 		order.setStatus(SalesOrderStatus.INITED);
 		order.setBilling(customer.getBilling());
 		order.setDelivery(customer.getDelivery());
-		order.setMerchant(UserInfoContextHolder.getMerchantStore());
+		order.setMerchant(CustomerInfoContextHolder.getMerchantStore());
 		order.setBilling(customer.getBilling());
 		order.setDelivery(customer.getDelivery());
 		Set<OrderProductLine> productItems = new HashSet<OrderProductLine>();
@@ -156,7 +156,7 @@ public class ShoppingCheckOutController extends AbstractShoppingController {
 			line.setSkuName(sku.getName());
 			line.setUnitPrice(sku.getRetailPrice());
 			line.setItemQuantity(item.getQuantity());
-			line.setCurrency(UserInfoContextHolder.getMerchantStore().getCurrency());
+			line.setCurrency(CustomerInfoContextHolder.getMerchantStore().getCurrency());
 			line.setTotal(lineTotal);
 			line.setSalesOrder(order);
 			productItems.add(line);

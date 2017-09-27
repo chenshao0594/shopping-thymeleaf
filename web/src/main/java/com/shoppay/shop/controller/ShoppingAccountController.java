@@ -39,7 +39,7 @@ import com.shoppay.core.customer.model.CustomerRO;
 import com.shoppay.core.facade.CustomerFacade;
 import com.shoppay.populator.ShoppingCartDataPopulator;
 import com.shoppay.shop.model.ShoppingCartData;
-import com.shoppay.shop.utils.UserInfoContextHolder;
+import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @RequestMapping()
@@ -92,6 +92,7 @@ public class ShoppingAccountController extends AbstractShoppingController {
 		}
 		try {
 			customerFacade.registerCustomer(customerRO, merchantStore);
+			
 		} catch (BusinessException e) {
 			LOGGER.error("Error while registering customer.. ", e);
 			ObjectError error = new ObjectError("registration",
@@ -102,6 +103,7 @@ public class ShoppingAccountController extends AbstractShoppingController {
 		}
 		try {
 			Customer c = customerFacade.getCustomerByUserName(customerRO.getEmailAddress(), merchantStore);
+			this.shoppingCartService.createEmptyCart(c);
 			// authenticate
 			customerFacade.authenticate(c, c.getEmailAddress(), customerRO.getPassword());
 			return "redirect:/";
@@ -121,13 +123,13 @@ public class ShoppingAccountController extends AbstractShoppingController {
 	public String login(CustomerRO customerInfo, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			LOGGER.debug("Authenticating user " + customerInfo.getName());
-			MerchantStore store = UserInfoContextHolder.getMerchantStore();
+			MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
 			Customer customerModel = customerFacade.getCustomerByUserName(customerInfo.getName(), store);
 			if (customerModel == null) {
 				throw new BusinessException("customer not exist");
 			}
 			customerFacade.authenticate(customerModel, customerInfo.getName(), customerInfo.getPassword());
-			super.setSessionAttribute(ApplicationConstants.CUSTOMER, customerModel, request);
+			//super.setSessionAttribute(ApplicationConstants.CUSTOMER, customerModel, request);
 			String sessionShoppingCartCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
 			if (!StringUtils.isBlank(sessionShoppingCartCode)) {
 				Cart shoppingCart = customerFacade.mergeCart(customerModel, sessionShoppingCartCode, store);

@@ -18,7 +18,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.core.catalog.service.PricingService;
-import com.shoppay.shop.utils.UserInfoContextHolder;
+import com.shoppay.shop.utils.CustomerInfoContextHolder;
 
 public class PriceProcessor extends AbstractElementTagProcessor {
 	public static final int PRECEDENCE = 100000;
@@ -43,7 +43,7 @@ public class PriceProcessor extends AbstractElementTagProcessor {
 		final IStandardExpression expression = parser.parseExpression(context, valueContent);
 		final BigDecimal price = (BigDecimal) expression.execute(context);
 
-		final MerchantStore store = UserInfoContextHolder.getMerchantStore();
+		final MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
 		String formatedPrice = "error";
 		try {
 			formatedPrice = pricingService.getDisplayAmount(price, store);

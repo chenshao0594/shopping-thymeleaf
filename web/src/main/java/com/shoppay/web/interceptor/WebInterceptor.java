@@ -1,6 +1,7 @@
 package com.shoppay.web.interceptor;
 
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +18,14 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
-import com.shoppay.common.reference.Address;
 import com.shoppay.common.service.MerchantStoreService;
+import com.shoppay.core.cart.Cart;
+import com.shoppay.core.cart.CartCodeGegerator;
+import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.customer.Customer;
-import com.shoppay.core.customer.model.AnonymousCustomer;
 import com.shoppay.core.customer.service.CustomerService;
-import com.shoppay.core.security.AuthoritiesConstants;
-import com.shoppay.shop.utils.UserInfoContextHolder;
-import com.shoppay.shop.utils.UserInfoContextHolder.UserInfo;
+import com.shoppay.shop.utils.CustomerInfoContextHolder;
+import com.shoppay.shop.utils.CustomerInfoContextHolder.CustomerInfo;
 
 public class WebInterceptor extends HandlerInterceptorAdapter {
 	private final Logger LOGGER = LoggerFactory.getLogger(WebInterceptor.class);
@@ -36,11 +37,14 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 	@Inject
 	private CustomerService customerService;
 
+	@Inject
+	private CartService cartService;
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		LOGGER.info("shop interceptor .....");
-		UserInfo userInfo = new UserInfo();
+		CustomerInfo userInfo = new CustomerInfo();
 		String authorization = request.getHeader("Authorization");
 		LOGGER.info("The authorization is: {}", authorization);
 		request.setCharacterEncoding("UTF-8");
@@ -61,111 +65,36 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 				store = setMerchantStoreInSession(request, MerchantStore.DEFAULT_STORE);
 			}
 			userInfo.setMerchantStore(store);
-			request.setAttribute(ApplicationConstants.MERCHANT_STORE, store);
-			/** customer **/
-			Customer customer = (Customer) request.getSession().getAttribute(ApplicationConstants.CUSTOMER);
-			if (customer != null) {
-				if (!customer.isAnonymous()) {
-					if (!request.isUserInRole(AuthoritiesConstants.CUSTOMER)) {
-						request.removeAttribute(ApplicationConstants.CUSTOMER);
-					}
-				}
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-				request.setAttribute(ApplicationConstants.CUSTOMER, customer);
+			Customer customer = null;
+			String shoppingCartCode = null;
+			if(auth!=null) {
+				customer = customerService.findCustomerByEmailAddress(auth.getName());
 			}
 
-			if (customer == null) {
-				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-				if (auth != null && request.isUserInRole("AUTH_CUSTOMER")) {
-					customer = customerService.findCustomerByEmailAddress(auth.getName());
-					if (customer != null) {
-						request.setAttribute(ApplicationConstants.CUSTOMER, customer);
-					}
+			if(customer!=null) {
+				userInfo.setCustomer(customer);
+				userInfo.setAnony(false);
+				Cart cart = this.cartService.getShoppingCartByCustomer(customer);
+				shoppingCartCode = cart.getCode();
+			}else {
+				userInfo.setAnony(true);
+				shoppingCartCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
+				if(StringUtils.isEmpty(shoppingCartCode)) {
+					shoppingCartCode = CartCodeGegerator.generateCode();
+					request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCartCode);
 				}
 			}
-			userInfo.setCustomer(customer);
-			AnonymousCustomer anonymousCustomer = (AnonymousCustomer) request.getSession()
-					.getAttribute(ApplicationConstants.ANONYMOUS_CUSTOMER);
-			if (anonymousCustomer == null) {
-				Address address = null;
-				try {
-					String ipAddress = "";// GeoLocationUtils.getClientIpAddress(request);
-					Address geoAddress = null;// customerService.getCustomerAddress(store,
-												// ipAddress);
-					if (geoAddress != null) {
-						address = new Address();
-						address.setCountry(geoAddress.getCountry());
-						address.setCity(geoAddress.getCity());
-						address.setZone(geoAddress.getZone());
-					}
-				} catch (Exception ce) {
-					LOGGER.error("Cannot get geo ip component ", ce);
-				}
-
-				if (address == null) {
-					address = new Address();
-					address.setCountry(store.getCountry().getIsoCode());
-					if (store.getZone() != null) {
-						address.setZone(store.getZone().getCode());
-					} else {
-						address.setStateProvince(store.getStateProvince());
-					}
-				}
-				anonymousCustomer = new AnonymousCustomer();
-				anonymousCustomer.setBilling(address);
-				request.getSession().setAttribute(ApplicationConstants.ANONYMOUS_CUSTOMER, anonymousCustomer);
-			} else {
-				request.setAttribute(ApplicationConstants.ANONYMOUS_CUSTOMER, anonymousCustomer);
-			}
-
 			/** language & locale **/
-			/*
-			 * Language language = languageUtils.getRequestLanguage( request,
-			 * response); request.setAttribute(AppConstants. LANGUAGE,
-			 * language);
-			 *
-			 * Locale locale = languageService.toLocale(language);
-			 */
-			// Locale locale = LocaleContextHolder.getLocale();
-
 			// will to enhance
 			LocaleContextHolder.setLocale(Locale.ENGLISH);
-
-			/**
-			 * Breadcrumbs will move to common
-			 *
-			 **/
-			// setBreadcrumb(request, Locale.ENGLISH);
-			/*******
-			 * Top Categories **
-			 *
-			 * need future research
-			 *
-			 ******/
-
-			// this.setTopCategories(store, language, request);
-
-			/******* Configuration objects *******/
-			/**
-			 * SHOP configuration type Should contain - Different configuration
-			 * flags - Google analytics - Facebook page - Twitter handle - Show
-			 * customer login - ...
-			 */
-
-			// this.getMerchantConfigurations(store, request);
-
-			/******* Shopping Cart *********/
-
-			String shoppingCarCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
-			if (shoppingCarCode != null) {
-				request.setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCarCode);
-			}
-
+			userInfo.setCartCode(shoppingCartCode);
 		} catch (Exception e) {
 			LOGGER.error("Error in StoreFilter", e);
 		}
-
-		UserInfoContextHolder.setUserInfo(userInfo);
+		System.out.println("customer info is : " + userInfo);
+		CustomerInfoContextHolder.setUserInfo(userInfo);
 		return true;
 	}
 
@@ -174,12 +103,11 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 			ModelAndView modelAndView) throws Exception {
 		if (modelAndView != null) {
 			modelAndView.addObject("continueShopping",
-					UserInfoContextHolder.getMerchantStore().getContinueShoppingURL());
+					CustomerInfoContextHolder.getMerchantStore().getContinueShoppingURL());
 			modelAndView.addObject("cartTotal", request.getSession().getAttribute(ApplicationConstants.CART_TOTAL));
 			modelAndView.addObject("cartItemsTotal", request.getSession().getAttribute(ApplicationConstants.CARTITEMS_TOTAL));
 		}
-
-		UserInfoContextHolder.clear();
+		CustomerInfoContextHolder.clear();
 	}
 
 	private MerchantStore setMerchantStoreInSession(HttpServletRequest request, String storeCode) throws Exception {

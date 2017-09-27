@@ -32,7 +32,7 @@ import com.shoppay.core.order.enumeration.SalesOrderStatus;
 import com.shoppay.core.order.service.SalesOrderService;
 import com.shoppay.shop.model.PaymentInfo;
 import com.shoppay.shop.model.ShoppingOrderContext;
-import com.shoppay.shop.utils.UserInfoContextHolder;
+import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShoppingOrderController")
@@ -71,12 +71,12 @@ public class ShoppingOrderController extends AbstractShoppingController {
 		BeanUtils.copyProperties(delivery, orderContext.getBilling());
 		order.setDelivery(delivery);
 
-		Customer customer = UserInfoContextHolder.getCustomer();
+		Customer customer = CustomerInfoContextHolder.getCustomer();
 		order.setCustomerId(customer.getId());
 		order.setStatus(SalesOrderStatus.INITED);
 		order.setBilling(customer.getBilling());
 		order.setDelivery(customer.getDelivery());
-		order.setMerchant(UserInfoContextHolder.getMerchantStore());
+		order.setMerchant(CustomerInfoContextHolder.getMerchantStore());
 		Set<OrderProductLine> productItems = new HashSet<OrderProductLine>();
 		BigDecimal orderTotal = new BigDecimal(0);
 		for (Long id : cartItemIds) {
@@ -96,7 +96,7 @@ public class ShoppingOrderController extends AbstractShoppingController {
 			line.setSkuName(sku.getName());
 			line.setUnitPrice(sku.getRetailPrice());
 			line.setItemQuantity(item.getQuantity());
-			line.setCurrency(UserInfoContextHolder.getMerchantStore().getCurrency());
+			line.setCurrency(CustomerInfoContextHolder.getMerchantStore().getCurrency());
 			line.setTotal(lineTotal);
 			line.setSalesOrder(order);
 			productItems.add(line);

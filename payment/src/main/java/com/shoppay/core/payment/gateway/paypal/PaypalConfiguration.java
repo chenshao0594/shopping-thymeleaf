@@ -1,4 +1,4 @@
-package com.shoppay.payment.gateway.paypal;
+package com.shoppay.core.payment.gateway.paypal;
 
 import java.util.HashMap;
 import java.util.Map;

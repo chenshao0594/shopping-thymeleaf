@@ -20,7 +20,7 @@ import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.facade.ShoppingCartFacade;
 import com.shoppay.shop.model.ShoppingCartData;
-import com.shoppay.shop.utils.UserInfoContextHolder;
+import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopCartController")
@@ -40,8 +40,8 @@ public class ShoppingCartController extends AbstractShoppingController {
 	public ModelAndView detail(ModelAndView model, final HttpServletRequest request) throws Exception {
 		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
-		MerchantStore store = UserInfoContextHolder.getMerchantStore();
-		Customer customer = getSessionAttribute(ApplicationConstants.CUSTOMER, request);
+		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
+		Customer customer = CustomerInfoContextHolder.getCustomer();
 		if (customer != null) {
 			shoppingCart = shoppingCartService.getShoppingCart(customer);
 		}

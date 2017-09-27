@@ -17,6 +17,7 @@ import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.repository.CartRepository;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.core.cart.Cart;
+import com.shoppay.core.cart.CartCodeGegerator;
 import com.shoppay.core.cart.CartItem;
 import com.shoppay.core.cart.QCart;
 import com.shoppay.core.cart.service.CartService;
@@ -114,12 +115,12 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 	@Override
 	public Cart createEmptyCart(Customer customer) {
 		Cart cart = new Cart();
-		String code = UUID.randomUUID().toString().replaceAll("-", "");
+		String code = CartCodeGegerator.generateCode();
 		cart.setCode(code);
-		if (customer != null) {
+		if(customer!=null) {
 			cart.setCustomerId(customer.getId());
 		}
-		// cart.setCustomerId(customer.getId());
+		
 		this.shoppingCartRepository.save(cart);
 		return cart;
 	}

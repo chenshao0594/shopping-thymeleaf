@@ -15,10 +15,10 @@ import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import com.shoppay.common.utils.URLUtils;
+import com.shoppay.core.payment.gateway.paypal.PaypalPaymentIntent;
+import com.shoppay.core.payment.gateway.paypal.PaypalPaymentMethod;
+import com.shoppay.core.payment.gateway.paypal.PaypalPaymentService;
 import com.shoppay.core.payment.model.PaymentContext;
-import com.shoppay.payment.gateway.paypal.PaypalPaymentIntent;
-import com.shoppay.payment.gateway.paypal.PaypalPaymentMethod;
-import com.shoppay.payment.gateway.paypal.PaypalPaymentService;
 
 public class PaypalController {
 	

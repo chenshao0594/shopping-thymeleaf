@@ -1,7 +1,7 @@
 package com.shoppay.core.payment.model;
 
-import com.shoppay.payment.gateway.paypal.PaypalPaymentIntent;
-import com.shoppay.payment.gateway.paypal.PaypalPaymentMethod;
+import com.shoppay.core.payment.gateway.paypal.PaypalPaymentIntent;
+import com.shoppay.core.payment.gateway.paypal.PaypalPaymentMethod;
 
 public class PaymentContext {
 

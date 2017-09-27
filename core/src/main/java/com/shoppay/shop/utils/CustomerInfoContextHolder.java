@@ -3,15 +3,15 @@ package com.shoppay.shop.utils;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.core.customer.Customer;
 
-public class UserInfoContextHolder {
-	private static final ThreadLocal<UserInfo> userInfoLocal = new InheritableThreadLocal<UserInfo>() {
+public class CustomerInfoContextHolder {
+	private static final ThreadLocal<CustomerInfo> userInfoLocal = new InheritableThreadLocal<CustomerInfo>() {
 		@Override
-		protected UserInfo initialValue() {
-			return new UserInfo();
+		protected CustomerInfo initialValue() {
+			return new CustomerInfo();
 		}
 	};
 
-	public static void setUserInfo(UserInfo userInfo) {
+	public static void setUserInfo(CustomerInfo userInfo) {
 		if (userInfo != null) {
 			userInfoLocal.set(userInfo);
 		}
@@ -29,29 +29,36 @@ public class UserInfoContextHolder {
 		return userInfoLocal.get().merchantStore;
 	}
 
-	public static Long getUserId() {
-		return userInfoLocal.get().userId;
-	}
 
 	public static String getSessionId() {
 		return userInfoLocal.get().sessionId;
 	}
-
-	public static void setUserInfo(Long tenantId, Long userId, Long employeeId, String sessionId,
-			MerchantStore merchantStore) {
-		UserInfo info = userInfoLocal.get();
-		info.merchantStore = merchantStore;
-		info.userId = userId;
-		info.tenantId = tenantId;
-		info.sessionId = sessionId;
+	
+	public static String getCartCode() {
+		return userInfoLocal.get().cartCode;
+	}
+	
+	public static boolean isAnony() {
+		return userInfoLocal.get().isAnony;
 	}
 
-	public static class UserInfo {
+	public static void setCustomerInfo(Long tenantId, Long employeeId, String sessionId,
+			MerchantStore merchantStore, String cartCode) {
+		CustomerInfo info = userInfoLocal.get();
+		info.merchantStore = merchantStore;
+		info.tenantId = tenantId;
+		info.sessionId = sessionId;
+		info.cartCode = cartCode;
+	}
+
+	public static class CustomerInfo {
+		private boolean isAnony=false;
 		private MerchantStore merchantStore;
 		private Customer customer;
 		private Long tenantId = null;
-		private Long userId = null;
 		private String sessionId = null;
+		
+		private String cartCode;
 
 		public Customer getCustomer() {
 			return customer;
@@ -69,14 +76,6 @@ public class UserInfoContextHolder {
 			this.tenantId = tenantId;
 		}
 
-		public Long getUserId() {
-			return userId;
-		}
-
-		public void setUserId(Long userId) {
-			this.userId = userId;
-		}
-
 		public String getSessionId() {
 			return sessionId;
 		}
@@ -92,6 +91,32 @@ public class UserInfoContextHolder {
 		public void setMerchantStore(MerchantStore merchantStore) {
 			this.merchantStore = merchantStore;
 		}
+
+		public String getCartCode() {
+			return cartCode;
+		}
+
+		public void setCartCode(String cartCode) {
+			this.cartCode = cartCode;
+		}
+
+		public boolean isAnony() {
+			return isAnony;
+		}
+
+		public void setAnony(boolean isAnony) {
+			this.isAnony = isAnony;
+		}
+
+		@Override
+		public String toString() {
+			return "CustomerInfo [isAnony=" + isAnony + ", merchantStore=" + merchantStore + ", customer=" + customer
+					+ ", tenantId=" + tenantId + ", sessionId=" + sessionId + ", cartCode=" + cartCode + "]";
+		}
+		
+		
+		
+		
 
 	}
 }

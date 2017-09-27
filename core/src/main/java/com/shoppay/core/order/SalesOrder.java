@@ -112,9 +112,6 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 	@Embedded
 	private Billing billing = null;
 
-	// @Embedded
-	// private CreditCard creditCard = null;
-
 	@Type(type = "locale")
 	@Column(name = "LOCALE")
 	private Locale locale;
