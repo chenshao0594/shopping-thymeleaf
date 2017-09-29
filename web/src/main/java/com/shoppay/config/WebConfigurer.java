@@ -74,23 +74,11 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 	@Override
 	public void customize(ConfigurableEmbeddedServletContainer container) {
 		MimeMappings mappings = new MimeMappings(MimeMappings.DEFAULT);
-		// IE issue, see https://github.com/jhipster/generator-jhipster/pull/711
 		mappings.add("html", "text/html;charset=utf-8");
-		// CloudFoundry issue, see
-		// https://github.com/cloudfoundry/gorouter/issues/64
 		mappings.add("json", "text/html;charset=utf-8");
 		container.setMimeMappings(mappings);
-		// When running in an IDE or with ./gradlew bootRun, set location of the
-		// static web assets.
 		setLocationForStaticAssets(container);
 
-		/*
-		 * Enable HTTP/2 for Undertow -
-		 * https://twitter.com/ankinson/status/829256167700492288 HTTP/2
-		 * requires HTTPS, so HTTP requests will fallback to HTTP/1.1. See the
-		 * JHipsterProperties class and your application-*.yml configuration
-		 * files for more information.
-		 */
 		if (applicationProperties.getHttp().getVersion().equals(JHipsterProperties.Http.Version.V_2_0)
 				&& container instanceof UndertowEmbeddedServletContainerFactory) {
 

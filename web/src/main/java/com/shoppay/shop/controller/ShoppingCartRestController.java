@@ -75,7 +75,6 @@ public class ShoppingCartRestController extends AbstractShoppingController {
 		}
 		shoppingCart = shoppingCartFacade.addItemsToShoppingCart(shoppingCart, item, store, customer);
 		shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart, store);
-		session.setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCart.getCode());
 		customerInfo.setCartQuantity(shoppingCartData.getQuantity());
 		customerInfo.setCartTotal(shoppingCartData.getTotal());
 		customerInfo.setCartCode(shoppingCart.getCode());

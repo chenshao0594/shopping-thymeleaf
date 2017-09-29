@@ -30,11 +30,9 @@ import com.shoppay.shop.utils.CustomerInfoContextHolder.CustomerInfo;
 
 public class WebInterceptor extends HandlerInterceptorAdapter {
 	private final Logger LOGGER = LoggerFactory.getLogger(WebInterceptor.class);
-	private final static String STORE_REQUEST_PARAMETER = "store";
 
 	private final static String CART_TOTAL="cartTotal";
 	private final static String CART_QUANTITY="cartQuantity";
-	private final static String COOKIE_CART_CODE="cart-code";
 
 	@Inject
 	private MerchantStoreService merchantService;
@@ -58,18 +56,6 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 		try {
 			/** merchant store **/
 			MerchantStore store = this.merchantService.getByCode("DEFAULT");
-//			if (!StringUtils.isBlank(storeCode)) {
-//				if (store != null) {
-//					if (!store.getCode().equals(storeCode)) {
-//						store = setMerchantStoreInSession(request, storeCode);
-//					}
-//				} else {
-//					store = setMerchantStoreInSession(request, storeCode);
-//				}
-//			}
-//			if (store == null) {
-//				store = setMerchantStoreInSession(request, MerchantStore.DEFAULT_STORE);
-//			}
 			userInfo.setMerchantStore(store);
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			Customer customer = null;
@@ -85,7 +71,7 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 			}else {
 				userInfo.setAnony(true);
 				Map<String, String> cookieMap = this.readCookieMap(request);
-				String cartCodeInCookie = cookieMap.get(COOKIE_CART_CODE);
+				String cartCodeInCookie = cookieMap.get(ApplicationConstants.SHOPPING_CART);
 				if(StringUtils.isEmpty(cartCodeInCookie)) {
 					Cart cart = this.cartService.createEmptyCart(customer);
 					shoppingCartCode=cart.getCode();
@@ -93,7 +79,7 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 					shoppingCartCode = cartCodeInCookie;
 				}
 			}
-			Cookie cookie = new Cookie(COOKIE_CART_CODE, shoppingCartCode);
+			Cookie cookie = new Cookie(ApplicationConstants.SHOPPING_CART, shoppingCartCode);
 			cookie.setMaxAge(30 * 60);// 设置为30min
 			cookie.setPath("/");
 			response.addCookie(cookie);
@@ -111,19 +97,26 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
+
+		System.out.println("post handle customer info holder is " + CustomerInfoContextHolder.getCustomerInfo());
 		if (modelAndView != null) {
 			modelAndView.addObject("continueShopping",
 					CustomerInfoContextHolder.getMerchantStore().getContinueShoppingURL());
 		}
 		request.getSession().setAttribute(CART_TOTAL, CustomerInfoContextHolder.getCartTotal());
 		request.getSession().setAttribute(CART_QUANTITY, CustomerInfoContextHolder.getCartQuantity());
-		Cookie cookie = new Cookie(COOKIE_CART_CODE, CustomerInfoContextHolder.getCartCode());
+		Cookie cookie = new Cookie(ApplicationConstants.SHOPPING_CART, CustomerInfoContextHolder.getCartCode());
 		cookie.setMaxAge(30 * 60);// 设置为30min
 		cookie.setPath("/");
 		response.addCookie(cookie);
+	}
+
+
+	@Override  
+	public void afterCompletion(HttpServletRequest request, 	HttpServletResponse response, Object handler, Exception ex)  
+					throws Exception {  
 		CustomerInfoContextHolder.clear();
 	}
-	
 	private  Map<String,String> readCookieMap(HttpServletRequest request){    
 		Map<String,String> cookieMap = new HashMap<String,String>();  
 		Cookie[] cookies = request.getCookies();  
@@ -132,19 +125,7 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 				cookieMap.put(StringUtils.trim(cookie.getName()), cookie.getValue());  
 			}  
 		}  
-		System.out.println("cookie map is " + cookieMap);
 		return cookieMap;  
 	}  
 
-	private MerchantStore setMerchantStoreInSession(HttpServletRequest request, String storeCode) throws Exception {
-		if (storeCode == null || request == null)
-			return null;
-		MerchantStore store = merchantService.getByCode(storeCode);
-		if (store != null) {
-			request.getSession().setAttribute(ApplicationConstants.MERCHANT_STORE, store);
-			request.getSession().setAttribute(ApplicationConstants.CONTINUE_SHOPPING, store.getContinueShoppingURL());
-		}
-		
-		return store;
-	}
 }

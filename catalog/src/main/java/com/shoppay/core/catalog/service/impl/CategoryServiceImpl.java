@@ -1,10 +1,13 @@
 package com.shoppay.core.catalog.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.core.catalog.Category;
 import com.shoppay.core.catalog.QCategory;
@@ -35,6 +38,11 @@ public class CategoryServiceImpl extends AbstractDomainServiceImpl<Category, Lon
 		QCategory q = QCategory.category;
 		// this.categoryRepository.findOne(q.sear)
 		return null;
+	}
+
+	@Override
+	public List< Category> findAllByStore(MerchantStore store) {
+		return this.categoryRepository.findByStore();
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.shoppay.shop.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codahale.metrics.annotation.Timed;
+import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.core.catalog.Category;
 import com.shoppay.core.catalog.Product;
 import com.shoppay.core.catalog.service.CategoryService;
 import com.shoppay.core.catalog.service.ProductService;
+import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopCatalogueController")
@@ -36,17 +39,17 @@ public class ShoppingCatalogueController {
 
 	@Timed
 	@GetMapping("")
-	public String catalogue(Model model, Pageable pageable, HttpServletRequest request, HttpServletResponse response,
-			Locale locale) throws Exception {
-		Page<Category> page = this.categoryService.findAll(null);
+	public String catalogue(Model model, Pageable pageable, HttpServletRequest request) throws Exception {
+		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
+		List<Category> categories = this.categoryService.findAllByStore(store);
 		Page<Product> productPage = this.productService.findAll(pageable);
-		model.addAttribute("categories", page.getContent());
+		model.addAttribute("categories", categories);
 		model.addAttribute("page", productPage);
 		return ShoppingControllerConstants.Catalog.catalogue;
 	}
 
 	@Timed
-	@GetMapping("/{friendlyUrl}.html")
+	@GetMapping("/{friendlyUrl}")
 	public String displayCategoryNoReference(@PathVariable final String friendlyUrl, Model model,
 			HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
 		return this.displayCategory(friendlyUrl, null, model, request, response, locale);
@@ -73,16 +76,4 @@ public class ShoppingCatalogueController {
 		}
 		return ShoppingControllerConstants.Catalog.catalogue;
 	}
-	// @Timed
-	// @GetMapping(value = "")
-	// public ModelAndView catalogue(Pageable pageable, ModelAndView model)
-	// throws Exception {
-	//
-	// Page<Product> productPage = this.productService.findAll(pageable);
-	// model.addObject("page", productPage);
-	// model.setViewName(ShopControllerConstants.Catalogue.catalogue);
-	// return model;
-	//
-	// }
-
 }

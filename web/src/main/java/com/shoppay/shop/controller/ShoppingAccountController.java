@@ -92,7 +92,6 @@ public class ShoppingAccountController extends AbstractShoppingController {
 		}
 		try {
 			customerFacade.registerCustomer(customerRO, merchantStore);
-			
 		} catch (BusinessException e) {
 			LOGGER.error("Error while registering customer.. ", e);
 			ObjectError error = new ObjectError("registration",
@@ -104,7 +103,6 @@ public class ShoppingAccountController extends AbstractShoppingController {
 		try {
 			Customer c = customerFacade.getCustomerByUserName(customerRO.getEmailAddress(), merchantStore);
 			this.shoppingCartService.createEmptyCart(c);
-			// authenticate
 			customerFacade.authenticate(c, c.getEmailAddress(), customerRO.getPassword());
 			return "redirect:/";
 
@@ -129,9 +127,6 @@ public class ShoppingAccountController extends AbstractShoppingController {
 				throw new BusinessException("customer not exist");
 			}
 			customerFacade.authenticate(customerModel, customerInfo.getName(), customerInfo.getPassword());
-			
-			
-			//super.setSessionAttribute(ApplicationConstants.CUSTOMER, customerModel, request);
 			String sessionShoppingCartCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
 			if (!StringUtils.isBlank(sessionShoppingCartCode)) {
 				Cart shoppingCart = customerFacade.mergeCart(customerModel, sessionShoppingCartCode, store);

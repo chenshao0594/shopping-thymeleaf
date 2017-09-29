@@ -42,7 +42,6 @@ public class PriceProcessor extends AbstractElementTagProcessor {
 		final IStandardExpressionParser parser = StandardExpressions.getExpressionParser(configuration);
 		final IStandardExpression expression = parser.parseExpression(context, valueContent);
 		final BigDecimal price = (BigDecimal) expression.execute(context);
-
 		final MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
 		String formatedPrice = "error";
 		try {
