@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -31,6 +32,7 @@ import com.shoppay.core.facade.ShoppingCartFacade;
 import com.shoppay.shop.model.ShoppingCartData;
 import com.shoppay.shop.model.ShoppingCartItem;
 import com.shoppay.shop.utils.CustomerInfoContextHolder;
+import com.shoppay.shop.utils.CustomerInfoContextHolder.CustomerInfo;
 import com.shoppay.web.rest.util.HeaderUtil;
 
 @RestController("ShopCartRestController")
@@ -50,31 +52,33 @@ public class ShoppingCartRestController extends AbstractShoppingController {
 	@Timed
 	@PostMapping()
 	public ResponseEntity<ShoppingCartData> addShoppingCartItem(final ShoppingCartItem item,
-			final HttpServletRequest request, final HttpServletResponse response, final Locale locale)
+			final HttpServletRequest request, final HttpServletResponse response, final Locale locale,HttpSession session)
 			throws BusinessException, ConversionException {
 		LOGGER.info("shopping cart item  {}", item);
+		CustomerInfo customerInfo = CustomerInfoContextHolder.getCustomerInfo();
 		ShoppingCartData shoppingCartData = null;
 		Cart shoppingCart = null;
-		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
-		String cartCodeInSession = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
-		boolean isAnony = CustomerInfoContextHolder.isAnony();
+		MerchantStore store = customerInfo.getMerchantStore();
+		boolean isAnony = customerInfo.isAnony();
 		if(isAnony){
 			
 		}
-		Customer customer = CustomerInfoContextHolder.getCustomer();
+		Customer customer = customerInfo.getCustomer();
 		if (customer != null) {
 			shoppingCart = shoppingCartService.getShoppingCart(customer);
 		}
-		if (!StringUtils.isBlank(cartCodeInSession)) {
-			shoppingCart = shoppingCartService.getShoppingCartByCode(cartCodeInSession);
+		if (!StringUtils.isBlank(customerInfo.getCartCode())) {
+			shoppingCart = shoppingCartService.getShoppingCartByCode(customerInfo.getCartCode());
 		}
 		if (shoppingCart == null) {
 			shoppingCart = shoppingCartService.createEmptyCart(customer);
 		}
 		shoppingCart = shoppingCartFacade.addItemsToShoppingCart(shoppingCart, item, store, customer);
 		shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart, store);
-		request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCart.getCode());
-		LOGGER.info("shopping cart", shoppingCart);
+		session.setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCart.getCode());
+		customerInfo.setCartQuantity(shoppingCartData.getQuantity());
+		customerInfo.setCartTotal(shoppingCartData.getTotal());
+		customerInfo.setCartCode(shoppingCart.getCode());
 		return ResponseEntity.ok().body(shoppingCartData);
 	}
 
@@ -105,18 +109,12 @@ public class ShoppingCartRestController extends AbstractShoppingController {
 
 	@Timed
 	@GetMapping("/miniCart")
-	public ResponseEntity<ShoppingCartData> getMiniCart(final String cartCode, HttpServletRequest request) {
+	public ResponseEntity<ShoppingCartData> getMiniCart( HttpServletRequest request) {
 		try {
 			MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
 			Customer customer = CustomerInfoContextHolder.getCustomer();
+			String cartCode = CustomerInfoContextHolder.getCartCode();
 			ShoppingCartData cart = shoppingCartFacade.getShoppingCartData(customer, store, cartCode);
-			if (cart != null) {
-				request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, cart.getCode());
-			}
-			if (cart == null) {
-				request.getSession().removeAttribute(ApplicationConstants.SHOPPING_CART);
-				cart = new ShoppingCartData();// create an empty cart
-			}
 			return ResponseEntity.ok().body(cart);
 		} catch (Exception e) {
 			LOGGER.error("Error while getting the shopping cart", e);

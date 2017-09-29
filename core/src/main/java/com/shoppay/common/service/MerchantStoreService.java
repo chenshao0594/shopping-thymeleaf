@@ -8,5 +8,6 @@ import com.shoppay.common.exception.BusinessException;
  */
 public interface MerchantStoreService extends AbstractDomainService<MerchantStore, Long> {
 	MerchantStore getByCode(String code) throws BusinessException;
+	MerchantStore getByAddress(String host);
 
 }

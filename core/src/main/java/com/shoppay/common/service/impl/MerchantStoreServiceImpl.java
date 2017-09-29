@@ -33,4 +33,9 @@ public class MerchantStoreServiceImpl extends AbstractDomainServiceImpl<Merchant
 		return this.merchantStoreRepository.findOne(qMerchantStore.code.eq(code));
 	}
 
+	@Override
+	public MerchantStore getByAddress(String host) {
+		return this.merchantStoreRepository.findByAddress(host);
+	}
+
 }

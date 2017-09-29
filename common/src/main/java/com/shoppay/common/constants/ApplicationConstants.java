@@ -32,12 +32,15 @@ public final class ApplicationConstants {
 	public final static String PERMISSION_CUSTOMER_AUTHENTICATED = "AUTH_CUSTOMER";
 
 	// shopping cart
-	public final static String SHOPPING_CART = "SHOPPING-CART";
+	//public final static String SHOPPING_CART = "SHOPPING-CART";
+	public final static String SHOPPING_CART = "CART_CODE";
 	public final static String STORE_CODE = "STRORE-CODE";
 	public final static String COOKIE_NAME_CART = "cart";
 	public final static String CART_TOTAL = "CART_TOTAL";
 	public final static String CARTITEMS_TOTAL = "CARTITEMS_TOTAL";
 	public final static String CONTINUE_SHOPPING = "CONTINUE_SHOPPING";
+	public final static String ITEMS="quantity";
+	public final static String TOTAL="total";
 	// temp
 	public final static String LINK_CODE = "LINK_CODE";
 	public final static Locale DEFAULT_LOCALE = Locale.US;

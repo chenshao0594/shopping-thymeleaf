@@ -16,8 +16,8 @@
 					</form>
 				</div>
 				<div class="five columns" id="mini-cart">
-					<a class="button right" th:href="@{/shoppingcart}"> <span id="cart-items">0</span> Items <span
-						id="cart-total">$0.00</span>
+					<a class="button right" th:href="@{/shoppingcart}"> <span id="cart-items"  th:text="${session.cartQuantity}">0</span> Items <span
+						id="cart-total" th:text="${session.cartTotal}">$0.00</span>
 					</a>
 				</div>
 			</div>
@@ -40,10 +40,8 @@
 				</li>
 				<li class="menu-item-seperator"></li>
 				<li
-					class="has-flyout {{ active_page == 'profile' or 
-                                   active_page == 'orders' or 
-                                   active_page == 'subscriptions' ? 'active' : null }} right-border-li">
-					<a href="#">Profile</a> <a class="flyout-toggle" href="{{ site_url('profile') }}"><span>
+					class="has-flyout">
+					<a href="#">Profile</a> <a class="flyout-toggle" href="#"><span>
 					</span></a>
 					<ul class="flyout" style="display: none;">
 						<li><a th:href="@{/customer/orders}">My Orders</a></li>

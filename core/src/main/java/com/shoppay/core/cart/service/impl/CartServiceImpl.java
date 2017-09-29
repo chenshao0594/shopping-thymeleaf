@@ -26,6 +26,7 @@ import com.shoppay.core.catalog.service.ProductService;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.repository.search.ShoppingCartSearchRepository;
 import com.shoppay.shop.model.ShoppingCartItem;
+import com.shoppay.shop.utils.CustomerInfoContextHolder;
 
 /**
  * Service Implementation for managing Category.
@@ -61,8 +62,7 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 
 	@Override
 	public Cart getByCode(String code, MerchantStore store) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.shoppingCartRepository.findByCode(code, store.getId());
 	}
 
 	@Override
@@ -93,7 +93,6 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 				return userShoppingCart;
 			}
 		}
-
 		LOGGER.info("Starting merging shopping carts");
 		this.save(userShoppingCart);
 		this.delete(sessionCart);
@@ -117,10 +116,10 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 		Cart cart = new Cart();
 		String code = CartCodeGegerator.generateCode();
 		cart.setCode(code);
+		cart.setMerchantStore(CustomerInfoContextHolder.getMerchantStore());
 		if(customer!=null) {
 			cart.setCustomerId(customer.getId());
 		}
-		
 		this.shoppingCartRepository.save(cart);
 		return cart;
 	}

@@ -108,20 +108,19 @@ public class ShoppingCartFacadeImpl implements ShoppingCartFacade {
 	}
 
 	@Override
-	public ShoppingCartData getShoppingCartData(Customer customer, MerchantStore store, String shoppingCartId)
+	public ShoppingCartData getShoppingCartData(Customer customer, MerchantStore store, String shoppingCartCode)
 			throws BusinessException {
 		Cart cart = null;
 		try {
 			if (customer != null) {
 				LOGGER.info("Reteriving customer shopping cart...");
 				cart = cartService.getShoppingCart(customer);
-			} else if (StringUtils.isNotBlank(shoppingCartId) && cart == null) {
-				cart = cartService.getByCode(shoppingCartId, store);
+			} else if (StringUtils.isNotBlank(shoppingCartCode) && cart == null) {
+				cart = cartService.getByCode(shoppingCartCode, store);
 			}
 		} catch (ServiceException ex) {
 			LOGGER.error("Error while retriving cart from customer", ex);
 		} catch (NoResultException nre) {
-			// nothing
 		}
 
 		if (cart == null) {

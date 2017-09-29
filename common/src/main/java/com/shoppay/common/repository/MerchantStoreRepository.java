@@ -11,5 +11,6 @@ import com.shoppay.common.domain.MerchantStore;
 @SuppressWarnings("unused")
 public interface MerchantStoreRepository
 		extends JpaRepository<MerchantStore, Long>, QueryDslPredicateExecutor<MerchantStore> {
-
+	
+	MerchantStore findByAddress(String address);
 }

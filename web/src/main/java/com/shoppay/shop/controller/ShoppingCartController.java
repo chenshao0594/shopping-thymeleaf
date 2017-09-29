@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
+import com.shoppay.common.exception.BusinessException;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.service.CartService;
-import com.shoppay.core.customer.Customer;
 import com.shoppay.core.facade.ShoppingCartFacade;
 import com.shoppay.shop.model.ShoppingCartData;
 import com.shoppay.shop.utils.CustomerInfoContextHolder;
@@ -38,22 +37,13 @@ public class ShoppingCartController extends AbstractShoppingController {
 	@Timed
 	@GetMapping()
 	public ModelAndView detail(ModelAndView model, final HttpServletRequest request) throws Exception {
-		ShoppingCartData shoppingCartData = null;
-		Cart shoppingCart = null;
 		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
-		Customer customer = CustomerInfoContextHolder.getCustomer();
-		if (customer != null) {
-			shoppingCart = shoppingCartService.getShoppingCart(customer);
+		String cartCode = CustomerInfoContextHolder.getCartCode();
+		if (StringUtils.isBlank(cartCode)) {
+			throw new BusinessException("can't work");
 		}
-		String cartCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
-		if (!StringUtils.isBlank(cartCode)) {
-			shoppingCart = shoppingCartService.getShoppingCartByCode(cartCode);
-		}
-		if (shoppingCart == null) {
-			shoppingCart = shoppingCartService.createEmptyCart(customer);
-		}
-		shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart, store);
-		request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCart.getCode());
+		Cart shoppingCart = shoppingCartService.getShoppingCartByCode(cartCode);
+		ShoppingCartData shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart, store);
 		boolean isEmpty = CollectionUtils.isEmpty(shoppingCartData.getShoppingCartItems());
 		model.addObject("shoppingcart", shoppingCartData);
 		model.addObject("isEmpty", isEmpty);

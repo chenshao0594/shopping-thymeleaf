@@ -1,5 +1,7 @@
 package com.shoppay.shop.utils;
 
+import java.math.BigDecimal;
+
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.core.customer.Customer;
 
@@ -11,7 +13,7 @@ public class CustomerInfoContextHolder {
 		}
 	};
 
-	public static void setUserInfo(CustomerInfo userInfo) {
+	public static void setCustomerInfo(CustomerInfo userInfo) {
 		if (userInfo != null) {
 			userInfoLocal.set(userInfo);
 		}
@@ -33,14 +35,28 @@ public class CustomerInfoContextHolder {
 	public static String getSessionId() {
 		return userInfoLocal.get().sessionId;
 	}
-	
+
 	public static String getCartCode() {
 		return userInfoLocal.get().cartCode;
 	}
-	
+
 	public static boolean isAnony() {
 		return userInfoLocal.get().isAnony;
 	}
+	public static String getCartTotal() {
+		return userInfoLocal.get().cartTotal;
+	}
+	
+	public static Integer getCartQuantity() {
+		return userInfoLocal.get().cartQuantity;
+	}
+
+	
+	public static CustomerInfo getCustomerInfo() {
+		return userInfoLocal.get();
+	}
+	
+	
 
 	public static void setCustomerInfo(Long tenantId, Long employeeId, String sessionId,
 			MerchantStore merchantStore, String cartCode) {
@@ -57,9 +73,10 @@ public class CustomerInfoContextHolder {
 		private Customer customer;
 		private Long tenantId = null;
 		private String sessionId = null;
-		
-		private String cartCode;
 
+		private String cartCode;
+		private Integer cartQuantity;
+		private String cartTotal;
 		public Customer getCustomer() {
 			return customer;
 		}
@@ -107,16 +124,31 @@ public class CustomerInfoContextHolder {
 		public void setAnony(boolean isAnony) {
 			this.isAnony = isAnony;
 		}
+		
+
+		public Integer getCartQuantity() {
+			return cartQuantity;
+		}
+
+		public void setCartQuantity(Integer cartQuantity) {
+			this.cartQuantity = cartQuantity;
+		}
+
+		public String getCartTotal() {
+			return cartTotal;
+		}
+
+		public void setCartTotal(String cartTotal) {
+			this.cartTotal = cartTotal;
+		}
 
 		@Override
 		public String toString() {
 			return "CustomerInfo [isAnony=" + isAnony + ", merchantStore=" + merchantStore + ", customer=" + customer
-					+ ", tenantId=" + tenantId + ", sessionId=" + sessionId + ", cartCode=" + cartCode + "]";
+					+ ", tenantId=" + tenantId + ", sessionId=" + sessionId + ", cartCode=" + cartCode
+					+ ", cartQuantity=" + cartQuantity + ", cartTotal=" + cartTotal + "]";
 		}
-		
-		
-		
-		
+
 
 	}
 }
