@@ -135,7 +135,10 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	@OrderBy(clause = "ORDER_STATUS_HISTORY_ID asc")
 	private Set<SalesOrderStatusHistory> orderHistory = new LinkedHashSet<SalesOrderStatusHistory>();
-
+	
+	@Column(name = "CURRENCY_CODE" ,nullable = false)
+	private java.util.Currency currency;
+	
 	public SalesOrder() {
 	}
 
@@ -308,5 +311,15 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 	public void setProductLines(Set<OrderProductLine> productLines) {
 		this.productLines = productLines;
 	}
+
+	public java.util.Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(java.util.Currency currency) {
+		this.currency = currency;
+	}
+	
+	
 
 }

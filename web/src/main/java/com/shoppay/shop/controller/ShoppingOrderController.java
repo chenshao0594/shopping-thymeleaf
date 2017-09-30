@@ -30,7 +30,6 @@ import com.shoppay.core.order.OrderProductLine;
 import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.order.enumeration.SalesOrderStatus;
 import com.shoppay.core.order.service.SalesOrderService;
-import com.shoppay.shop.model.PaymentInfo;
 import com.shoppay.shop.model.ShoppingOrderContext;
 import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
@@ -70,13 +69,14 @@ public class ShoppingOrderController extends AbstractShoppingController {
 		Delivery delivery = new Delivery();
 		BeanUtils.copyProperties(delivery, orderContext.getBilling());
 		order.setDelivery(delivery);
-
+		
 		Customer customer = CustomerInfoContextHolder.getCustomer();
 		order.setCustomerId(customer.getId());
 		order.setStatus(SalesOrderStatus.INITED);
 		order.setBilling(customer.getBilling());
 		order.setDelivery(customer.getDelivery());
 		order.setMerchant(CustomerInfoContextHolder.getMerchantStore());
+		order.setCurrency(CustomerInfoContextHolder.getMerchantStore().getCurrency());
 		Set<OrderProductLine> productItems = new HashSet<OrderProductLine>();
 		BigDecimal orderTotal = new BigDecimal(0);
 		for (Long id : cartItemIds) {
@@ -100,7 +100,7 @@ public class ShoppingOrderController extends AbstractShoppingController {
 			line.setTotal(lineTotal);
 			line.setSalesOrder(order);
 			productItems.add(line);
-			orderTotal.add(lineTotal);
+			orderTotal = orderTotal.add(lineTotal);
 		}
 		order.setTotal(orderTotal);
 		order.setProductLines(productItems);
@@ -115,11 +115,6 @@ public class ShoppingOrderController extends AbstractShoppingController {
 
 	}
 
-	@Timed
-	@PostMapping("payment")
-	public void payment(ModelAndView model, PaymentInfo paymentInfo, final HttpServletRequest request) {
-		SalesOrder order = this.salesOrderService.findOne(paymentInfo.getOrderId());
-
-	}
+	
 
 }

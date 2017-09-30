@@ -21,8 +21,7 @@
 								style="width: 52px;" /></a>
 							<div class="short-description">
 								<h3>
-									<a
-										th:href="@{/product/{productId}(productId=${item.productId})}">
+									<a th:href="@{/product/{productId}(productId=${item.productId})}">
 										[[${item.productName }]]</a>
 								</h3>
 							</div></td>
@@ -32,7 +31,8 @@
 						<td class="narrow"><i><shop:monetary
 									value="${item.itemPrice}"></shop:monetary></i></td>
 						<td class="narrow"><i>[[${item.subTotal}]]</i></td>
-						<td class="narrow remove"><a href="#">Remove</a></td>
+						<td class="narrow remove">
+						<a th:href="@{/shoppingcart/{cartId}/items/{itemId}(cartId=${shoppingcart.id}, itemId=${item.id})}">Remove</a></td>
 					</tr>
 				</table>
 			</div>
@@ -80,7 +80,7 @@
 			<div class="row">
 				<div class="buttons-block">
 					<div class="six columns">
-						<a class="secondary button" th:href="${continueShopping}">Continue
+						<a class="secondary button" th:href="${session.shoppingURL}">Continue
 							shopping</a>
 					</div>
 					<div class="six columns">

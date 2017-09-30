@@ -1,13 +1,13 @@
 package com.shoppay.shop.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.service.MailService;
 import com.shoppay.common.service.MerchantStoreService;
 import com.shoppay.common.service.MessageService;
@@ -61,10 +62,11 @@ public class ShoppingCustomerController extends AbstractShoppingController {
 	}
 
 	@GetMapping(value = "/orders")
-	public String orders(Model model) {
+	public String orders(Model model, Pageable pageable) {
 		Customer customer = CustomerInfoContextHolder.getCustomer();
-		List<SalesOrder> orders = this.orderService.findByCustomer(customer);
-		model.addAttribute("orders", orders);
+		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
+		Page<SalesOrder> page = this.orderService.findByCustomerAndStore(customer, store,pageable);
+		model.addAttribute("page", page);
 		return ShoppingControllerConstants.Customer.customerOrders;
 	}
 

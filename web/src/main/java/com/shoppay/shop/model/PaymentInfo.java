@@ -4,6 +4,7 @@ import com.shoppay.core.payment.enumeration.PaymentType;
 
 public class PaymentInfo {
 	private long orderId;
+	
 	private PaymentType type;
 
 	public long getOrderId() {

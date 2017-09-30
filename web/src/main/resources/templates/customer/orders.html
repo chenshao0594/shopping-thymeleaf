@@ -1,15 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
 	layout:decorate="~{layouts/layout}">
 <head>
 </head>
 <body>
 	<section layout:fragment="content">
-	
-	
-	customer orders
-	
-	
+		<div class="row">
+			<div class="content twelve columns">
+				<div class="row">
+					<table class="product-list full-width">
+						<tr>
+							<th>#</th>
+							<th>Date</th>
+							<th>Status</th>
+							<th>Total</th>
+							<th>operation</th>
+						</tr>
+						<tbody>
+							<tr th:each="row : ${page}">
+								<th scope="row" th:text="${row.id}">1</th>
+								<td th:text="${row.createdDate}">created_date</td>
+								<td th:text="${row.status}">status</td>
+								<td th:text="${row.total}">total</td>
+								<td>
+									<div class="flex-btn-group-container">
+										&nbsp; <a class="btn btn-success btn-sm"
+											th:href="@{/contributions/{contributionId}/download(contributionId=${row.id})}">
+											<span class="fa fa-eye"></span> <span class="hidden-md-down">Pay</span>
+										</a> &nbsp;
+
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div sd:pagination-summary="">info</div>
+					</div>
+					<div class="col-sm-6">
+						<nav class="pull-right">
+							<ul class="pagination" sd:pagination="full">
+								<li class="disabled"><a href="#" aria-label="Previous"><span
+										aria-hidden="true">&laquo;</span></a></li>
+								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 </body>
 </html>

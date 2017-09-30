@@ -10,9 +10,12 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.shoppay.common.constants.BusinessConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
@@ -132,16 +135,19 @@ public class SalesOrderServiceImpl extends AbstractDomainServiceImpl<SalesOrder,
 
 	}
 
-	@Override
-	public List<SalesOrder> findByCustomer(Customer customer) {
-		QSalesOrder qSales = QSalesOrder.salesOrder;
-		return (List<SalesOrder>) this.salesOrderRepository.findAll(qSales.customerId.eq(customer.getId()));
-	}
 
 	@Override
 	public SalesOrderTotalSummary calculateShoppingCartTotal(Cart cartModel, Customer customer, MerchantStore store) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Page<SalesOrder> findByCustomerAndStore(Customer customer, MerchantStore store, Pageable pageable) {
+		QSalesOrder qSales = QSalesOrder.salesOrder;
+		BooleanExpression expression = qSales.merchant.eq(store).and(qSales.customerId.eq(customer.getId()));
+		return this.salesOrderRepository.findAll(expression, pageable);
+	
 	}
 
 }

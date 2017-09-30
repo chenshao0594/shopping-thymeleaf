@@ -112,6 +112,7 @@ public class MerchantStore extends BusinessDomain<Long, MerchantStore> implement
 
 	@Transient
 	private java.util.Currency currency = BusinessConstants.DEFAULT_CURRENCY;
+	
 	@Transient
 	private Locale locale = Locale.US;
 

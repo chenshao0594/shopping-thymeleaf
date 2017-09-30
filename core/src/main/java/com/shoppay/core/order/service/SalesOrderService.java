@@ -1,6 +1,7 @@
 package com.shoppay.core.order.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
@@ -15,10 +16,11 @@ import com.shoppay.core.order.model.SalesOrderTotalSummary;
  */
 public interface SalesOrderService extends AbstractDomainService<SalesOrder, Long> {
 
-	List<SalesOrder> findByCustomer(Customer customer);
 
 	SalesOrderTotalSummary calculateShoppingCartTotal(Cart shoppingCart, MerchantStore store) throws BusinessException;
 
 	SalesOrderTotalSummary calculateShoppingCartTotal(Cart cartModel, Customer customer, MerchantStore store);
+
+	Page<SalesOrder> findByCustomerAndStore(Customer customer, MerchantStore store, Pageable pageable);
 
 }

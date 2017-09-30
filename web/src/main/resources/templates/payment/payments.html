@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
 	layout:decorate="~{layouts/layout}">
 <head>
 </head>
 <body>
 	<section layout:fragment="content">
-	order id : <span th:text="${orderId}"></span>
-	
-	
-	payments  page ... 
-	
-	
+		order id : <span th:text="${orderId}"></span> payments page ...
+		<form method="post" th:action="@{/paypal/pay}">
+			<input type="hidden" name="orderId" th:value="${orderId}"/>
+			<button type="submit">Process Payment</button>
+		</form>
+
+
 	</section>
 </body>
 </html>

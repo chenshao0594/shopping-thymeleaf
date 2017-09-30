@@ -1,46 +1,55 @@
-package com.shoppay.core.payment;
+package com.shoppay.shop.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import com.shoppay.common.utils.URLUtils;
+import com.shoppay.core.order.SalesOrder;
+import com.shoppay.core.order.service.SalesOrderService;
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentIntent;
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentMethod;
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentService;
 import com.shoppay.core.payment.model.PaymentContext;
+import com.shoppay.shop.model.PaymentInfo;
 
-public class PaypalController {
+
+
+@Controller("ShoppingPaypalController")
+@RequestMapping("/paypal")
+public class ShoppingPaypalController {
 	
 	public static final String PAYPAL_SUCCESS_URL = "paypal/success";
 	public static final String PAYPAL_CANCEL_URL = "paypal/cancel";
 	
-	private Logger LOGGER = LoggerFactory.getLogger(PaypalController.class);
+	private Logger LOGGER = LoggerFactory.getLogger(ShoppingPaypalController.class);
 	
 	@Autowired
 	private PaypalPaymentService paypalService;
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public String index(){
-		return "index";
-	}
+	
+	@Autowired
+	private SalesOrderService salesOrderService;
 	
 	@PostMapping("/pay")
-	public String pay(HttpServletRequest request){
+	public String pay( PaymentInfo paymentInfo, HttpServletRequest request){
 		String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL;
 		String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_URL;
-		PaymentContext paymentContext = new PaymentContext.Builder(4.00, "USD").method(PaypalPaymentMethod.paypal)
-				.intent(PaypalPaymentIntent.sale).description("paymentDescription")
+		
+		SalesOrder order = salesOrderService.findOne(paymentInfo.getOrderId());
+		PaymentContext paymentContext = new PaymentContext.Builder(order.getTotal(), order.getCurrency().getCurrencyCode())
+				.method(PaypalPaymentMethod.paypal)
+				.intent(PaypalPaymentIntent.sale).description("order descripton")
 				.cancelUrl(cancelUrl).successUrl(successUrl).build();
 		
 		try {

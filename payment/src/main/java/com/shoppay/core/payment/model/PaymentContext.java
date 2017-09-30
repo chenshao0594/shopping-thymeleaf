@@ -1,28 +1,30 @@
 package com.shoppay.core.payment.model;
 
+import java.math.BigDecimal;
+
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentIntent;
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentMethod;
 
 public class PaymentContext {
 
-	private Double total;
+	private BigDecimal total;
 	private String currency; 
 	private PaypalPaymentMethod method;
 	private PaypalPaymentIntent intent; 
 	private String description;
 	private String cancelUrl; 
 	private String successUrl;
-	public PaymentContext(Double total, String currency) {
+	public PaymentContext(BigDecimal total, String currency) {
 		this.total =total;
 		this.currency = currency;
 	} 
 
 	
 
-	public Double getTotal() {
+	public BigDecimal getTotal() {
 		return total;
 	}
-	public void setTotal(Double total) {
+	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
 	public String getCurrency() {
@@ -65,14 +67,14 @@ public class PaymentContext {
 
 
 	public static class Builder {
-		private Double total;
+		private BigDecimal total;
 		private String currency; 
 		private PaypalPaymentMethod method;
 		private PaypalPaymentIntent intent; 
 		private String description;
 		private String cancelUrl; 
 		private String successUrl;
-		public Builder(Double total, String currency) {
+		public Builder(BigDecimal total, String currency) {
 			this.total =total;
 			this.currency = currency;
 		}
