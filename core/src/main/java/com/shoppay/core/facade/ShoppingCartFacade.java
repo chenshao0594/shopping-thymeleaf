@@ -29,8 +29,8 @@ public interface ShoppingCartFacade {
 
 	public ShoppingCartData getShoppingCartData(String code, MerchantStore store) throws BusinessException;
 
-	public ShoppingCartData removeCartItem(final Long itemID, final String cartId, final MerchantStore store)
-			throws BusinessException;
+	public ShoppingCartData removeCartItem(final Long itemID, final Long cartId, final MerchantStore store)
+			throws BusinessException, ConversionException;
 
 	public ShoppingCartData updateCartItem(final Long itemID, final String cartId, final long quantity,
 			final MerchantStore store) throws BusinessException;

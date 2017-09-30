@@ -11,7 +11,7 @@
 		<div class="six columns">
 			<div class="row">
 				<div class="seven columns">
-					<form class="search" method="get" action="#">
+					<form class="search" method="post" action="/catalogue/search" th:action="@{/catalogue/search}">
 						<input type="text" name="query" value="" placeholder="Search store…">
 					</form>
 				</div>
@@ -70,7 +70,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row secondhead">
+	<!-- <div class="row secondhead">
 		<div class="twelve columns omega">
 			<div id="breadcrumbs-area" class="product left">
 				<h2>breadcrumbs</h2>
@@ -84,5 +84,5 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-	</div>
+	</div> -->
 </header>

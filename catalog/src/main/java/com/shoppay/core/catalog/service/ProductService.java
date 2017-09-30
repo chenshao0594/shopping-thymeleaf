@@ -3,6 +3,9 @@ package com.shoppay.core.catalog.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.shoppay.common.service.AbstractDomainService;
 import com.shoppay.core.catalog.Category;
 import com.shoppay.core.catalog.Product;
@@ -33,5 +36,9 @@ public interface ProductService extends AbstractDomainService<Product, Long> {
 	Product findBySearchURL(String searchURL);
 
 	long countByCategory(Category category);
+	
+	Page<Product> findAllByCategory(Category category,Pageable pageable);
+	
+	Page<Product> searchByName(String name, Pageable pageable);
 
 }

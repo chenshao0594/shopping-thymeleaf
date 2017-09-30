@@ -28,7 +28,7 @@
 							class="quantity" th:value="${item.quantity}"></td>
 						<td class="narrow"><i><shop:monetary value="${item.itemPrice}"></shop:monetary></i></td>
 						<td class="narrow"><i>[[${item.subTotal}]]</i></td>
-						<td class="narrow remove"><a href="#">Remove</a></td>
+						<td class="narrow remove"><a th:href="#">Remove</a></td>
 					</tr>
 				</table>
 			</div>

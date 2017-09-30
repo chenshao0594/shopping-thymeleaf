@@ -1,7 +1,5 @@
 package com.shoppay.shop.utils;
 
-import java.math.BigDecimal;
-
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.core.customer.Customer;
 

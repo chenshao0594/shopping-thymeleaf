@@ -7,9 +7,6 @@ import com.shoppay.order.model.OrderTotal;
 
 public class ShoppingCartData implements Serializable {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = -3563109569242923101L;
 
 	private Long id;
@@ -20,7 +17,6 @@ public class ShoppingCartData implements Serializable {
 	private String subTotal;
 	private List<OrderTotal> totals;// calculated from OrderTotalSummary
 	private List<ShoppingCartItem> shoppingCartItems;
-	// private List<ShoppingCartItem> unavailables;
 
 	public String getMessage() {
 		return message;

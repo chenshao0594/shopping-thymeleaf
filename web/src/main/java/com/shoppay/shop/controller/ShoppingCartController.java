@@ -8,13 +8,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
+import com.shoppay.common.exception.ConversionException;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.facade.ShoppingCartFacade;
@@ -45,10 +49,30 @@ public class ShoppingCartController extends AbstractShoppingController {
 		Cart shoppingCart = shoppingCartService.getShoppingCartByCode(cartCode);
 		ShoppingCartData shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart, store);
 		boolean isEmpty = CollectionUtils.isEmpty(shoppingCartData.getShoppingCartItems());
+		
+		CustomerInfoContextHolder.getCustomerInfo().setCartTotal(shoppingCartData.getTotal());
+		CustomerInfoContextHolder.getCustomerInfo().setCartQuantity(shoppingCartData.getQuantity());
+		
 		model.addObject("shoppingcart", shoppingCartData);
 		model.addObject("isEmpty", isEmpty);
 		model.setViewName(ShoppingControllerConstants.ShoppingCart.detail);
 		return model;
+	}
+	
+	@Timed
+	@DeleteMapping("/{cartId}/items/{itemId}")
+	public ModelAndView delete(@PathVariable final long cartId, @PathVariable final long itemId, ModelAndView model ) throws BusinessException, ConversionException {
+		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
+		ShoppingCartData shoppingCartData = this.shoppingCartFacade.removeCartItem(itemId, cartId, store);
+		boolean isEmpty = CollectionUtils.isEmpty(shoppingCartData.getShoppingCartItems());
+		CustomerInfoContextHolder.getCustomerInfo().setCartTotal(shoppingCartData.getTotal());
+		CustomerInfoContextHolder.getCustomerInfo().setCartQuantity(shoppingCartData.getQuantity());
+		
+		model.addObject("shoppingcart", shoppingCartData);
+		model.addObject("isEmpty", isEmpty);
+		model.setViewName(ShoppingControllerConstants.ShoppingCart.detail);
+		return model;
+		
 	}
 
 }

@@ -62,7 +62,6 @@ public class Category extends BusinessDomain<Long, Category> implements Serializ
 	@Column(name = "image")
 	private String image;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "parent")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<Category> categories = new HashSet<>();

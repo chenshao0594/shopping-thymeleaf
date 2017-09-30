@@ -15,6 +15,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Transformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -283,6 +285,16 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 	public long countByCategory(Category category) {
 		QProduct qProduct = QProduct.product;
 		return this.productRepository.count(qProduct.category.id.eq(category.getId()));
+	}
+
+	@Override
+	public Page<Product> findAllByCategory(Category category,Pageable pageable) {
+		return this.productRepository.findAllByCategory(category, pageable);
+	}
+
+	@Override
+	public Page<Product> searchByName(String name, Pageable pageable) {
+		return this.productRepository.findAllByNameContaining(name, pageable);
 	}
 
 }

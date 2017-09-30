@@ -10,12 +10,9 @@ public interface ShoppingControllerConstants {
 		final static String detail = "cart/detail";
 	}
 
-	interface Category {
-		final static String category = "category";
-	}
-
 	interface Catalog {
 		final static String catalogue = "catalog/catalogue";
+		final static String search = "catalog/search";
 	}
 
 	interface Product {

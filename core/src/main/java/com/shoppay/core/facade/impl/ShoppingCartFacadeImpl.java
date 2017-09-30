@@ -204,9 +204,10 @@ public class ShoppingCartFacadeImpl implements ShoppingCartFacade {
 	}
 
 	@Override
-	public ShoppingCartData removeCartItem(Long itemID, String cartId, MerchantStore store) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+	public ShoppingCartData removeCartItem(Long itemId, Long cartId, MerchantStore store) throws BusinessException, ConversionException {
+		this.cartItemService.delete(itemId);
+		Cart cart = this.cartService.findOne(cartId);
+		return this.getShoppingCartData(cart, store);
 	}
 
 }

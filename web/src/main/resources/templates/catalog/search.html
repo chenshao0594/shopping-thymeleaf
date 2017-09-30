@@ -9,19 +9,7 @@
 		<div class="row">
 			<div class="content twelve columns">
 				<div class="row">
-					<div class="three columns categories">
-						<h3>Categories</h3>
-						<!-- {{ partial('shop-categories') }} -->
-						<ul
-							class="{% if tree.topLevel %} categories-group {% else %} sub-category {% endif %}">
-							<li th:each="item: ${categories}"><a
-								th:href="@{/catalogue/{catalogueId}(catalogueId=${item.id})}"
-								th:text="${item.code}"></a></li>
-						</ul>
-					</div>
 					<div class="product-list nine columns">
-
-						<section>
 							<div class="row">
 								<ul class="clearfix">
 									<li th:each="row : ${page}" class="three columns mobile-two">
@@ -56,7 +44,6 @@
 									</ul>
 								</div>
 							</div>
-						</section>
 					</div>
 				</div>
 			</div>

@@ -6,6 +6,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codahale.metrics.annotation.Timed;
@@ -48,12 +50,37 @@ public class ShoppingCatalogueController {
 		return ShoppingControllerConstants.Catalog.catalogue;
 	}
 
+	
 	@Timed
-	@GetMapping("/{friendlyUrl}")
-	public String displayCategoryNoReference(@PathVariable final String friendlyUrl, Model model,
-			HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
-		return this.displayCategory(friendlyUrl, null, model, request, response, locale);
+	@GetMapping("/{catalogueId}")
+	public String catalogue(@PathVariable long catalogueId, Model model, Pageable pageable, HttpServletRequest request) throws Exception {
+		LOGGER.info("find products by catelogueId {}", catalogueId);
+		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
+		Category category = this.categoryService.findOne(catalogueId);
+		List<Category> categories = this.categoryService.findAllByStore(store);
+		Page<Product> productPage = this.productService.findAllByCategory(category, pageable);
+		model.addAttribute("categories", categories);
+		model.addAttribute("page", productPage);
+		return ShoppingControllerConstants.Catalog.catalogue;
 	}
+
+	
+	@Timed
+	@PostMapping("/search")
+	public String search(String query, Model model, Pageable pageable, HttpSession session) throws Exception {
+		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
+		Page<Product> productPage = this.productService.searchByName(query, pageable);
+		session.setAttribute("query", query);
+		model.addAttribute("page", productPage);
+		return ShoppingControllerConstants.Catalog.search;
+	}
+
+//	@Timed
+//	@GetMapping("/{friendlyUrl}")
+//	public String displayCategoryNoReference(@PathVariable final String friendlyUrl, Model model,
+//			HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
+//		return this.displayCategory(friendlyUrl, null, model, request, response, locale);
+//	}
 
 	@Timed
 	@GetMapping("/{friendlyUrl}.html/ref={ref}")
