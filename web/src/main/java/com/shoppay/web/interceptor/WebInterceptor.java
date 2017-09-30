@@ -33,6 +33,8 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 
 	private final static String CART_TOTAL="cartTotal";
 	private final static String CART_QUANTITY="cartQuantity";
+	
+	private final static String CONTINUE_SHOPPING_URL="shoppingURL";
 
 	@Inject
 	private MerchantStoreService merchantService;
@@ -97,12 +99,7 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-
-		System.out.println("post handle customer info holder is " + CustomerInfoContextHolder.getCustomerInfo());
-		if (modelAndView != null) {
-			modelAndView.addObject("continueShopping",
-					CustomerInfoContextHolder.getMerchantStore().getContinueShoppingURL());
-		}
+		request.getSession().setAttribute(CONTINUE_SHOPPING_URL, CustomerInfoContextHolder.getMerchantStore().getContinueShoppingURL());
 		request.getSession().setAttribute(CART_TOTAL, CustomerInfoContextHolder.getCartTotal());
 		request.getSession().setAttribute(CART_QUANTITY, CustomerInfoContextHolder.getCartQuantity());
 		Cookie cookie = new Cookie(ApplicationConstants.SHOPPING_CART, CustomerInfoContextHolder.getCartCode());

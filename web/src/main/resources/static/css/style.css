@@ -306,7 +306,7 @@ header {
       padding: 3px 10px;
       box-shadow: none;
       border-radius: 0;
-      background: url(../images/search.gif) no-repeat right 6px;
+      background: url(../img/search.gif) no-repeat right 6px;
       margin-bottom: 0;
       height: 36px;
       transition:none;
@@ -388,7 +388,7 @@ header {
       .nav-bar > li.has-flyout > a:first-child:after {
         right: 4px; top: 9px;
         border: none;
-        background: url(../images/dropdown.gif) no-repeat;
+        background: url(../img/dropdown.gif) no-repeat;
         height: 13px; width: 13px;
         }
         .flyout {
@@ -402,7 +402,7 @@ header {
 
           .flyout:before {
             content: "";
-            background: url(../images/dropdowntop.gif) no-repeat 50% 0;
+            background: url(../img/dropdowntop.gif) no-repeat 50% 0;
             width: 100%; height: 19px;
             display: block;
             position: absolute;
@@ -969,7 +969,7 @@ footer p {
       text-align: center!important;
     }
     td.remove a {
-      background: url(../images/remove.gif) no-repeat center top;
+      background: url(../img/remove.gif) no-repeat center top;
       text-indent: -1000em;
       display: inline-block;
       height: 23px; width: 23px;
@@ -1108,7 +1108,7 @@ footer p {
     }
 
 .banner {
-    background: url(../images/zest-banner-bg.jpg) no-repeat;
+    background: url(../img/zest-banner-bg.jpg) no-repeat;
     height:368px;
 }
 
@@ -1203,13 +1203,13 @@ strong {
 }
 
 .social-links .icon-facebook {
-  background: url("../images/social.png") 0 0;
+  background: url("../img/social.png") 0 0;
 }
 .social-links .icon-instagram {
-  background: url("../images/social.png") 16px 0;
+  background: url("../img/social.png") 16px 0;
 }
 .social-links .icon-twitter {
-  background: url("../images/social.png") 32px 0;
+  background: url("../img/social.png") 32px 0;
 }
 .social .sharrre {
   display: inline-block;

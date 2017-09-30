@@ -33,7 +33,7 @@ import io.github.jhipster.config.JHipsterConstants;
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ ApplicationProperties.class })
 public class EshopApplication {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(EshopApplication.class);
 
 	private final Environment env;
@@ -65,13 +65,6 @@ public class EshopApplication {
 		if (env.getProperty("server.ssl.key-store") != null) {
 			protocol = "https";
 		}
-		log.info(
-				"\n----------------------------------------------------------\n\t"
-						+ "Application '{}' is running! Access URLs:\n\t" + "Local: \t\t{}://localhost:{}\n\t"
-						+ "External: \t{}://{}:{}\n\t"
-						+ "Profile(s): \t{}\n----------------------------------------------------------",
-				env.getProperty("spring.application.name"), protocol, env.getProperty("server.port"), protocol,
-				InetAddress.getLocalHost().getHostAddress(), env.getProperty("server.port"), env.getActiveProfiles());
 	}
 
 }

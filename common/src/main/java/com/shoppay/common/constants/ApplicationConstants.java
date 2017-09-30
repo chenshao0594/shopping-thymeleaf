@@ -41,6 +41,8 @@ public final class ApplicationConstants {
 	public final static String CONTINUE_SHOPPING = "CONTINUE_SHOPPING";
 	public final static String ITEMS="quantity";
 	public final static String TOTAL="total";
+	
+	
 	// temp
 	public final static String LINK_CODE = "LINK_CODE";
 	public final static Locale DEFAULT_LOCALE = Locale.US;

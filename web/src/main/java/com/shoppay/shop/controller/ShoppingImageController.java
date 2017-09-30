@@ -18,7 +18,7 @@ import com.shoppay.common.domain.Attachment;
 import com.shoppay.common.service.AttachmentService;
 import com.shoppay.core.attachment.utils.AttachmentUtils;
 
-@Controller("ShopImageController")
+@Controller("ShoppingImageController")
 @RequestMapping("/images")
 public class ShoppingImageController {
 
