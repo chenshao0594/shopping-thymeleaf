@@ -12,11 +12,15 @@
 					<div class="three columns categories">
 						<h3>Categories</h3>
 						<!-- {{ partial('shop-categories') }} -->
-						<ul
-							class="{% if tree.topLevel %} categories-group {% else %} sub-category {% endif %}">
+						<ul class="categories-group">
 							<li th:each="item: ${categories}"><a
 								th:href="@{/catalogue/{catalogueId}(catalogueId=${item.id})}"
-								th:text="${item.code}"></a></li>
+								th:text="${item.code}"></a>
+								<ul class="sub-category ">
+									<li th:each="sub : ${item.categories}"><a
+										th:href="@{/catalogue/{subId}(subId=${sub.id})}"
+										th:text="${sub.code}"></a></li>
+								</ul></li>
 						</ul>
 					</div>
 					<div class="product-list nine columns">

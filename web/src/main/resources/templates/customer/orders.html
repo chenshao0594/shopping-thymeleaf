@@ -19,17 +19,16 @@
 						</tr>
 						<tbody>
 							<tr th:each="row : ${page}">
-								<th scope="row" th:text="${row.id}">1</th>
+								<td scope="row" th:text="${row.id}">1</td>
 								<td th:text="${row.createdDate}">created_date</td>
 								<td th:text="${row.status}">status</td>
-								<td th:text="${row.total}">total</td>
+								<td><shop:monetary value="${row.total}"></shop:monetary></td>
 								<td>
 									<div class="flex-btn-group-container">
 										&nbsp; <a class="btn btn-success btn-sm"
 											th:href="@{/contributions/{contributionId}/download(contributionId=${row.id})}">
-											<span class="fa fa-eye"></span> <span class="hidden-md-down">Pay</span>
+											<span class="fa fa-eye"></span> <span class="hidden-md-down">To Pay</span>
 										</a> &nbsp;
-
 									</div>
 								</td>
 							</tr>
