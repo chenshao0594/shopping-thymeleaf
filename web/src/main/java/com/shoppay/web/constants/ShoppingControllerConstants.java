@@ -29,7 +29,6 @@ public interface ShoppingControllerConstants {
 		final static String review = "review";
 		final static String register = "register";
 		final static String changePassword = "customerPassword";
-		final static String customerOrders = "customer/orders";
 		final static String Billing = "customerAddress";
 		final static String EditAddress = "editCustomerAddress";
 		final static String RegistrationPage = "customer/registration.html";
@@ -62,6 +61,11 @@ public interface ShoppingControllerConstants {
 		final static String search = "search";
 	}
 
+	interface Order {
+		final static String list = "order/list";
+		final static String detail = "order/detail";
+		
+	}
 	interface Error {
 		final static String accessDenied = "accessDenied";
 		final static String error = "error";

@@ -473,3 +473,6 @@
     width: 100%;
     display: table-row;
 }
+.thumbnail-image{
+    width: 80px;
+}

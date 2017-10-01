@@ -28,12 +28,6 @@ public abstract class AbstractDomainServiceImpl<E extends BusinessDomainInterfac
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	public E getById(K id) {
-		return repository.findOne(id);
-	}
-
-	@Override
 	public E save(E entity) throws ServiceException {
 		repository.save(entity);
 		// searchRepository.save(entity);

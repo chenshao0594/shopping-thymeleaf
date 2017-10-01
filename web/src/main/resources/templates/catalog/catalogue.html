@@ -42,8 +42,11 @@
 												</h3>
 												<span> <a
 													th:href="@{/product/{productId}(productId=${row.id})}">
-														<i> <span class="oldprice"
-															th:text="${row.retailPrice}"> </span>
+														<i> <span> <shop:monetary
+																	value="${row.retailPrice}">
+																</shop:monetary>
+
+														</span>
 													</i>
 												</a>
 												</span>

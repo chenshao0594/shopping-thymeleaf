@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -41,12 +41,11 @@ public class ShoppingPaypalController {
 	@Autowired
 	private SalesOrderService salesOrderService;
 	
-	@PostMapping("/pay")
-	public String pay( PaymentInfo paymentInfo, HttpServletRequest request){
+	@GetMapping("/pay/{orderId}")
+	public String pay(@PathVariable long orderId,  PaymentInfo paymentInfo, HttpServletRequest request){
 		String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL;
 		String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_URL;
-		
-		SalesOrder order = salesOrderService.findOne(paymentInfo.getOrderId());
+		SalesOrder order = salesOrderService.findOne(orderId);
 		PaymentContext paymentContext = new PaymentContext.Builder(order.getTotal(), order.getCurrency().getCurrencyCode())
 				.method(PaypalPaymentMethod.paypal)
 				.intent(PaypalPaymentIntent.sale).description("order descripton")

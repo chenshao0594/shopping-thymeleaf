@@ -13,9 +13,6 @@ public interface CategoryService extends AbstractDomainService<Category, Long> {
 
 	Category findBySearchURL(final String searchURL);
 	
-	
-	List<Category> findAllByStore(final MerchantStore store);
-	
 	List<Category> findCategoryTreeByStore(final MerchantStore store);
 	
 	

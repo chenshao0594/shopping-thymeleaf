@@ -99,7 +99,7 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		request.getSession().setAttribute(CONTINUE_SHOPPING_URL, CustomerInfoContextHolder.getMerchantStore().getContinueShoppingURL());
+		request.getSession().setAttribute(CONTINUE_SHOPPING_URL, "/catalogue");
 		request.getSession().setAttribute(CART_TOTAL, CustomerInfoContextHolder.getCartTotal());
 		request.getSession().setAttribute(CART_QUANTITY, CustomerInfoContextHolder.getCartQuantity());
 		Cookie cookie = new Cookie(ApplicationConstants.SHOPPING_CART, CustomerInfoContextHolder.getCartCode());

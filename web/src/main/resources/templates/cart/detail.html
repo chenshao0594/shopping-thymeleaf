@@ -77,7 +77,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row"  th:unless="${isEmpty}">
 				<div class="buttons-block">
 					<div class="six columns">
 						<a class="secondary button" th:href="${session.shoppingURL}">Continue
@@ -93,7 +93,7 @@
 			</div>
 			<div class="row" th:if="${isEmpty}">
 				<div class="six columns">
-					<a class="secondary button" href="{{ site_url('shop') }}">Your
+					<a class="secondary button" th:href="${session.shoppingURL}">Your
 						cart is empty! Continue shopping.</a>
 				</div>
 			</div>

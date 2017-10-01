@@ -13,6 +13,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Embeddable
 public class Billing implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7078668725259754630L;
+
 	@NotEmpty
 	@Column(name = "BILLING_LAST_NAME", length = 64, nullable = false)
 	private String lastName;

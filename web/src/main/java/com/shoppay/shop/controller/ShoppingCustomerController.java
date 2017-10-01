@@ -13,7 +13,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shoppay.common.domain.MerchantStore;
@@ -24,6 +26,7 @@ import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.facade.CustomerFacade;
 import com.shoppay.core.order.SalesOrder;
+import com.shoppay.core.order.enumeration.SalesOrderStatus;
 import com.shoppay.core.order.service.SalesOrderService;
 import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
@@ -67,7 +70,25 @@ public class ShoppingCustomerController extends AbstractShoppingController {
 		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
 		Page<SalesOrder> page = this.orderService.findByCustomerAndStore(customer, store,pageable);
 		model.addAttribute("page", page);
-		return ShoppingControllerConstants.Customer.customerOrders;
+		return ShoppingControllerConstants.Order.list;
+	}
+	
+	@GetMapping(value = "/orders/{orderId}/delete")
+	public String deleteOrder(@PathVariable("orderId") long orderId, Model model, Pageable pageable) {
+		Customer customer = CustomerInfoContextHolder.getCustomer();
+		MerchantStore store = CustomerInfoContextHolder.getMerchantStore();
+		SalesOrder order = this.orderService.findOne(orderId);
+		order.setStatus(SalesOrderStatus.DELETED);
+		this.orderService.update(order);
+		Page<SalesOrder> page = this.orderService.findByCustomerAndStore(customer, store,pageable);
+		model.addAttribute("page", page);
+		return ShoppingControllerConstants.Order.list;
+	}
+	@GetMapping(value = "/orders/{orderId}/detail")
+	public String getOrderDetail(@PathVariable("orderId") long orderId, Model model, Pageable pageable) {
+		SalesOrder order = this.orderService.findOne(orderId);
+		model.addAttribute("order", order);
+		return ShoppingControllerConstants.Order.detail;
 	}
 
 }

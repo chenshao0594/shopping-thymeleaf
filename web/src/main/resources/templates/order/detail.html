@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+	layout:decorate="~{layouts/layout}">
+<head>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="row">
+			<div class="content twelve columns">
+				<section th:if="${order}">
+					<div class="row">
+						<div class="eight columns data-list">
+							<p>
+								<strong>Order number: </strong>[[${order.id}]]
+							</p>
+
+							<p>
+								<strong>Payment method: </strong> [[${order.status}]]
+							</p>
+
+							<p>
+								<strong>Order Date: </strong>[[${order.createdDate}]]]
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<table class="product-list full-width">
+							<tr>
+								<th>Item</th>
+								<th class="narrow">Quantity</th>
+								<th class="narrow">Price</th>
+								<th class="narrow">Total</th>
+							</tr>
+							<tr th:each="item : ${order.productLines}">
+								<td><a class="hide-for-small"
+									th:href="@{/product/{productId}(productId=${item.productId})}"><img  class="thumbnail-image"
+										th:src="@{/images/product/{productId}/thumbnail(productId=${item.productId})}"/></a>
+									<div class="short-description">
+										<h3>
+											<a th:href="@{/product/{productId}(productId=${item.productId})}">[[${item.skuName}]]</a>
+										</h3>
+										<p>{{ description|unescape }}</p>
+									</div></td>
+								<td class="narrow"><i>[[${item.itemQuantity}]]</i></td>
+								<td class="narrow"><i><shop:monetary value="${item.unitPrice}"></shop:monetary></i></td>
+								<td class="narrow"><i><shop:monetary value="${item.total}"></shop:monetary></i></td>
+							</tr>
+						</table>
+					</div>
+					<div class="row">
+						<div class="two columns">
+						
+							<a class="button"
+								th:href="@{/paypal/pay/{orderId}(orderId = ${order.id})}">Pay the
+								order</a> 
+						</div>
+
+						<div class="three columns offset-by-seven data-list align-right">
+							<p>
+								<strong>Subtotal:</strong> <i>{00.00</i>
+							</p>
+							<p>
+								<strong>Sales Tax:</strong> <i>00.00</i>
+							</p>
+							<p>
+								<strong>Shipping:</strong> <i> 00.00</i>
+							</p>
+
+							<p class="subtotal">
+								<strong>Total:</strong> 
+								<i><shop:monetary value="${order.total}"></shop:monetary></i>
+							</p>
+						</div>
+					</div>
+				</section>
+				<p class="flash error" th:unless="${order}">Order not found</p>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

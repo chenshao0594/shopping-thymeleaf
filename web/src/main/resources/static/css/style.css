@@ -953,8 +953,8 @@ footer p {
       background-color: #f2f2f2;
     }
     table.product-list tr td {
-      padding-top: 20px;
-      padding-bottom: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
       table tr td input {
         float: right; 

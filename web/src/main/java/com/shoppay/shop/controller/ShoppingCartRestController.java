@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.exception.ConversionException;

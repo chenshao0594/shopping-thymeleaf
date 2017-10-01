@@ -2,7 +2,7 @@ package com.shoppay.core.order.enumeration;
 
 public enum SalesOrderStatus {
 	INITED("inited"), ORDERED("ordered"), PROCESSED("processed"), DELIVERED("delivered"), REFUNDED(
-			"refunded"), CANCELED("canceled"),;
+			"refunded"), CANCELED("canceled"),DELETED("deleted");
 
 	private String value;
 

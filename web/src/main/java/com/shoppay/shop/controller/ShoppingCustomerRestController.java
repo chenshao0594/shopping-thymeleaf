@@ -1,7 +1,6 @@
 package com.shoppay.shop.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -64,23 +63,16 @@ public class ShoppingCustomerRestController extends AbstractShoppingController {
 				ShoppingCartData shoppingCartData = this.populateShoppingCartData(shoppingCart, store);
 				if (shoppingCartData != null) {
 					request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCartData.getCode());
-				} else {
-					// DELETE COOKIE
-					Cookie c = new Cookie(ApplicationConstants.COOKIE_NAME_CART, "");
-					c.setMaxAge(0);
-					c.setPath(ApplicationConstants.SLASH);
-					response.addCookie(c);
 				}
-
 			} else {
 				Cart cartModel = shoppingCartService.getShoppingCartByCustomer(customerModel);
-				if (cartModel != null) {
-					request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, cartModel.getCode());
-					Cookie c = new Cookie(ApplicationConstants.COOKIE_NAME_CART, cartModel.getCode());
-					c.setMaxAge(60 * 24 * 3600);
-					c.setPath(ApplicationConstants.SLASH);
-					response.addCookie(c);
-				}
+//				if (cartModel != null) {
+//					request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, cartModel.getCode());
+//					Cookie c = new Cookie(ApplicationConstants.COOKIE_NAME_CART, cartModel.getCode());
+//					c.setMaxAge(60 * 24 * 3600);
+//					c.setPath(ApplicationConstants.SLASH);
+//					response.addCookie(c);
+//				}
 
 			}
 
