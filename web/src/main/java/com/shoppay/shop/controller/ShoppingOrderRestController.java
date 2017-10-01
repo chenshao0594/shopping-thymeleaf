@@ -14,7 +14,7 @@ import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.order.service.SalesOrderService;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @RestController("ShoppingOrderRestController")

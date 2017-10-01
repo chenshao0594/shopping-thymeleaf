@@ -24,9 +24,9 @@ import com.shoppay.core.catalog.service.PricingService;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.model.CustomerRO;
 import com.shoppay.core.facade.CustomerFacade;
+import com.shoppay.core.model.ShoppingCartData;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 import com.shoppay.populator.ShoppingCartDataPopulator;
-import com.shoppay.shop.model.ShoppingCartData;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
 
 @Controller("ShopCustomerRestController")
 @RequestMapping("/customer")
@@ -56,14 +56,10 @@ public class ShoppingCustomerRestController extends AbstractShoppingController {
 				throw new BusinessException("customer not exist");
 			}
 			customerFacade.authenticate(customerModel, customerInfo.getName(), customerInfo.getPassword());
-			//super.setSessionAttribute(ApplicationConstants.CUSTOMER, customerModel, request);
-			String sessionShoppingCartCode = (String) request.getSession().getAttribute(ApplicationConstants.SHOPPING_CART);
+			String sessionShoppingCartCode = CustomerInfoContextHolder.getCartCode();
 			if (!StringUtils.isBlank(sessionShoppingCartCode)) {
 				Cart shoppingCart = customerFacade.mergeCart(customerModel, sessionShoppingCartCode, store);
 				ShoppingCartData shoppingCartData = this.populateShoppingCartData(shoppingCart, store);
-				if (shoppingCartData != null) {
-					request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCartData.getCode());
-				}
 			} else {
 				Cart cartModel = shoppingCartService.getShoppingCartByCustomer(customerModel);
 //				if (cartModel != null) {

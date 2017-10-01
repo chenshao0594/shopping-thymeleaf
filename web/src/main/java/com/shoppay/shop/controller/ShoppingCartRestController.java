@@ -28,10 +28,10 @@ import com.shoppay.core.cart.service.CartItemService;
 import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.facade.ShoppingCartFacade;
-import com.shoppay.shop.model.ShoppingCartData;
-import com.shoppay.shop.model.ShoppingCartItem;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
-import com.shoppay.shop.utils.CustomerInfoContextHolder.CustomerInfo;
+import com.shoppay.core.model.ShoppingCartData;
+import com.shoppay.core.model.ShoppingCartItem;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
+import com.shoppay.core.utils.CustomerInfoContextHolder.CustomerInfo;
 import com.shoppay.web.rest.util.HeaderUtil;
 
 @RestController("ShopCartRestController")

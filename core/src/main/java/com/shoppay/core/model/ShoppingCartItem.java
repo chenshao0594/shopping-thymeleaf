@@ -1,4 +1,4 @@
-package com.shoppay.shop.model;
+package com.shoppay.core.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

@@ -15,6 +15,7 @@ import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import com.shoppay.common.utils.URLUtils;
+import com.shoppay.core.model.PaymentInfo;
 import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.order.enumeration.SalesOrderStatus;
 import com.shoppay.core.order.service.SalesOrderService;
@@ -23,7 +24,6 @@ import com.shoppay.core.payment.gateway.paypal.PaypalPaymentIntent;
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentMethod;
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentService;
 import com.shoppay.core.payment.model.PaymentContext;
-import com.shoppay.shop.model.PaymentInfo;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 

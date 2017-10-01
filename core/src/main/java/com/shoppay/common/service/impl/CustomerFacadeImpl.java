@@ -68,18 +68,18 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
 	@Override
 	public Customer getCustomerByUserName(String userName, MerchantStore store) throws BusinessException {
-		return this.customerService.findCustomerByName(userName);
+		return this.customerService.findByName(userName);
 	}
 
 	@Override
 	public Customer getCustomerByEmailAddress(final String emailAddress, final MerchantStore store)
 			throws BusinessException {
-		return this.customerService.findCustomerByEmailAddress(emailAddress);
+		return this.customerService.findByEmailAddress(emailAddress);
 	}
 
 	@Override
 	public boolean checkIfUserExists(String email, MerchantStore store) throws BusinessException {
-		Customer customer = this.customerService.findCustomerByEmailAddress(email);
+		Customer customer = this.customerService.findByEmailAddress(email);
 		return customer != null;
 	}
 

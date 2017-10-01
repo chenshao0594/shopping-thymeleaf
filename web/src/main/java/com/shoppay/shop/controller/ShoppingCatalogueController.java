@@ -26,8 +26,8 @@ import com.shoppay.core.catalog.Category;
 import com.shoppay.core.catalog.Product;
 import com.shoppay.core.catalog.service.CategoryService;
 import com.shoppay.core.catalog.service.ProductService;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 import com.shoppay.shop.model.CategoryNode;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopCatalogueController")

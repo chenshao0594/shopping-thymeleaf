@@ -23,9 +23,9 @@ import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.catalog.Product;
 import com.shoppay.core.catalog.service.ProductService;
 import com.shoppay.core.customer.Customer;
+import com.shoppay.core.model.ShoppingCartItem;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 import com.shoppay.repository.search.ShoppingCartSearchRepository;
-import com.shoppay.shop.model.ShoppingCartItem;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
 
 /**
  * Service Implementation for managing Category.

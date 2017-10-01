@@ -1,4 +1,4 @@
-package com.shoppay.shop.model;
+package com.shoppay.core.model;
 
 import com.shoppay.core.payment.enumeration.PaymentType;
 

@@ -20,11 +20,11 @@ import com.shoppay.core.cart.service.ShoppingCartCalculationService;
 import com.shoppay.core.catalog.service.PricingService;
 import com.shoppay.core.catalog.service.ProductService;
 import com.shoppay.core.catalog.service.SKUService;
+import com.shoppay.core.model.ShoppingCartData;
+import com.shoppay.core.model.ShoppingCartItem;
 import com.shoppay.core.order.model.SalesOrderTotalSummary;
 import com.shoppay.order.model.OrderTotal;
 import com.shoppay.order.model.SalesOrderSummary;
-import com.shoppay.shop.model.ShoppingCartData;
-import com.shoppay.shop.model.ShoppingCartItem;
 
 public class ShoppingCartDataPopulator extends AbstractDataPopulator<Cart, ShoppingCartData> {
 

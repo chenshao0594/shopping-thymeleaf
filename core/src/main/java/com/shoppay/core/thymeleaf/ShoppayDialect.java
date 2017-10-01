@@ -1,4 +1,4 @@
-package com.shoppay.thymeleaf;
+package com.shoppay.core.thymeleaf;
 
 import java.util.HashSet;
 import java.util.Set;

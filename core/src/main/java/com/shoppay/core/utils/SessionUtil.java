@@ -1,4 +1,4 @@
-package com.shoppay.shop.utils;
+package com.shoppay.core.utils;
 
 import javax.servlet.http.HttpServletRequest;
 

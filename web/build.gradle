@@ -32,7 +32,8 @@ defaultTasks 'bootRun'
 
 eclipse {
     classpath {
-       downloadSources=true
+    	   downloadJavadoc = true
+       downloadSources = true
     }
 }
 

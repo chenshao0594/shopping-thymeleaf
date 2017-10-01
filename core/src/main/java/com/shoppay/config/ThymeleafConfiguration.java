@@ -10,7 +10,7 @@ import org.thymeleaf.dialect.springdata.SpringDataDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-import com.shoppay.thymeleaf.ShoppayDialect;
+import com.shoppay.core.thymeleaf.ShoppayDialect;
 
 @Configuration
 public class ThymeleafConfiguration {

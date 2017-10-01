@@ -33,12 +33,12 @@ import com.shoppay.core.catalog.service.SKUService;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.facade.PaymentFacade;
+import com.shoppay.core.model.ShoppingOrderContext;
 import com.shoppay.core.order.OrderProductLine;
 import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.order.enumeration.SalesOrderStatus;
 import com.shoppay.core.order.service.SalesOrderService;
-import com.shoppay.shop.model.ShoppingOrderContext;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopCheckOutController")
@@ -81,7 +81,7 @@ public class ShoppingCheckOutController extends AbstractShoppingController {
 		LOGGER.info("principal user {}", principal);
 		if (principal instanceof UserDetails) {
 			String username = ((UserDetails) principal).getUsername();
-			Customer customer = customerService.findCustomerByName(username);
+			Customer customer = customerService.findByName(username);
 			//Customer userInfo = UserInfoContextHolder.getCustomer();
 			Cart shoppingCart = shoppingCartService.getShoppingCart(customer);
 			for (CartItem item : shoppingCart.getLineItems()) {
@@ -96,33 +96,9 @@ public class ShoppingCheckOutController extends AbstractShoppingController {
 			LOGGER.info(" not UserDetails user {}", principal.getClass());
 			model.setViewName(ShoppingControllerConstants.Checkout.start);
 		}
-		request.getSession().setAttribute(ShoppingControllerConstants.ORDER_KEY, order);
 		return model;
 	}
 
-	/*
-	 * @Timed
-	 *
-	 * @PostMapping("shipping") public ModelAndView shipping(ModelAndView model,
-	 * ShoppingOrderContext order, final HttpServletRequest request) {
-	 * ShoppingOrderContext orderSession = (ShoppingOrderContext)
-	 * request.getSession().getAttribute(ORDER_KEY);
-	 * orderSession.setBilling(order.getBilling());
-	 * request.getSession().setAttribute(ORDER_KEY, orderSession); Object
-	 * principal =
-	 * SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	 * LOGGER.info("principal user {}", principal); if (principal instanceof
-	 * UserDetails) { LOGGER.info("UserDetails user {}", principal); String
-	 * username = ((UserDetails) principal).getUsername(); Customer customer =
-	 * customerService.findCustomerByName(username); Page page =
-	 * this.countryService.findAll(null); model.addObject("countries",
-	 * page.getContent()); model.addObject("customer", customer);
-	 * model.setViewName(ShoppingControllerConstants.Checkout.address); } else {
-	 * LOGGER.info(" not UserDetails user {}", principal.getClass());
-	 * model.setViewName(ShoppingControllerConstants.Checkout.start); }
-	 * model.setViewName(ShoppingControllerConstants.Payment.methods); return
-	 * model; }
-	 */
 	@Timed
 	// @PostMapping("order")
 	public ModelAndView order(ModelAndView model, final Customer customer) throws BusinessException {

@@ -20,8 +20,8 @@ import com.shoppay.common.exception.ConversionException;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.facade.ShoppingCartFacade;
-import com.shoppay.shop.model.ShoppingCartData;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
+import com.shoppay.core.model.ShoppingCartData;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopCartController")

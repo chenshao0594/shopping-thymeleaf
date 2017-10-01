@@ -46,7 +46,7 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 	private Long id;
 
 	@NotEmpty
-	@Column(name = "name", length = 64, nullable = false)
+	@Column(name = "name", length = 64, nullable = false, updatable=false)
 	private String name;
 
 	@NotEmpty
@@ -74,7 +74,7 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 	private String remark;
 
 	@Email
-	@Column(name = "email_address", nullable = false)
+	@Column(name = "email_address", nullable = false, updatable=false)
 	private String emailAddress;
 
 	@Column(name = "CUSTOMER_PASSWORD")

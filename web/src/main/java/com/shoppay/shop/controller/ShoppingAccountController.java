@@ -36,9 +36,9 @@ import com.shoppay.core.catalog.service.PricingService;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.model.CustomerRO;
 import com.shoppay.core.facade.CustomerFacade;
+import com.shoppay.core.model.ShoppingCartData;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 import com.shoppay.populator.ShoppingCartDataPopulator;
-import com.shoppay.shop.model.ShoppingCartData;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @RequestMapping()
@@ -115,8 +115,8 @@ public class ShoppingAccountController extends AbstractShoppingController {
 
 	}
 
-	@Timed
-	@PostMapping(value = "/login")
+/*	@Timed
+	//@PostMapping(value = "/login")
 	public String login(CustomerRO customerInfo, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			LOGGER.debug("Authenticating user " + customerInfo.getName());
@@ -130,10 +130,7 @@ public class ShoppingAccountController extends AbstractShoppingController {
 			if (!StringUtils.isBlank(sessionShoppingCartCode)) {
 				Cart shoppingCart = customerFacade.mergeCart(customerModel, sessionShoppingCartCode, store);
 				ShoppingCartData shoppingCartData = this.populateShoppingCartData(shoppingCart, store);
-				if (shoppingCartData != null) {
-					request.getSession().setAttribute(ApplicationConstants.SHOPPING_CART, shoppingCartData.getCode());
-				}
-
+				CustomerInfoContextHolder.getCustomerInfo().setCartCode(shoppingCartData.getCode());				
 			} else {
 				Cart cartModel = shoppingCartService.getShoppingCartByCustomer(customerModel);
 //				if (cartModel != null) {
@@ -145,16 +142,6 @@ public class ShoppingAccountController extends AbstractShoppingController {
 //				}
 
 			}
-
-			StringBuilder cookieValue = new StringBuilder();
-			cookieValue.append(store.getCode()).append("_").append(customerModel.getName());
-			// set username in the cookie
-			// Cookie c = new Cookie(AppConstants.COOKIE_NAME_USER,
-			// cookieValue.toString());
-			// c.setMaxAge(60 * 24 * 3600);
-			// c.setPath(Constants.SLASH);
-			// response.addCookie(c);
-
 		} catch (AuthenticationException ex) {
 			ex.printStackTrace();
 			return "redirect:/login";
@@ -165,6 +152,7 @@ public class ShoppingAccountController extends AbstractShoppingController {
 		return "redirect:/";
 
 	}
+	*/
 
 	private ShoppingCartData populateShoppingCartData(final Cart cartModel, final MerchantStore store) {
 		ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();

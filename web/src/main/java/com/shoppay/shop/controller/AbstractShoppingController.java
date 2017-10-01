@@ -2,7 +2,7 @@ package com.shoppay.shop.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.shoppay.shop.utils.SessionUtil;
+import com.shoppay.core.utils.SessionUtil;
 
 public abstract class AbstractShoppingController {
 	@SuppressWarnings("unchecked")

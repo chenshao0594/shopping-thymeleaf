@@ -28,7 +28,7 @@ import com.shoppay.core.facade.CustomerFacade;
 import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.order.enumeration.SalesOrderStatus;
 import com.shoppay.core.order.service.SalesOrderService;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShopCustomerController")

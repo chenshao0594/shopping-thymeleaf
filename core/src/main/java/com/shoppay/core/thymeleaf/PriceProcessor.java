@@ -1,4 +1,4 @@
-package com.shoppay.thymeleaf;
+package com.shoppay.core.thymeleaf;
 
 import java.math.BigDecimal;
 
@@ -18,7 +18,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.core.catalog.service.PricingService;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 
 public class PriceProcessor extends AbstractElementTagProcessor {
 	public static final int PRECEDENCE = 100000;

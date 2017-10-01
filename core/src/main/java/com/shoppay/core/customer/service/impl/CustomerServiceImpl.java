@@ -34,7 +34,7 @@ public class CustomerServiceImpl extends AbstractDomainServiceImpl<Customer, Lon
 	}
 
 	@Override
-	public Customer findCustomerByEmailAddress(String emailAddress) {
+	public Customer findByEmailAddress(String emailAddress) {
 		return this.customerRepository.findByEmailAddress(emailAddress);
 	}
 
@@ -49,7 +49,7 @@ public class CustomerServiceImpl extends AbstractDomainServiceImpl<Customer, Lon
 	}
 
 	@Override
-	public Customer findCustomerByName(String name) {
+	public Customer findByName(String name) {
 		return this.customerRepository.findByName(name);
 	}
 

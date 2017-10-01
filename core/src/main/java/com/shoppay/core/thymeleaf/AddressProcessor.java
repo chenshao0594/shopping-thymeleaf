@@ -1,4 +1,4 @@
-package com.shoppay.thymeleaf;
+package com.shoppay.core.thymeleaf;
 
 import org.apache.commons.lang3.StringUtils;
 import org.thymeleaf.IEngineConfiguration;

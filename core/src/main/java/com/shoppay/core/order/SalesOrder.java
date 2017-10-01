@@ -57,8 +57,6 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 	@Enumerated(value = EnumType.STRING)
 	private SalesOrderStatus status;
 
-	// the customer object can be detached. An order can exist and the customer
-	// deleted
 	@Column(name = "CUSTOMER_ID")
 	private Long customerId;
 

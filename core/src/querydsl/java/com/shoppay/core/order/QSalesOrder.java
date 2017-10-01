@@ -28,6 +28,8 @@ public class QSalesOrder extends EntityPathBase<SalesOrder> {
 
     public final BooleanPath confirmedAddress = createBoolean("confirmedAddress");
 
+    public final SimplePath<java.util.Currency> currency = createSimple("currency", java.util.Currency.class);
+
     public final NumberPath<java.math.BigDecimal> currencyValue = createNumber("currencyValue", java.math.BigDecimal.class);
 
     public final BooleanPath customerAgreement = createBoolean("customerAgreement");

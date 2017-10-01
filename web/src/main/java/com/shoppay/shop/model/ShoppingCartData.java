@@ -3,6 +3,7 @@ package com.shoppay.shop.model;
 import java.io.Serializable;
 import java.util.List;
 
+import com.shoppay.core.model.ShoppingCartItem;
 import com.shoppay.order.model.OrderTotal;
 
 public class ShoppingCartData implements Serializable {

@@ -5,9 +5,9 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shoppay.core.model.PaymentInfo;
 import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.order.service.SalesOrderService;
-import com.shoppay.shop.model.PaymentInfo;
 
 public class ShoppingPayController extends AbstractShoppingController {
 

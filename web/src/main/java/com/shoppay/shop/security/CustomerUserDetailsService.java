@@ -35,7 +35,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String customerName) throws UsernameNotFoundException, DataAccessException {
 		Customer customer = null;
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		customer = customerService.findCustomerByName(customerName);
+		customer = customerService.findByName(customerName);
 		if(customer==null) {
 			  throw new UsernameNotFoundException("user not existed");
 		}

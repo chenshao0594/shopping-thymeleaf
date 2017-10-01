@@ -7,8 +7,8 @@ import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.exception.ConversionException;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.customer.Customer;
-import com.shoppay.shop.model.ShoppingCartData;
-import com.shoppay.shop.model.ShoppingCartItem;
+import com.shoppay.core.model.ShoppingCartData;
+import com.shoppay.core.model.ShoppingCartItem;
 
 public interface ShoppingCartFacade {
 	public Cart addItemsToShoppingCart(Cart shoppingCart, final ShoppingCartItem item, final MerchantStore store,

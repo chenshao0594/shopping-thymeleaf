@@ -1,4 +1,4 @@
-package com.shoppay.shop.model;
+package com.shoppay.core.model;
 
 public class CategoryCountInfo {
 	private String code;

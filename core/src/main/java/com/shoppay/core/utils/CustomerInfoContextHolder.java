@@ -1,4 +1,4 @@
-package com.shoppay.shop.utils;
+package com.shoppay.core.utils;
 
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.core.customer.Customer;

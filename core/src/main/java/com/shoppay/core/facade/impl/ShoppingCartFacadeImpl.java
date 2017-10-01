@@ -27,9 +27,9 @@ import com.shoppay.core.catalog.service.ProductService;
 import com.shoppay.core.catalog.service.SKUService;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.facade.ShoppingCartFacade;
+import com.shoppay.core.model.ShoppingCartData;
+import com.shoppay.core.model.ShoppingCartItem;
 import com.shoppay.populator.ShoppingCartDataPopulator;
-import com.shoppay.shop.model.ShoppingCartData;
-import com.shoppay.shop.model.ShoppingCartItem;
 
 @Service("shoppingCartFacadeImpl")
 public class ShoppingCartFacadeImpl implements ShoppingCartFacade {

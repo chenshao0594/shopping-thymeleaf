@@ -25,16 +25,19 @@ import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.service.CustomerService;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
-import com.shoppay.shop.utils.CustomerInfoContextHolder.CustomerInfo;
+import com.shoppay.core.security.SecurityUtils;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
+import com.shoppay.core.utils.CustomerInfoContextHolder.CustomerInfo;
 
 public class WebInterceptor extends HandlerInterceptorAdapter {
 	private final Logger LOGGER = LoggerFactory.getLogger(WebInterceptor.class);
 
 	private final static String CART_TOTAL="cartTotal";
 	private final static String CART_QUANTITY="cartQuantity";
-	
+
 	private final static String CONTINUE_SHOPPING_URL="shoppingURL";
+	
+	private final static String IS_AUTH="is_auth";
 
 	@Inject
 	private MerchantStoreService merchantService;
@@ -62,8 +65,8 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			Customer customer = null;
 			String shoppingCartCode = null;
-			if(auth!=null && !auth.getName().equals("anonymousUser")) {
-				customer = customerService.findCustomerByEmailAddress(auth.getName());
+			if(SecurityUtils.isAuthenticated()) {
+				customer = customerService.findByEmailAddress(auth.getName());
 			}
 			if(customer!=null ) {
 				userInfo.setCustomer(customer);
@@ -111,7 +114,7 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 
 	@Override  
 	public void afterCompletion(HttpServletRequest request, 	HttpServletResponse response, Object handler, Exception ex)  
-					throws Exception {  
+			throws Exception {  
 		CustomerInfoContextHolder.clear();
 	}
 	private  Map<String,String> readCookieMap(HttpServletRequest request){    

@@ -26,12 +26,12 @@ import com.shoppay.core.catalog.service.ProductService;
 import com.shoppay.core.catalog.service.SKUService;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.facade.PaymentFacade;
+import com.shoppay.core.model.ShoppingOrderContext;
 import com.shoppay.core.order.OrderProductLine;
 import com.shoppay.core.order.SalesOrder;
 import com.shoppay.core.order.enumeration.SalesOrderStatus;
 import com.shoppay.core.order.service.SalesOrderService;
-import com.shoppay.shop.model.ShoppingOrderContext;
-import com.shoppay.shop.utils.CustomerInfoContextHolder;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 import com.shoppay.web.constants.ShoppingControllerConstants;
 
 @Controller("ShoppingOrderController")

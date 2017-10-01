@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.shoppay.core.model.ShoppingCartAttribute;
+
 public class ShoppingCartItem implements Serializable {
 
 	/**

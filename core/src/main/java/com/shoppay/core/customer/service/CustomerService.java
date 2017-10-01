@@ -11,9 +11,9 @@ import com.shoppay.core.customer.Customer;
  */
 public interface CustomerService extends AbstractDomainService<Customer, Long> {
 
-	Customer findCustomerByName(String name);
+	Customer findByName(String name);
 
-	Customer findCustomerByEmailAddress(String emailAddress);
+	Customer findByEmailAddress(String emailAddress);
 
 	Address getCustomerAddress(MerchantStore store, String ipAddress) throws BusinessException;
 	
