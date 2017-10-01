@@ -16,12 +16,15 @@ import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import com.shoppay.common.utils.URLUtils;
 import com.shoppay.core.order.SalesOrder;
+import com.shoppay.core.order.enumeration.SalesOrderStatus;
 import com.shoppay.core.order.service.SalesOrderService;
+import com.shoppay.core.payment.enumeration.PaymentType;
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentIntent;
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentMethod;
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentService;
 import com.shoppay.core.payment.model.PaymentContext;
 import com.shoppay.shop.model.PaymentInfo;
+import com.shoppay.web.constants.ShoppingControllerConstants;
 
 
 
@@ -43,13 +46,16 @@ public class ShoppingPaypalController {
 	
 	@GetMapping("/pay/{orderId}")
 	public String pay(@PathVariable long orderId,  PaymentInfo paymentInfo, HttpServletRequest request){
-		String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL;
-		String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_URL;
+		String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL+"/"+orderId;
+		String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_URL+"/"+orderId;
 		SalesOrder order = salesOrderService.findOne(orderId);
 		PaymentContext paymentContext = new PaymentContext.Builder(order.getTotal(), order.getCurrency().getCurrencyCode())
 				.method(PaypalPaymentMethod.paypal)
-				.intent(PaypalPaymentIntent.sale).description("order descripton")
-				.cancelUrl(cancelUrl).successUrl(successUrl).build();
+				.intent(PaypalPaymentIntent.sale)
+				.description("order descripton")
+				.cancelUrl(cancelUrl)
+				.successUrl(successUrl)
+				.build();
 		
 		try {
 			Payment payment = paypalService.createPayment(paymentContext);
@@ -64,17 +70,27 @@ public class ShoppingPaypalController {
 		return "redirect:/";
 	}
 
-	@GetMapping(value = PAYPAL_CANCEL_URL)
-	public String cancelPay(){
-		return "cancel";
+	@GetMapping(value = "/cancel/{orderId}")
+	public String cancelPay(@PathVariable long orderId){
+		System.out.println("path order id is " + orderId);
+		
+		
+		return ShoppingControllerConstants.Payment.cancel;
 	}
 
-	@GetMapping(value = PAYPAL_SUCCESS_URL)
-	public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
+	@GetMapping(value = "/success/{orderId}")
+	public String successPay(@PathVariable long orderId, @RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
+		LOGGER.info("pay success path order id is {} ", orderId);
 		try {
 			Payment payment = paypalService.executePayment(paymentId, payerId);
+			LOGGER.info("paypal  info is {}" , payment);
 			if(payment.getState().equals("approved")){
-				return "success";
+				SalesOrder order = this.salesOrderService.findOne(orderId);
+				order.setPaymentCode(payment.getId());
+				order.setPaymentType(PaymentType.PAYPAL);
+				order.setStatus(SalesOrderStatus.PROCESSED);
+				this.salesOrderService.update(order);
+				return ShoppingControllerConstants.Payment.success;
 			}
 		} catch (PayPalRESTException e) {
 			LOGGER.error(e.getMessage());

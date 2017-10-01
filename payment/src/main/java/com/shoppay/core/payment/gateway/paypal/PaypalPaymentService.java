@@ -34,7 +34,6 @@ public class PaypalPaymentService  implements PaymentGetewayService{
 		Transaction transaction = new Transaction();
 		transaction.setDescription(paymentContext.getDescription());
 		transaction.setAmount(amount);
-
 		List<Transaction> transactions = new ArrayList<>();
 		transactions.add(transaction);
 
@@ -44,6 +43,7 @@ public class PaypalPaymentService  implements PaymentGetewayService{
 		payment.setIntent(paymentContext.getIntent().toString());
 		payment.setPayer(payer);
 		payment.setTransactions(transactions);
+		
 		RedirectUrls redirectUrls = new RedirectUrls();
 		redirectUrls.setCancelUrl(paymentContext.getCancelUrl());
 		redirectUrls.setReturnUrl(paymentContext.getSuccessUrl());

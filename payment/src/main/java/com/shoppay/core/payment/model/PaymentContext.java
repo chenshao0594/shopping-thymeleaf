@@ -6,7 +6,8 @@ import com.shoppay.core.payment.gateway.paypal.PaypalPaymentIntent;
 import com.shoppay.core.payment.gateway.paypal.PaypalPaymentMethod;
 
 public class PaymentContext {
-
+	private long orderId;
+	private String orderCode;
 	private BigDecimal total;
 	private String currency; 
 	private PaypalPaymentMethod method;
@@ -18,8 +19,6 @@ public class PaymentContext {
 		this.total =total;
 		this.currency = currency;
 	} 
-
-	
 
 	public BigDecimal getTotal() {
 		return total;
@@ -66,6 +65,30 @@ public class PaymentContext {
 
 
 
+	public long getOrderId() {
+		return orderId;
+	}
+
+
+
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
+
+
+
+	public String getOrderCode() {
+		return orderCode;
+	}
+
+
+
+	public void setOrderCode(String orderCode) {
+		this.orderCode = orderCode;
+	}
+
+
+
 	public static class Builder {
 		private BigDecimal total;
 		private String currency; 
@@ -74,6 +97,7 @@ public class PaymentContext {
 		private String description;
 		private String cancelUrl; 
 		private String successUrl;
+		private String orderCode;
 		public Builder(BigDecimal total, String currency) {
 			this.total =total;
 			this.currency = currency;
@@ -99,6 +123,11 @@ public class PaymentContext {
 			this.successUrl = successUrl;
 			return this;
 		}
+		
+		public Builder orderCode(String orderCode){
+			this.orderCode=this.orderCode;
+			return this;
+		}
 
 		public PaymentContext build() {
 			return new PaymentContext(this);
@@ -114,6 +143,7 @@ public class PaymentContext {
 		description =b.description;
 		cancelUrl = b.cancelUrl; 
 		successUrl = b.successUrl;
+		orderCode = b.orderCode;
 
 	}
 

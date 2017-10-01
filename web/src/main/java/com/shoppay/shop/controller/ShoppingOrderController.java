@@ -69,7 +69,7 @@ public class ShoppingOrderController extends AbstractShoppingController {
 		Delivery delivery = new Delivery();
 		BeanUtils.copyProperties(delivery, orderContext.getBilling());
 		order.setDelivery(delivery);
-		
+		order.setPaymentCode(Long.toString(System.currentTimeMillis()));
 		Customer customer = CustomerInfoContextHolder.getCustomer();
 		order.setCustomerId(customer.getId());
 		order.setStatus(SalesOrderStatus.INITED);
