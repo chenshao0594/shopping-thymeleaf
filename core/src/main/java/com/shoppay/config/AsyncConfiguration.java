@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import com.shoppay.common.cofig.ApplicationProperties;
+import com.shoppay.common.config.ApplicationProperties;
 
 import io.github.jhipster.async.ExceptionHandlingAsyncTaskExecutor;
 

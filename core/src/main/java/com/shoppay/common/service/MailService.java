@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
-import com.shoppay.common.cofig.ApplicationProperties;
+import com.shoppay.common.config.ApplicationProperties;
 import com.shoppay.common.user.User;
 
 /**

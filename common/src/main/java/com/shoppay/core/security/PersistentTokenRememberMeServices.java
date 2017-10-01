@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.rememberme.RememberMeAuth
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shoppay.common.cofig.ApplicationProperties;
+import com.shoppay.common.config.ApplicationProperties;
 import com.shoppay.common.repository.PersistentTokenRepository;
 import com.shoppay.common.repository.UserRepository;
 import com.shoppay.common.user.PersistentToken;

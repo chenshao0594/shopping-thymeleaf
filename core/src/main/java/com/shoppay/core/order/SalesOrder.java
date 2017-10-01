@@ -123,14 +123,6 @@ public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Seri
 
 	@OneToMany(mappedBy = "salesOrder", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<OrderProductLine> productLines = new HashSet<OrderProductLine>();
-	//
-	// @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	// private Set<OrderProduct> orderProducts = new
-	// LinkedHashSet<OrderProduct>();
-	//
-	// @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	// @OrderBy(clause = "sort_order asc")
-	// private Set<OrderTotal> orderTotal = new LinkedHashSet<OrderTotal>();
 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	@OrderBy(clause = "ORDER_STATUS_HISTORY_ID asc")

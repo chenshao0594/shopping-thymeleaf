@@ -1,4 +1,4 @@
-package com.shoppay.common.cofig;
+package com.shoppay.common.config;
 
 import java.util.LinkedHashMap;
 import java.util.List;

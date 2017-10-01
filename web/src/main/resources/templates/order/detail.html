@@ -50,16 +50,14 @@
 						</table>
 					</div>
 					<div class="row">
-						<div class="two columns">
-						
-							<a class="button"
-								th:href="@{/paypal/pay/{orderId}(orderId = ${order.id})}">Pay the
-								order</a> 
+						<div class="two columns" th:if="${order.status.name()=='INITED'}">
+							<a class="button" 	th:href="@{/paypal/pay/{orderId}(orderId = ${order.id})}">
+							Pay the order</a> 
 						</div>
 
 						<div class="three columns offset-by-seven data-list align-right">
 							<p>
-								<strong>Subtotal:</strong> <i>{00.00</i>
+								<strong>Subtotal:</strong> <i>待定...</i>
 							</p>
 							<p>
 								<strong>Sales Tax:</strong> <i>00.00</i>

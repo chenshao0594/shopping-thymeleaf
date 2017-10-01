@@ -19,7 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 
-import com.shoppay.common.cofig.ApplicationProperties;
+import com.shoppay.common.config.ApplicationProperties;
 import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.config.DefaultProfileUtil;
 import com.shoppay.core.payment.gateway.paypal.PaypalConfiguration;
