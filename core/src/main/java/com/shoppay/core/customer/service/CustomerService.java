@@ -16,6 +16,9 @@ public interface CustomerService extends AbstractDomainService<Customer, Long> {
 	Customer findByEmailAddress(String emailAddress);
 
 	Address getCustomerAddress(MerchantStore store, String ipAddress) throws BusinessException;
+
+	void changePassword( Customer customer, String password);
 	
-	
+	Customer completePasswordReset(String newPassword, String key) ;
+
 }

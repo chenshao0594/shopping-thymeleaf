@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.core.catalog.Category;
-import com.shoppay.core.catalog.QCategory;
 import com.shoppay.core.catalog.repository.CategoryRepository;
 import com.shoppay.core.catalog.repository.search.CategorySearchRepository;
 import com.shoppay.core.catalog.service.CategoryService;
@@ -35,8 +34,6 @@ public class CategoryServiceImpl extends AbstractDomainServiceImpl<Category, Lon
 
 	@Override
 	public Category findBySearchURL(String searchURL) {
-		QCategory q = QCategory.category;
-		// this.categoryRepository.findOne(q.sear)
 		return null;
 	}
 

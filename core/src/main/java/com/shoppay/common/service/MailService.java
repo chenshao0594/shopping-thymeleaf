@@ -17,6 +17,7 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import com.shoppay.common.config.ApplicationProperties;
 import com.shoppay.common.user.User;
+import com.shoppay.core.customer.Customer;
 
 /**
  * Service for sending emails.
@@ -104,5 +105,17 @@ public class MailService {
         String content = templateEngine.process("passwordResetEmail", context);
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
+    }
+    
+    @Async
+    public void sendCustomerPasswordResetMail(Customer customer) {
+        log.debug("Sending password reset email to '{}'", customer.getEmailAddress());
+        Locale locale = customer.getMerchantStore().getLocale();
+        Context context = new Context(locale);
+        context.setVariable(USER, customer);
+        context.setVariable(BASE_URL, appProperties.getMail().getBaseUrl());
+        String content = templateEngine.process("passwordResetEmail", context);
+        String subject = messageSource.getMessage("email.reset.title", null, locale);
+        sendEmail(customer.getEmailAddress(), subject, content, false, true);
     }
 }

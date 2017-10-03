@@ -2,6 +2,7 @@ package com.shoppay.core.customer;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -18,6 +19,7 @@ import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -104,6 +106,14 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 	private String showDeliveryStateList;
 
 	private boolean isActivity = true;
+	
+	@Size(max = 20)
+    @Column(name = "reset_key", length = 20)
+    private String resetKey;
+
+    @Column(name = "reset_date")
+    private ZonedDateTime resetDate = null;
+
 
 	@Override
 	public Long getId() {
@@ -291,6 +301,23 @@ public class Customer extends BusinessDomain<Long, Customer> implements Serializ
 
 	public void setActivity(boolean isActivity) {
 		this.isActivity = isActivity;
+	}
+
+	
+	public String getResetKey() {
+		return resetKey;
+	}
+
+	public void setResetKey(String resetKey) {
+		this.resetKey = resetKey;
+	}
+
+	public ZonedDateTime getResetDate() {
+		return resetDate;
+	}
+
+	public void setResetDate(ZonedDateTime resetDate) {
+		this.resetDate = resetDate;
 	}
 
 	@Override

@@ -2,14 +2,15 @@ package com.shoppay.core.customer.model;
 
 import java.time.LocalDate;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import com.shoppay.common.enumeration.Gender;
 
 public class CustomerRO {
 
 	private Long id;
+	
 	private String name;
 	@NotEmpty
 	private String lastName;
@@ -29,7 +30,11 @@ public class CustomerRO {
 	@Email
 	private String emailAddress;
 
+	@NotEmpty
 	private String password;
+	
+	@NotEmpty
+	private String password2;
 
 	private String image;
 
@@ -127,6 +132,14 @@ public class CustomerRO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
 	}
 
 }

@@ -37,4 +37,7 @@ public interface CustomerFacade {
 
 	Cart mergeCart(Customer customer, String sessionShoppingCartId, MerchantStore store) throws BusinessException;
 
+	Customer requestPasswordReset(String loginKey) throws BusinessException;
+	void changePassword( Customer customer,String password);
+	Customer completePasswordReset(String newPassword, String key) ;
 }

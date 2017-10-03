@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codahale.metrics.annotation.Timed;
+import com.shoppay.common.model.KeyAndPasswordVM;
 import com.shoppay.common.model.UserDTO;
 import com.shoppay.common.repository.PersistentTokenRepository;
 import com.shoppay.common.repository.UserRepository;
@@ -34,7 +35,6 @@ import com.shoppay.common.user.PersistentToken;
 import com.shoppay.common.user.User;
 import com.shoppay.core.security.SecurityUtils;
 import com.shoppay.web.rest.util.HeaderUtil;
-import com.shoppay.web.rest.vm.KeyAndPasswordVM;
 import com.shoppay.web.rest.vm.ManagedUserVM;
 
 /**

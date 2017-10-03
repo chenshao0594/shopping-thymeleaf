@@ -54,6 +54,10 @@ public class QCustomer extends EntityPathBase<Customer> {
 
     public final StringPath remark = createString("remark");
 
+    public final DateTimePath<java.time.ZonedDateTime> resetDate = createDateTime("resetDate", java.time.ZonedDateTime.class);
+
+    public final StringPath resetKey = createString("resetKey");
+
     public QCustomer(String variable) {
         this(Customer.class, forVariable(variable), INITS);
     }

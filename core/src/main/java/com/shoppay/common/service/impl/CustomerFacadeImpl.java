@@ -1,5 +1,6 @@
 package com.shoppay.common.service.impl;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -26,6 +27,7 @@ import com.shoppay.common.repository.AuthorityRepository;
 import com.shoppay.common.service.MailService;
 import com.shoppay.common.service.UserService;
 import com.shoppay.common.user.Authority;
+import com.shoppay.common.utils.RandomUtil;
 import com.shoppay.core.cart.Cart;
 import com.shoppay.core.cart.service.CartService;
 import com.shoppay.core.customer.Customer;
@@ -34,6 +36,7 @@ import com.shoppay.core.customer.model.CustomerRO;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.facade.CustomerFacade;
 import com.shoppay.core.security.AuthoritiesConstants;
+import com.shoppay.core.utils.CustomerInfoContextHolder;
 
 @Service("customerFacade")
 public class CustomerFacadeImpl implements CustomerFacade {
@@ -205,5 +208,33 @@ public class CustomerFacadeImpl implements CustomerFacade {
 			throws BusinessException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public Customer requestPasswordReset(String loginKey) throws BusinessException {
+		Customer customer = this.customerService.findByEmailAddress(loginKey);
+		if(customer==null) {
+			customer = this.customerService.findByName(loginKey);	
+		}
+		if(customer==null) {
+			throw new BusinessException("{}  not exist ", loginKey) ;
+		}
+		customer.setResetKey(RandomUtil.generateResetKey());
+		customer.setResetDate(ZonedDateTime.now());
+		this.customerService.update(customer);
+		return customer;
+	}
+
+
+	@Override
+	public void changePassword(Customer customer, String password) {
+		this.customerService.changePassword(customer, password);
+	}
+
+
+	@Override
+	public Customer completePasswordReset(String newPassword, String key) {
+		return customerService.completePasswordReset(newPassword, key);
 	}
 }

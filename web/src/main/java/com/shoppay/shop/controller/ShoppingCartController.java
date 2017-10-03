@@ -47,7 +47,6 @@ public class ShoppingCartController extends AbstractShoppingController {
 		Cart shoppingCart = shoppingCartService.getShoppingCartByCode(cartCode);
 		ShoppingCartData shoppingCartData = shoppingCartFacade.getShoppingCartData(shoppingCart, store);
 		boolean isEmpty = CollectionUtils.isEmpty(shoppingCartData.getShoppingCartItems());
-		
 		CustomerInfoContextHolder.getCustomerInfo().setCartTotal(shoppingCartData.getTotal());
 		CustomerInfoContextHolder.getCustomerInfo().setCartQuantity(shoppingCartData.getQuantity());
 		

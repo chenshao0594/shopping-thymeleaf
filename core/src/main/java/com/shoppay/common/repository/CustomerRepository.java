@@ -17,4 +17,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, Query
 	@Query("SELECT customer from Customer customer where customer.name=?1")
 	Customer findByName(String name);
 
+	Customer findByResetKey(String resetKey);
 }
