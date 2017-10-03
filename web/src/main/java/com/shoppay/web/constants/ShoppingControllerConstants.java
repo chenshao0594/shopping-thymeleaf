@@ -33,6 +33,7 @@ public interface ShoppingControllerConstants {
 		final static String EditAddress = "editCustomerAddress";
 		final static String resetPasswordInit="password/reset_init";
 		final static String resetPasswordSuccess="password/reset_success";
+		final static String changePasswordInit="password/change_init";
 		final static String changePasswordSuccess="password/change_success";
 
 	}

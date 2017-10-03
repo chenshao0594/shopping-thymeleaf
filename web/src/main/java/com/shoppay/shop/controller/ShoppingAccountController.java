@@ -124,8 +124,14 @@ public class ShoppingAccountController extends AbstractShoppingController {
 	}
 
 	@Timed
+	@GetMapping(path = "changePassword")
+	public String  changePasswordInit() {
+		return ShoppingControllerConstants.Customer.changePasswordInit;
+	}
+	
+	@Timed
 	@PostMapping(path = "changePassword")
-	public String  changePassword(@RequestBody String password) {
+	public String  changePassword( String password) {
 		Customer customer = CustomerInfoContextHolder.getCustomer();
 		customerFacade.changePassword(customer, password);
 		return ShoppingControllerConstants.Customer.changePasswordSuccess;
@@ -133,7 +139,7 @@ public class ShoppingAccountController extends AbstractShoppingController {
 
 	@Timed
 	@PostMapping(path="/resetPassword/finish")
-	public String finishPasswordReset(@RequestBody KeyAndPasswordVM keyAndPassword, Model model) {
+	public String finishPasswordReset(KeyAndPasswordVM keyAndPassword, Model model) {
 		Customer customer =	this.customerFacade.completePasswordReset(keyAndPassword.getNewPassword(), keyAndPassword.getKey());
 		model.addAttribute("customer", customer);
 		return ShoppingControllerConstants.Customer.resetPasswordSuccess;
