@@ -23,7 +23,7 @@ public class MerchantStoreServiceImpl extends AbstractDomainServiceImpl<Merchant
 	private final MerchantStoreRepository merchantStoreRepository;
 
 	public MerchantStoreServiceImpl(MerchantStoreRepository merchantStoreRepository) {
-		super(merchantStoreRepository, null);
+		super(merchantStoreRepository);
 		this.merchantStoreRepository = merchantStoreRepository;
 	}
 

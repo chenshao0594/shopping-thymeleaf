@@ -1,4 +1,4 @@
-package com.shoppay.core.cart;
+package com.shoppay.core.cart.utils;
 
 import java.util.UUID;
 

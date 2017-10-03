@@ -31,10 +31,13 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	private final Logger log = LoggerFactory.getLogger(AbstractDomainController.class);
 
 	private final AbstractDomainService<E, K> service;
+	
+	private final Class entityClass;
 
-	protected abstract String getSectionKey();
+	private final String sectionKey;
 
-	protected abstract Class getEntityClass();
+	
+
 
 	protected void preNew(ModelAndView model) {
 	};
@@ -49,8 +52,10 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 		return entity;
 	};
 
-	public AbstractDomainController(AbstractDomainService<E, K> service) {
+	public AbstractDomainController(AbstractDomainService<E, K> service, Class entityClass) {
 		this.service = service;
+		this.entityClass = entityClass;
+		this.sectionKey = entityClass.getSimpleName().toLowerCase();
 	}
 
 	@Timed
@@ -58,7 +63,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	public String listEntities(Model model, Pageable pageable) {
 		Page<E> page = this.service.findAll(pageable);
 		model.addAttribute("page", page);
-		return this.getSectionKey() + "/list";
+		return this.sectionKey + "/list";
 	}
 
 	@Timed
@@ -66,7 +71,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	public String findOne(@PathVariable("id") K id, Model model) {
 		E entity = this.service.findOne(id);
 		model.addAttribute("item", entity);
-		return this.getSectionKey() + "/detail";
+		return this.sectionKey + "/detail";
 	}
 
 	@Timed
@@ -74,7 +79,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 	public ModelAndView initCreationForm(ModelAndView model) {
 		this.preNew(model);
 		try {
-			model.addObject("item", this.getEntityClass().newInstance());
+			model.addObject("item", this.entityClass.newInstance());
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,7 +87,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		model.setViewName(this.getSectionKey() + "/dialog");
+		model.setViewName(this.sectionKey + "/dialog");
 		return model;
 	}
 
@@ -95,7 +100,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 		if (result.hasErrors()) {
 			log.error("save entity has error {}", result.getAllErrors());
 			mv.addObject("formErrors", result.getAllErrors());
-			mv.setViewName(this.getSectionKey() + "/dialog");
+			mv.setViewName(this.sectionKey + "/dialog");
 			mv.addObject("item", entity);
 			this.preNew(mv);
 			return mv;
@@ -104,7 +109,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			this.service.save(entity);
 			redirect.addFlashAttribute("statusMessage", "Successfully created!");
 			return new ModelAndView(
-					"redirect:" + ApplicationConstants.ADMIN_PREFIX + "/" + this.getSectionKey() + "/{entity.id}", "entity.id",
+					"redirect:" + ApplicationConstants.ADMIN_PREFIX + "/" + this.sectionKey + "/{entity.id}", "entity.id",
 					entity.getId());
 		}
 	}
@@ -115,7 +120,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 		E entity = this.service.findOne(id);
 		model.addObject("item", entity);
 		this.preNew(model);
-		model.setViewName(this.getSectionKey() + "/dialog");
+		model.setViewName(this.sectionKey + "/dialog");
 		return model;
 	}
 
@@ -127,14 +132,13 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			log.error("error info {}", result.getAllErrors());
 			model.addAttribute("formErrors", result.getAllErrors());
 			model.addAttribute("item", entity);
-			return this.getSectionKey() + "/dialog";
+			return this.sectionKey + "/dialog";
 		} else {
-
 			E e = this.service.findOne(id);
 			this.service.save(entity);
 			model.addAttribute("item", entity);
 			redirect.addFlashAttribute("statusMessage", "Update Successfully !");
-			return "redirect:" + ApplicationConstants.ADMIN_PREFIX + "/" + this.getSectionKey() + "/" + id + "/edit";
+			return "redirect:" + ApplicationConstants.ADMIN_PREFIX + "/" + this.sectionKey + "/" + id + "/edit";
 		}
 	}
 

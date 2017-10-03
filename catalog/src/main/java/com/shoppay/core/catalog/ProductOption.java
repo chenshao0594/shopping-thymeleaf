@@ -20,7 +20,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.common.domain.MerchantStore;
@@ -31,7 +30,6 @@ import com.shoppay.common.domain.MerchantStore;
 @Entity
 @Table(name = "product_option")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "productoption")
 public class ProductOption extends BusinessDomain<Long, ProductOption> {
 
 	private static final long serialVersionUID = 1L;

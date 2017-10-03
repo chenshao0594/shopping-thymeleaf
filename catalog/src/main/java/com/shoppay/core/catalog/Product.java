@@ -25,14 +25,12 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 
 @Entity
 @Table(name = "product")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Document(indexName = "product")
 public class Product extends BusinessDomain<Long, Product> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

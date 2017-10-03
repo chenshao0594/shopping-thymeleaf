@@ -18,7 +18,6 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.core.order.enumeration.SalesOrderStatus;
@@ -26,7 +25,6 @@ import com.shoppay.core.order.enumeration.SalesOrderStatus;
 @Entity
 @Table(name = "Order_Status_History")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "orderStatusHistory")
 public class SalesOrderStatusHistory extends BusinessDomain<Long, SalesOrder> implements Serializable {
 
 	/**

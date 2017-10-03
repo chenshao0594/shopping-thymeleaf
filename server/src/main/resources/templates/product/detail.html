@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	layout:decorate="~{layouts/layout_detail}">
+</head>
+<body>
+	<section layout:fragment="content_detail">
+		<div class="row justify-content-md-center">
+			<div class="col-3">
+				<img
+					th:src="@{/{admin}/attachments/product/{productId}/thumbnail(admin=${admin_url}, productId=${item.id})}"
+					class="img-rounded float-left" height="150" />
+			</div>
+			<dl class="col-md-9 row">
+				<dt class="col-md-2 text-right">Sale Price</dt>
+				<dd class="col-md-4 text-left" th:text="${item.standardPrice}">Sale
+					Price</dd>
+				<dt class="col-md-2 text-right">Retail Price</dt>
+				<dd class="col-md-4 text-left" th:text="${item.retailPrice}">Retail
+					Price</dd>
+				<dt class="col-md-2 text-right">Category</dt>
+				<dd class="col-md-4 text-left" th:text="${item.category?.code}">Category
+					Code</dd>
+				<dt class="col-md-2 text-right">Brand</dt>
+				<dd class="col-md-4 text-left" th:text="${item.category?.code}">Brand</dd>
+				<dt class="col-md-2 text-right"></dt>
+				<dd class="col-md-4 text-left"></dd>
+				<dt class="col-md-2 text-right">Remark</dt>
+				<dd class="col-md-4 text-left" th:text="${item.remark}">Remark</dd>
+			</dl>
+		</div>
+		<fieldset>
+			<legend class="section">Shipping Info</legend>
+			<dl class="row">
+				<dt class="col-md-2 text-right">Width</dt>
+				<dd class="col-md-4 text-left" th:text="${item.width}">Width</dd>
+				<dt class="col-md-2 text-right">Length</dt>
+				<dd class="col-md-4 text-left" th:text="${item.length}">Length</dd>
+				<dt class="col-md-2 text-right">Weight</dt>
+				<dd class="col-md-4 text-left" th:text="${item.productWeight}">Weight</dd>
+				<dt class="col-md-2 text-right">Height</dt>
+				<dd class="col-md-4 text-left" th:text="${item.productHeight}">Height</dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend class="section"> SKUs Info </legend>
+			<div id="skus-block">
+				<table class="table table-striped">
+					<thead class="thead-default">
+						<tr>
+							<th><a class="sorted">Id</a></th>
+							<th>name</th>
+							<th>Attributes</th>
+							<th>Sale Price</th>
+							<th>Retail Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="sku : ${item.skus}">
+							<th scope="row" th:text="${sku?.id}">1</th>
+							<td th:text="${sku?.name}">Name</td>
+							<td th:text="${sku?.attributes}">Attributes</td>
+							<td th:text="${sku?.standardPrice}">Standard Price</td>
+							<td th:text="${sku?.retailPrice}">Retail Price</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</fieldset>
+	</section>
+</body>
+</html>

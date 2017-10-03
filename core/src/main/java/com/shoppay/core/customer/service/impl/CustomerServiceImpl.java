@@ -1,7 +1,6 @@
 package com.shoppay.core.customer.service.impl;
 
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -16,12 +15,9 @@ import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.reference.Address;
 import com.shoppay.common.repository.CustomerRepository;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
-import com.shoppay.common.user.User;
 import com.shoppay.common.utils.GeoLocationUtils;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.customer.service.CustomerService;
-import com.shoppay.core.security.SecurityUtils;
-import com.shoppay.repository.search.CustomerSearchRepository;
 
 /**
  * Service Implementation for managing Customer.
@@ -32,16 +28,13 @@ public class CustomerServiceImpl extends AbstractDomainServiceImpl<Customer, Lon
 
 	private final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceImpl.class);
 	private final CustomerRepository customerRepository;
-	private final CustomerSearchRepository customerSearchRepository;
 
 	@Inject
 	private  PasswordEncoder passwordEncoder;
 
-	public CustomerServiceImpl(CustomerRepository customerRepository,
-			CustomerSearchRepository customerSearchRepository) {
-		super(customerRepository, customerSearchRepository);
+	public CustomerServiceImpl(CustomerRepository customerRepository) {
+		super(customerRepository);
 		this.customerRepository = customerRepository;
-		this.customerSearchRepository = customerSearchRepository;
 	}
 
 	@Override

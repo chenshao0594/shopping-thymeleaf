@@ -19,12 +19,6 @@ import com.shoppay.common.config.ApplicationProperties;
 import com.shoppay.common.user.User;
 import com.shoppay.core.customer.Customer;
 
-/**
- * Service for sending emails.
- * <p>
- * We use the @Async annotation to send emails asynchronously.
- * </p>
- */
 @Service
 public class MailService {
 
@@ -55,8 +49,6 @@ public class MailService {
     public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
         log.debug("Send email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
             isMultipart, isHtml, to, subject, content);
-
-        // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, CharEncoding.UTF_8);
@@ -114,7 +106,7 @@ public class MailService {
         Context context = new Context(locale);
         context.setVariable(USER, customer);
         context.setVariable(BASE_URL, appProperties.getMail().getBaseUrl());
-        String content = templateEngine.process("passwordResetEmail", context);
+        String content = templateEngine.process("customer-passwordResetEmail", context);
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(customer.getEmailAddress(), subject, content, false, true);
     }

@@ -10,27 +10,18 @@ import com.shoppay.common.service.ShippingConfigurationService;
 import com.shoppay.domain.ShippingConfiguration;
 
 @Controller
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + ShippingConfigurationController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/shippingConfiguration")
 public class ShippingConfigurationController extends AbstractDomainController<ShippingConfiguration, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);
-	public static final String SECTION_KEY = "shippingConfigurations";
 
 	private final ShippingConfigurationService shippingConfigurationService;
 
 	public ShippingConfigurationController(ShippingConfigurationService shippingConfigurationService) {
-		super(shippingConfigurationService);
+		super(shippingConfigurationService,ShippingConfiguration.class);
 		this.shippingConfigurationService = shippingConfigurationService;
 	}
 
-	@Override
-	protected String getSectionKey() {
-		return this.SECTION_KEY;
-	}
-
-	@Override
-	protected Class getEntityClass() {
-		return ShippingConfiguration.class;
-	}
+	
 
 }

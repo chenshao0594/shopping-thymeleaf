@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.core.enumeration.SMTPSecurityEnum;
@@ -26,7 +25,6 @@ import com.shoppay.core.enumeration.SMTPSecurityEnum;
 @Entity
 @Table(name = "email_setting")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "emailsetting")
 public class EmailSetting extends BusinessDomain<Long, EmailSetting> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

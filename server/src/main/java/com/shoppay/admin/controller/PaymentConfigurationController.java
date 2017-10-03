@@ -10,7 +10,7 @@ import com.shoppay.core.payment.PaymentConfiguration;
 import com.shoppay.core.payment.service.PaymentConfigurationService;
 
 @Controller
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + PaymentConfigurationController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/paymentConfiguration")
 public class PaymentConfigurationController extends AbstractDomainController<PaymentConfiguration, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);
@@ -19,18 +19,8 @@ public class PaymentConfigurationController extends AbstractDomainController<Pay
 	private final PaymentConfigurationService paymentConfigurationService;
 
 	public PaymentConfigurationController(PaymentConfigurationService paymentConfigurationService) {
-		super(paymentConfigurationService);
+		super(paymentConfigurationService, PaymentConfiguration.class);
 		this.paymentConfigurationService = paymentConfigurationService;
-	}
-
-	@Override
-	protected String getSectionKey() {
-		return this.SECTION_KEY;
-	}
-
-	@Override
-	protected Class getEntityClass() {
-		return PaymentConfiguration.class;
 	}
 
 }

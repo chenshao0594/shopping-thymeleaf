@@ -23,7 +23,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.common.enumeration.StatusEnum;
@@ -31,7 +30,6 @@ import com.shoppay.common.enumeration.StatusEnum;
 @Entity
 @Table(name = "sku")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "sku")
 public class SKU extends BusinessDomain<Long, SKU> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

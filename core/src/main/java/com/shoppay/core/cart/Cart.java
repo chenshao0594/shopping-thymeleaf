@@ -19,7 +19,6 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.common.domain.MerchantStore;
@@ -27,7 +26,6 @@ import com.shoppay.common.domain.MerchantStore;
 @Entity
 @Table(name = "SHOPPING_CART")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "shoppingcart")
 public class Cart extends BusinessDomain<Long, Cart> implements Serializable {
 
 	/**

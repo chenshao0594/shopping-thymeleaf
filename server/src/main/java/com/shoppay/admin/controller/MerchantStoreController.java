@@ -9,12 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.service.MerchantStoreService;
+import com.shoppay.core.customer.Customer;
 
 /**
  * REST controller for managing MerchantStore.
  */
 @Controller
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + MerchantStoreController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/merchantStore")
 public class MerchantStoreController extends AbstractDomainController<MerchantStore, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(MerchantStoreController.class);
@@ -24,7 +25,7 @@ public class MerchantStoreController extends AbstractDomainController<MerchantSt
 	private final MerchantStoreService merchantStoreService;
 
 	public MerchantStoreController(MerchantStoreService merchantStoreService) {
-		super(merchantStoreService);
+		super(merchantStoreService, MerchantStore.class);
 		this.merchantStoreService = merchantStoreService;
 	}
 
@@ -33,14 +34,6 @@ public class MerchantStoreController extends AbstractDomainController<MerchantSt
 
 	}
 
-	@Override
-	protected String getSectionKey() {
-		return SECTION_KEY;
-	}
-
-	@Override
-	protected Class getEntityClass() {
-		return ENTITY_CLASS;
-	}
+	
 
 }

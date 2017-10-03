@@ -33,7 +33,6 @@ import com.shoppay.core.order.model.SalesOrderSummary;
 import com.shoppay.core.order.model.SalesOrderTotalSummary;
 import com.shoppay.core.order.service.SalesOrderService;
 import com.shoppay.core.order.service.SalesOrderTotalService;
-import com.shoppay.repository.search.SalesOrderSearchRepository;
 
 /**
  * Service Implementation for managing Product.
@@ -44,16 +43,13 @@ public class SalesOrderServiceImpl extends AbstractDomainServiceImpl<SalesOrder,
 
 	private final Logger LOGGER = LoggerFactory.getLogger(SalesOrderServiceImpl.class);
 	private final SalesOrderRepository salesOrderRepository;
-	private final SalesOrderSearchRepository salesOrderSearchRepository;
 
 	@Inject
 	private SalesOrderTotalService orderTotalService;
 
-	public SalesOrderServiceImpl(SalesOrderRepository salesOrderRepository,
-			SalesOrderSearchRepository salesOrderSearchRepository) {
-		super(salesOrderRepository, salesOrderSearchRepository);
+	public SalesOrderServiceImpl(SalesOrderRepository salesOrderRepository) {
+		super(salesOrderRepository);
 		this.salesOrderRepository = salesOrderRepository;
-		this.salesOrderSearchRepository = salesOrderSearchRepository;
 	}
 
 	@Override
@@ -136,7 +132,6 @@ public class SalesOrderServiceImpl extends AbstractDomainServiceImpl<SalesOrder,
 	}
 
 
-	@Override
 	public SalesOrderTotalSummary calculateShoppingCartTotal(Cart cartModel, Customer customer, MerchantStore store) {
 		// TODO Auto-generated method stub
 		return null;

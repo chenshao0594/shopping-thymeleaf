@@ -25,7 +25,7 @@ public class ProductOptionValueServiceImpl extends AbstractDomainServiceImpl<Pro
 	private final ProductOptionValueRepository productOptionValueRepository;
 
 	public ProductOptionValueServiceImpl(ProductOptionValueRepository productOptionValueRepository) {
-		super(productOptionValueRepository, null);
+		super(productOptionValueRepository);
 		this.productOptionValueRepository = productOptionValueRepository;
 	}
 

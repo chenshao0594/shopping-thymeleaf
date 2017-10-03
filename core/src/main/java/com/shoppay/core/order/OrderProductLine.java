@@ -15,14 +15,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.LiteDomain;
 
 @Entity
 @Table(name = "SALES_ORDER_LINE")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "salesorderline")
 public class OrderProductLine extends LiteDomain<Long, OrderProductLine> implements Serializable {
 
 	/**

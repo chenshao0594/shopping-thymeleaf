@@ -13,17 +13,15 @@ import com.shoppay.core.catalog.Category;
 import com.shoppay.core.catalog.service.CategoryService;
 
 @Controller
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + CategoryController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/category")
 public class CategoryController extends AbstractDomainController<Category, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(CategoryController.class);
-	public static final String SECTION_KEY = "categories";
-	private static final Class ENTITY_CLASS = Category.class;
 
 	private final CategoryService categoryService;
 
 	public CategoryController(CategoryService categoryService) {
-		super(categoryService);
+		super(categoryService, Category.class);
 		this.categoryService = categoryService;
 	}
 
@@ -31,16 +29,6 @@ public class CategoryController extends AbstractDomainController<Category, Long>
 	protected void preNew(ModelAndView model) {
 		List<Category> categories = this.categoryService.list();
 		model.addObject("categories", categories);
-	}
-
-	@Override
-	protected String getSectionKey() {
-		return this.SECTION_KEY;
-	}
-
-	@Override
-	protected Class getEntityClass() {
-		return this.ENTITY_CLASS;
 	}
 
 }

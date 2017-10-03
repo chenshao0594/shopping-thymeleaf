@@ -19,10 +19,11 @@ public class ShippingConfigurationServiceImpl extends AbstractDomainServiceImpl<
 		implements ShippingConfigurationService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(ShippingConfigurationServiceImpl.class);
+	
 	private final ShippingConfigurationRepository shippingConfigurationRepository;
 
 	public ShippingConfigurationServiceImpl(ShippingConfigurationRepository shippingConfigurationRepository) {
-		super(shippingConfigurationRepository, null);
+		super(shippingConfigurationRepository);
 		this.shippingConfigurationRepository = shippingConfigurationRepository;
 	}
 

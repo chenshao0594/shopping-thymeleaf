@@ -23,7 +23,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.common.domain.MerchantStore;
@@ -38,7 +37,6 @@ import com.shoppay.common.user.Authority;
 @Entity
 @Table(name = "customer")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "customer")
 public class Customer extends BusinessDomain<Long, Customer> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

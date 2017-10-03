@@ -36,7 +36,6 @@ import com.shoppay.core.customer.model.CustomerRO;
 import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.facade.CustomerFacade;
 import com.shoppay.core.security.AuthoritiesConstants;
-import com.shoppay.core.utils.CustomerInfoContextHolder;
 
 @Service("customerFacade")
 public class CustomerFacadeImpl implements CustomerFacade {

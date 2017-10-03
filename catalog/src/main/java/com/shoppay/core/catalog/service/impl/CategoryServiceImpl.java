@@ -11,7 +11,6 @@ import com.shoppay.common.domain.MerchantStore;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.core.catalog.Category;
 import com.shoppay.core.catalog.repository.CategoryRepository;
-import com.shoppay.core.catalog.repository.search.CategorySearchRepository;
 import com.shoppay.core.catalog.service.CategoryService;
 
 /**
@@ -23,13 +22,10 @@ public class CategoryServiceImpl extends AbstractDomainServiceImpl<Category, Lon
 
 	private final Logger LOGGER = LoggerFactory.getLogger(CategoryServiceImpl.class);
 	private final CategoryRepository categoryRepository;
-	private final CategorySearchRepository categorySearchRepository;
 
-	public CategoryServiceImpl(CategoryRepository categoryRepository,
-			CategorySearchRepository categorySearchRepository) {
-		super(categoryRepository, categorySearchRepository);
+	public CategoryServiceImpl(CategoryRepository categoryRepository) {
+		super(categoryRepository);
 		this.categoryRepository = categoryRepository;
-		this.categorySearchRepository = categorySearchRepository;
 	}
 
 	@Override

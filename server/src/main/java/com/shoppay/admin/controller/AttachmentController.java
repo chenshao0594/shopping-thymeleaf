@@ -16,7 +16,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.lucene.util.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -135,8 +135,8 @@ public class AttachmentController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			IOUtils.closeWhileHandlingException(in);
-			IOUtils.closeWhileHandlingException(baos);
+			IOUtils.closeQuietly(in);
+			IOUtils.closeQuietly(baos);
 		}
 
 	}

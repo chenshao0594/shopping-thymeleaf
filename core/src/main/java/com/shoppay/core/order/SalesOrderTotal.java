@@ -17,14 +17,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 
 @Entity
 @Table(name = "SALES_ORDER_total")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "salesordertotal")
 public class SalesOrderTotal extends BusinessDomain<Long, SalesOrderTotal> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -29,7 +29,7 @@ public class ProductRelationshipServiceImpl extends AbstractDomainServiceImpl<Pr
 	private final ProductRelationshipRepository repository;
 
 	public ProductRelationshipServiceImpl(ProductRelationshipRepository repository) {
-		super(repository, null);
+		super(repository);
 		this.repository = repository;
 	}
 

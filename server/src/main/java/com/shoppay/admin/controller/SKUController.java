@@ -13,28 +13,17 @@ import com.shoppay.core.catalog.service.SKUService;
  * REST controller for managing ProductOption.
  */
 @Controller
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + SKUController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/sku")
 public class SKUController extends AbstractDomainController<SKU, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(SKUController.class);
-	public static final String SECTION_KEY = "skus";
-	private static final Class ENTITY_CLASS = SKU.class;
-
 	private final SKUService SKUService;
 
 	public SKUController(SKUService SKUService) {
-		super(SKUService);
+		super(SKUService, SKU.class);
 		this.SKUService = SKUService;
 	}
 
-	@Override
-	protected String getSectionKey() {
-		return SECTION_KEY;
-	}
-
-	@Override
-	protected Class getEntityClass() {
-		return ENTITY_CLASS;
-	}
+	
 
 }

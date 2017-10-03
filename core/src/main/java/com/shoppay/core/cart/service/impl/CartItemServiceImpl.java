@@ -23,7 +23,7 @@ public class CartItemServiceImpl extends AbstractDomainServiceImpl<CartItem, Lon
 	private final CartItemRepository shoppingCartItemRepository;
 
 	public CartItemServiceImpl(CartItemRepository shoppingCartItemRepository) {
-		super(shoppingCartItemRepository, null);
+		super(shoppingCartItemRepository);
 		this.shoppingCartItemRepository = shoppingCartItemRepository;
 	}
 

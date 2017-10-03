@@ -13,27 +13,16 @@ import com.shoppay.core.customer.service.CustomerService;
  * REST controller for managing Customer.
  */
 @Controller
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + CustomerController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/customer")
 public class CustomerController extends AbstractDomainController<Customer, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(CustomerController.class);
-	public static final String SECTION_KEY = "customers";
 
 	private final CustomerService customerService;
 
 	public CustomerController(CustomerService customerService) {
-		super(customerService);
+		super(customerService, Customer.class);
 		this.customerService = customerService;
-	}
-
-	@Override
-	protected String getSectionKey() {
-		return SECTION_KEY;
-	}
-
-	@Override
-	protected Class getEntityClass() {
-		return Customer.class;
 	}
 
 }

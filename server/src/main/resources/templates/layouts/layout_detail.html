@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	layout:decorate="~{layouts/layout}">
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="page-title">
+			<h2>
+				Product <small class="text-muted" th:text="${item.id}"></small>
+				<button type="button" class="btn btn-primary pull-right"
+					role="button"
+					th:onclick="@{/{admin}/products/{productId}/edit(admin=${admin_url}, productId=${item.id})}">
+					<span class="fa fa-arrow-left"></span>Edit
+				</button>
+				<button type="button" class="btn btn-secondary pull-right"
+					role="button" th:href="@{/{admin}/products(admin=${admin_url})}">
+					<span class="fa fa-arrow-left"></span>Back to List
+				</button>
+			</h2>
+		</div>
+		<div role="alert" th:if="${statusMessage}"
+			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'"
+			th:text="${statusMessage}"></div>
+		<fieldset>
+			<legend class="section">Basic Info</legend>
+			<section layout:fragment="content_detail">
+				<p>Content goes here...</p>
+			</section>
+
+		</fieldset>
+		<fieldset>
+			<legend class="section">Audit Info</legend>
+			<dl class="row justify-content-md-center">
+				<dt class="col-md-2 text-right">Created By</dt>
+				<dd class="col-md-4 text-left" th:text="${item.createdBy}">Code</dd>
+				<dt class="col-md-2 text-right">Created Date</dt>
+				<dd class="col-md-4 text-left" th:text="${item.createdDate}">CreatedDate</dd>
+				<dt class="col-md-2 text-right">Modified By</dt>
+				<dd class="col-md-4 text-left" th:text="${item.lastModifiedBy}">Modified
+					By</dd>
+				<dt class="col-md-2 text-right">Modified Date</dt>
+				<dd class="col-md-4 text-left" th:text="${item.lastModifiedDate}">LastModifiedDate</dd>
+			</dl>
+		</fieldset>
+	</section>
+</body>
+</html>

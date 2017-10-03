@@ -16,16 +16,15 @@ import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.repository.CartRepository;
 import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.core.cart.Cart;
-import com.shoppay.core.cart.CartCodeGegerator;
 import com.shoppay.core.cart.CartItem;
 import com.shoppay.core.cart.QCart;
 import com.shoppay.core.cart.service.CartService;
+import com.shoppay.core.cart.utils.CartCodeGegerator;
 import com.shoppay.core.catalog.Product;
 import com.shoppay.core.catalog.service.ProductService;
 import com.shoppay.core.customer.Customer;
 import com.shoppay.core.model.ShoppingCartItem;
 import com.shoppay.core.utils.CustomerInfoContextHolder;
-import com.shoppay.repository.search.ShoppingCartSearchRepository;
 
 /**
  * Service Implementation for managing Category.
@@ -36,16 +35,13 @@ public class CartServiceImpl extends AbstractDomainServiceImpl<Cart, Long> imple
 
 	private final Logger LOGGER = LoggerFactory.getLogger(CartServiceImpl.class);
 	private final CartRepository shoppingCartRepository;
-	private final ShoppingCartSearchRepository shoppingCartSearchRepository;
 
 	@Inject
 	private ProductService productService;
 
-	public CartServiceImpl(CartRepository shoppingCartRepository,
-			ShoppingCartSearchRepository shoppingCartSearchRepository) {
-		super(shoppingCartRepository, shoppingCartSearchRepository);
+	public CartServiceImpl(CartRepository shoppingCartRepository) {
+		super(shoppingCartRepository);
 		this.shoppingCartRepository = shoppingCartRepository;
-		this.shoppingCartSearchRepository = shoppingCartSearchRepository;
 	}
 
 	@Override

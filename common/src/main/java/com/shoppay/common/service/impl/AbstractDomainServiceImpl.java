@@ -1,16 +1,12 @@
 package com.shoppay.common.service.impl;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
-
 import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.shoppay.common.domain.BusinessDomainInterface;
 import com.shoppay.common.service.AbstractDomainService;
@@ -20,11 +16,9 @@ public abstract class AbstractDomainServiceImpl<E extends BusinessDomainInterfac
 
 	private JpaRepository<E, K> repository;
 
-	private ElasticsearchRepository<E, K> searchRepository;
 
-	public AbstractDomainServiceImpl(JpaRepository<E, K> repository, ElasticsearchRepository<E, K> searchRepository) {
+	public AbstractDomainServiceImpl(JpaRepository<E, K> repository) {
 		this.repository = repository;
-		this.searchRepository = searchRepository;
 	}
 
 	@Override
@@ -42,17 +36,11 @@ public abstract class AbstractDomainServiceImpl<E extends BusinessDomainInterfac
 	@Override
 	public void delete(E entity) throws ServiceException {
 		repository.delete(entity);
-		if (searchRepository != null) {
-			searchRepository.delete(entity);
-		}
 	}
 
 	@Override
 	public void delete(K id) throws ServiceException {
 		repository.delete(id);
-		if (searchRepository != null) {
-			searchRepository.delete(id);
-		}
 	}
 
 	@Override
@@ -80,10 +68,4 @@ public abstract class AbstractDomainServiceImpl<E extends BusinessDomainInterfac
 		return repository.findAll(pageable);
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public Page<E> search(String query, Pageable pageable) {
-		Page<E> result = searchRepository.search(queryStringQuery(query), pageable);
-		return result;
-	}
 }

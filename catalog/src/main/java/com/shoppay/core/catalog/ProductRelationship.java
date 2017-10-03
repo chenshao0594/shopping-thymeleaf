@@ -15,14 +15,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 
 @Entity
 @Table(name = "product_relationship")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "productrelationship")
 public class ProductRelationship extends BusinessDomain<Long, ProductRelationship> implements Serializable {
 
 	/**

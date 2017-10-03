@@ -40,15 +40,13 @@ import com.shoppay.core.catalog.service.SKUService;
  */
 @Transactional
 @Controller("AdminProductController")
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + ProductController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/product")
 public class ProductController extends AbstractDomainController<Product, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
-	public static final String SECTION_KEY = "products";
 	private static final String SKUS_FRAGMENT = "skus/list :: skusList";
 
 	private static final String RELATIONS_FRAGMENT = "products/relation-list :: relation-section";
-	private static final Class ENTITY_CLASS = Product.class;
 
 	private final ProductService productService;
 
@@ -67,7 +65,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 	private ProductRelationshipService productRelationshipService;
 
 	public ProductController(ProductService productService) {
-		super(productService);
+		super(productService, Product.class);
 		this.productService = productService;
 	}
 
@@ -101,7 +99,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		}
 		model.addObject("options", this.productOptionService.findAll(null));
 		model.addObject("skus", product.getSkus());
-		model.setViewName(this.getSectionKey() + "/skus");
+		model.setViewName("product/skus");
 		return model;
 	}
 
@@ -118,8 +116,8 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 			product.getProductOptions().add(option);
 		}
 		this.productService.save(product);
-		model.setViewName(this.getSectionKey() + "/skus");
-		model.setViewName("redirect:" + ApplicationConstants.ADMIN_PREFIX + "/" + SECTION_KEY + "/" + productId + "/skus");
+		model.setViewName("product/skus");
+		model.setViewName("redirect:" + ApplicationConstants.ADMIN_PREFIX + "/product/" + productId + "/skus");
 		return model;
 	}
 
@@ -139,7 +137,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		model.addAttribute("priviewConfig", inititalPreviewConfigs);
 		model.addAttribute("attachments", results);
 		model.addAttribute("productId", productId);
-		return this.getSectionKey() + "/images";
+		return "product/images";
 	}
 
 	@Timed
@@ -168,7 +166,7 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 			throw new BusinessException("can't find product by id " + productId);
 		}
 		model.addObject("relations", this.productService.findRelations(product));
-		model.setViewName(this.getSectionKey() + "/relations");
+		model.setViewName("product/relations");
 		return model;
 	}
 
@@ -181,16 +179,6 @@ public class ProductController extends AbstractDomainController<Product, Long> {
 		List<Product> relations = this.productRelationshipService.getRelations(this.productService.findOne(id));
 		model.addAttribute("relations", relations);
 		return RELATIONS_FRAGMENT;
-	}
-
-	@Override
-	protected String getSectionKey() {
-		return SECTION_KEY;
-	}
-
-	@Override
-	protected Class getEntityClass() {
-		return ENTITY_CLASS;
 	}
 
 }

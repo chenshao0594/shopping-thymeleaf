@@ -27,11 +27,10 @@ import com.shoppay.core.catalog.service.ProductOptionValueService;
  * REST controller for managing ProductOption.
  */
 @Controller
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/" + ProductOptionController.SECTION_KEY)
+@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/productOption")
 public class ProductOptionController extends AbstractDomainController<ProductOption, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);
-	public static final String SECTION_KEY = "productOptions";
 	private static final Class ENTITY_CLASS = ProductOption.class;
 
 	private final ProductOptionService productOptionService;
@@ -40,7 +39,7 @@ public class ProductOptionController extends AbstractDomainController<ProductOpt
 	private ProductOptionValueService productOptionValueService;
 
 	public ProductOptionController(ProductOptionService productOptionService) {
-		super(productOptionService);
+		super(productOptionService, ProductOption.class);
 		this.productOptionService = productOptionService;
 	}
 
@@ -60,7 +59,7 @@ public class ProductOptionController extends AbstractDomainController<ProductOpt
 		entity.setProductOption(productOption);
 		productOption.getProductOptionValues().add(entity);
 		this.productOptionService.save(productOption);
-		return "redirect:/admin/" + this.getSectionKey() + "/" + optionId;
+		return "redirect:/admin/" + "productOption/" + optionId;
 	}
 
 	@Timed
@@ -73,14 +72,5 @@ public class ProductOptionController extends AbstractDomainController<ProductOpt
 		return option.getProductOptionValues();
 	}
 
-	@Override
-	protected String getSectionKey() {
-		return SECTION_KEY;
-	}
-
-	@Override
-	protected Class getEntityClass() {
-		return ENTITY_CLASS;
-	}
 
 }

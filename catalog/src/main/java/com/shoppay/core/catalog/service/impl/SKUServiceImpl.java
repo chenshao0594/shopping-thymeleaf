@@ -12,7 +12,6 @@ import com.shoppay.common.service.impl.AbstractDomainServiceImpl;
 import com.shoppay.core.catalog.QSKU;
 import com.shoppay.core.catalog.SKU;
 import com.shoppay.core.catalog.repository.SKURepository;
-import com.shoppay.core.catalog.repository.search.SKUSearchRepository;
 import com.shoppay.core.catalog.service.SKUService;
 
 /**
@@ -24,12 +23,10 @@ public class SKUServiceImpl extends AbstractDomainServiceImpl<SKU, Long> impleme
 
 	private final Logger LOGGER = LoggerFactory.getLogger(SKUServiceImpl.class);
 	private final SKURepository skuRepository;
-	private final SKUSearchRepository skuSearchRepository;
 
-	public SKUServiceImpl(SKURepository skuRepository, SKUSearchRepository skuSearchRepository) {
-		super(skuRepository, skuSearchRepository);
+	public SKUServiceImpl(SKURepository skuRepository) {
+		super(skuRepository);
 		this.skuRepository = skuRepository;
-		this.skuSearchRepository = skuSearchRepository;
 	}
 
 	@Override

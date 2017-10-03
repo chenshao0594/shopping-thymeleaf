@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.attachment.AttachmentEnum;
 
@@ -25,7 +24,6 @@ import com.shoppay.common.attachment.AttachmentEnum;
 @Entity
 @Table(name = "attachment")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "attachment")
 public class Attachment extends BusinessDomain<Long, Attachment> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

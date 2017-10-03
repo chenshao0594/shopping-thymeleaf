@@ -1,13 +1,9 @@
 package com.shoppay.web.rest;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +26,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.model.UserDTO;
 import com.shoppay.common.repository.UserRepository;
-import com.shoppay.common.repository.search.UserSearchRepository;
 import com.shoppay.common.service.MailService;
 import com.shoppay.common.service.UserService;
 import com.shoppay.common.user.User;
@@ -80,15 +75,13 @@ public class UserController {
 
     private final UserService userService;
 
-    private final UserSearchRepository userSearchRepository;
 
     public UserController(UserRepository userRepository, MailService mailService,
-            UserService userService, UserSearchRepository userSearchRepository) {
+            UserService userService) {
 
         this.userRepository = userRepository;
         this.mailService = mailService;
         this.userService = userService;
-        this.userSearchRepository = userSearchRepository;
     }
 
     /**
@@ -202,18 +195,4 @@ public class UserController {
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "A user is deleted with identifier " + login, login)).build();
     }
 
-    /**
-     * SEARCH  /_search/users/:query : search for the User corresponding
-     * to the query.
-     *
-     * @param query the query to search
-     * @return the result of the search
-     */
-    @GetMapping("/_search/users/{query}")
-    @Timed
-    public List<User> search(@PathVariable String query) {
-        return StreamSupport
-            .stream(userSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
-    }
 }

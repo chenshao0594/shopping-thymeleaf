@@ -17,8 +17,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.shoppay.common.repository.CustomerRepository;
 import com.shoppay.core.customer.Customer;
-import com.shoppay.core.customer.service.CustomerService;
 import com.shoppay.core.security.AuthoritiesConstants;
 
 
@@ -28,14 +28,14 @@ public class CustomerUserDetailsService implements UserDetailsService {
 	private final Logger LOGGER = LoggerFactory.getLogger(CustomerUserDetailsService.class);
 
 	@Inject
-	private CustomerService customerService;
+	private CustomerRepository customerRepository;
 	
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String customerName) throws UsernameNotFoundException, DataAccessException {
 		Customer customer = null;
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		customer = customerService.findByName(customerName);
+		customer = customerRepository.findByName(customerName);
 		if(customer==null) {
 			  throw new UsernameNotFoundException("user not existed");
 		}

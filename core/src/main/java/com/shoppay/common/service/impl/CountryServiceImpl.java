@@ -18,7 +18,7 @@ public class CountryServiceImpl extends AbstractDomainServiceImpl<Country, Long>
 	private CountryRepository countryRepository;
 
 	public CountryServiceImpl(CountryRepository repository) {
-		super(repository, null);
+		super(repository);
 		this.countryRepository = repository;
 	}
 

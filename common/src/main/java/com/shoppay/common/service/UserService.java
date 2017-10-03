@@ -21,7 +21,6 @@ import com.shoppay.common.model.UserDTO;
 import com.shoppay.common.repository.AuthorityRepository;
 import com.shoppay.common.repository.PersistentTokenRepository;
 import com.shoppay.common.repository.UserRepository;
-import com.shoppay.common.repository.search.UserSearchRepository;
 import com.shoppay.common.user.Authority;
 import com.shoppay.common.user.User;
 import com.shoppay.common.utils.RandomUtil;
@@ -41,18 +40,16 @@ public class UserService {
 
 	private final PasswordEncoder passwordEncoder;
 
-	private final UserSearchRepository userSearchRepository;
 
 	private final PersistentTokenRepository persistentTokenRepository;
 
 	private final AuthorityRepository authorityRepository;
 
 	public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
-			UserSearchRepository userSearchRepository, PersistentTokenRepository persistentTokenRepository,
+			 PersistentTokenRepository persistentTokenRepository,
 			AuthorityRepository authorityRepository) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
-		this.userSearchRepository = userSearchRepository;
 		this.persistentTokenRepository = persistentTokenRepository;
 		this.authorityRepository = authorityRepository;
 	}
@@ -63,7 +60,6 @@ public class UserService {
 			// activate given user for the registration key.
 			user.setActivated(true);
 			user.setActivationKey(null);
-			userSearchRepository.save(user);
 			log.debug("Activated user: {}", user);
 			return user;
 		});
@@ -113,7 +109,6 @@ public class UserService {
 		authorities.add(authority);
 		newUser.setAuthorities(authorities);
 		userRepository.save(newUser);
-		userSearchRepository.save(newUser);
 		log.debug("Created Information for User: {}", newUser);
 		return newUser;
 	}
@@ -141,7 +136,6 @@ public class UserService {
 		user.setResetDate(ZonedDateTime.now());
 		user.setActivated(true);
 		userRepository.save(user);
-		userSearchRepository.save(user);
 		log.debug("Created Information for User: {}", user);
 		return user;
 	}
@@ -168,7 +162,6 @@ public class UserService {
 			user.setEmail(email);
 			user.setLangKey(langKey);
 			user.setImageUrl(imageUrl);
-			userSearchRepository.save(user);
 			log.debug("Changed Information for User: {}", user);
 		});
 	}
@@ -200,7 +193,6 @@ public class UserService {
 	public void deleteUser(String login) {
 		userRepository.findOneByLogin(login).ifPresent(user -> {
 			userRepository.delete(user);
-			userSearchRepository.delete(user);
 			log.debug("Deleted User: {}", user);
 		});
 	}
@@ -264,7 +256,6 @@ public class UserService {
 		for (User user : users) {
 			log.debug("Deleting not activated user {}", user.getLogin());
 			userRepository.delete(user);
-			userSearchRepository.delete(user);
 		}
 	}
 }

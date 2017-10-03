@@ -34,7 +34,6 @@ import com.shoppay.core.catalog.SKU;
 import com.shoppay.core.catalog.model.ProductOptionDTO;
 import com.shoppay.core.catalog.model.ProductOptionPricing;
 import com.shoppay.core.catalog.repository.ProductRepository;
-import com.shoppay.core.catalog.repository.search.ProductSearchRepository;
 import com.shoppay.core.catalog.service.CategoryService;
 import com.shoppay.core.catalog.service.ProductOptionService;
 import com.shoppay.core.catalog.service.ProductOptionValueService;
@@ -51,7 +50,6 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 
 	private final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 	private final ProductRepository productRepository;
-	private final ProductSearchRepository productSearchRepository;
 	@Inject
 	CategoryService categoryService;
 
@@ -67,10 +65,9 @@ public class ProductServiceImpl extends AbstractDomainServiceImpl<Product, Long>
 	@Inject
 	ProductOptionValueService productOptionValueService;
 
-	public ProductServiceImpl(ProductRepository productRepository, ProductSearchRepository productSearchRepository) {
-		super(productRepository, productSearchRepository);
+	public ProductServiceImpl(ProductRepository productRepository ) {
+		super(productRepository);
 		this.productRepository = productRepository;
-		this.productSearchRepository = productSearchRepository;
 	}
 
 	@Override

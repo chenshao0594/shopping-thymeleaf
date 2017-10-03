@@ -26,7 +26,5 @@ public interface AbstractDomainService<E extends BusinessDomainInterface, K exte
 
 	void flush();
 
-	Page<E> search(String query, Pageable pageable);
-
 	E findOne(K id);
 }

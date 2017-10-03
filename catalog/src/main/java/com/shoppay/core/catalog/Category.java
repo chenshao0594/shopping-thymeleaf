@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 
@@ -27,7 +26,6 @@ import com.shoppay.common.domain.BusinessDomain;
 @Entity
 @Table(name = "category")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "category")
 public class Category extends BusinessDomain<Long, Category> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -30,7 +30,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OrderBy;
 import org.hibernate.annotations.Type;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.common.domain.MerchantStore;
@@ -44,7 +43,6 @@ import com.shoppay.core.payment.enumeration.PaymentType;
 @Entity
 @Table(name = "SALES_ORDER")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "salesorder")
 public class SalesOrder extends BusinessDomain<Long, SalesOrder> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -23,7 +23,7 @@ public class PaymentConfigurationServiceImpl extends AbstractDomainServiceImpl<P
 	private final PaymentConfigurationRepository paymentConfigurationRepository;
 
 	public PaymentConfigurationServiceImpl(PaymentConfigurationRepository paymentConfigurationRepository) {
-		super(paymentConfigurationRepository, null);
+		super(paymentConfigurationRepository);
 		this.paymentConfigurationRepository = paymentConfigurationRepository;
 	}
 
