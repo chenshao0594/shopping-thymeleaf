@@ -80,7 +80,7 @@
 						<td th:text="${option?.code}">Code</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{'/products/'+${option.id}}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{'/product/'+${option.id}}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
 								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/products/'+${option.id}+'/edit'}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
@@ -134,7 +134,7 @@
 			$("#optionModal").modal('toggle');
 			return;
 		}
-		$.post("/[[${admin_url}]]/products/[[${productId}]]/generateSkusByBatch", 
+		$.post("/[[${admin_url}]]/product/[[${productId}]]/generateSkusByBatch", 
 				{optionContent : selected.join('@'),
 				 [[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
 				}, 

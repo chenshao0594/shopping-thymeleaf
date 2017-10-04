@@ -6,7 +6,7 @@
 	<section layout:fragment="content">
 		<div class="page-title">
 			<h2>
-				Categories <a th:href="@{/categories/new}" class="btn btn-success pull-right"><span
+				Categories <a th:href="@{/category/new}" class="btn btn-success pull-right"><span
 					class="fa fa-plus"></span>Add category</a>
 			</h2>
 		</div>
@@ -29,9 +29,9 @@
 						<td th:text="${row.parent?.code}">Parent</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{'/categories/'+${row.id}}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{'/category/'+${row.id}}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/categories/'+${row.id}+'/edit'}">
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{'/category/'+${row.id}+'/edit'}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

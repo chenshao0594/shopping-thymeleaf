@@ -22,12 +22,12 @@
 					</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 						<a class="dropdown-item"
-							th:href="@{/{admin}/products/{productId}/skus(admin=${admin_url}, productId=${item.id})}">Edit
+							th:href="@{/{admin}/product/{productId}/skus(admin=${admin_url}, productId=${item.id})}">Edit
 							SKUs</a> <a class="dropdown-item"
-							th:href="@{/{admin}/products/{productId}/images(admin=${admin_url}, productId=${item.id})}">Edit
+							th:href="@{/{admin}/product/{productId}/images(admin=${admin_url}, productId=${item.id})}">Edit
 							Images</a>
 							 <a class="dropdown-item"
-							th:href="@{/{admin}/products/{productId}/relations(admin=${admin_url}, productId=${item.id})}">Edit
+							th:href="@{/{admin}/product/{productId}/relations(admin=${admin_url}, productId=${item.id})}">Edit
 							Relations</a>
 							 <a class="dropdown-item"
 							href="#">Product Description</a>
@@ -36,8 +36,8 @@
 			</div>
 		</div>
 		<form name="form"
-			th:action="@{(${item.id} ? '/'+${admin_url}+'/products/'+${item.id}+'/edit' : '/'+${admin_url}+'/products')}"
-			action="products/edit.html" method="POST">
+			th:action="@{(${item.id} ? '/'+${admin_url}+'/product/'+${item.id}+'/edit' : '/'+${admin_url}+'/products')}"
+			action="product/edit.html" method="POST">
 			<fieldset>
 				<legend class="section">Basic Info</legend>
 				<div class="row">

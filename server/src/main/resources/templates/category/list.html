@@ -5,39 +5,33 @@
 <body>
 	<section layout:fragment="content" th:remove="tag">
 		<div class="page-title">
-			<h2>
-				Customer <a th:href="@{/{admin}/customers/new(admin=${admin_url})}"
-					class="btn btn-success pull-right"><span class="fa fa-plus"></span>Add Customer</a>
-			</h2>
+			<h3>
+				Categories <a th:href="@{/{admin}/category/new(admin=${admin_url})}" class="btn btn-success pull-right"><span
+					class="fa fa-plus"></span>Add category</a>
+			</h3>
 		</div>
 		<div class="row">
 			<div role="alert" th:if="${statusMessage}"
 				th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-			<table class="table">
+			<table class="table table-striped">
 				<thead class="thead-default">
 					<tr>
 						<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
-						<th>Display Name</th>
-						<th>Gender</th>
-						<th><a class="sorted" sd:pagination-sort="emailAddress">Email</a></th>
-						<th>Company</th>
+						<th><a class="sorted" sd:pagination-sort="code">Code</a></th>
+						<th>Parent</th>
 						<th>Operation</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="row : ${page}">
 						<th scope="row" th:text="${row.id}">1</th>
-						<td th:text="${row.lastName} +' '+ ${row.firstName}">DisplayName</td>
-						<td th:text="${row.gender}">Gender</td>
-						<td th:text="${row.emailAddress}">Email</td>
-						<td th:text="${row.company}">Company</td>
+						<td th:text="${row.code}">code</td>
+						<td th:text="${row.parent?.code}">Parent</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm"
-									th:href="@{/{admin}/customers/{customerId}(admin=${admin_url}, customerId=${row.id})}">
-									<span class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm"
-									th:href="@{/{admin}/customers/{customerId}/edit(admin=${admin_url}, customerId=${row.id})}">
+								<a class="btn btn-success btn-sm" th:href="@{/{admin}/category/{categoryId}(admin=${admin_url}, categoryId=${row.id})}"> <span
+									class="fa fa-eye"></span> &nbsp; <span class="hidden-md-down">View</span>
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/category/{categoryId}/edit(admin=${admin_url}, categoryId=${row.id})}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

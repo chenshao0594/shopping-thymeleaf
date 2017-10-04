@@ -51,7 +51,7 @@
 							<td th:text="${row.retailPrice}">Retail Price</td>
 							<td>
 								<div class="flex-btn-group-container">
-									<a class="btn btn-success btn-sm" th:href="@{/{admin}/products/{itemId}(admin=${admin_url}, itemId=${row.id})}"> <span
+									<a class="btn btn-success btn-sm" th:href="@{/{admin}/product/{itemId}(admin=${admin_url}, itemId=${row.id})}"> <span
 										class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
 									</a>
 									&nbsp; <button type="button" class="btn btn-primary btn-sm"
@@ -138,7 +138,7 @@
 				$("#relationModal").modal('toggle');
 				return;
 			}
-			$.post("/[[${admin_url}]]/products/[[${productId}]]/relations", 
+			$.post("/[[${admin_url}]]/product/[[${productId}]]/relations", 
 					{	relationIds : selected,
 				 		[[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
 					}, 

@@ -28,7 +28,7 @@
 							<td th:text="${row.retailPrice}">Retail Price</td>
 							<td>
 								<div class="flex-btn-group-container">
-									 <a class="btn btn-success btn-sm" th:href="@{/{admin}/products/{productId}(admin=${admin_url}, skuId=${row.id})}"> <span
+									 <a class="btn btn-success btn-sm" th:href="@{/{admin}/product/{productId}(admin=${admin_url}, skuId=${row.id})}"> <span
 										class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
 									</a>
 									&nbsp;

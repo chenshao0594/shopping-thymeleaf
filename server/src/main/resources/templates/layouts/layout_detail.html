@@ -9,7 +9,7 @@
 				Product <small class="text-muted" th:text="${item.id}"></small>
 				<button type="button" class="btn btn-primary pull-right"
 					role="button"
-					th:onclick="@{/{admin}/products/{productId}/edit(admin=${admin_url}, productId=${item.id})}">
+					th:onclick="@{/{admin}/product/{productId}/edit(admin=${admin_url}, productId=${item.id})}">
 					<span class="fa fa-arrow-left"></span>Edit
 				</button>
 				<button type="button" class="btn btn-secondary pull-right"

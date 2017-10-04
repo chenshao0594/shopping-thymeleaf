@@ -8,7 +8,7 @@
 		</div>
 		<div role="alert" th:if="${statusMessage}"
 			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
-		<form name="form" th:action="@{(${item.id} ? '/'+${admin_url}+'productOptions/'+${item.id}+'/edit': '/'+${admin_url}+'/productOptions')}"
+		<form name="form" th:action="@{(${item.id} ? '/'+${admin_url}+'productOption/'+${item.id}+'/edit': '/'+${admin_url}+'/productOption')}"
 			action="productOption/edit.html" method="POST">
 			<div class="row form-group">
 				<label for="codeInput" class="col-2 col-form-label text-right">Code</label>
