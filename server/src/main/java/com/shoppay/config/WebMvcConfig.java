@@ -22,7 +22,6 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.shoppay.admin.interceptor.AdminInterceptor;
-import com.shoppay.common.constants.ApplicationConstants;
 
 /**
  * Configures View-related items.
@@ -36,13 +35,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/access").setViewName("access");
-		registry.addViewController(ApplicationConstants.ADMIN_PREFIX + "/login").setViewName("login");
+		registry.addViewController( "/login").setViewName("login");
 		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new AdminInterceptor()).addPathPatterns(ApplicationConstants.ADMIN_PREFIX + "/**");
+		registry.addInterceptor(new AdminInterceptor()).addPathPatterns( "/**");
 	}
 
 	

@@ -7,7 +7,7 @@
 		<div class="row justify-content-md-center">
 			<div class="col-3">
 				<img
-					th:src="@{/{admin}/attachments/product/{productId}/thumbnail(admin=${admin_url}, productId=${item.id})}"
+					th:src="@{/attachments/product/{productId}/thumbnail( productId=${item.id})}"
 					class="img-rounded float-left" height="150" />
 			</div>
 			<dl class="col-md-9 row">

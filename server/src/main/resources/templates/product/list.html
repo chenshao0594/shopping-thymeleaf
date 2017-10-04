@@ -6,7 +6,7 @@
 	<section layout:fragment="content">
 		<div class="page-title">
 			<h3>
-				Products<a th:href="@{/{admin}/product/new(admin=${admin_url})}" class="btn btn-success pull-right"><span
+				Products<a th:href="@{/product/new}" class="btn btn-success pull-right"><span
 					class="fa fa-plus"></span>Add Product</a>
 			</h3>
 		</div>
@@ -28,16 +28,16 @@
 				<tbody>
 					<tr th:each="row : ${page}">
 						<th scope="row" th:text="${row.id}">1</th>
-						<th><img th:src="@{/{admin}/attachments/product/{productId}/thumbnail(admin=${admin_url}, productId=${row.id})}" class="img-rounded" height="50"></th>
+						<th><img th:src="@{/attachments/product/{productId}/thumbnail( productId=${row.id})}" class="img-rounded" height="50"></th>
 						<td th:text="${row.name}">name</td>
 						<td th:text="${row.category?.code}">Category</td>
 						<td th:text="${row.standardPrice}">Sale Price</td>
 						<td th:text="${row.retailPrice}">Retail Price</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{/{admin}/product/{productId}(admin=${admin_url}, productId=${row.id})}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{/product/{productId}( productId=${row.id})}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/product/{productId}/edit(admin=${admin_url}, productId=${row.id})}">
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/product/{productId}/edit( productId=${row.id})}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

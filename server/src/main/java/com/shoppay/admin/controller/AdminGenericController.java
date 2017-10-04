@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.shoppay.common.constants.ApplicationConstants;
-
 @Controller
 @ControllerAdvice
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX)
+@RequestMapping()
 public class AdminGenericController {
+	
 	@GetMapping("/login")
 	public String index() {
 		return "login";
@@ -44,13 +43,13 @@ public class AdminGenericController {
 		return mav;
 	}
 
-	@GetMapping(value = "/logout")
-	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth != null) {
-			new SecurityContextLogoutHandler().logout(request, response, auth);
-		}
-		return "redirect:" + ApplicationConstants.ADMIN_PREFIX + "?logout";
-	}
+//	@GetMapping(value = "/logout")
+//	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		if (auth != null) {
+//			new SecurityContextLogoutHandler().logout(request, response, auth);
+//		}
+//		return "redirect:" +  "?logout";
+//	}
 
 }

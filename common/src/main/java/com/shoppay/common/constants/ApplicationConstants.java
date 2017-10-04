@@ -12,7 +12,6 @@ public final class ApplicationConstants {
     public static final String SPRING_PROFILE_TEST = "test";
     public static final String SPRING_PROFILE_PRODUCTION = "prod";
     // Spring profile used when deploying to Heroku
-    public static final String SPRING_PROFILE_HEROKU = "heroku";
     public final static String SLASH = "/";
 	public final static String BLANK = "";
 
@@ -22,7 +21,6 @@ public final class ApplicationConstants {
 
 	public static final String SYSTEM_ACCOUNT = "system";
 	public static final String ANONYMOUS_USER = "anonymoususer";
-	public static final String ADMIN_PREFIX = "/admin";
 	public static final String CUSTOMER_PREFIX = "/customer";
 	public static final String MERCHANT_STORE = "merchantStore";
 	public static final String LANG = "en";

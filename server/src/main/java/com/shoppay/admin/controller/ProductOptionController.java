@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.core.catalog.ProductOption;
 import com.shoppay.core.catalog.ProductOptionValue;
@@ -27,7 +26,7 @@ import com.shoppay.core.catalog.service.ProductOptionValueService;
  * REST controller for managing ProductOption.
  */
 @Controller
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/productOption")
+@RequestMapping( "/productOption")
 public class ProductOptionController extends AbstractDomainController<ProductOption, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);

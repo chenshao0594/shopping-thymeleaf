@@ -6,7 +6,7 @@
 	<section layout:fragment="content" th:remove="tag">
 		<div class="page-title">
 			<h2>
-				Customer <a th:href="@{/{admin}/customer/new(admin=${admin_url})}"
+				Customer <a th:href="@{/customer/new}"
 					class="btn btn-success pull-right"><span class="fa fa-plus"></span>Add Customer</a>
 			</h2>
 		</div>
@@ -34,10 +34,10 @@
 						<td>
 							<div class="flex-btn-group-container">
 								<a class="btn btn-success btn-sm"
-									th:href="@{/{admin}/customer/{customerId}(admin=${admin_url}, customerId=${row.id})}">
+									th:href="@{/customer/{customerId}( customerId=${row.id})}">
 									<span class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
 								</a> &nbsp; <a class="btn btn-primary btn-sm"
-									th:href="@{/{admin}/customer/{customerId}/edit(admin=${admin_url}, customerId=${row.id})}">
+									th:href="@{/customer/{customerId}/edit( customerId=${row.id})}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

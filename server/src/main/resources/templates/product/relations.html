@@ -43,7 +43,7 @@
 						<tr th:each="row: ${relations}" th:id="'relation-'+${row.id}">
 							<th scope="row" th:text="${row.id}">1</th>
 							<th><img
-								th:src="@{/{admin}/attachments/product/{productId}/thumbnail(admin=${admin_url}, productId=${row.id})}"
+								th:src="@{/attachments/product/{productId}/thumbnail( productId=${row.id})}"
 								class="img-rounded" height="50"></th>
 							<td th:text="${row.name}">name</td>
 							<td th:text="${row.category?.code}">Category</td>
@@ -51,7 +51,7 @@
 							<td th:text="${row.retailPrice}">Retail Price</td>
 							<td>
 								<div class="flex-btn-group-container">
-									<a class="btn btn-success btn-sm" th:href="@{/{admin}/product/{itemId}(admin=${admin_url}, itemId=${row.id})}"> <span
+									<a class="btn btn-success btn-sm" th:href="@{/product/{itemId}( itemId=${row.id})}"> <span
 										class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
 									</a>
 									&nbsp; <button type="button" class="btn btn-primary btn-sm"
@@ -116,7 +116,7 @@
 		var othersTemplate = Hogan.compile(document.getElementById("others").innerHTML);
 		
 		$('#relationModal').on('show.bs.modal', function (e) {
-			 jQuery.ajax({url:"/[[${admin_url}]]/catalogue/product/[[${productId}]]/others",
+			 jQuery.ajax({url: "/catalogue/product/[[${productId}]]/others",
 			 			  success:function(data){
 						 		var items = {"products" : data};
 						 		var out = othersTemplate.render(items);
@@ -138,7 +138,7 @@
 				$("#relationModal").modal('toggle');
 				return;
 			}
-			$.post("/[[${admin_url}]]/product/[[${productId}]]/relations", 
+			$.post("/product/[[${productId}]]/relations", 
 					{	relationIds : selected,
 				 		[[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
 					}, 
@@ -148,7 +148,7 @@
 					});
 		};
 		function deleteRelation(relationId){
-			$.ajax({url: "/[[${admin_url}]]/catalogue/product/[[${productId}]]/relations/"+relationId,
+			$.ajax({url: "/catalogue/product/[[${productId}]]/relations/"+relationId,
 				   data:{
 						[[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
 				   },

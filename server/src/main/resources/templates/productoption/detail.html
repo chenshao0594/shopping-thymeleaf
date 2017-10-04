@@ -76,7 +76,7 @@
 						</button>
 					</div>
 					<form name="form"
-						th:action="@{/{admin}/productOption/{optionId}/values(admin=${admin_url}, optionId=${item.id})}"
+						th:action="@{/productOption/{optionId}/values( optionId=${item.id})}"
 						action="productOption/values.html" method="POST">
 						<div class="modal-body">
 							<div class="row form-group">

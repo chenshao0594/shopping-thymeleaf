@@ -37,9 +37,9 @@
 					aria-expanded="false"><i class="fa fa-user"></i> <span sec:authentication="name">miquel</span>
 						<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a th:href="@{/{admin}/profile(admin=${admin_url})}"><i class="fa fa-fw fa-user"></i> <span
+						<li><a th:href="@{/profile}"><i class="fa fa-fw fa-user"></i> <span
 								th:text="#{label.generic.profile}" text="My profile"></span></a></li>
-						<li><a th:href="@{/{admin}/logout(admin=${admin_url})}"><i class="fa fa-fw fa-power-off"></i><span
+						<li><a th:href="@{/logout}"><i class="fa fa-fw fa-power-off"></i><span
 								th:text="#{label.generic.logout}" text="Logout"></span></a></li>
 					</ul></li>
 			</ul>

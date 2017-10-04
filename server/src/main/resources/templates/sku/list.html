@@ -25,10 +25,10 @@
 					<td>
 						<div class="flex-btn-group-container">
 							<a class="btn btn-success btn-sm"
-								th:href="@{/{admin}/skus/{skuId}(admin=${admin_url}, skuId=${sku.id})}"> <span
+								th:href="@{/skus/{skuId}( skuId=${sku.id})}"> <span
 								class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
 							</a> &nbsp; <a class="btn btn-primary btn-sm"
-								th:href="@{/{admin}/skus/{skuId}/edit(admin=${admin_url}, skuId=${sku.id})}"> <span
+								th:href="@{/skus/{skuId}/edit( skuId=${sku.id})}"> <span
 								class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 							</a>
 						</div>

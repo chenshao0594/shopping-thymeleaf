@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.core.catalog.Product;
 import com.shoppay.core.catalog.service.ProductRelationshipService;
 import com.shoppay.core.catalog.service.ProductService;
 
 @RestController
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/catalogue/")
+@RequestMapping( "/catalogue/")
 public class CatalogRestController {
 	private final Logger LOGGER = LoggerFactory.getLogger(CatalogRestController.class);
 

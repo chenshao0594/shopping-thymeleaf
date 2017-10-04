@@ -20,7 +20,7 @@
 						<tr th:each="row: ${relations}">
 							<th scope="row" th:text="${row.id}">1</th>
 							<th><img
-								th:src="@{/{admin}/attachments/product/{productId}/thumbnail(admin=${admin_url}, productId=${row.id})}"
+								th:src="@{/attachments/product/{productId}/thumbnail( productId=${row.id})}"
 								class="img-rounded" height="50"></th>
 							<td th:text="${row.name}">name</td>
 							<td th:text="${row.category?.code}">Category</td>
@@ -28,7 +28,7 @@
 							<td th:text="${row.retailPrice}">Retail Price</td>
 							<td>
 								<div class="flex-btn-group-container">
-									 <a class="btn btn-success btn-sm" th:href="@{/{admin}/product/{productId}(admin=${admin_url}, skuId=${row.id})}"> <span
+									 <a class="btn btn-success btn-sm" th:href="@{/product/{productId}( skuId=${row.id})}"> <span
 										class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
 									</a>
 									&nbsp;

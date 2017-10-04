@@ -23,10 +23,10 @@ public class AdminUserAuthenticationSuccessHandler extends SimpleUrlAuthenticati
 	@Override
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException {
-		String targetUrl = ApplicationConstants.ADMIN_PREFIX + "/home";
+		String targetUrl =  "/home";
 
 		if (response.isCommitted()) {
-			System.out.println("Can't redirect");
+			System.out.println("Can't redirect ....");
 			return;
 		}
 

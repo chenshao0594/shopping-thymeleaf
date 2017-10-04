@@ -46,9 +46,9 @@
 							<td th:text="${sku?.retailPrice}">Retail Price</td>
 							<td>
 								<div class="flex-btn-group-container">
-									<!-- <a class="btn btn-success btn-sm" th:href="@{/{admin}/skus/{skuId}(admin=${admin_url}, skuId=${sku.id})}"> <span
+									<!-- <a class="btn btn-success btn-sm" th:href="@{/skus/{skuId}( skuId=${sku.id})}"> <span
 										class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-									</a> --> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/skus/{skuId}/edit(admin=${admin_url}, skuId=${sku.id})}"> <span
+									</a> --> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/skus/{skuId}/edit( skuId=${sku.id})}"> <span
 										class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 									</a>
 								</div>
@@ -134,7 +134,7 @@
 			$("#optionModal").modal('toggle');
 			return;
 		}
-		$.post("/[[${admin_url}]]/product/[[${productId}]]/generateSkusByBatch", 
+		$.post("/product/[[${productId}]]/generateSkusByBatch", 
 				{optionContent : selected.join('@'),
 				 [[${_csrf.parameterName}]]: '[[${_csrf.token}]]'
 				}, 

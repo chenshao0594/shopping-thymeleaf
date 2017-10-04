@@ -19,16 +19,17 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codahale.metrics.annotation.Timed;
-import com.shoppay.common.constants.ApplicationConstants;
 import com.shoppay.common.domain.BusinessDomain;
 import com.shoppay.common.exception.BusinessException;
 import com.shoppay.common.service.AbstractDomainService;
 
 @Controller("BasicEntityController")
-@RequestMapping(ApplicationConstants.ADMIN_PREFIX + "/{sectionKey:.+}")
+@RequestMapping( "/{sectionKey:.+}")
 public abstract class AbstractDomainController<E extends BusinessDomain, K extends Serializable & Comparable<K>> {
 
 	private final Logger log = LoggerFactory.getLogger(AbstractDomainController.class);
+	
+	private final static String KEY="key";
 
 	private final AbstractDomainService<E, K> service;
 	
@@ -36,11 +37,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 
 	private final String sectionKey;
 
-	
-
-
-	protected void preNew(ModelAndView model) {
-	};
+	protected void preNew(ModelAndView model) {};
 
 	protected void postNew(E entity, Model model) {
 	};
@@ -81,10 +78,8 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 		try {
 			model.addObject("item", this.entityClass.newInstance());
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		model.setViewName(this.sectionKey + "/dialog");
@@ -109,7 +104,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			this.service.save(entity);
 			redirect.addFlashAttribute("statusMessage", "Successfully created!");
 			return new ModelAndView(
-					"redirect:" + ApplicationConstants.ADMIN_PREFIX + "/" + this.sectionKey + "/{entity.id}", "entity.id",
+					"redirect:/" + this.sectionKey + "/{entity.id}", "entity.id",
 					entity.getId());
 		}
 	}
@@ -138,7 +133,7 @@ public abstract class AbstractDomainController<E extends BusinessDomain, K exten
 			this.service.save(entity);
 			model.addAttribute("item", entity);
 			redirect.addFlashAttribute("statusMessage", "Update Successfully !");
-			return "redirect:" + ApplicationConstants.ADMIN_PREFIX + "/" + this.sectionKey + "/" + id + "/edit";
+			return "redirect:" +  "/" + this.sectionKey + "/" + id + "/edit";
 		}
 	}
 

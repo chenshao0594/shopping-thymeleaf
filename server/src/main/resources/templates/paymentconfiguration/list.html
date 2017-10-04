@@ -6,7 +6,7 @@
 	<section layout:fragment="content">
 		<div class="page-title">
 			<h3>
-				PaymentConfiguration <a th:href="@{/{admin}/paymentConfiguration/new(admin=${admin_url})}" class="btn btn-success pull-right"><span
+				PaymentConfiguration <a th:href="@{/paymentConfiguration/new}" class="btn btn-success pull-right"><span
 					class="fa fa-plus"></span>Add Payment Configuration</a>
 			</h3>
 		</div>
@@ -29,9 +29,9 @@
 						<td th:text="${row.type}">type</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{/{admin}/paymentConfiguration/{itemId}(admin=${admin_url}, itemId=${row.id})}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{/paymentConfiguration/{itemId}( itemId=${row.id})}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/{admin}/paymentConfiguration/{itemId}/edit(admin=${admin_url}, itemId=${row.id})}">
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/paymentConfiguration/{itemId}/edit( itemId=${row.id})}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>
