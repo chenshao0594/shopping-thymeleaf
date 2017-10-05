@@ -1,4 +1,4 @@
-package com.shoppay.config;
+package com.shoppay.admin.config;
 
 import java.util.HashMap;
 import java.util.Map;

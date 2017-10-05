@@ -19,9 +19,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 
+import com.shoppay.admin.config.DefaultProfileUtil;
 import com.shoppay.common.config.ApplicationProperties;
 import com.shoppay.common.constants.ApplicationConstants;
-import com.shoppay.config.DefaultProfileUtil;
 import com.shoppay.core.payment.gateway.paypal.PaypalConfiguration;
 
 import io.github.jhipster.config.JHipsterConstants;

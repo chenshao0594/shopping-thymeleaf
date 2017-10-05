@@ -1,4 +1,4 @@
 /**
  * Spring Framework configuration files.
  */
-package com.shoppay.config;
+package com.shoppay.admin.config;

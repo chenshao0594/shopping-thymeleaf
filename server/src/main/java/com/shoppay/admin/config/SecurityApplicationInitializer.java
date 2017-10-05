@@ -1,4 +1,4 @@
-package com.shoppay.config;
+package com.shoppay.admin.config;
 
 import javax.servlet.ServletContext;
 

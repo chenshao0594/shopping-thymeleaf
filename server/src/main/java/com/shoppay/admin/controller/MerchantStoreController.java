@@ -17,8 +17,6 @@ import com.shoppay.common.service.MerchantStoreService;
 public class MerchantStoreController extends AbstractDomainController<MerchantStore, Long> {
 
 	private final Logger log = LoggerFactory.getLogger(MerchantStoreController.class);
-	public static final String SECTION_KEY = "merchantStores";
-	private static final Class ENTITY_CLASS = MerchantStore.class;
 
 	private final MerchantStoreService merchantStoreService;
 

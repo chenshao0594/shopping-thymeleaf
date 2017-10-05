@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.shoppay.config.DefaultProfileUtil;
+import com.shoppay.admin.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterProperties;
 

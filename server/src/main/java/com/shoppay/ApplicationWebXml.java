@@ -3,7 +3,7 @@ package com.shoppay;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
-import com.shoppay.config.DefaultProfileUtil;
+import com.shoppay.admin.config.DefaultProfileUtil;
 
 /**
  * This is a helper Java class that provides an alternative to creating a web.xml.

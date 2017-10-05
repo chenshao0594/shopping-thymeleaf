@@ -25,15 +25,12 @@ public class AdminGenericController {
 		return "login";
 	}
 
+	/*
 	@GetMapping({ "", "/home" })
 	public String home() {
 		return "welcome";
 	}
-
-	@GetMapping("/router")
-	public String accessDeniedRouter(@RequestParam("q") String resource) {
-		return "redirect:/" + resource;
-	}
+	*/
 
 	@GetMapping("/unauthorized")
 	public ModelAndView accessDenied() {
@@ -43,13 +40,13 @@ public class AdminGenericController {
 		return mav;
 	}
 
-//	@GetMapping(value = "/logout")
-//	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		if (auth != null) {
-//			new SecurityContextLogoutHandler().logout(request, response, auth);
-//		}
-//		return "redirect:" +  "?logout";
-//	}
+	@GetMapping(value = "/logout")
+	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/login?logout";
+	}
 
 }

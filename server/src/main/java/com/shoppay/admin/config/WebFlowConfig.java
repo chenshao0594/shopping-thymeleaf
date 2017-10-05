@@ -1,4 +1,4 @@
-package com.shoppay.config;
+package com.shoppay.admin.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

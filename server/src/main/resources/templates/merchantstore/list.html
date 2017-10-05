@@ -6,7 +6,7 @@
 	<section layout:fragment="content" th:remove="tag">
 		<div class="page-title">
 			<h3>
-				Merchant Store <a th:href="@{/merchantStores/new}"
+				Merchant Store <a th:href="@{/merchantStore/new}"
 					class="btn btn-success pull-right"><span class="fa fa-plus"></span>Add Merchant Store</a>
 			</h3>
 		</div>
@@ -33,9 +33,9 @@
 						<td th:text="${row.currency}">Currency</td>
 						<td>
 							<div class="flex-btn-group-container">
-								<a class="btn btn-success btn-sm" th:href="@{/merchantStores/{id}( id=${row.id})}"> <span
+								<a class="btn btn-success btn-sm" th:href="@{/merchantStore/{id}( id=${row.id})}"> <span
 									class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
-								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/merchantStores/{id}/edit( id=${row.id})}">
+								</a> &nbsp; <a class="btn btn-primary btn-sm" th:href="@{/merchantStore/{id}/edit( id=${row.id})}">
 									<span class="fa fa-pencil"></span> <span class="hidden-md-down">Edit</span>
 								</a>
 							</div>

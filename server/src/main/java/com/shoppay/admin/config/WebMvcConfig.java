@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.shoppay.config;
+package com.shoppay.admin.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -35,7 +35,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/access").setViewName("access");
-		registry.addViewController( "/login").setViewName("login");
+		registry.addViewController( "/home").setViewName("home");
+		registry.addViewController( "/").setViewName("home");
 		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 	}
 
